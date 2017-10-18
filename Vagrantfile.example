@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+REDHAT_USERNAME = ENV['RH_USER'] || ""
+REDHAT_PASSWORD = ENV['RH_PASS'] || ""
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "rhel-6.8-5.1.18"
+
+  config.vm.provider "virtualbox" do |vb|
+    # Customize the amount of memory on the VM:
+    vb.memory = "2048"
+  end
+
+  # Proxy Configuration
+  config.vm.provision "shell" do |s|
+    s.inline = 'sudo cp /vagrant/build_scripts/proxy.sh /etc/profile.d/'
+  end
+
+  config.vm.provision :reload
+
+  # RedHat Subscription Management
+  config.vm.provision "shell" do |s|
+    s.path = "build_scripts/subscription_manager.sh"
+    s.args = [REDHAT_USERNAME, REDHAT_PASSWORD]
+  end
+
+  config.vm.provision :reload
+
+  config.vm.provision "shell" do |s|
+    s.inline = 'sudo yum -y groupinstall "Development Tools" && sudo /etc/init.d/vboxadd setup && echo "cd /vagrant" >> /home/vagrant/.bash_profile'
+  end
+
+  # Single server VM
+  config.vm.define "default", primary: true do |default|
+    default.vm.network "forwarded_port", guest: 80,   host: 8080
+    default.vm.network "forwarded_port", guest: 443,  host: 8443
+    default.vm.network "forwarded_port", guest: 5432, host: 8432
+    default.vm.network "private_network", ip: "10.0.0.2"
+  end
+
+end

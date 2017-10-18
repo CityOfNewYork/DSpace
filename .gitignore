@@ -39,3 +39,7 @@ META-INF/
 
 ##Mac noise
 .DS_Store
+
+## Ignore Vagrant files
+.vagrant/
+Vagrantfile

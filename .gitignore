@@ -43,3 +43,8 @@ META-INF/
 ## Ignore Vagrant files
 .vagrant/
 Vagrantfile
+
+## Ignore software directories
+apache-ant-*/
+apache-maven-*/
+apache-tomcat-*/

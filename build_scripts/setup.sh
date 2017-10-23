@@ -11,6 +11,10 @@ unzip /tmp/apache-maven-3.5.0-bin.zip
 cp /vagrant/build_scripts/maven.sh /etc/profile.d/
 source /etc/profile.d/maven.sh
 
+# Configure proxy for HTTP requests in Maven
+mv /vagrant/apache-maven-3.5.0/conf/settings.xml /vagrant/apache-maven-3.5.0/conf/settings.xml.orig
+ln -s /vagrant/build_scripts/settings.xml /vagrant/apache-maven-3.5.0/conf/
+
 ## Ant setup
 wget http://apache.spinellicreations.com//ant/binaries/apache-ant-1.10.1-bin.tar.gz -P /tmp
 tar xzvf /tmp/apache-ant-1.10.1-bin.tar.gz
@@ -56,8 +60,20 @@ tar xzvf /tmp/apache-tomcat-8.5.23.tar.gz
 mv apache-tomcat-8.5.23/conf/server.xml apache-tomcat-8.5.23/conf/server.xml.orig
 ln -s /vagrant/build_scripts/server.xml apache-tomcat-8.5.23/conf/server.xml
 
+# tomcat owner must have read/write access to DSpace installation directory
 # chown -R dspace:dspace apache-tomcat-8.5.23
 
 createuser --username=postgres -h 127.0.0.1 dspace
 createdb --username=postgres -h 127.0.0.1 --owner=dspace --encoding=UNICODE dspace
 psql --username=postgres -h 127.0.0.1 dspace -c "CREATE EXTENSION pgcrypto;"
+
+ln -s /vagrant/build_scripts/local.cfg /vagrant/dspace/config/
+
+# Build installation package
+cd /vagrant
+mvn package
+
+# Deploy web applications
+ln -s /vagrant/build_scripts/jspui.xml /vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/jspui.xml
+ln -s /vagrant/build_scripts/xmlui.xml /vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/xmlui.xml
+ln -s /vagrant/build_scripts/solr.xml /vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/solr.xml

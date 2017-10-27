@@ -16,5 +16,12 @@ mv /etc/opt/rh/rh-nginx18/nginx/nginx.conf /etc/opt/rh/rh-nginx18/nginx/nginx.co
 # SymLink nginx.conf
 ln -s /vagrant/build_scripts/web_setup/nginx_conf/nginx.conf /etc/opt/rh/rh-nginx18/nginx/nginx.conf
 
+# Create ssl certs
+mkdir /home/vagrant/ssl
+openssl req \
+       -newkey rsa:4096 -nodes -keyout /home/vagrant/ssl/dspace_dev.key \
+       -x509 -days 365 -out /home/vagrant/ssl/dspace_dev.crt -subj "/C=US/ST=New York/L=New York/O=NYC Department of Records and Information Services/OU=IT/CN=dspace_dev.nyc"
+openssl x509 -in /home/vagrant/ssl/dspace_dev.crt -out /home/vagrant/ssl/dspace_dev.pem -outform PEM
+
 # Restart nginx
 sudo service rh-nginx18-nginx restart

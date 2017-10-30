@@ -39,3 +39,12 @@ META-INF/
 
 ##Mac noise
 .DS_Store
+
+## Ignore Vagrant files
+.vagrant/
+Vagrantfile
+
+## Ignore software directories
+apache-ant-*/
+apache-maven-*/
+apache-tomcat-*/

@@ -2,7 +2,7 @@
 
 # Download and extract Maven
 # tar file to be provided if server does not have internet connection
-wget http://mirror.jax.hugeserver.com/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip -P /tmp
+wget https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip -P /tmp
 unzip /tmp/apache-maven-3.5.0-bin.zip -d /home/vagrant/
 
 # Add bin directory to PATH on startup

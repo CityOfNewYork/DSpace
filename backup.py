@@ -14,7 +14,7 @@ USER = "postgres"
 PASS = ""
 HOST = "127.0.0.1"
 
-BACKUP_DIR = "/data/"
+BACKUP_DIR = "/backup/"
 dumper = """/opt/rh/rh-postgresql95/root/usr/bin/pg_dump -U %s -h 127.0.0.1 -Z 9 -f %s -F c %s  """
 
 sender = 'gpp-support@records.nyc.gov'

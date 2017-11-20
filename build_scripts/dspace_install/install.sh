@@ -3,6 +3,10 @@
 # Create symlink of DSpace configuration file
 ln -s /vagrant/build_scripts/dspace_install/local.cfg /vagrant/dspace/config/local.cfg
 
+# Create assetstore directory in /data to store content from DSpace
+mkdir -p /data/assetstore
+chown -R vagrant:vagrant /data/assetstore
+
 # Build installation package
 cd /vagrant
 mvn package

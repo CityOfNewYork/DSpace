@@ -16,15 +16,16 @@ HOST = "127.0.0.1"
 
 BACKUP_DIR = "/backup/"
 dumper = """/opt/rh/rh-postgresql95/root/usr/bin/pg_dump -U %s -h 127.0.0.1 -Z 9 -f %s -F c %s  """
+ENVIRONMENT = "Dev"
 
 sender = 'gpp-support@records.nyc.gov'
 receivers = ['gpp-support@records.nyc.gov']
 
 email = """From: Government Publications Portal Backup Report <backup@records.nyc.go>
 To: Government Publications Portal Support Staff <gpp-support@records.nyc.gov>
-Subject: Government Publications Portal Backup Report %s
+Subject: Government Publications Portal Backup Report (%s) %s
 
-""" % time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+""" % (ENVIRONMENT, time.strftime("%Y-%m-%d %H-%M-%S", time.localtime()))
 
 
 def log(string):
@@ -79,3 +80,5 @@ except:
     e = sys.exc_info()[0]
     print str(e)
 
+# to restore a backup, run the command:
+# pg_restore -U dspace -h 127.0.0.1 -C -d postgres <NAME_OF_PG_DUMP_FILE>

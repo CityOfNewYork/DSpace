@@ -21,7 +21,7 @@ ENVIRONMENT = "Dev"
 sender = 'gpp-support@records.nyc.gov'
 receivers = ['gpp-support@records.nyc.gov']
 
-email = """From: Government Publications Portal Backup Report <backup@records.nyc.go>
+email = """From: Government Publications Portal Backup Report <backup@records.nyc.gov>
 To: Government Publications Portal Support Staff <gpp-support@records.nyc.gov>
 Subject: Government Publications Portal Backup Report (%s) %s
 

@@ -4,1839 +4,1856 @@
 
 <input-forms>
 
- <!-- The form-map maps collection handles to forms. DSpace does not       -->
- <!-- require a collection name to be unique, not even within a community. -->
- <!-- DSpace does however ensure that each collection's handle is unique.  -->
- <!-- Form-map provides the means to associate a unique collection name    -->
- <!-- with a form. The form-map also provides the special handle "default" -->
- <!-- (which is never a collection), here mapped to "traditional". Any     -->
- <!-- collection which does not appear in this map will be associated with -->
- <!-- the mapping for handle "default".                                    -->
+    <!-- The form-map maps collection handles to forms. DSpace does not       -->
+    <!-- require a collection name to be unique, not even within a community. -->
+    <!-- DSpace does however ensure that each collection's handle is unique.  -->
+    <!-- Form-map provides the means to associate a unique collection name    -->
+    <!-- with a form. The form-map also provides the special handle "default" -->
+    <!-- (which is never a collection), here mapped to "traditional". Any     -->
+    <!-- collection which does not appear in this map will be associated with -->
+    <!-- the mapping for handle "default".                                    -->
 
- <form-map>
-   <name-map collection-handle="default" form-name="traditional" />
- </form-map>
-
-
- <!-- The form-definitions map lays out the detailed definition of all the -->
- <!-- submission forms. Each separate form set has a unique name as an     -->
- <!-- attribute. This name matches one of the names in the form-map. One   -->
- <!-- named form set has the name "traditional"; as this name suggests,    -->
- <!-- it is the old style and is also the default, which gets used when    -->
- <!-- the specified collection has no correspondingly-named form set.      -->
- <!--                                                                      -->
- <!-- Each form set contains an ordered set of pages; each page defines    -->
- <!-- one submission metadata entry screen. Each page has an ordered list  -->
- <!-- of field definitions, Each field definition corresponds to one       -->
- <!-- metadata entry (a so-called row), which has a DC element name, a    -->
- <!-- displayed label, a text string prompt which is called a hint, and    -->
- <!-- an input-type. Each field also may hold optional elements: DC        -->
- <!-- qualifier name, a repeatable flag, and a text string whose presence  -->
- <!-- serves as a 'this field is required' flag.                           -->
-
- <form-definitions>
-
-   <form name="traditional">
-     <page number="1">
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>title</dc-element>
-         <dc-qualifier></dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Title</label>
-         <input-type>onebox</input-type>
-         <hint>On the front page, the first page or in the Executive Summary (if any) of the document, what is it called? 150 characters or fewer.</hint>
-         <required>You must enter a main title for this item.</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>title</dc-element>
-         <dc-qualifier>alternative</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Sub-Title</label>
-         <input-type>onebox</input-type>
-         <hint>The remainder of the document's title, if any. 150 characters of fewer.</hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>contributor</dc-element>
-         <dc-qualifier>author</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Agency</label>
-         <input-type value-pairs-name="agencies">dropdown</input-type>
-         <hint>What agency is the primary creator of this document?</hint>
-         <required>You must select an agency</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>contributor</dc-element>
-         <dc-qualifier>other</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Additional Creator(s)</label>
-         <input-type>onebox</input-type>
-         <hint>What other agencies, consultants, or authors, if any, contributed to the creation of this document?</hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>subject</dc-element>
-         <dc-qualifier></dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Subjects(s)</label>
-         <input-type value-pairs-name="submission-subject">dropdown</input-type>
-         <hint>Select what subjects you feel are the most relevant subjects covered in this report. Pick up to three.</hint>
-         <required>You must select at least one subject</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>description</dc-element>
-         <dc-qualifier>abstract</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Description</label>
-         <input-type>textarea</input-type>
-         <hint>A brief (100-200 characters) explanation of the contents of this document.</hint>
-         <required>You must provide a description about this submission</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>date</dc-element>
-         <dc-qualifier>issued</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Date Published</label>
-         <input-type>date</input-type>
-         <hint>This document's date of publication by agency.</hint>
-         <required>You must enter at least the year.</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>type</dc-element>
-         <dc-qualifier></dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Report Type</label>
-         <input-type value-pairs-name="submission-types">dropdown</input-type>
-         <hint>Use the dropdown for a list of the most common kinds of reports and pick the one closest to what you are submitting.</hint>
-         <required>You must select a type</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>source</dc-element>
-         <dc-qualifier></dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Source</label>
-         <input-type>onebox</input-type>
-         <hint>The source of this publication</hint>
-         <required>You must provide a source</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>language</dc-element>
-         <dc-qualifier>iso</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Language</label>
-         <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
-         <hint>If the publication is written in a language other than English, pick the language from the dropdown list. English is the default choice.</hint>
-         <required>You must select a language</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>coverage</dc-element>
-         <dc-qualifier>temporal</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Associated Year - Fiscal</label>
-         <input-type>onebox</input-type>
-         <hint>The fiscal year covered by this publication. If multiple fiscal years are covered, select "Add more" to add additional years. One of either Associated Year - Fiscal or Associated Year - Calender is required.</hint>
-         <required>You must select a language</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>coverage</dc-element>
-         <dc-qualifier>temporal</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Associated Year - Calender</label>
-         <input-type>onebox</input-type>
-         <hint>The calender year covered by this publication. If multiple calender years are covered, select "Add more" to add additional years. One of either Associated Year - Calender or Associated Year - Fiscal is required.</hint>
-         <required>You must select a language</required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>coverage</dc-element>
-         <dc-qualifier>spatial</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Associated Place (Other)</label>
-         <input-type>onebox</input-type>
-         <hint>The place associated with this publication. Required if applicable.</hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>coverage</dc-element>
-         <dc-qualifier>spatial</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Associated Neighborhood</label>
-         <input-type value-pairs-name="neighborhoods">dropdown</input-type>
-         <hint>The neighborhood associated with this publication. Required if applicable.</hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>coverage</dc-element>
-         <dc-qualifier>spatial</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Associated Borough(s)</label>
-         <input-type value-pairs-name="boroughs">dropdown</input-type>
-         <hint>The borough associated with this publication. Required if applicable.</hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>coverage</dc-element>
-         <dc-qualifier>spatial</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Associated School District(s)</label>
-         <input-type value-pairs-name="school-districts">dropdown</input-type>
-         <hint>The school district(s) associated with this publication. Required if applicable.</hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>coverage</dc-element>
-         <dc-qualifier>spatial</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>Associated Community Board District(s)</label>
-         <input-type value-pairs-name="community-board-districts">dropdown</input-type>
-         <hint>The community board district(s) associated with this publication. Required if applicable.</hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>format</dc-element>
-         <dc-qualifier>extent</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Number of Pages</label>
-         <input-type>onebox</input-type>
-         <hint>How many pages are in this document?</hint>
-         <required></required>
-       </field>
-     </page>
-
-     <page number="2">
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>subject</dc-element>
-         <dc-qualifier></dc-qualifier>
-         <!-- An input-type of twobox MUST be marked as repeatable -->
-         <repeatable>true</repeatable>
-         <label>Subject Keywords</label>
-         <input-type>twobox</input-type>
-         <hint>Enter appropriate subject keywords or phrases. </hint>
-         <required></required>
-         <vocabulary>srsc</vocabulary>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>description</dc-element>
-         <dc-qualifier>abstract</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Abstract</label>
-         <input-type>textarea</input-type>
-         <hint>Enter the abstract of the item. </hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>description</dc-element>
-         <dc-qualifier>sponsorship</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Sponsors</label>
-         <input-type>textarea</input-type>
-         <hint>Enter the names of any sponsors and/or funding codes in the box. </hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>description</dc-element>
-         <dc-qualifier></dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Description</label>
-         <input-type>textarea</input-type>
-         <hint>Enter any other description or comments in this box. </hint>
-         <required></required>
-       </field>
-     </page>
-   </form>
-
-   <form name="one">
-     <page number="1">
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>contributor</dc-element>
-         <dc-qualifier>author</dc-qualifier>
-         <repeatable>true</repeatable>
-         <label>One: Authors</label>
-         <input-type>name</input-type>
-         <hint>Enter the names of the authors of this item.</hint>
-         <required></required>
-       </field>
-      </page>
-    </form>
- </form-definitions>
+    <form-map>
+        <name-map collection-handle="default" form-name="traditional"/>
+    </form-map>
 
 
- <!-- form-value-pairs populate dropdown and qualdrop-value lists.          -->
- <!-- The form-value-pairs element holds child elements named 'value-pairs' -->
- <!-- A 'value-pairs' element has a value-pairs-name and a dc-term          -->
- <!-- attribute. The dc-term attribute specifies which to which Dublin Core -->
- <!-- Term this set of value-pairs applies.                                 -->
- <!--     Current dc-terms are: identifier-pairs, type-pairs, and           -->
- <!--     language_iso-pairs. The name attribute matches a name             -->
- <!--     in the form-map, above.                                           -->
- <!-- A value-pair contains one 'pair' for each value displayed in the list -->
- <!-- Each pair contains a 'displayed-value' element and a 'stored-value'   -->
- <!-- element. A UI list displays the displayed-values, but the program     -->
- <!-- stores the associated stored-values in the database.                  -->
+    <!-- The form-definitions map lays out the detailed definition of all the -->
+    <!-- submission forms. Each separate form set has a unique name as an     -->
+    <!-- attribute. This name matches one of the names in the form-map. One   -->
+    <!-- named form set has the name "traditional"; as this name suggests,    -->
+    <!-- it is the old style and is also the default, which gets used when    -->
+    <!-- the specified collection has no correspondingly-named form set.      -->
+    <!--                                                                      -->
+    <!-- Each form set contains an ordered set of pages; each page defines    -->
+    <!-- one submission metadata entry screen. Each page has an ordered list  -->
+    <!-- of field definitions, Each field definition corresponds to one       -->
+    <!-- metadata entry (a so-called row), which has a DC element name, a    -->
+    <!-- displayed label, a text string prompt which is called a hint, and    -->
+    <!-- an input-type. Each field also may hold optional elements: DC        -->
+    <!-- qualifier name, a repeatable flag, and a text string whose presence  -->
+    <!-- serves as a 'this field is required' flag.                           -->
 
- <form-value-pairs>
-      <value-pairs value-pairs-name="agencies" dc-term="contributor_author">
-     <pair>
-       <displayed-value>Administrative Trials and Hearings, Office of (OATH)</displayed-value>
-       <stored-value>Administrative Trials and Hearings, Office of (OATH)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Aging, Department for the (DFTA)</displayed-value>
-       <stored-value>Aging, Department for the (DFTA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Buildings, Department of (DOB)</displayed-value>
-       <stored-value>Buildings, Department of (DOB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Business Integrity Commission (BIC)</displayed-value>
-       <stored-value>Business Integrity Commission (BIC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Campaign Finance Board (CFB)</displayed-value>
-       <stored-value>Campaign Finance Board (CFB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Center for Economic Opportunity (CEO)</displayed-value>
-       <stored-value>Center for Economic Opportunity (CEO)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Center for Innovation through Data Intelligence (CIDI)</displayed-value>
-       <stored-value>Center for Innovation through Data Intelligence (CIDI)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Chief Medical Examiner, NYC Office of (OCME)</displayed-value>
-       <stored-value>Chief Medical Examiner, NYC Office of (OCME)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Children's Services, Administration for (ACS)</displayed-value>
-       <stored-value>Children's Services, Administration for (ACS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>City Council, New York (NYCC)</displayed-value>
-       <stored-value>City Council, New York (NYCC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>City Planning, Department of (DCP)</displayed-value>
-       <stored-value>City Planning, Department of (DCP)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Citywide Administrative Services, Department of (DCAS)</displayed-value>
-       <stored-value>Citywide Administrative Services, Department of (DCAS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Civilian Complaint Review Board (CCRB)</displayed-value>
-       <stored-value>Civilian Complaint Review Board (CCRB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Combat Domestic Violence, Mayor's Office to (OCDV)</displayed-value>
-       <stored-value>Combat Domestic Violence, Mayor's Office to (OCDV)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Commission to Combat Police Corruption (CCPC)</displayed-value>
-       <stored-value>Commission to Combat Police Corruption (CCPC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Comptroller (COMP)</displayed-value>
-       <stored-value>Comptroller (COMP)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Conflicts of Interest Board (COIB)</displayed-value>
-       <stored-value>Conflicts of Interest Board (COIB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Consumer Affairs, Department of (DCA)</displayed-value>
-       <stored-value>Consumer Affairs, Department of (DCA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Contract Services, Mayor's Office of (MOCS)</displayed-value>
-       <stored-value>Contract Services, Mayor's Office of (MOCS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Correction, Department of (DOC)</displayed-value>
-       <stored-value>Correction, Department of (DOC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Criminal Justice, Mayor's Office of (MOCJ)</displayed-value>
-       <stored-value>Criminal Justice, Mayor's Office of (MOCJ)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Cultural Affairs, Department of (DCLA)</displayed-value>
-       <stored-value>Cultural Affairs, Department of (DCLA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Data Analytics, Mayor's Office of (MODA)</displayed-value>
-       <stored-value>Data Analytics, Mayor's Office of (MODA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Design and Construction, Department of (DDC)</displayed-value>
-       <stored-value>Design and Construction, Department of (DDC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Design Commission</displayed-value>
-       <stored-value>Design Commission</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Economic Opportunity, Mayor's Office for</displayed-value>
-       <stored-value>Economic Opportunity, Mayor's Office for</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Education, Department of (DOE)</displayed-value>
-       <stored-value>Education, Department of (DOE)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Emergency Management, Office of (OEM)</displayed-value>
-       <stored-value>Emergency Management, Office of (OEM)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Environmental Protection, Department of (DEP)</displayed-value>
-       <stored-value>Environmental Protection, Department of (DEP)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Equal Employment Practices Commission (EEPC)</displayed-value>
-       <stored-value>Equal Employment Practices Commission (EEPC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Finance, Department of (DOF)</displayed-value>
-       <stored-value>Finance, Department of (DOF)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Fire Department, New York City (FDNY)</displayed-value>
-       <stored-value>Fire Department, New York City (FDNY)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Food Policy Director, Office of the (See Long Term Planning)</displayed-value>
-       <stored-value>Food Policy Director, Office of the (See Long Term Planning)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Health and Hospitals Corporation (HHC)</displayed-value>
-       <stored-value>Health and Hospitals Corporation (HHC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Health and Mental Hygiene, Department of (DOHMH)</displayed-value>
-       <stored-value>Health and Mental Hygiene, Department of (DOHMH)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Homeless Services, Department of (DHS)</displayed-value>
-       <stored-value>Homeless Services, Department of (DHS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Housing Authority, New York City (NYCHA)</displayed-value>
-       <stored-value>Housing Authority, New York City (NYCHA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Housing Preservation and Development, Department of (HPD)</displayed-value>
-       <stored-value>Housing Preservation and Development, Department of (HPD)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Housing Recovery Operations (HRO)</displayed-value>
-       <stored-value>Housing Recovery Operations (HRO)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Human Capital Development, Office of (See Workforce Development)</displayed-value>
-       <stored-value>Human Capital Development, Office of (See Workforce Development)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Human Resources Administration (HRA)</displayed-value>
-       <stored-value>Human Resources Administration (HRA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Human Rights, City Commission on (CCHR)</displayed-value>
-       <stored-value>Human Rights, City Commission on (CCHR)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Immigrant Affairs, Mayor's Office of (MOIA)</displayed-value>
-       <stored-value>Immigrant Affairs, Mayor's Office of (MOIA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Independent Budget Office, NYC (IBO)</displayed-value>
-       <stored-value>Independent Budget Office, NYC (IBO)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Information Technology and Telecommunications, Department of (DOITT)</displayed-value>
-       <stored-value>Information Technology and Telecommunications, Department of (DOITT)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Inspector General NYPD, Office of the (OIG-NYPD)</displayed-value>
-       <stored-value>Inspector General NYPD, Office of the (OIG-NYPD)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Investigation, Department of (DOI)</displayed-value>
-       <stored-value>Investigation, Department of (DOI)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Labor Relations, NYC Office of (OLR)</displayed-value>
-       <stored-value>Labor Relations, NYC Office of (OLR)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Landmarks Preservation Commission (LPC)</displayed-value>
-       <stored-value>Landmarks Preservation Commission (LPC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Law Department (LAW)</displayed-value>
-       <stored-value>Law Department (LAW)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Loft Board (LOFT) (now see DOB)</displayed-value>
-       <stored-value>Loft Board (LOFT) (now see DOB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Long-Term Planning &amp; Sustainability, Office of (OLTPS)</displayed-value>
-       <stored-value>Long-Term Planning &amp; Sustainability, Office of (OLTPS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Management and Budget, Office of (OMB)</displayed-value>
-       <stored-value>Management and Budget, Office of (OMB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Fund to Advance NYC (Mayor's Fund)</displayed-value>
-       <stored-value>Mayor's Fund to Advance NYC (Mayor's Fund)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Office (OM)</displayed-value>
-       <stored-value>Mayor's Office (OM)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Office for International Affairs (IA)</displayed-value>
-       <stored-value>Mayor's Office for International Affairs (IA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Office of Workforce Development</displayed-value>
-       <stored-value>Mayor's Office of Workforce Development</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Media and Entertainment, Mayor's Office of (MOME)</displayed-value>
-       <stored-value>Media and Entertainment, Mayor's Office of (MOME)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>NYC Employees' Retirement System (NYCERS)</displayed-value>
-       <stored-value>NYC Employees' Retirement System (NYCERS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>NYC Health + Hospitals (NYCHHC)</displayed-value>
-       <stored-value>NYC Health + Hospitals (NYCHHC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>NYC Service (SERVICE)</displayed-value>
-       <stored-value>NYC Service (SERVICE)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Operations, Mayor's Office of (OPS)</displayed-value>
-       <stored-value>Operations, Mayor's Office of (OPS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Parks and Recreation, Department of (DPR) or (NYCDPR)</displayed-value>
-       <stored-value>Parks and Recreation, Department of (DPR) or (NYCDPR)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>People with Disabilities, Mayor's Office of (MOPD)</displayed-value>
-       <stored-value>People with Disabilities, Mayor's Office of (MOPD)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Police Department (NYPD)</displayed-value>
-       <stored-value>Police Department (NYPD)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Probation, Department of (DOP)</displayed-value>
-       <stored-value>Probation, Department of (DOP)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Advocate (PUB ADV)</displayed-value>
-       <stored-value>Public Advocate (PUB ADV)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Quadrennial Advisory Commission</displayed-value>
-       <stored-value>Quadrennial Advisory Commission</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Records and Information Services, Department of (DORIS)</displayed-value>
-       <stored-value>Records and Information Services, Department of (DORIS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Rent Guidelines Board (RGB)</displayed-value>
-       <stored-value>Rent Guidelines Board (RGB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Sanitation, Department of (DSNY)</displayed-value>
-       <stored-value>Sanitation, Department of (DSNY)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>School Construction Authority (SCA)</displayed-value>
-       <stored-value>School Construction Authority (SCA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Small Business Services (SBS)</displayed-value>
-       <stored-value>Small Business Services (SBS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Standards and Appeals, Board of (BSA)</displayed-value>
-       <stored-value>Standards and Appeals, Board of (BSA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Tax Appeals Tribunal, New York City (TAT) (See Tax Commission)</displayed-value>
-       <stored-value>Tax Appeals Tribunal, New York City (TAT) (See Tax Commission)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Tax Commission, New York City (TC)</displayed-value>
-       <stored-value>Tax Commission, New York City (TC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Taxi and Limousine Commission (TLC)</displayed-value>
-       <stored-value>Taxi and Limousine Commission (TLC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Transportation, Department of (DOT) or (NYCDOT)</displayed-value>
-       <stored-value>Transportation, Department of (DOT) or (NYCDOT)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Veterans' Services, Department of (DVS)</displayed-value>
-       <stored-value>Veterans' Services, Department of (DVS)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Workforce Development, Mayor's Office of (WKDEV)</displayed-value>
-       <stored-value>Workforce Development, Mayor's Office of (WKDEV)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Youth and Community Development, Department of (DYCD)</displayed-value>
-       <stored-value>Youth and Community Development, Department of (DYCD)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Actuary, NYC Office of the (NYCOA)</displayed-value>
-       <stored-value>Actuary, NYC Office of the (NYCOA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Administrative Justice Coordinator, NYC Office of (AJC)</displayed-value>
-       <stored-value>Administrative Justice Coordinator, NYC Office of (AJC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Appointments, Mayor's Office of (MOA)</displayed-value>
-       <stored-value>Appointments, Mayor's Office of (MOA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Art Commission (see Design Commission)</displayed-value>
-       <stored-value>Art Commission (see Design Commission)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Brooklyn Public Library (BPL)</displayed-value>
-       <stored-value>Brooklyn Public Library (BPL)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>City Clerk, Office of the (CLERK)</displayed-value>
-       <stored-value>City Clerk, Office of the (CLERK)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>City University of New York (CUNY)</displayed-value>
-       <stored-value>City University of New York (CUNY)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Citywide Event Coordination and Management, Office of (CECM)</displayed-value>
-       <stored-value>Citywide Event Coordination and Management, Office of (CECM)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Civil Service Commission (CSC)</displayed-value>
-       <stored-value>Civil Service Commission (CSC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Commission on Gender Equity (CGE)</displayed-value>
-       <stored-value>Commission on Gender Equity (CGE)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Community Affairs Unit (CAU)</displayed-value>
-       <stored-value>Community Affairs Unit (CAU)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Community Boards (CB)</displayed-value>
-       <stored-value>Community Boards (CB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Correction, Board of (BOC)</displayed-value>
-       <stored-value>Correction, Board of (BOC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>District Attorney - Bronx County</displayed-value>
-       <stored-value>District Attorney - Bronx County</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>District Attorney - Kings County (Brooklyn)</displayed-value>
-       <stored-value>District Attorney - Kings County (Brooklyn)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>District Attorney - New York County (Manhattan)</displayed-value>
-       <stored-value>District Attorney - New York County (Manhattan)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>District Attorney - Queens County</displayed-value>
-       <stored-value>District Attorney - Queens County</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>District Attorney - Richmond County (Staten Island)</displayed-value>
-       <stored-value>District Attorney - Richmond County (Staten Island)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Economic Development Corporation (EDC) or (NYCEDC)</displayed-value>
-       <stored-value>Economic Development Corporation (EDC) or (NYCEDC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Elections, Board of (BOE)</displayed-value>
-       <stored-value>Elections, Board of (BOE)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Environmental Coordination, Mayor's Office of (OEC)</displayed-value>
-       <stored-value>Environmental Coordination, Mayor's Office of (OEC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Fiscal Year 2005 Securitization Corporation</displayed-value>
-       <stored-value>Fiscal Year 2005 Securitization Corporation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>GreeNYC (GNYC)</displayed-value>
-       <stored-value>GreeNYC (GNYC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Hudson Yards Infrastructure Corporation (HYIC)</displayed-value>
-       <stored-value>Hudson Yards Infrastructure Corporation (HYIC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Intergovernmental Affairs, Mayor's Office of (MOIGA)</displayed-value>
-       <stored-value>Intergovernmental Affairs, Mayor's Office of (MOIGA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Judiciary, Mayor's Advisory Committee on the (ACJ)</displayed-value>
-       <stored-value>Judiciary, Mayor's Advisory Committee on the (ACJ)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Library, Brooklyn Public (BPL)</displayed-value>
-       <stored-value>Library, Brooklyn Public (BPL)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Library, New York Public (NYPL)</displayed-value>
-       <stored-value>Library, New York Public (NYPL)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Library, Queens Public (QL)</displayed-value>
-       <stored-value>Library, Queens Public (QL)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Committee on City Marshals (MCCM)</displayed-value>
-       <stored-value>Mayor's Committee on City Marshals (MCCM)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Office for People with Disabilities (MOPD)</displayed-value>
-       <stored-value>Mayor's Office for People with Disabilities (MOPD)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Office of Environmental Remediation (OER)</displayed-value>
-       <stored-value>Mayor's Office of Environmental Remediation (OER)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Office of Special Projects &amp; Community Events (MOSPCE)</displayed-value>
-       <stored-value>Mayor's Office of Special Projects &amp; Community Events (MOSPCE)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor's Office of Technology and Innovation (MOTI)</displayed-value>
-       <stored-value>Mayor's Office of Technology and Innovation (MOTI)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Media, NYC (part of MOME)</displayed-value>
-       <stored-value>Media, NYC (part of MOME)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>New Business Acceleration Team (NBAT) (NYCBA)(part of SBS?)</displayed-value>
-       <stored-value>New Business Acceleration Team (NBAT) (NYCBA)(part of SBS?)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>New York City Transitional Finance Authority (TFA)</displayed-value>
-       <stored-value>New York City Transitional Finance Authority (TFA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>New York Public Library (NYPL)</displayed-value>
-       <stored-value>New York Public Library (NYPL)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>NYC &amp; Company (NYCGO)</displayed-value>
-       <stored-value>NYC &amp; Company (NYCGO)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>NYC Young Men’s Initiative (YMI)</displayed-value>
-       <stored-value>NYC Young Men’s Initiative (YMI)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Payroll Administration, Office of (OPA)</displayed-value>
-       <stored-value>Payroll Administration, Office of (OPA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Police Pension Fund (PPF)</displayed-value>
-       <stored-value>Police Pension Fund (PPF)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Procurement Policy Board (PPB)</displayed-value>
-       <stored-value>Procurement Policy Board (PPB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Administrator - Bronx County (BCPA)</displayed-value>
-       <stored-value>Public Administrator - Bronx County (BCPA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Administrator - Kings County (KCPA)</displayed-value>
-       <stored-value>Public Administrator - Kings County (KCPA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Administrator - New York County (NYCountyPA)</displayed-value>
-       <stored-value>Public Administrator - New York County (NYCountyPA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Administrator - Queens County (QPA)</displayed-value>
-       <stored-value>Public Administrator - Queens County (QPA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Administrator - Richmond County (RCPA)</displayed-value>
-       <stored-value>Public Administrator - Richmond County (RCPA)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Queens Library (QL)</displayed-value>
-       <stored-value>Queens Library (QL)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Sales Tax Asset Receivable Corporation (STAR)</displayed-value>
-       <stored-value>Sales Tax Asset Receivable Corporation (STAR)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Special Enforcement, Mayor's Office of (MOSE)</displayed-value>
-       <stored-value>Special Enforcement, Mayor's Office of (MOSE)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Special Narcotics Prosecutor, NYC Office of the (SNP)</displayed-value>
-       <stored-value>Special Narcotics Prosecutor, NYC Office of the (SNP)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>TSASC, Inc. (TSASC)</displayed-value>
-       <stored-value>TSASC, Inc. (TSASC)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Water Board (NYWB)</displayed-value>
-       <stored-value>Water Board (NYWB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Water Finance Authority, NYC Municipal (NYW)</displayed-value>
-       <stored-value>Water Finance Authority, NYC Municipal (NYW)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Waterfront Management Advisory Board (WMAB)</displayed-value>
-       <stored-value>Waterfront Management Advisory Board (WMAB)</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Workforce Investment Board (WIB) (See Workforce Development)</displayed-value>
-       <stored-value>Workforce Investment Board (WIB) (See Workforce Development)</stored-value>
-     </pair>
-   </value-pairs>
+    <form-definitions>
 
-   <value-pairs value-pairs-name="submission-subject" dc-term="subject">
-     <pair>
-       <displayed-value>Accounting</displayed-value>
-       <stored-value>accounting</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Advertising</displayed-value>
-       <stored-value>advertising</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Aged</displayed-value>
-       <stored-value>aged</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Alcohol</displayed-value>
-       <stored-value>alcohol</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Animal Welfare</displayed-value>
-       <stored-value>animal_welfare</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Archaeology</displayed-value>
-       <stored-value>archaeology</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Architecture</displayed-value>
-       <stored-value>architecture</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Art and Design</displayed-value>
-       <stored-value>art_design</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Athletics</displayed-value>
-       <stored-value>athletics</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Banks and Banking</displayed-value>
-       <stored-value>banks_banking</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Brooklyn</displayed-value>
-       <stored-value>Borough of</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Bronx</displayed-value>
-       <stored-value>Borough of the</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Brooklyn (City)</displayed-value>
-       <stored-value>city_brooklyn</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Budget and Finance</displayed-value>
-       <stored-value>budget_finance</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Building Code</displayed-value>
-       <stored-value>building_code</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Building Construction</displayed-value>
-       <stored-value>building_construction</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Buildings</displayed-value>
-       <stored-value>buildings</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Business</displayed-value>
-       <stored-value>business</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Celebrations and Parades</displayed-value>
-       <stored-value>celebrations_parades</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Cemeteries</displayed-value>
-       <stored-value>cemeteries</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Census</displayed-value>
-       <stored-value>census</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Charities</displayed-value>
-       <stored-value>charities</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Children</displayed-value>
-       <stored-value>children</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>City Planning</displayed-value>
-       <stored-value>city_planning</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Civil Service</displayed-value>
-       <stored-value>civil_service</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Climate</displayed-value>
-       <stored-value>climate</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Coastal</displayed-value>
-       <stored-value>coastal</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Community Relations</displayed-value>
-       <stored-value>community_relations</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Consumers</displayed-value>
-       <stored-value>consumers</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Conventions</displayed-value>
-       <stored-value>conventions</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Correction</displayed-value>
-       <stored-value>correction</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Cost</displayed-value>
-       <stored-value>cost</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Courts</displayed-value>
-       <stored-value>courts</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Crime and Criminals</displayed-value>
-       <stored-value>crime_criminals</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Criminal Justice</displayed-value>
-       <stored-value>criminal_justice</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Culture</displayed-value>
-       <stored-value>culture</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Data and Communications</displayed-value>
-       <stored-value>data_communications</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Death</displayed-value>
-       <stored-value>death</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Demography and Population</displayed-value>
-       <stored-value>demography_population</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Disability</displayed-value>
-       <stored-value>disability</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Discrimination</displayed-value>
-       <stored-value>discrimination</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Diseases</displayed-value>
-       <stored-value>disease</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Drugs</displayed-value>
-       <stored-value>drugs</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Education</displayed-value>
-       <stored-value>education</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Education</displayed-value>
-       <stored-value>Bilingual</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Education</displayed-value>
-       <stored-value>Pre-kindergarten</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Education</displayed-value>
-       <stored-value>Remedial</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Education</displayed-value>
-       <stored-value>Special</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Elections and Voting</displayed-value>
-       <stored-value>elections_voting</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Electric Power</displayed-value>
-       <stored-value>electric_power</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Emergencies</displayed-value>
-       <stored-value>emergencies</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Employment</displayed-value>
-       <stored-value>employment</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Energy</displayed-value>
-       <stored-value>energy</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Engineering</displayed-value>
-       <stored-value>engineering</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Environment</displayed-value>
-       <stored-value>environment</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Equal Employment</displayed-value>
-       <stored-value>equal_employment</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Ethics</displayed-value>
-       <stored-value>ethics</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Ethnic groups</displayed-value>
-       <stored-value>ethnic_groups</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Families</displayed-value>
-       <stored-value>families</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Finance</displayed-value>
-       <stored-value>finance</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Fire Fighting</displayed-value>
-       <stored-value>fire_fighting</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Firearms</displayed-value>
-       <stored-value>firearms</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Food</displayed-value>
-       <stored-value>food</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Food supply</displayed-value>
-       <stored-value>food_supply</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Fuels</displayed-value>
-       <stored-value>fuels</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Gambling</displayed-value>
-       <stored-value>gambling</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Geography</displayed-value>
-       <stored-value>geography</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Government</displayed-value>
-       <stored-value>government</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Government - Citizen participation</displayed-value>
-       <stored-value>government_citizen_participation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Hazardous Materials</displayed-value>
-       <stored-value>hazardous_materials</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Health</displayed-value>
-       <stored-value>health</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>History</displayed-value>
-       <stored-value>history</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Homeless Persons</displayed-value>
-       <stored-value>homeless_persons</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Hospitals</displayed-value>
-       <stored-value>hospitals</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Hotels</displayed-value>
-       <stored-value>Taverns</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Housing</displayed-value>
-       <stored-value>housing</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Housing - Limited Profit</displayed-value>
-       <stored-value>housing_limited_profit</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Housing - Low Income</displayed-value>
-       <stored-value>housing_low_income</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Human Rights</displayed-value>
-       <stored-value>human_rights</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Immigration</displayed-value>
-       <stored-value>immigration</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Industries</displayed-value>
-       <stored-value>industries</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Infrastructure</displayed-value>
-       <stored-value>infrastructure</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Insurance</displayed-value>
-       <stored-value>insurance</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Internet</displayed-value>
-       <stored-value>internet</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Islands</displayed-value>
-       <stored-value>islands</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Labor and Employment</displayed-value>
-       <stored-value>labor_employment</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Land Use</displayed-value>
-       <stored-value>land_use</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Landmarks</displayed-value>
-       <stored-value>landmarks</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Languages</displayed-value>
-       <stored-value>languages</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Laws and legislation</displayed-value>
-       <stored-value>laws_legislation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>LGBTQ (Lesbian / Gay / Bisexual / Transgender / Queer or Questioning)</displayed-value>
-       <stored-value>lgbtq</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Libraries</displayed-value>
-       <stored-value>libraries</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Licenses and Permits</displayed-value>
-       <stored-value>licenses_permits</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Manhattan</displayed-value>
-       <stored-value>Borough of</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Maps</displayed-value>
-       <stored-value>maps</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Markets</displayed-value>
-       <stored-value>markets</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mayor (Name)</displayed-value>
-       <stored-value>mayor_name</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Memorials</displayed-value>
-       <stored-value>memorials</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Mental Health</displayed-value>
-       <stored-value>mental_health</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Monuments</displayed-value>
-       <stored-value>monuments</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Motor Vehicles</displayed-value>
-       <stored-value>motor_vehicles</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Museums</displayed-value>
-       <stored-value>museums</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Neighborhoods</displayed-value>
-       <stored-value>neighborhoods</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Nutrition</displayed-value>
-       <stored-value>nutrition</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Officials and Employees</displayed-value>
-       <stored-value>officials_employees</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Parking</displayed-value>
-       <stored-value>parking</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Parks and Recreation</displayed-value>
-       <stored-value>parks_recreation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Pensions</displayed-value>
-       <stored-value>pensions</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Pests</displayed-value>
-       <stored-value>pests</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Police</displayed-value>
-       <stored-value>police</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Police - Community Relations</displayed-value>
-       <stored-value>police_community_relations</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Police - Discipline</displayed-value>
-       <stored-value>police_discipline</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Politics and Government</displayed-value>
-       <stored-value>politics_government</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Pollution</displayed-value>
-       <stored-value>pollution</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Poverty</displayed-value>
-       <stored-value>poverty</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Prices</displayed-value>
-       <stored-value>prices</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Purchasing Methods</displayed-value>
-       <stored-value>purchasing_methods</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Authorities</displayed-value>
-       <stored-value>public_authorities</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Public Welfare</displayed-value>
-       <stored-value>public_welfare</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Queens</displayed-value>
-       <stored-value>Borough of</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Real Property</displayed-value>
-       <stored-value>real_property</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Records</displayed-value>
-       <stored-value>records</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Recreation</displayed-value>
-       <stored-value>recreation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Recycling</displayed-value>
-       <stored-value>recycling</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Refuse and Refuse Disposal</displayed-value>
-       <stored-value>refuse_disposal</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Religions</displayed-value>
-       <stored-value>religions</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Rent Control</displayed-value>
-       <stored-value>rent_control</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Rent Stabilization Law</displayed-value>
-       <stored-value>rent_stabilization_law</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Restaurants</displayed-value>
-       <stored-value>restaurants</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Retail</displayed-value>
-       <stored-value>retail</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Rivers</displayed-value>
-       <stored-value>rivers</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Sanitation</displayed-value>
-       <stored-value>sanitation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Schools</displayed-value>
-       <stored-value>schools</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Schools - Administration</displayed-value>
-       <stored-value>schools_administration</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Schools - Charter</displayed-value>
-       <stored-value>schools_charter</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Schools - Parochial</displayed-value>
-       <stored-value>schools_parochial</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Schools - Private</displayed-value>
-       <stored-value>schools_private</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Schools - Buildings</displayed-value>
-       <stored-value>schools_buildings</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Sewage</displayed-value>
-       <stored-value>sewage</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Small Business</displayed-value>
-       <stored-value>small_business</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Snow Removal</displayed-value>
-       <stored-value>snow_removal</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Special Districts</displayed-value>
-       <stored-value>special_districts</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>State of New York</displayed-value>
-       <stored-value>state_new_york</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Staten Island</displayed-value>
-       <stored-value>Borough of</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Statistics</displayed-value>
-       <stored-value>statistics</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Statistics</displayed-value>
-       <stored-value>Education</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Statistics</displayed-value>
-       <stored-value>Police</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Street Vendors</displayed-value>
-       <stored-value>street_vendors</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Streets - Maintenance and Repair</displayed-value>
-       <stored-value>streets_maintenance_repair</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Streets and Highways</displayed-value>
-       <stored-value>streets_highways</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Students</displayed-value>
-       <stored-value>students</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Subways</displayed-value>
-       <stored-value>subways</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Subways - Stations</displayed-value>
-       <stored-value>subways_stations</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Supplies</displayed-value>
-       <stored-value>supplies</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Surveying</displayed-value>
-       <stored-value>surveying</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Taxation</displayed-value>
-       <stored-value>taxation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Taxation - Exemption from</displayed-value>
-       <stored-value>taxation_exemption</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Taxation - Real Property</displayed-value>
-       <stored-value>taxation_real_property</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Taxicabs</displayed-value>
-       <stored-value>taxicabs</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Teachers</displayed-value>
-       <stored-value>teachers</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Television</displayed-value>
-       <stored-value>television</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Terminals</displayed-value>
-       <stored-value>terminals</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Terrorism</displayed-value>
-       <stored-value>terrorism</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Toilets</displayed-value>
-       <stored-value>toilets</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Tolls</displayed-value>
-       <stored-value>toils</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Tourists</displayed-value>
-       <stored-value>tourists</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Traffic and Parking</displayed-value>
-       <stored-value>traffic_parking</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Traffic Safety</displayed-value>
-       <stored-value>traffic_safety</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Transit</displayed-value>
-       <stored-value>transit</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Transit - Rapid</displayed-value>
-       <stored-value>transit_rapid</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Transportation</displayed-value>
-       <stored-value>transportation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Transportation - Finance</displayed-value>
-       <stored-value>transportation_finance</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Transportation - School</displayed-value>
-       <stored-value>transportation_school</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Transportation- Planning</displayed-value>
-       <stored-value>transportation_planning</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Trees</displayed-value>
-       <stored-value>trees</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Trusts and Estates</displayed-value>
-       <stored-value>trusts_estates</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Universities and Colleges</displayed-value>
-       <stored-value>universities_colleges</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Vendors and Contracts</displayed-value>
-       <stored-value>vendors_contracts</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Veterans</displayed-value>
-       <stored-value>veterans</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Volunteers</displayed-value>
-       <stored-value>volunteers</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Water</displayed-value>
-       <stored-value>water</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Water Supply</displayed-value>
-       <stored-value>water_supply</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Weapons</displayed-value>
-       <stored-value>weapons</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Weather</displayed-value>
-       <stored-value>weather</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Women</displayed-value>
-       <stored-value>women</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>World Trade Center</displayed-value>
-       <stored-value>world_trade_center</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Youth</displayed-value>
-       <stored-value>youth</stored-value>
-     </pair>
-   </value-pairs>
+        <form name="traditional">
+            <page number="1">
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Title</label>
+                    <input-type>onebox</input-type>
+                    <hint>On the front page, the first page or in the Executive Summary (if any) of the document, what
+                        is it called? 150 characters or fewer.
+                    </hint>
+                    <required>You must enter a main title for this item.</required>
+                </field>
 
-   <value-pairs value-pairs-name="submission-types" dc-term="type">
-     <pair>
-       <displayed-value>Adjudications / Decisions</displayed-value>
-       <stored-value>adjudications_decisions</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Audit Report</displayed-value>
-       <stored-value>audit_report</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Brochures</displayed-value>
-       <stored-value>brochures</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Budget / Finance</displayed-value>
-       <stored-value>budget_finance</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Bulletins</displayed-value>
-       <stored-value>bulletins</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Calendars</displayed-value>
-       <stored-value>calendars</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Data / Statistics</displayed-value>
-       <stored-value>data_statistics</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Directives</displayed-value>
-       <stored-value>directives</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Environmental Impact Statements - Draft</displayed-value>
-       <stored-value>environmental_impact_statements_draft</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Environmental Impact Statements - Final</displayed-value>
-       <stored-value>environmental_impact_statements_final</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Executive Orders</displayed-value>
-       <stored-value>executive_orders</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Guides</displayed-value>
-       <stored-value>guides</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Laws / Legislation</displayed-value>
-       <stored-value>laws_legislation</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Manuals / Directories</displayed-value>
-       <stored-value>manuals_directories</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Minutes</displayed-value>
-       <stored-value>minutes</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Newsletters / Other Serial Publications</displayed-value>
-       <stored-value>newletters</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Other</displayed-value>
-       <stored-value>other</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Plans</displayed-value>
-       <stored-value>plans</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Press Releases</displayed-value>
-       <stored-value>press_releases</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Proceedings</displayed-value>
-       <stored-value>proceedings</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Reports - Annual</displayed-value>
-       <stored-value>reports_annual</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Reports - Biennial</displayed-value>
-       <stored-value>reports_biennial</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Reports - Monthly</displayed-value>
-       <stored-value>reports_monthly</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Reports - Weekly</displayed-value>
-       <stored-value>reports_weekly</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Reports - Other (Consultant/Staff)</displayed-value>
-       <stored-value>reports_other</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Studies</displayed-value>
-       <stored-value>studies</stored-value>
-     </pair>
-   </value-pairs>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Sub-Title</label>
+                    <input-type>onebox</input-type>
+                    <hint>The remainder of the document's title, if any. 150 characters of fewer.</hint>
+                    <required></required>
+                </field>
 
-   <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
-     <pair>
-       <displayed-value>English</displayed-value>
-       <stored-value>english</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Spanish</displayed-value>
-       <stored-value>spanish</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Chinese</displayed-value>
-       <stored-value>chinese</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Russian</displayed-value>
-       <stored-value>russian</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Arabic</displayed-value>
-       <stored-value>arabic</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Bengali</displayed-value>
-       <stored-value>bengali</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>French</displayed-value>
-       <stored-value>french</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Haitian Creole</displayed-value>
-       <stored-value>hatian_creole</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Italian</displayed-value>
-       <stored-value>italian</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Korean</displayed-value>
-       <stored-value>korean</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Polish</displayed-value>
-       <stored-value>polish</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Urdu</displayed-value>
-       <stored-value>urdu</stored-value>
-     </pair>
-     <pair>
-       <displayed-value>Yiddish</displayed-value>
-       <stored-value>yidish</stored-value>
-     </pair>
-   </value-pairs>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>author</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Agency</label>
+                    <input-type value-pairs-name="agencies">dropdown</input-type>
+                    <hint>What agency is the primary creator of this document?</hint>
+                    <required>You must select an agency</required>
+                </field>
 
-   <value-pairs value-pairs-name="neighborhoods" dc-term="coverage.spacial">
-     <pair>
-       <displayed-value>Neighborhood 1</displayed-value>
-       <stored-value>neighborhood_1</stored-value>
-     </pair>
-       <pair>
-       <displayed-value>Neighborhood 2</displayed-value>
-       <stored-value>neighborhood_2</stored-value>
-     </pair>
-   </value-pairs>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>other</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Additional Creator(s)</label>
+                    <input-type>onebox</input-type>
+                    <hint>What other agencies, consultants, or authors, if any, contributed to the creation of this
+                        document?
+                    </hint>
+                    <required></required>
+                </field>
 
-   <value-pairs value-pairs-name="boroughs" dc-term="coverage.spacial">
-     <pair>
-       <displayed-value>Bronx</displayed-value>
-       <stored-value>bronx</stored-value>
-     </pair>
-       <pair>
-       <displayed-value>Brooklyn</displayed-value>
-       <stored-value>brooklyn</stored-value>
-     </pair>
-       <pair>
-       <displayed-value>Manhattan</displayed-value>
-       <stored-value>manhattan</stored-value>
-     </pair>
-       <pair>
-       <displayed-value>Queens</displayed-value>
-       <stored-value>queens</stored-value>
-     </pair>
-       <pair>
-       <displayed-value>Staten Island</displayed-value>
-       <stored-value>staten_island</stored-value>
-     </pair>
-   </value-pairs>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Subjects(s)</label>
+                    <input-type value-pairs-name="submission-subject">dropdown</input-type>
+                    <hint>Select what subjects you feel are the most relevant subjects covered in this report. Pick up
+                        to three.
+                    </hint>
+                    <required>You must select at least one subject</required>
+                </field>
 
-   <value-pairs value-pairs-name="school-districts" dc-term="coverage.spacial">
-     <pair>
-       <displayed-value>School District 1</displayed-value>
-       <stored-value>school_district_1</stored-value>
-     </pair>
-   </value-pairs>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Description</label>
+                    <input-type>textarea</input-type>
+                    <hint>A brief (100-200 characters) explanation of the contents of this document.</hint>
+                    <required>You must provide a description about this submission</required>
+                </field>
 
-   <value-pairs value-pairs-name="community-board-districts" dc-term="coverage.spacial">
-     <pair>
-       <displayed-value>Community Board Districts 1</displayed-value>
-       <stored-value>community_board_districts_1</stored-value>
-     </pair>
-       <pair>
-       <displayed-value>Community Board Districts 2</displayed-value>
-       <stored-value>community_board_districts_2</stored-value>
-     </pair>
-   </value-pairs>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>date</dc-element>
+                    <dc-qualifier>issued</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Date Published</label>
+                    <input-type>date</input-type>
+                    <hint>This document's date of publication by agency.</hint>
+                    <required>You must enter at least the year.</required>
+                </field>
 
- </form-value-pairs>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Report Type</label>
+                    <input-type value-pairs-name="submission-types">dropdown</input-type>
+                    <hint>Use the dropdown for a list of the most common kinds of reports and pick the one closest to
+                        what you are submitting.
+                    </hint>
+                    <required>You must select a type</required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>source</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Source</label>
+                    <input-type>onebox</input-type>
+                    <hint>The source of this publication</hint>
+                    <required>You must provide a source</required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>language</dc-element>
+                    <dc-qualifier>iso</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Language</label>
+                    <input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+                    <hint>If the publication is written in a language other than English, pick the language from the
+                        dropdown list. English is the default choice.
+                    </hint>
+                    <required>You must select a language</required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>temporal</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Associated Year - Fiscal</label>
+                    <input-type>onebox</input-type>
+                    <hint>The fiscal year covered by this publication. If multiple fiscal years are covered, select "Add
+                        more" to add additional years. One of either Associated Year - Fiscal or Associated Year -
+                        Calender is required.
+                    </hint>
+                    <required>You must select a language</required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>temporal</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Associated Year - Calender</label>
+                    <input-type>onebox</input-type>
+                    <hint>The calender year covered by this publication. If multiple calender years are covered, select
+                        "Add more" to add additional years. One of either Associated Year - Calender or Associated Year
+                        - Fiscal is required.
+                    </hint>
+                    <required>You must select a language</required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>spatial</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Associated Place (Other)</label>
+                    <input-type>onebox</input-type>
+                    <hint>The place associated with this publication. Required if applicable.</hint>
+                    <required></required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>spatial</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Associated Neighborhood</label>
+                    <input-type value-pairs-name="neighborhoods">dropdown</input-type>
+                    <hint>The neighborhood associated with this publication. Required if applicable.</hint>
+                    <required></required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>spatial</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Associated Borough(s)</label>
+                    <input-type value-pairs-name="boroughs">dropdown</input-type>
+                    <hint>The borough associated with this publication. Required if applicable.</hint>
+                    <required></required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>spatial</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Associated School District(s)</label>
+                    <input-type value-pairs-name="school-districts">dropdown</input-type>
+                    <hint>The school district(s) associated with this publication. Required if applicable.</hint>
+                    <required></required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>coverage</dc-element>
+                    <dc-qualifier>spatial</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Associated Community Board District(s)</label>
+                    <input-type value-pairs-name="community-board-districts">dropdown</input-type>
+                    <hint>The community board district(s) associated with this publication. Required if applicable.
+                    </hint>
+                    <required></required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>format</dc-element>
+                    <dc-qualifier>extent</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Number of Pages</label>
+                    <input-type>onebox</input-type>
+                    <hint>How many pages are in this document?</hint>
+                    <required></required>
+                </field>
+            </page>
+
+            <page number="2">
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <!-- An input-type of twobox MUST be marked as repeatable -->
+                    <repeatable>true</repeatable>
+                    <label>Subject Keywords</label>
+                    <input-type>twobox</input-type>
+                    <hint>Enter appropriate subject keywords or phrases.</hint>
+                    <required></required>
+                    <vocabulary>srsc</vocabulary>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Abstract</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter the abstract of the item.</hint>
+                    <required></required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>sponsorship</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Sponsors</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter the names of any sponsors and/or funding codes in the box.</hint>
+                    <required></required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Description</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter any other description or comments in this box.</hint>
+                    <required></required>
+                </field>
+            </page>
+        </form>
+
+        <form name="one">
+            <page number="1">
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>contributor</dc-element>
+                    <dc-qualifier>author</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>One: Authors</label>
+                    <input-type>name</input-type>
+                    <hint>Enter the names of the authors of this item.</hint>
+                    <required></required>
+                </field>
+            </page>
+        </form>
+    </form-definitions>
+
+
+    <!-- form-value-pairs populate dropdown and qualdrop-value lists.          -->
+    <!-- The form-value-pairs element holds child elements named 'value-pairs' -->
+    <!-- A 'value-pairs' element has a value-pairs-name and a dc-term          -->
+    <!-- attribute. The dc-term attribute specifies which to which Dublin Core -->
+    <!-- Term this set of value-pairs applies.                                 -->
+    <!--     Current dc-terms are: identifier-pairs, type-pairs, and           -->
+    <!--     language_iso-pairs. The name attribute matches a name             -->
+    <!--     in the form-map, above.                                           -->
+    <!-- A value-pair contains one 'pair' for each value displayed in the list -->
+    <!-- Each pair contains a 'displayed-value' element and a 'stored-value'   -->
+    <!-- element. A UI list displays the displayed-values, but the program     -->
+    <!-- stores the associated stored-values in the database.                  -->
+
+    <form-value-pairs>
+        <value-pairs value-pairs-name="agencies" dc-term="contributor_author">
+            <pair>
+                <displayed-value>Administrative Trials and Hearings, Office of (OATH)</displayed-value>
+                <stored-value>Administrative Trials and Hearings, Office of (OATH)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Aging, Department for the (DFTA)</displayed-value>
+                <stored-value>Aging, Department for the (DFTA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Buildings, Department of (DOB)</displayed-value>
+                <stored-value>Buildings, Department of (DOB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Business Integrity Commission (BIC)</displayed-value>
+                <stored-value>Business Integrity Commission (BIC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Campaign Finance Board (CFB)</displayed-value>
+                <stored-value>Campaign Finance Board (CFB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Center for Economic Opportunity (CEO)</displayed-value>
+                <stored-value>Center for Economic Opportunity (CEO)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Center for Innovation through Data Intelligence (CIDI)</displayed-value>
+                <stored-value>Center for Innovation through Data Intelligence (CIDI)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Chief Medical Examiner, NYC Office of (OCME)</displayed-value>
+                <stored-value>Chief Medical Examiner, NYC Office of (OCME)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Children's Services, Administration for (ACS)</displayed-value>
+                <stored-value>Children's Services, Administration for (ACS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>City Council, New York (NYCC)</displayed-value>
+                <stored-value>City Council, New York (NYCC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>City Planning, Department of (DCP)</displayed-value>
+                <stored-value>City Planning, Department of (DCP)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Citywide Administrative Services, Department of (DCAS)</displayed-value>
+                <stored-value>Citywide Administrative Services, Department of (DCAS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Civilian Complaint Review Board (CCRB)</displayed-value>
+                <stored-value>Civilian Complaint Review Board (CCRB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Combat Domestic Violence, Mayor's Office to (OCDV)</displayed-value>
+                <stored-value>Combat Domestic Violence, Mayor's Office to (OCDV)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Commission to Combat Police Corruption (CCPC)</displayed-value>
+                <stored-value>Commission to Combat Police Corruption (CCPC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Comptroller (COMP)</displayed-value>
+                <stored-value>Comptroller (COMP)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Conflicts of Interest Board (COIB)</displayed-value>
+                <stored-value>Conflicts of Interest Board (COIB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Consumer Affairs, Department of (DCA)</displayed-value>
+                <stored-value>Consumer Affairs, Department of (DCA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Contract Services, Mayor's Office of (MOCS)</displayed-value>
+                <stored-value>Contract Services, Mayor's Office of (MOCS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Correction, Department of (DOC)</displayed-value>
+                <stored-value>Correction, Department of (DOC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Criminal Justice, Mayor's Office of (MOCJ)</displayed-value>
+                <stored-value>Criminal Justice, Mayor's Office of (MOCJ)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Cultural Affairs, Department of (DCLA)</displayed-value>
+                <stored-value>Cultural Affairs, Department of (DCLA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Data Analytics, Mayor's Office of (MODA)</displayed-value>
+                <stored-value>Data Analytics, Mayor's Office of (MODA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Design and Construction, Department of (DDC)</displayed-value>
+                <stored-value>Design and Construction, Department of (DDC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Design Commission</displayed-value>
+                <stored-value>Design Commission</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Economic Opportunity, Mayor's Office for</displayed-value>
+                <stored-value>Economic Opportunity, Mayor's Office for</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education, Department of (DOE)</displayed-value>
+                <stored-value>Education, Department of (DOE)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Emergency Management, Office of (OEM)</displayed-value>
+                <stored-value>Emergency Management, Office of (OEM)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Environmental Protection, Department of (DEP)</displayed-value>
+                <stored-value>Environmental Protection, Department of (DEP)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Equal Employment Practices Commission (EEPC)</displayed-value>
+                <stored-value>Equal Employment Practices Commission (EEPC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Finance, Department of (DOF)</displayed-value>
+                <stored-value>Finance, Department of (DOF)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Fire Department, New York City (FDNY)</displayed-value>
+                <stored-value>Fire Department, New York City (FDNY)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Food Policy Director, Office of the (See Long Term Planning)</displayed-value>
+                <stored-value>Food Policy Director, Office of the (See Long Term Planning)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Health and Hospitals Corporation (HHC)</displayed-value>
+                <stored-value>Health and Hospitals Corporation (HHC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Health and Mental Hygiene, Department of (DOHMH)</displayed-value>
+                <stored-value>Health and Mental Hygiene, Department of (DOHMH)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Homeless Services, Department of (DHS)</displayed-value>
+                <stored-value>Homeless Services, Department of (DHS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing Authority, New York City (NYCHA)</displayed-value>
+                <stored-value>Housing Authority, New York City (NYCHA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing Preservation and Development, Department of (HPD)</displayed-value>
+                <stored-value>Housing Preservation and Development, Department of (HPD)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing Recovery Operations (HRO)</displayed-value>
+                <stored-value>Housing Recovery Operations (HRO)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Capital Development, Office of (See Workforce Development)</displayed-value>
+                <stored-value>Human Capital Development, Office of (See Workforce Development)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Resources Administration (HRA)</displayed-value>
+                <stored-value>Human Resources Administration (HRA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Rights, City Commission on (CCHR)</displayed-value>
+                <stored-value>Human Rights, City Commission on (CCHR)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Immigrant Affairs, Mayor's Office of (MOIA)</displayed-value>
+                <stored-value>Immigrant Affairs, Mayor's Office of (MOIA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Independent Budget Office, NYC (IBO)</displayed-value>
+                <stored-value>Independent Budget Office, NYC (IBO)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Information Technology and Telecommunications, Department of (DOITT)</displayed-value>
+                <stored-value>Information Technology and Telecommunications, Department of (DOITT)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Inspector General NYPD, Office of the (OIG-NYPD)</displayed-value>
+                <stored-value>Inspector General NYPD, Office of the (OIG-NYPD)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Investigation, Department of (DOI)</displayed-value>
+                <stored-value>Investigation, Department of (DOI)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Labor Relations, NYC Office of (OLR)</displayed-value>
+                <stored-value>Labor Relations, NYC Office of (OLR)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Landmarks Preservation Commission (LPC)</displayed-value>
+                <stored-value>Landmarks Preservation Commission (LPC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Law Department (LAW)</displayed-value>
+                <stored-value>Law Department (LAW)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Loft Board (LOFT) (now see DOB)</displayed-value>
+                <stored-value>Loft Board (LOFT) (now see DOB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Long-Term Planning &amp; Sustainability, Office of (OLTPS)</displayed-value>
+                <stored-value>Long-Term Planning &amp; Sustainability, Office of (OLTPS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Management and Budget, Office of (OMB)</displayed-value>
+                <stored-value>Management and Budget, Office of (OMB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Fund to Advance NYC (Mayor's Fund)</displayed-value>
+                <stored-value>Mayor's Fund to Advance NYC (Mayor's Fund)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office (OM)</displayed-value>
+                <stored-value>Mayor's Office (OM)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office for International Affairs (IA)</displayed-value>
+                <stored-value>Mayor's Office for International Affairs (IA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office of Workforce Development</displayed-value>
+                <stored-value>Mayor's Office of Workforce Development</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Media and Entertainment, Mayor's Office of (MOME)</displayed-value>
+                <stored-value>Media and Entertainment, Mayor's Office of (MOME)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC Employees' Retirement System (NYCERS)</displayed-value>
+                <stored-value>NYC Employees' Retirement System (NYCERS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC Health + Hospitals (NYCHHC)</displayed-value>
+                <stored-value>NYC Health + Hospitals (NYCHHC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC Service (SERVICE)</displayed-value>
+                <stored-value>NYC Service (SERVICE)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Operations, Mayor's Office of (OPS)</displayed-value>
+                <stored-value>Operations, Mayor's Office of (OPS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Parks and Recreation, Department of (DPR) or (NYCDPR)</displayed-value>
+                <stored-value>Parks and Recreation, Department of (DPR) or (NYCDPR)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>People with Disabilities, Mayor's Office of (MOPD)</displayed-value>
+                <stored-value>People with Disabilities, Mayor's Office of (MOPD)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Police Department (NYPD)</displayed-value>
+                <stored-value>Police Department (NYPD)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Probation, Department of (DOP)</displayed-value>
+                <stored-value>Probation, Department of (DOP)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Advocate (PUB ADV)</displayed-value>
+                <stored-value>Public Advocate (PUB ADV)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Quadrennial Advisory Commission</displayed-value>
+                <stored-value>Quadrennial Advisory Commission</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Records and Information Services, Department of (DORIS)</displayed-value>
+                <stored-value>Records and Information Services, Department of (DORIS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Rent Guidelines Board (RGB)</displayed-value>
+                <stored-value>Rent Guidelines Board (RGB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Sanitation, Department of (DSNY)</displayed-value>
+                <stored-value>Sanitation, Department of (DSNY)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>School Construction Authority (SCA)</displayed-value>
+                <stored-value>School Construction Authority (SCA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Small Business Services (SBS)</displayed-value>
+                <stored-value>Small Business Services (SBS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Standards and Appeals, Board of (BSA)</displayed-value>
+                <stored-value>Standards and Appeals, Board of (BSA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Tax Appeals Tribunal, New York City (TAT) (See Tax Commission)</displayed-value>
+                <stored-value>Tax Appeals Tribunal, New York City (TAT) (See Tax Commission)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Tax Commission, New York City (TC)</displayed-value>
+                <stored-value>Tax Commission, New York City (TC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Taxi and Limousine Commission (TLC)</displayed-value>
+                <stored-value>Taxi and Limousine Commission (TLC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transportation, Department of (DOT) or (NYCDOT)</displayed-value>
+                <stored-value>Transportation, Department of (DOT) or (NYCDOT)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Veterans' Services, Department of (DVS)</displayed-value>
+                <stored-value>Veterans' Services, Department of (DVS)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Workforce Development, Mayor's Office of (WKDEV)</displayed-value>
+                <stored-value>Workforce Development, Mayor's Office of (WKDEV)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Youth and Community Development, Department of (DYCD)</displayed-value>
+                <stored-value>Youth and Community Development, Department of (DYCD)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Actuary, NYC Office of the (NYCOA)</displayed-value>
+                <stored-value>Actuary, NYC Office of the (NYCOA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Administrative Justice Coordinator, NYC Office of (AJC)</displayed-value>
+                <stored-value>Administrative Justice Coordinator, NYC Office of (AJC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Appointments, Mayor's Office of (MOA)</displayed-value>
+                <stored-value>Appointments, Mayor's Office of (MOA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Art Commission (see Design Commission)</displayed-value>
+                <stored-value>Art Commission (see Design Commission)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn Public Library (BPL)</displayed-value>
+                <stored-value>Brooklyn Public Library (BPL)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>City Clerk, Office of the (CLERK)</displayed-value>
+                <stored-value>City Clerk, Office of the (CLERK)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>City University of New York (CUNY)</displayed-value>
+                <stored-value>City University of New York (CUNY)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Citywide Event Coordination and Management, Office of (CECM)</displayed-value>
+                <stored-value>Citywide Event Coordination and Management, Office of (CECM)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Civil Service Commission (CSC)</displayed-value>
+                <stored-value>Civil Service Commission (CSC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Commission on Gender Equity (CGE)</displayed-value>
+                <stored-value>Commission on Gender Equity (CGE)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Community Affairs Unit (CAU)</displayed-value>
+                <stored-value>Community Affairs Unit (CAU)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Community Boards (CB)</displayed-value>
+                <stored-value>Community Boards (CB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Correction, Board of (BOC)</displayed-value>
+                <stored-value>Correction, Board of (BOC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District Attorney - Bronx County</displayed-value>
+                <stored-value>District Attorney - Bronx County</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District Attorney - Kings County (Brooklyn)</displayed-value>
+                <stored-value>District Attorney - Kings County (Brooklyn)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District Attorney - New York County (Manhattan)</displayed-value>
+                <stored-value>District Attorney - New York County (Manhattan)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District Attorney - Queens County</displayed-value>
+                <stored-value>District Attorney - Queens County</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District Attorney - Richmond County (Staten Island)</displayed-value>
+                <stored-value>District Attorney - Richmond County (Staten Island)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Economic Development Corporation (EDC) or (NYCEDC)</displayed-value>
+                <stored-value>Economic Development Corporation (EDC) or (NYCEDC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Elections, Board of (BOE)</displayed-value>
+                <stored-value>Elections, Board of (BOE)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Environmental Coordination, Mayor's Office of (OEC)</displayed-value>
+                <stored-value>Environmental Coordination, Mayor's Office of (OEC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Fiscal Year 2005 Securitization Corporation</displayed-value>
+                <stored-value>Fiscal Year 2005 Securitization Corporation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>GreeNYC (GNYC)</displayed-value>
+                <stored-value>GreeNYC (GNYC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Hudson Yards Infrastructure Corporation (HYIC)</displayed-value>
+                <stored-value>Hudson Yards Infrastructure Corporation (HYIC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Intergovernmental Affairs, Mayor's Office of (MOIGA)</displayed-value>
+                <stored-value>Intergovernmental Affairs, Mayor's Office of (MOIGA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Judiciary, Mayor's Advisory Committee on the (ACJ)</displayed-value>
+                <stored-value>Judiciary, Mayor's Advisory Committee on the (ACJ)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Library, Brooklyn Public (BPL)</displayed-value>
+                <stored-value>Library, Brooklyn Public (BPL)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Library, New York Public (NYPL)</displayed-value>
+                <stored-value>Library, New York Public (NYPL)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Library, Queens Public (QL)</displayed-value>
+                <stored-value>Library, Queens Public (QL)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Committee on City Marshals (MCCM)</displayed-value>
+                <stored-value>Mayor's Committee on City Marshals (MCCM)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office for People with Disabilities (MOPD)</displayed-value>
+                <stored-value>Mayor's Office for People with Disabilities (MOPD)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office of Environmental Remediation (OER)</displayed-value>
+                <stored-value>Mayor's Office of Environmental Remediation (OER)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office of Special Projects &amp; Community Events (MOSPCE)</displayed-value>
+                <stored-value>Mayor's Office of Special Projects &amp; Community Events (MOSPCE)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office of Technology and Innovation (MOTI)</displayed-value>
+                <stored-value>Mayor's Office of Technology and Innovation (MOTI)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Media, NYC (part of MOME)</displayed-value>
+                <stored-value>Media, NYC (part of MOME)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>New Business Acceleration Team (NBAT) (NYCBA)(part of SBS?)</displayed-value>
+                <stored-value>New Business Acceleration Team (NBAT) (NYCBA)(part of SBS?)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>New York City Transitional Finance Authority (TFA)</displayed-value>
+                <stored-value>New York City Transitional Finance Authority (TFA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>New York Public Library (NYPL)</displayed-value>
+                <stored-value>New York Public Library (NYPL)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC &amp; Company (NYCGO)</displayed-value>
+                <stored-value>NYC &amp; Company (NYCGO)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC Young Men’s Initiative (YMI)</displayed-value>
+                <stored-value>NYC Young Men’s Initiative (YMI)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Payroll Administration, Office of (OPA)</displayed-value>
+                <stored-value>Payroll Administration, Office of (OPA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Police Pension Fund (PPF)</displayed-value>
+                <stored-value>Police Pension Fund (PPF)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Procurement Policy Board (PPB)</displayed-value>
+                <stored-value>Procurement Policy Board (PPB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Administrator - Bronx County (BCPA)</displayed-value>
+                <stored-value>Public Administrator - Bronx County (BCPA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Administrator - Kings County (KCPA)</displayed-value>
+                <stored-value>Public Administrator - Kings County (KCPA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Administrator - New York County (NYCountyPA)</displayed-value>
+                <stored-value>Public Administrator - New York County (NYCountyPA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Administrator - Queens County (QPA)</displayed-value>
+                <stored-value>Public Administrator - Queens County (QPA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Administrator - Richmond County (RCPA)</displayed-value>
+                <stored-value>Public Administrator - Richmond County (RCPA)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens Library (QL)</displayed-value>
+                <stored-value>Queens Library (QL)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Sales Tax Asset Receivable Corporation (STAR)</displayed-value>
+                <stored-value>Sales Tax Asset Receivable Corporation (STAR)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Special Enforcement, Mayor's Office of (MOSE)</displayed-value>
+                <stored-value>Special Enforcement, Mayor's Office of (MOSE)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Special Narcotics Prosecutor, NYC Office of the (SNP)</displayed-value>
+                <stored-value>Special Narcotics Prosecutor, NYC Office of the (SNP)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>TSASC, Inc. (TSASC)</displayed-value>
+                <stored-value>TSASC, Inc. (TSASC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Water Board (NYWB)</displayed-value>
+                <stored-value>Water Board (NYWB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Water Finance Authority, NYC Municipal (NYW)</displayed-value>
+                <stored-value>Water Finance Authority, NYC Municipal (NYW)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Waterfront Management Advisory Board (WMAB)</displayed-value>
+                <stored-value>Waterfront Management Advisory Board (WMAB)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Workforce Investment Board (WIB) (See Workforce Development)</displayed-value>
+                <stored-value>Workforce Investment Board (WIB) (See Workforce Development)</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="submission-subject" dc-term="subject">
+            <pair>
+                <displayed-value>Accounting</displayed-value>
+                <stored-value>accounting</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Advertising</displayed-value>
+                <stored-value>advertising</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Aged</displayed-value>
+                <stored-value>aged</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Alcohol</displayed-value>
+                <stored-value>alcohol</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Animal Welfare</displayed-value>
+                <stored-value>animal_welfare</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Archaeology</displayed-value>
+                <stored-value>archaeology</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Architecture</displayed-value>
+                <stored-value>architecture</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Art and Design</displayed-value>
+                <stored-value>art_design</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Athletics</displayed-value>
+                <stored-value>athletics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Banks and Banking</displayed-value>
+                <stored-value>banks_banking</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn</displayed-value>
+                <stored-value>Borough of</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx</displayed-value>
+                <stored-value>Borough of the</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn (City)</displayed-value>
+                <stored-value>city_brooklyn</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Budget and Finance</displayed-value>
+                <stored-value>budget_finance</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Building Code</displayed-value>
+                <stored-value>building_code</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Building Construction</displayed-value>
+                <stored-value>building_construction</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Buildings</displayed-value>
+                <stored-value>buildings</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Business</displayed-value>
+                <stored-value>business</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Celebrations and Parades</displayed-value>
+                <stored-value>celebrations_parades</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Cemeteries</displayed-value>
+                <stored-value>cemeteries</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Census</displayed-value>
+                <stored-value>census</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Charities</displayed-value>
+                <stored-value>charities</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Children</displayed-value>
+                <stored-value>children</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>City Planning</displayed-value>
+                <stored-value>city_planning</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Civil Service</displayed-value>
+                <stored-value>civil_service</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Climate</displayed-value>
+                <stored-value>climate</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Coastal</displayed-value>
+                <stored-value>coastal</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Community Relations</displayed-value>
+                <stored-value>community_relations</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Consumers</displayed-value>
+                <stored-value>consumers</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Conventions</displayed-value>
+                <stored-value>conventions</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Correction</displayed-value>
+                <stored-value>correction</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Cost</displayed-value>
+                <stored-value>cost</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Courts</displayed-value>
+                <stored-value>courts</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Crime and Criminals</displayed-value>
+                <stored-value>crime_criminals</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Criminal Justice</displayed-value>
+                <stored-value>criminal_justice</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Culture</displayed-value>
+                <stored-value>culture</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Data and Communications</displayed-value>
+                <stored-value>data_communications</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Death</displayed-value>
+                <stored-value>death</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Demography and Population</displayed-value>
+                <stored-value>demography_population</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Disability</displayed-value>
+                <stored-value>disability</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Discrimination</displayed-value>
+                <stored-value>discrimination</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Diseases</displayed-value>
+                <stored-value>disease</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Drugs</displayed-value>
+                <stored-value>drugs</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education</displayed-value>
+                <stored-value>education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education</displayed-value>
+                <stored-value>Bilingual</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education</displayed-value>
+                <stored-value>Pre-kindergarten</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education</displayed-value>
+                <stored-value>Remedial</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education</displayed-value>
+                <stored-value>Special</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Elections and Voting</displayed-value>
+                <stored-value>elections_voting</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Electric Power</displayed-value>
+                <stored-value>electric_power</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Emergencies</displayed-value>
+                <stored-value>emergencies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Employment</displayed-value>
+                <stored-value>employment</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Energy</displayed-value>
+                <stored-value>energy</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Engineering</displayed-value>
+                <stored-value>engineering</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Environment</displayed-value>
+                <stored-value>environment</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Equal Employment</displayed-value>
+                <stored-value>equal_employment</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Ethics</displayed-value>
+                <stored-value>ethics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Ethnic groups</displayed-value>
+                <stored-value>ethnic_groups</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Families</displayed-value>
+                <stored-value>families</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Finance</displayed-value>
+                <stored-value>finance</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Fire Fighting</displayed-value>
+                <stored-value>fire_fighting</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Firearms</displayed-value>
+                <stored-value>firearms</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Food</displayed-value>
+                <stored-value>food</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Food supply</displayed-value>
+                <stored-value>food_supply</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Fuels</displayed-value>
+                <stored-value>fuels</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Gambling</displayed-value>
+                <stored-value>gambling</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Geography</displayed-value>
+                <stored-value>geography</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Government</displayed-value>
+                <stored-value>government</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Government - Citizen participation</displayed-value>
+                <stored-value>government_citizen_participation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Hazardous Materials</displayed-value>
+                <stored-value>hazardous_materials</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Health</displayed-value>
+                <stored-value>health</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>History</displayed-value>
+                <stored-value>history</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Homeless Persons</displayed-value>
+                <stored-value>homeless_persons</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Hospitals</displayed-value>
+                <stored-value>hospitals</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Hotels</displayed-value>
+                <stored-value>Taverns</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing</displayed-value>
+                <stored-value>housing</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing - Limited Profit</displayed-value>
+                <stored-value>housing_limited_profit</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing - Low Income</displayed-value>
+                <stored-value>housing_low_income</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Rights</displayed-value>
+                <stored-value>human_rights</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Immigration</displayed-value>
+                <stored-value>immigration</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Industries</displayed-value>
+                <stored-value>industries</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Infrastructure</displayed-value>
+                <stored-value>infrastructure</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Insurance</displayed-value>
+                <stored-value>insurance</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Internet</displayed-value>
+                <stored-value>internet</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Islands</displayed-value>
+                <stored-value>islands</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Labor and Employment</displayed-value>
+                <stored-value>labor_employment</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Land Use</displayed-value>
+                <stored-value>land_use</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Landmarks</displayed-value>
+                <stored-value>landmarks</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Languages</displayed-value>
+                <stored-value>languages</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Laws and legislation</displayed-value>
+                <stored-value>laws_legislation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>LGBTQ (Lesbian / Gay / Bisexual / Transgender / Queer or Questioning)</displayed-value>
+                <stored-value>lgbtq</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Libraries</displayed-value>
+                <stored-value>libraries</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Licenses and Permits</displayed-value>
+                <stored-value>licenses_permits</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan</displayed-value>
+                <stored-value>Borough of</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Maps</displayed-value>
+                <stored-value>maps</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Markets</displayed-value>
+                <stored-value>markets</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor (Name)</displayed-value>
+                <stored-value>mayor_name</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Memorials</displayed-value>
+                <stored-value>memorials</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mental Health</displayed-value>
+                <stored-value>mental_health</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Monuments</displayed-value>
+                <stored-value>monuments</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Motor Vehicles</displayed-value>
+                <stored-value>motor_vehicles</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Museums</displayed-value>
+                <stored-value>museums</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Neighborhoods</displayed-value>
+                <stored-value>neighborhoods</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Nutrition</displayed-value>
+                <stored-value>nutrition</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Officials and Employees</displayed-value>
+                <stored-value>officials_employees</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Parking</displayed-value>
+                <stored-value>parking</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Parks and Recreation</displayed-value>
+                <stored-value>parks_recreation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Pensions</displayed-value>
+                <stored-value>pensions</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Pests</displayed-value>
+                <stored-value>pests</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Police</displayed-value>
+                <stored-value>police</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Police - Community Relations</displayed-value>
+                <stored-value>police_community_relations</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Police - Discipline</displayed-value>
+                <stored-value>police_discipline</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Politics and Government</displayed-value>
+                <stored-value>politics_government</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Pollution</displayed-value>
+                <stored-value>pollution</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Poverty</displayed-value>
+                <stored-value>poverty</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Prices</displayed-value>
+                <stored-value>prices</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Purchasing Methods</displayed-value>
+                <stored-value>purchasing_methods</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Authorities</displayed-value>
+                <stored-value>public_authorities</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Welfare</displayed-value>
+                <stored-value>public_welfare</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens</displayed-value>
+                <stored-value>Borough of</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Real Property</displayed-value>
+                <stored-value>real_property</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Records</displayed-value>
+                <stored-value>records</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Recreation</displayed-value>
+                <stored-value>recreation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Recycling</displayed-value>
+                <stored-value>recycling</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Refuse and Refuse Disposal</displayed-value>
+                <stored-value>refuse_disposal</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Religions</displayed-value>
+                <stored-value>religions</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Rent Control</displayed-value>
+                <stored-value>rent_control</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Rent Stabilization Law</displayed-value>
+                <stored-value>rent_stabilization_law</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Restaurants</displayed-value>
+                <stored-value>restaurants</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Retail</displayed-value>
+                <stored-value>retail</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Rivers</displayed-value>
+                <stored-value>rivers</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Sanitation</displayed-value>
+                <stored-value>sanitation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Schools</displayed-value>
+                <stored-value>schools</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Schools - Administration</displayed-value>
+                <stored-value>schools_administration</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Schools - Charter</displayed-value>
+                <stored-value>schools_charter</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Schools - Parochial</displayed-value>
+                <stored-value>schools_parochial</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Schools - Private</displayed-value>
+                <stored-value>schools_private</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Schools - Buildings</displayed-value>
+                <stored-value>schools_buildings</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Sewage</displayed-value>
+                <stored-value>sewage</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Small Business</displayed-value>
+                <stored-value>small_business</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Snow Removal</displayed-value>
+                <stored-value>snow_removal</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Special Districts</displayed-value>
+                <stored-value>special_districts</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>State of New York</displayed-value>
+                <stored-value>state_new_york</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Staten Island</displayed-value>
+                <stored-value>Borough of</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Statistics</displayed-value>
+                <stored-value>statistics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Statistics</displayed-value>
+                <stored-value>Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Statistics</displayed-value>
+                <stored-value>Police</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Street Vendors</displayed-value>
+                <stored-value>street_vendors</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Streets - Maintenance and Repair</displayed-value>
+                <stored-value>streets_maintenance_repair</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Streets and Highways</displayed-value>
+                <stored-value>streets_highways</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Students</displayed-value>
+                <stored-value>students</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Subways</displayed-value>
+                <stored-value>subways</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Subways - Stations</displayed-value>
+                <stored-value>subways_stations</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Supplies</displayed-value>
+                <stored-value>supplies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Surveying</displayed-value>
+                <stored-value>surveying</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Taxation</displayed-value>
+                <stored-value>taxation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Taxation - Exemption from</displayed-value>
+                <stored-value>taxation_exemption</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Taxation - Real Property</displayed-value>
+                <stored-value>taxation_real_property</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Taxicabs</displayed-value>
+                <stored-value>taxicabs</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Teachers</displayed-value>
+                <stored-value>teachers</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Television</displayed-value>
+                <stored-value>television</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Terminals</displayed-value>
+                <stored-value>terminals</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Terrorism</displayed-value>
+                <stored-value>terrorism</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Toilets</displayed-value>
+                <stored-value>toilets</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Tolls</displayed-value>
+                <stored-value>toils</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Tourists</displayed-value>
+                <stored-value>tourists</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Traffic and Parking</displayed-value>
+                <stored-value>traffic_parking</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Traffic Safety</displayed-value>
+                <stored-value>traffic_safety</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transit</displayed-value>
+                <stored-value>transit</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transit - Rapid</displayed-value>
+                <stored-value>transit_rapid</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transportation</displayed-value>
+                <stored-value>transportation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transportation - Finance</displayed-value>
+                <stored-value>transportation_finance</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transportation - School</displayed-value>
+                <stored-value>transportation_school</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transportation- Planning</displayed-value>
+                <stored-value>transportation_planning</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Trees</displayed-value>
+                <stored-value>trees</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Trusts and Estates</displayed-value>
+                <stored-value>trusts_estates</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Universities and Colleges</displayed-value>
+                <stored-value>universities_colleges</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Vendors and Contracts</displayed-value>
+                <stored-value>vendors_contracts</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Veterans</displayed-value>
+                <stored-value>veterans</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Volunteers</displayed-value>
+                <stored-value>volunteers</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Water</displayed-value>
+                <stored-value>water</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Water Supply</displayed-value>
+                <stored-value>water_supply</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Weapons</displayed-value>
+                <stored-value>weapons</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Weather</displayed-value>
+                <stored-value>weather</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Women</displayed-value>
+                <stored-value>women</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>World Trade Center</displayed-value>
+                <stored-value>world_trade_center</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Youth</displayed-value>
+                <stored-value>youth</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="submission-types" dc-term="type">
+            <pair>
+                <displayed-value>Adjudications / Decisions</displayed-value>
+                <stored-value>adjudications_decisions</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Audit Report</displayed-value>
+                <stored-value>audit_report</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brochures</displayed-value>
+                <stored-value>brochures</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Budget / Finance</displayed-value>
+                <stored-value>budget_finance</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bulletins</displayed-value>
+                <stored-value>bulletins</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Calendars</displayed-value>
+                <stored-value>calendars</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Data / Statistics</displayed-value>
+                <stored-value>data_statistics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Directives</displayed-value>
+                <stored-value>directives</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Environmental Impact Statements - Draft</displayed-value>
+                <stored-value>environmental_impact_statements_draft</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Environmental Impact Statements - Final</displayed-value>
+                <stored-value>environmental_impact_statements_final</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Executive Orders</displayed-value>
+                <stored-value>executive_orders</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Guides</displayed-value>
+                <stored-value>guides</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Laws / Legislation</displayed-value>
+                <stored-value>laws_legislation</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manuals / Directories</displayed-value>
+                <stored-value>manuals_directories</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Minutes</displayed-value>
+                <stored-value>minutes</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Newsletters / Other Serial Publications</displayed-value>
+                <stored-value>newletters</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>other</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Plans</displayed-value>
+                <stored-value>plans</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Press Releases</displayed-value>
+                <stored-value>press_releases</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Proceedings</displayed-value>
+                <stored-value>proceedings</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Reports - Annual</displayed-value>
+                <stored-value>reports_annual</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Reports - Biennial</displayed-value>
+                <stored-value>reports_biennial</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Reports - Monthly</displayed-value>
+                <stored-value>reports_monthly</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Reports - Weekly</displayed-value>
+                <stored-value>reports_weekly</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Reports - Other (Consultant/Staff)</displayed-value>
+                <stored-value>reports_other</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Studies</displayed-value>
+                <stored-value>studies</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
+            <pair>
+                <displayed-value>English</displayed-value>
+                <stored-value>english</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Spanish</displayed-value>
+                <stored-value>spanish</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Chinese</displayed-value>
+                <stored-value>chinese</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Russian</displayed-value>
+                <stored-value>russian</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Arabic</displayed-value>
+                <stored-value>arabic</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bengali</displayed-value>
+                <stored-value>bengali</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>French</displayed-value>
+                <stored-value>french</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Haitian Creole</displayed-value>
+                <stored-value>hatian_creole</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Italian</displayed-value>
+                <stored-value>italian</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Korean</displayed-value>
+                <stored-value>korean</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Polish</displayed-value>
+                <stored-value>polish</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Urdu</displayed-value>
+                <stored-value>urdu</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Yiddish</displayed-value>
+                <stored-value>yidish</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="neighborhoods" dc-term="coverage.spacial">
+            <pair>
+                <displayed-value>Neighborhood 1</displayed-value>
+                <stored-value>neighborhood_1</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Neighborhood 2</displayed-value>
+                <stored-value>neighborhood_2</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="boroughs" dc-term="coverage.spacial">
+            <pair>
+                <displayed-value>Bronx</displayed-value>
+                <stored-value>bronx</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn</displayed-value>
+                <stored-value>brooklyn</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan</displayed-value>
+                <stored-value>manhattan</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens</displayed-value>
+                <stored-value>queens</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Staten Island</displayed-value>
+                <stored-value>staten_island</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="school-districts" dc-term="coverage.spacial">
+            <pair>
+                <displayed-value>School District 1</displayed-value>
+                <stored-value>school_district_1</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="community-board-districts" dc-term="coverage.spacial">
+            <pair>
+                <displayed-value>Community Board Districts 1</displayed-value>
+                <stored-value>community_board_districts_1</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Community Board Districts 2</displayed-value>
+                <stored-value>community_board_districts_2</stored-value>
+            </pair>
+        </value-pairs>
+
+    </form-value-pairs>
 
 </input-forms>

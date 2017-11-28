@@ -1,2 +1,2 @@
 # Backup dspace database everyday at midnight
-0 0 * * * sudo -u postgres sh /vagrant/build_scripts/db_setup/backup.sh
+0 0 * * * sudo -u postgres -E sh /vagrant/build_scripts/db_setup/backup.sh

@@ -250,7 +250,7 @@
                     <label>Number of Pages</label>
                     <input-type>onebox</input-type>
                     <hint>How many pages are in this document?</hint>
-                    <required></required>
+                    <required>You must enter the number of pages in the document.</required>
                 </field>
             </page>
 
@@ -336,556 +336,556 @@
     <form-value-pairs>
         <value-pairs value-pairs-name="agencies" dc-term="contributor_author">
             <pair>
-                <displayed-value>Administrative Trials and Hearings, Office of (OATH)</displayed-value>
-                <stored-value>Administrative Trials and Hearings, Office of (OATH)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Aging, Department for the (DFTA)</displayed-value>
-                <stored-value>Aging, Department for the (DFTA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Buildings, Department of (DOB)</displayed-value>
-                <stored-value>Buildings, Department of (DOB)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Business Integrity Commission (BIC)</displayed-value>
-                <stored-value>Business Integrity Commission (BIC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Campaign Finance Board (CFB)</displayed-value>
-                <stored-value>Campaign Finance Board (CFB)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Center for Economic Opportunity (CEO)</displayed-value>
-                <stored-value>Center for Economic Opportunity (CEO)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Center for Innovation through Data Intelligence (CIDI)</displayed-value>
-                <stored-value>Center for Innovation through Data Intelligence (CIDI)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Chief Medical Examiner, NYC Office of (OCME)</displayed-value>
-                <stored-value>Chief Medical Examiner, NYC Office of (OCME)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Children's Services, Administration for (ACS)</displayed-value>
-                <stored-value>Children's Services, Administration for (ACS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>City Council, New York (NYCC)</displayed-value>
-                <stored-value>City Council, New York (NYCC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>City Planning, Department of (DCP)</displayed-value>
-                <stored-value>City Planning, Department of (DCP)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Citywide Administrative Services, Department of (DCAS)</displayed-value>
-                <stored-value>Citywide Administrative Services, Department of (DCAS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Civilian Complaint Review Board (CCRB)</displayed-value>
-                <stored-value>Civilian Complaint Review Board (CCRB)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Combat Domestic Violence, Mayor's Office to (OCDV)</displayed-value>
-                <stored-value>Combat Domestic Violence, Mayor's Office to (OCDV)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Commission to Combat Police Corruption (CCPC)</displayed-value>
-                <stored-value>Commission to Combat Police Corruption (CCPC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Comptroller (COMP)</displayed-value>
-                <stored-value>Comptroller (COMP)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Conflicts of Interest Board (COIB)</displayed-value>
-                <stored-value>Conflicts of Interest Board (COIB)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Consumer Affairs, Department of (DCA)</displayed-value>
-                <stored-value>Consumer Affairs, Department of (DCA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Contract Services, Mayor's Office of (MOCS)</displayed-value>
-                <stored-value>Contract Services, Mayor's Office of (MOCS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Correction, Department of (DOC)</displayed-value>
-                <stored-value>Correction, Department of (DOC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Criminal Justice, Mayor's Office of (MOCJ)</displayed-value>
-                <stored-value>Criminal Justice, Mayor's Office of (MOCJ)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Cultural Affairs, Department of (DCLA)</displayed-value>
-                <stored-value>Cultural Affairs, Department of (DCLA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Data Analytics, Mayor's Office of (MODA)</displayed-value>
-                <stored-value>Data Analytics, Mayor's Office of (MODA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Design and Construction, Department of (DDC)</displayed-value>
-                <stored-value>Design and Construction, Department of (DDC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Design Commission</displayed-value>
-                <stored-value>Design Commission</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Economic Opportunity, Mayor's Office for</displayed-value>
-                <stored-value>Economic Opportunity, Mayor's Office for</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Education, Department of (DOE)</displayed-value>
-                <stored-value>Education, Department of (DOE)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Emergency Management, Office of (OEM)</displayed-value>
-                <stored-value>Emergency Management, Office of (OEM)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Environmental Protection, Department of (DEP)</displayed-value>
-                <stored-value>Environmental Protection, Department of (DEP)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Equal Employment Practices Commission (EEPC)</displayed-value>
-                <stored-value>Equal Employment Practices Commission (EEPC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Finance, Department of (DOF)</displayed-value>
-                <stored-value>Finance, Department of (DOF)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Fire Department, New York City (FDNY)</displayed-value>
-                <stored-value>Fire Department, New York City (FDNY)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Food Policy Director, Office of the (See Long Term Planning)</displayed-value>
-                <stored-value>Food Policy Director, Office of the (See Long Term Planning)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Health and Hospitals Corporation (HHC)</displayed-value>
-                <stored-value>Health and Hospitals Corporation (HHC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Health and Mental Hygiene, Department of (DOHMH)</displayed-value>
-                <stored-value>Health and Mental Hygiene, Department of (DOHMH)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Homeless Services, Department of (DHS)</displayed-value>
-                <stored-value>Homeless Services, Department of (DHS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Housing Authority, New York City (NYCHA)</displayed-value>
-                <stored-value>Housing Authority, New York City (NYCHA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Housing Preservation and Development, Department of (HPD)</displayed-value>
-                <stored-value>Housing Preservation and Development, Department of (HPD)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Housing Recovery Operations (HRO)</displayed-value>
-                <stored-value>Housing Recovery Operations (HRO)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Human Capital Development, Office of (See Workforce Development)</displayed-value>
-                <stored-value>Human Capital Development, Office of (See Workforce Development)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Human Resources Administration (HRA)</displayed-value>
-                <stored-value>Human Resources Administration (HRA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Human Rights, City Commission on (CCHR)</displayed-value>
-                <stored-value>Human Rights, City Commission on (CCHR)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Immigrant Affairs, Mayor's Office of (MOIA)</displayed-value>
-                <stored-value>Immigrant Affairs, Mayor's Office of (MOIA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Independent Budget Office, NYC (IBO)</displayed-value>
-                <stored-value>Independent Budget Office, NYC (IBO)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Information Technology and Telecommunications, Department of (DOITT)</displayed-value>
-                <stored-value>Information Technology and Telecommunications, Department of (DOITT)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Inspector General NYPD, Office of the (OIG-NYPD)</displayed-value>
-                <stored-value>Inspector General NYPD, Office of the (OIG-NYPD)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Investigation, Department of (DOI)</displayed-value>
-                <stored-value>Investigation, Department of (DOI)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Labor Relations, NYC Office of (OLR)</displayed-value>
-                <stored-value>Labor Relations, NYC Office of (OLR)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Landmarks Preservation Commission (LPC)</displayed-value>
-                <stored-value>Landmarks Preservation Commission (LPC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Law Department (LAW)</displayed-value>
-                <stored-value>Law Department (LAW)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Loft Board (LOFT) (now see DOB)</displayed-value>
-                <stored-value>Loft Board (LOFT) (now see DOB)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Long-Term Planning &amp; Sustainability, Office of (OLTPS)</displayed-value>
-                <stored-value>Long-Term Planning &amp; Sustainability, Office of (OLTPS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Management and Budget, Office of (OMB)</displayed-value>
-                <stored-value>Management and Budget, Office of (OMB)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Mayor's Fund to Advance NYC (Mayor's Fund)</displayed-value>
-                <stored-value>Mayor's Fund to Advance NYC (Mayor's Fund)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Mayor's Office (OM)</displayed-value>
-                <stored-value>Mayor's Office (OM)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Mayor's Office for International Affairs (IA)</displayed-value>
-                <stored-value>Mayor's Office for International Affairs (IA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Mayor's Office of Workforce Development</displayed-value>
-                <stored-value>Mayor's Office of Workforce Development</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Media and Entertainment, Mayor's Office of (MOME)</displayed-value>
-                <stored-value>Media and Entertainment, Mayor's Office of (MOME)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>NYC Employees' Retirement System (NYCERS)</displayed-value>
-                <stored-value>NYC Employees' Retirement System (NYCERS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>NYC Health + Hospitals (NYCHHC)</displayed-value>
-                <stored-value>NYC Health + Hospitals (NYCHHC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>NYC Service (SERVICE)</displayed-value>
-                <stored-value>NYC Service (SERVICE)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Operations, Mayor's Office of (OPS)</displayed-value>
-                <stored-value>Operations, Mayor's Office of (OPS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Parks and Recreation, Department of (DPR) or (NYCDPR)</displayed-value>
-                <stored-value>Parks and Recreation, Department of (DPR) or (NYCDPR)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>People with Disabilities, Mayor's Office of (MOPD)</displayed-value>
-                <stored-value>People with Disabilities, Mayor's Office of (MOPD)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Police Department (NYPD)</displayed-value>
-                <stored-value>Police Department (NYPD)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Probation, Department of (DOP)</displayed-value>
-                <stored-value>Probation, Department of (DOP)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Public Advocate (PUB ADV)</displayed-value>
-                <stored-value>Public Advocate (PUB ADV)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Quadrennial Advisory Commission</displayed-value>
-                <stored-value>Quadrennial Advisory Commission</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Records and Information Services, Department of (DORIS)</displayed-value>
-                <stored-value>Records and Information Services, Department of (DORIS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Rent Guidelines Board (RGB)</displayed-value>
-                <stored-value>Rent Guidelines Board (RGB)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Sanitation, Department of (DSNY)</displayed-value>
-                <stored-value>Sanitation, Department of (DSNY)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>School Construction Authority (SCA)</displayed-value>
-                <stored-value>School Construction Authority (SCA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Small Business Services (SBS)</displayed-value>
-                <stored-value>Small Business Services (SBS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Standards and Appeals, Board of (BSA)</displayed-value>
-                <stored-value>Standards and Appeals, Board of (BSA)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Tax Appeals Tribunal, New York City (TAT) (See Tax Commission)</displayed-value>
-                <stored-value>Tax Appeals Tribunal, New York City (TAT) (See Tax Commission)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Tax Commission, New York City (TC)</displayed-value>
-                <stored-value>Tax Commission, New York City (TC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Taxi and Limousine Commission (TLC)</displayed-value>
-                <stored-value>Taxi and Limousine Commission (TLC)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Transportation, Department of (DOT) or (NYCDOT)</displayed-value>
-                <stored-value>Transportation, Department of (DOT) or (NYCDOT)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Veterans' Services, Department of (DVS)</displayed-value>
-                <stored-value>Veterans' Services, Department of (DVS)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Workforce Development, Mayor's Office of (WKDEV)</displayed-value>
-                <stored-value>Workforce Development, Mayor's Office of (WKDEV)</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Youth and Community Development, Department of (DYCD)</displayed-value>
-                <stored-value>Youth and Community Development, Department of (DYCD)</stored-value>
-            </pair>
-            <pair>
                 <displayed-value>Actuary, NYC Office of the (NYCOA)</displayed-value>
-                <stored-value>Actuary, NYC Office of the (NYCOA)</stored-value>
+                <stored-value>1</stored-value>
             </pair>
             <pair>
                 <displayed-value>Administrative Justice Coordinator, NYC Office of (AJC)</displayed-value>
-                <stored-value>Administrative Justice Coordinator, NYC Office of (AJC)</stored-value>
+                <stored-value>2</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Administrative Trials and Hearings, Office of (OATH)</displayed-value>
+                <stored-value>3</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Aging, Department for the (DFTA)</displayed-value>
+                <stored-value>4</stored-value>
             </pair>
             <pair>
                 <displayed-value>Appointments, Mayor's Office of (MOA)</displayed-value>
-                <stored-value>Appointments, Mayor's Office of (MOA)</stored-value>
+                <stored-value>5</stored-value>
             </pair>
             <pair>
                 <displayed-value>Art Commission (see Design Commission)</displayed-value>
-                <stored-value>Art Commission (see Design Commission)</stored-value>
+                <stored-value>6</stored-value>
             </pair>
             <pair>
                 <displayed-value>Brooklyn Public Library (BPL)</displayed-value>
-                <stored-value>Brooklyn Public Library (BPL)</stored-value>
+                <stored-value>7</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Buildings, Department of (DOB)</displayed-value>
+                <stored-value>8</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Business Integrity Commission (BIC)</displayed-value>
+                <stored-value>9</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Campaign Finance Board (CFB)</displayed-value>
+                <stored-value>10</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Center for Economic Opportunity (CEO)</displayed-value>
+                <stored-value>11</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Center for Innovation through Data Intelligence (CIDI)</displayed-value>
+                <stored-value>12</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Chief Medical Examiner, NYC Office of (OCME)</displayed-value>
+                <stored-value>13</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Children's Services, Administration for (ACS)</displayed-value>
+                <stored-value>14</stored-value>
             </pair>
             <pair>
                 <displayed-value>City Clerk, Office of the (CLERK)</displayed-value>
-                <stored-value>City Clerk, Office of the (CLERK)</stored-value>
+                <stored-value>15</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>City Council, New York (NYCC)</displayed-value>
+                <stored-value>16</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>City Planning, Department of (DCP)</displayed-value>
+                <stored-value>17</stored-value>
             </pair>
             <pair>
                 <displayed-value>City University of New York (CUNY)</displayed-value>
-                <stored-value>City University of New York (CUNY)</stored-value>
+                <stored-value>18</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Citywide Administrative Services, Department of (DCAS)</displayed-value>
+                <stored-value>19</stored-value>
             </pair>
             <pair>
                 <displayed-value>Citywide Event Coordination and Management, Office of (CECM)</displayed-value>
-                <stored-value>Citywide Event Coordination and Management, Office of (CECM)</stored-value>
+                <stored-value>20</stored-value>
             </pair>
             <pair>
                 <displayed-value>Civil Service Commission (CSC)</displayed-value>
-                <stored-value>Civil Service Commission (CSC)</stored-value>
+                <stored-value>21</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Civilian Complaint Review Board (CCRB)</displayed-value>
+                <stored-value>22</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Combat Domestic Violence, Mayor's Office to (OCDV)</displayed-value>
+                <stored-value>23</stored-value>
             </pair>
             <pair>
                 <displayed-value>Commission on Gender Equity (CGE)</displayed-value>
-                <stored-value>Commission on Gender Equity (CGE)</stored-value>
+                <stored-value>24</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Commission to Combat Police Corruption (CCPC)</displayed-value>
+                <stored-value>25</stored-value>
             </pair>
             <pair>
                 <displayed-value>Community Affairs Unit (CAU)</displayed-value>
-                <stored-value>Community Affairs Unit (CAU)</stored-value>
+                <stored-value>26</stored-value>
             </pair>
             <pair>
                 <displayed-value>Community Boards (CB)</displayed-value>
-                <stored-value>Community Boards (CB)</stored-value>
+                <stored-value>27</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Comptroller (COMP)</displayed-value>
+                <stored-value>28</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Conflicts of Interest Board (COIB)</displayed-value>
+                <stored-value>29</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Consumer Affairs, Department of (DCA)</displayed-value>
+                <stored-value>30</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Contract Services, Mayor's Office of (MOCS)</displayed-value>
+                <stored-value>31</stored-value>
             </pair>
             <pair>
                 <displayed-value>Correction, Board of (BOC)</displayed-value>
-                <stored-value>Correction, Board of (BOC)</stored-value>
+                <stored-value>32</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Correction, Department of (DOC)</displayed-value>
+                <stored-value>33</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Criminal Justice, Mayor's Office of (MOCJ)</displayed-value>
+                <stored-value>34</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Cultural Affairs, Department of (DCLA)</displayed-value>
+                <stored-value>35</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Data Analytics, Mayor's Office of (MODA)</displayed-value>
+                <stored-value>36</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Design and Construction, Department of (DDC)</displayed-value>
+                <stored-value>37</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Design Commission</displayed-value>
+                <stored-value>38</stored-value>
             </pair>
             <pair>
                 <displayed-value>District Attorney - Bronx County</displayed-value>
-                <stored-value>District Attorney - Bronx County</stored-value>
+                <stored-value>39</stored-value>
             </pair>
             <pair>
                 <displayed-value>District Attorney - Kings County (Brooklyn)</displayed-value>
-                <stored-value>District Attorney - Kings County (Brooklyn)</stored-value>
+                <stored-value>40</stored-value>
             </pair>
             <pair>
                 <displayed-value>District Attorney - New York County (Manhattan)</displayed-value>
-                <stored-value>District Attorney - New York County (Manhattan)</stored-value>
+                <stored-value>41</stored-value>
             </pair>
             <pair>
                 <displayed-value>District Attorney - Queens County</displayed-value>
-                <stored-value>District Attorney - Queens County</stored-value>
+                <stored-value>42</stored-value>
             </pair>
             <pair>
                 <displayed-value>District Attorney - Richmond County (Staten Island)</displayed-value>
-                <stored-value>District Attorney - Richmond County (Staten Island)</stored-value>
+                <stored-value>43</stored-value>
             </pair>
             <pair>
                 <displayed-value>Economic Development Corporation (EDC) or (NYCEDC)</displayed-value>
-                <stored-value>Economic Development Corporation (EDC) or (NYCEDC)</stored-value>
+                <stored-value>44</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Economic Opportunity, Mayor's Office for</displayed-value>
+                <stored-value>45</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education, Department of (DOE)</displayed-value>
+                <stored-value>46</stored-value>
             </pair>
             <pair>
                 <displayed-value>Elections, Board of (BOE)</displayed-value>
-                <stored-value>Elections, Board of (BOE)</stored-value>
+                <stored-value>47</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Emergency Management, Office of (OEM)</displayed-value>
+                <stored-value>48</stored-value>
             </pair>
             <pair>
                 <displayed-value>Environmental Coordination, Mayor's Office of (OEC)</displayed-value>
-                <stored-value>Environmental Coordination, Mayor's Office of (OEC)</stored-value>
+                <stored-value>49</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Environmental Protection, Department of (DEP)</displayed-value>
+                <stored-value>50</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Equal Employment Practices Commission (EEPC)</displayed-value>
+                <stored-value>51</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Finance, Department of (DOF)</displayed-value>
+                <stored-value>52</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Fire Department, New York City (FDNY)</displayed-value>
+                <stored-value>53</stored-value>
             </pair>
             <pair>
                 <displayed-value>Fiscal Year 2005 Securitization Corporation</displayed-value>
-                <stored-value>Fiscal Year 2005 Securitization Corporation</stored-value>
+                <stored-value>54</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Food Policy Director, Office of the (See Long Term Planning)</displayed-value>
+                <stored-value>55</stored-value>
             </pair>
             <pair>
                 <displayed-value>GreeNYC (GNYC)</displayed-value>
-                <stored-value>GreeNYC (GNYC)</stored-value>
+                <stored-value>56</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Health and Hospitals Corporation (HHC)</displayed-value>
+                <stored-value>57</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Health and Mental Hygiene, Department of (DOHMH)</displayed-value>
+                <stored-value>58</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Homeless Services, Department of (DHS)</displayed-value>
+                <stored-value>59</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing Authority, New York City (NYCHA)</displayed-value>
+                <stored-value>60</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing Preservation and Development, Department of (HPD)</displayed-value>
+                <stored-value>61</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Housing Recovery Operations (HRO)</displayed-value>
+                <stored-value>62</stored-value>
             </pair>
             <pair>
                 <displayed-value>Hudson Yards Infrastructure Corporation (HYIC)</displayed-value>
-                <stored-value>Hudson Yards Infrastructure Corporation (HYIC)</stored-value>
+                <stored-value>63</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Capital Development, Office of (See Workforce Development)</displayed-value>
+                <stored-value>64</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Resources Administration (HRA)</displayed-value>
+                <stored-value>65</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Rights, City Commission on (CCHR)</displayed-value>
+                <stored-value>66</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Immigrant Affairs, Mayor's Office of (MOIA)</displayed-value>
+                <stored-value>67</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Independent Budget Office, NYC (IBO)</displayed-value>
+                <stored-value>68</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Information Technology and Telecommunications, Department of (DOITT)</displayed-value>
+                <stored-value>69</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Inspector General NYPD, Office of the (OIG-NYPD)</displayed-value>
+                <stored-value>70</stored-value>
             </pair>
             <pair>
                 <displayed-value>Intergovernmental Affairs, Mayor's Office of (MOIGA)</displayed-value>
-                <stored-value>Intergovernmental Affairs, Mayor's Office of (MOIGA)</stored-value>
+                <stored-value>71</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Investigation, Department of (DOI)</displayed-value>
+                <stored-value>72</stored-value>
             </pair>
             <pair>
                 <displayed-value>Judiciary, Mayor's Advisory Committee on the (ACJ)</displayed-value>
-                <stored-value>Judiciary, Mayor's Advisory Committee on the (ACJ)</stored-value>
+                <stored-value>73</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Labor Relations, NYC Office of (OLR)</displayed-value>
+                <stored-value>74</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Landmarks Preservation Commission (LPC)</displayed-value>
+                <stored-value>75</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Law Department (LAW)</displayed-value>
+                <stored-value>76</stored-value>
             </pair>
             <pair>
                 <displayed-value>Library, Brooklyn Public (BPL)</displayed-value>
-                <stored-value>Library, Brooklyn Public (BPL)</stored-value>
+                <stored-value>77</stored-value>
             </pair>
             <pair>
                 <displayed-value>Library, New York Public (NYPL)</displayed-value>
-                <stored-value>Library, New York Public (NYPL)</stored-value>
+                <stored-value>78</stored-value>
             </pair>
             <pair>
                 <displayed-value>Library, Queens Public (QL)</displayed-value>
-                <stored-value>Library, Queens Public (QL)</stored-value>
+                <stored-value>79</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Loft Board (LOFT) (now see DOB)</displayed-value>
+                <stored-value>80</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Long-Term Planning & Sustainability, Office of (OLTPS)</displayed-value>
+                <stored-value>81</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Management and Budget, Office of (OMB)</displayed-value>
+                <stored-value>82</stored-value>
             </pair>
             <pair>
                 <displayed-value>Mayor's Committee on City Marshals (MCCM)</displayed-value>
-                <stored-value>Mayor's Committee on City Marshals (MCCM)</stored-value>
+                <stored-value>83</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Fund to Advance NYC (Mayor's Fund)</displayed-value>
+                <stored-value>84</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office (OM)</displayed-value>
+                <stored-value>85</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office for International Affairs (IA)</displayed-value>
+                <stored-value>86</stored-value>
             </pair>
             <pair>
                 <displayed-value>Mayor's Office for People with Disabilities (MOPD)</displayed-value>
-                <stored-value>Mayor's Office for People with Disabilities (MOPD)</stored-value>
+                <stored-value>87</stored-value>
             </pair>
             <pair>
                 <displayed-value>Mayor's Office of Environmental Remediation (OER)</displayed-value>
-                <stored-value>Mayor's Office of Environmental Remediation (OER)</stored-value>
+                <stored-value>88</stored-value>
             </pair>
             <pair>
-                <displayed-value>Mayor's Office of Special Projects &amp; Community Events (MOSPCE)</displayed-value>
-                <stored-value>Mayor's Office of Special Projects &amp; Community Events (MOSPCE)</stored-value>
+                <displayed-value>Mayor's Office of Special Projects & Community Events (MOSPCE)</displayed-value>
+                <stored-value>89</stored-value>
             </pair>
             <pair>
                 <displayed-value>Mayor's Office of Technology and Innovation (MOTI)</displayed-value>
-                <stored-value>Mayor's Office of Technology and Innovation (MOTI)</stored-value>
+                <stored-value>90</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mayor's Office of Workforce Development</displayed-value>
+                <stored-value>91</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Media and Entertainment, Mayor's Office of (MOME)</displayed-value>
+                <stored-value>92</stored-value>
             </pair>
             <pair>
                 <displayed-value>Media, NYC (part of MOME)</displayed-value>
-                <stored-value>Media, NYC (part of MOME)</stored-value>
+                <stored-value>93</stored-value>
             </pair>
             <pair>
                 <displayed-value>New Business Acceleration Team (NBAT) (NYCBA)(part of SBS?)</displayed-value>
-                <stored-value>New Business Acceleration Team (NBAT) (NYCBA)(part of SBS?)</stored-value>
+                <stored-value>94</stored-value>
             </pair>
             <pair>
                 <displayed-value>New York City Transitional Finance Authority (TFA)</displayed-value>
-                <stored-value>New York City Transitional Finance Authority (TFA)</stored-value>
+                <stored-value>95</stored-value>
             </pair>
             <pair>
                 <displayed-value>New York Public Library (NYPL)</displayed-value>
-                <stored-value>New York Public Library (NYPL)</stored-value>
+                <stored-value>96</stored-value>
             </pair>
             <pair>
-                <displayed-value>NYC &amp; Company (NYCGO)</displayed-value>
-                <stored-value>NYC &amp; Company (NYCGO)</stored-value>
+                <displayed-value>NYC & Company (NYCGO)</displayed-value>
+                <stored-value>97</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC Employees' Retirement System (NYCERS)</displayed-value>
+                <stored-value>98</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC Health + Hospitals (NYCHHC)</displayed-value>
+                <stored-value>99</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>NYC Service (SERVICE)</displayed-value>
+                <stored-value>100</stored-value>
             </pair>
             <pair>
                 <displayed-value>NYC Young Men’s Initiative (YMI)</displayed-value>
-                <stored-value>NYC Young Men’s Initiative (YMI)</stored-value>
+                <stored-value>101</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Operations, Mayor's Office of (OPS)</displayed-value>
+                <stored-value>102</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Parks and Recreation, Department of (DPR) or (NYCDPR)</displayed-value>
+                <stored-value>103</stored-value>
             </pair>
             <pair>
                 <displayed-value>Payroll Administration, Office of (OPA)</displayed-value>
-                <stored-value>Payroll Administration, Office of (OPA)</stored-value>
+                <stored-value>104</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>People with Disabilities, Mayor's Office of (MOPD)</displayed-value>
+                <stored-value>105</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Police Department (NYPD)</displayed-value>
+                <stored-value>106</stored-value>
             </pair>
             <pair>
                 <displayed-value>Police Pension Fund (PPF)</displayed-value>
-                <stored-value>Police Pension Fund (PPF)</stored-value>
+                <stored-value>107</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Probation, Department of (DOP)</displayed-value>
+                <stored-value>108</stored-value>
             </pair>
             <pair>
                 <displayed-value>Procurement Policy Board (PPB)</displayed-value>
-                <stored-value>Procurement Policy Board (PPB)</stored-value>
+                <stored-value>109</stored-value>
             </pair>
             <pair>
                 <displayed-value>Public Administrator - Bronx County (BCPA)</displayed-value>
-                <stored-value>Public Administrator - Bronx County (BCPA)</stored-value>
+                <stored-value>110</stored-value>
             </pair>
             <pair>
                 <displayed-value>Public Administrator - Kings County (KCPA)</displayed-value>
-                <stored-value>Public Administrator - Kings County (KCPA)</stored-value>
+                <stored-value>111</stored-value>
             </pair>
             <pair>
                 <displayed-value>Public Administrator - New York County (NYCountyPA)</displayed-value>
-                <stored-value>Public Administrator - New York County (NYCountyPA)</stored-value>
+                <stored-value>112</stored-value>
             </pair>
             <pair>
                 <displayed-value>Public Administrator - Queens County (QPA)</displayed-value>
-                <stored-value>Public Administrator - Queens County (QPA)</stored-value>
+                <stored-value>113</stored-value>
             </pair>
             <pair>
                 <displayed-value>Public Administrator - Richmond County (RCPA)</displayed-value>
-                <stored-value>Public Administrator - Richmond County (RCPA)</stored-value>
+                <stored-value>114</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Advocate (PUB ADV)</displayed-value>
+                <stored-value>115</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Quadrennial Advisory Commission</displayed-value>
+                <stored-value>116</stored-value>
             </pair>
             <pair>
                 <displayed-value>Queens Library (QL)</displayed-value>
-                <stored-value>Queens Library (QL)</stored-value>
+                <stored-value>117</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Records and Information Services, Department of (DORIS)</displayed-value>
+                <stored-value>118</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Rent Guidelines Board (RGB)</displayed-value>
+                <stored-value>119</stored-value>
             </pair>
             <pair>
                 <displayed-value>Sales Tax Asset Receivable Corporation (STAR)</displayed-value>
-                <stored-value>Sales Tax Asset Receivable Corporation (STAR)</stored-value>
+                <stored-value>120</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Sanitation, Department of (DSNY)</displayed-value>
+                <stored-value>121</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>School Construction Authority (SCA)</displayed-value>
+                <stored-value>122</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Small Business Services (SBS)</displayed-value>
+                <stored-value>123</stored-value>
             </pair>
             <pair>
                 <displayed-value>Special Enforcement, Mayor's Office of (MOSE)</displayed-value>
-                <stored-value>Special Enforcement, Mayor's Office of (MOSE)</stored-value>
+                <stored-value>124</stored-value>
             </pair>
             <pair>
                 <displayed-value>Special Narcotics Prosecutor, NYC Office of the (SNP)</displayed-value>
-                <stored-value>Special Narcotics Prosecutor, NYC Office of the (SNP)</stored-value>
+                <stored-value>125</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Standards and Appeals, Board of (BSA)</displayed-value>
+                <stored-value>126</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Tax Appeals Tribunal, New York City (TAT) (See Tax Commission)</displayed-value>
+                <stored-value>127</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Tax Commission, New York City (TC)</displayed-value>
+                <stored-value>128</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Taxi and Limousine Commission (TLC)</displayed-value>
+                <stored-value>129</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Transportation, Department of (DOT) or (NYCDOT)</displayed-value>
+                <stored-value>130</stored-value>
             </pair>
             <pair>
                 <displayed-value>TSASC, Inc. (TSASC)</displayed-value>
-                <stored-value>TSASC, Inc. (TSASC)</stored-value>
+                <stored-value>131</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Veterans' Services, Department of (DVS)</displayed-value>
+                <stored-value>132</stored-value>
             </pair>
             <pair>
                 <displayed-value>Water Board (NYWB)</displayed-value>
-                <stored-value>Water Board (NYWB)</stored-value>
+                <stored-value>133</stored-value>
             </pair>
             <pair>
                 <displayed-value>Water Finance Authority, NYC Municipal (NYW)</displayed-value>
-                <stored-value>Water Finance Authority, NYC Municipal (NYW)</stored-value>
+                <stored-value>134</stored-value>
             </pair>
             <pair>
                 <displayed-value>Waterfront Management Advisory Board (WMAB)</displayed-value>
-                <stored-value>Waterfront Management Advisory Board (WMAB)</stored-value>
+                <stored-value>135</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Workforce Development, Mayor's Office of (WKDEV)</displayed-value>
+                <stored-value>136</stored-value>
             </pair>
             <pair>
                 <displayed-value>Workforce Investment Board (WIB) (See Workforce Development)</displayed-value>
-                <stored-value>Workforce Investment Board (WIB) (See Workforce Development)</stored-value>
+                <stored-value>137</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Youth and Community Development, Department of (DYCD)</displayed-value>
+                <stored-value>138</stored-value>
             </pair>
         </value-pairs>
 

@@ -34,5 +34,9 @@ chown -R postgres:postgres /data/postgres
 ln -s /opt/rh/rh-postgresql95/root/usr/lib64/libpq.so.rh-postgresql95-5 /usr/lib64/libpq.so.rh-postgresql95-5
 ln -s /opt/rh/rh-postgresql95/root/usr/lib64/libpq.so.rh-postgresql95-5 /usr/lib/libpq.so.rh-postgresql95-5
 
+# Create backup directory for Postgres
+mkdir /backup
+chown postgres:postgres /backup
+
 # Start Postgres
 sudo service rh-postgresql95-postgresql start

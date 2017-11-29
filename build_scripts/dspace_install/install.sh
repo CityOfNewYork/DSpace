@@ -18,6 +18,10 @@ ant fresh_install
 # DSpace installation directory and Tomcat directory must have same owner
 chown -R vagrant:vagrant /home/vagrant/dspace
 
+# Manually install GeoLite database file
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P /tmp
+gunzip -c /tmp/GeoLiteCity.dat.gz > /home/vagrant/dspace/config/GeoLiteCity.dat
+
 # Deploy web applications
 mkdir -p /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost
 ln -s /vagrant/build_scripts/dspace_install/jspui.xml /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/jspui.xml

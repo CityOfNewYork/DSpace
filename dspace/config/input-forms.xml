@@ -161,7 +161,7 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>temporal</dc-qualifier>
+                    <dc-qualifier>temporal-fiscal</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Associated Year - Fiscal</label>
                     <input-type>onebox</input-type>
@@ -175,7 +175,7 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>temporal</dc-qualifier>
+                    <dc-qualifier>temporal-calender</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Associated Year - Calender</label>
                     <input-type>onebox</input-type>
@@ -189,7 +189,7 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>spatial</dc-qualifier>
+                    <dc-qualifier>spatial-place</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Associated Place (Other)</label>
                     <input-type>onebox</input-type>
@@ -200,7 +200,7 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>spatial</dc-qualifier>
+                    <dc-qualifier>spatial-neighborhood</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Associated Neighborhood</label>
                     <input-type value-pairs-name="neighborhoods">dropdown</input-type>
@@ -211,7 +211,7 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>spatial</dc-qualifier>
+                    <dc-qualifier>spatial-borough</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Associated Borough(s)</label>
                     <input-type value-pairs-name="boroughs">dropdown</input-type>
@@ -222,7 +222,7 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>spatial</dc-qualifier>
+                    <dc-qualifier>spatial-school-district</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Associated School District(s)</label>
                     <input-type value-pairs-name="school-districts">dropdown</input-type>
@@ -233,7 +233,7 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>spatial</dc-qualifier>
+                    <dc-qualifier>spatial-community-board-district</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Associated Community Board District(s)</label>
                     <input-type value-pairs-name="community-board-districts">dropdown</input-type>

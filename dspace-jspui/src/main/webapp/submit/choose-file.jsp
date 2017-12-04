@@ -378,10 +378,10 @@
         <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.formats\")%>">Information about file types</dspace:popup> and levels of
         support for each are available.</p> --%>
         
-		<div class="submitFormHelp">
-            <fmt:message key="jsp.submit.choose-file.info6"/>
-            <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.formats\")%>"><fmt:message key="jsp.submit.choose-file.info7"/></dspace:popup>
-        </div>
+		<%--<div class="submitFormHelp">--%>
+            <%--<fmt:message key="jsp.submit.choose-file.info6"/>--%>
+            <%--<dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.formats\")%>"><fmt:message key="jsp.submit.choose-file.info7"/></dspace:popup>--%>
+        <%--</div>--%>
 		<br/>
         
         <div class="row container">

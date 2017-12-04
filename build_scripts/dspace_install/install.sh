@@ -15,7 +15,7 @@ ant fresh_install
 chown -R vagrant:vagrant /home/vagrant/dspace
 
 # Deploy web applications
-mkdir -p /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost
-ln -s /vagrant/build_scripts/dspace_install/jspui.xml /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/jspui.xml
-ln -s /vagrant/build_scripts/dspace_install/xmlui.xml /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/xmlui.xml
-ln -s /vagrant/build_scripts/dspace_install/solr.xml /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/solr.xml
+mkdir -p /home/vagrant/apache-tomcat-8.5.24/conf/Catalina/localhost
+ln -s /vagrant/build_scripts/dspace_install/jspui.xml /home/vagrant/apache-tomcat-8.5.24/conf/Catalina/localhost/jspui.xml
+ln -s /vagrant/build_scripts/dspace_install/xmlui.xml /home/vagrant/apache-tomcat-8.5.24/conf/Catalina/localhost/xmlui.xml
+ln -s /vagrant/build_scripts/dspace_install/solr.xml /home/vagrant/apache-tomcat-8.5.24/conf/Catalina/localhost/solr.xml

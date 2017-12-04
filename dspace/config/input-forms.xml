@@ -1827,19 +1827,379 @@
 
         <value-pairs value-pairs-name="school-districts" dc-term="coverage.spacial">
             <pair>
-                <displayed-value>School District 1</displayed-value>
-                <stored-value>school_district_1</stored-value>
+                <displayed-value>District 1</displayed-value>
+                <stored-value>District 1</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 2</displayed-value>
+                <stored-value>District 2</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 3</displayed-value>
+                <stored-value>District 3</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 4</displayed-value>
+                <stored-value>District 4</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 5</displayed-value>
+                <stored-value>District 5</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 6</displayed-value>
+                <stored-value>District 6</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 7</displayed-value>
+                <stored-value>District 7</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 8</displayed-value>
+                <stored-value>District 8</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 9</displayed-value>
+                <stored-value>District 9</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 10</displayed-value>
+                <stored-value>District 10</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 11</displayed-value>
+                <stored-value>District 11</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 12</displayed-value>
+                <stored-value>District 12</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 13</displayed-value>
+                <stored-value>District 13</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 14</displayed-value>
+                <stored-value>District 14</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 15</displayed-value>
+                <stored-value>District 15</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 16</displayed-value>
+                <stored-value>District 16</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 17</displayed-value>
+                <stored-value>District 17</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 18</displayed-value>
+                <stored-value>District 18</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 19</displayed-value>
+                <stored-value>District 19</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 20</displayed-value>
+                <stored-value>District 20</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 21</displayed-value>
+                <stored-value>District 21</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 22</displayed-value>
+                <stored-value>District 22</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 23</displayed-value>
+                <stored-value>District 23</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 24</displayed-value>
+                <stored-value>District 24</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 25</displayed-value>
+                <stored-value>District 25</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 26</displayed-value>
+                <stored-value>District 26</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 27</displayed-value>
+                <stored-value>District 27</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 28</displayed-value>
+                <stored-value>District 28</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 29</displayed-value>
+                <stored-value>District 29</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 30</displayed-value>
+                <stored-value>District 30</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 31</displayed-value>
+                <stored-value>District 31</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 32</displayed-value>
+                <stored-value>District 32</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 75</displayed-value>
+                <stored-value>District 75</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>District 79</displayed-value>
+                <stored-value>District 79</stored-value>
             </pair>
         </value-pairs>
 
         <value-pairs value-pairs-name="community-board-districts" dc-term="coverage.spacial">
             <pair>
-                <displayed-value>Community Board Districts 1</displayed-value>
-                <stored-value>community_board_districts_1</stored-value>
+                <displayed-value>Bronx 1</displayed-value>
+                <stored-value>Bronx 1</stored-value>
             </pair>
             <pair>
-                <displayed-value>Community Board Districts 2</displayed-value>
-                <stored-value>community_board_districts_2</stored-value>
+                <displayed-value>Bronx 2</displayed-value>
+                <stored-value>Bronx 2</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 3</displayed-value>
+                <stored-value>Bronx 3</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 4</displayed-value>
+                <stored-value>Bronx 4</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 5</displayed-value>
+                <stored-value>Bronx 5</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 6</displayed-value>
+                <stored-value>Bronx 6</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 7</displayed-value>
+                <stored-value>Bronx 7</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 8</displayed-value>
+                <stored-value>Bronx 8</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 9</displayed-value>
+                <stored-value>Bronx 9</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 10</displayed-value>
+                <stored-value>Bronx 10</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 11</displayed-value>
+                <stored-value>Bronx 11</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bronx 12</displayed-value>
+                <stored-value>Bronx 12</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 1</displayed-value>
+                <stored-value>Brooklyn 1</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 2</displayed-value>
+                <stored-value>Brooklyn 2</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 3</displayed-value>
+                <stored-value>Brooklyn 3</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 4</displayed-value>
+                <stored-value>Brooklyn 4</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 5</displayed-value>
+                <stored-value>Brooklyn 5</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 6</displayed-value>
+                <stored-value>Brooklyn 6</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 7</displayed-value>
+                <stored-value>Brooklyn 7</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 8</displayed-value>
+                <stored-value>Brooklyn 8</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 9</displayed-value>
+                <stored-value>Brooklyn 9</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 10</displayed-value>
+                <stored-value>Brooklyn 10</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 11</displayed-value>
+                <stored-value>Brooklyn 11</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 12</displayed-value>
+                <stored-value>Brooklyn 12</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 13</displayed-value>
+                <stored-value>Brooklyn 13</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 14</displayed-value>
+                <stored-value>Brooklyn 14</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 15</displayed-value>
+                <stored-value>Brooklyn 15</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 16</displayed-value>
+                <stored-value>Brooklyn 16</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 17</displayed-value>
+                <stored-value>Brooklyn 17</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Brooklyn 18</displayed-value>
+                <stored-value>Brooklyn 18</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 1</displayed-value>
+                <stored-value>Manhattan 1</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 2</displayed-value>
+                <stored-value>Manhattan 2</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 3</displayed-value>
+                <stored-value>Manhattan 3</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 4</displayed-value>
+                <stored-value>Manhattan 4</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 5</displayed-value>
+                <stored-value>Manhattan 5</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 6</displayed-value>
+                <stored-value>Manhattan 6</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 7</displayed-value>
+                <stored-value>Manhattan 7</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 8</displayed-value>
+                <stored-value>Manhattan 8</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 9</displayed-value>
+                <stored-value>Manhattan 9</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 10</displayed-value>
+                <stored-value>Manhattan 10</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 11</displayed-value>
+                <stored-value>Manhattan 11</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Manhattan 12</displayed-value>
+                <stored-value>Manhattan 12</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 1</displayed-value>
+                <stored-value>Queens 1</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 2</displayed-value>
+                <stored-value>Queens 2</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 3</displayed-value>
+                <stored-value>Queens 3</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 4</displayed-value>
+                <stored-value>Queens 4</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 5</displayed-value>
+                <stored-value>Queens 5</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 6</displayed-value>
+                <stored-value>Queens 6</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 7</displayed-value>
+                <stored-value>Queens 7</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 8</displayed-value>
+                <stored-value>Queens 8</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 9</displayed-value>
+                <stored-value>Queens 9</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 10</displayed-value>
+                <stored-value>Queens 10</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 11</displayed-value>
+                <stored-value>Queens 11</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 12</displayed-value>
+                <stored-value>Queens 12</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 13</displayed-value>
+                <stored-value>Queens 13</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Queens 14</displayed-value>
+                <stored-value>Queens 14</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Staten Island 1</displayed-value>
+                <stored-value>Staten Island 1</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Staten Island 2</displayed-value>
+                <stored-value>Staten Island 2</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Staten Island 3</displayed-value>
+                <stored-value>Staten Island 3</stored-value>
             </pair>
         </value-pairs>
 

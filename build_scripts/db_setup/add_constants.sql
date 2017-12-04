@@ -397,18 +397,113 @@ CREATE TABLE boroughs (
   name            VARCHAR(128) NOT NULL
 );
 
-INSERT INTO languages (name) VALUES ('Bronx');
-INSERT INTO languages (name) VALUES ('Brooklyn');
-INSERT INTO languages (name) VALUES ('Manhattan');
-INSERT INTO languages (name) VALUES ('Queens');
-INSERT INTO languages (name) VALUES ('Staten Island');
+INSERT INTO boroughs (name) VALUES ('Bronx');
+INSERT INTO boroughs (name) VALUES ('Brooklyn');
+INSERT INTO boroughs (name) VALUES ('Manhattan');
+INSERT INTO boroughs (name) VALUES ('Queens');
+INSERT INTO boroughs (name) VALUES ('Staten Island');
 
 CREATE TABLE school_districts (
   id              SERIAL PRIMARY KEY,
   name            VARCHAR(128) NOT NULL
 );
 
+INSERT INTO school_districts (name) VALUES ('District 1');
+INSERT INTO school_districts (name) VALUES ('District 2');
+INSERT INTO school_districts (name) VALUES ('District 3');
+INSERT INTO school_districts (name) VALUES ('District 4');
+INSERT INTO school_districts (name) VALUES ('District 5');
+INSERT INTO school_districts (name) VALUES ('District 6');
+INSERT INTO school_districts (name) VALUES ('District 7');
+INSERT INTO school_districts (name) VALUES ('District 8');
+INSERT INTO school_districts (name) VALUES ('District 9');
+INSERT INTO school_districts (name) VALUES ('District 10');
+INSERT INTO school_districts (name) VALUES ('District 11');
+INSERT INTO school_districts (name) VALUES ('District 12');
+INSERT INTO school_districts (name) VALUES ('District 13');
+INSERT INTO school_districts (name) VALUES ('District 14');
+INSERT INTO school_districts (name) VALUES ('District 15');
+INSERT INTO school_districts (name) VALUES ('District 16');
+INSERT INTO school_districts (name) VALUES ('District 17');
+INSERT INTO school_districts (name) VALUES ('District 18');
+INSERT INTO school_districts (name) VALUES ('District 19');
+INSERT INTO school_districts (name) VALUES ('District 20');
+INSERT INTO school_districts (name) VALUES ('District 21');
+INSERT INTO school_districts (name) VALUES ('District 22');
+INSERT INTO school_districts (name) VALUES ('District 23');
+INSERT INTO school_districts (name) VALUES ('District 24');
+INSERT INTO school_districts (name) VALUES ('District 25');
+INSERT INTO school_districts (name) VALUES ('District 26');
+INSERT INTO school_districts (name) VALUES ('District 27');
+INSERT INTO school_districts (name) VALUES ('District 28');
+INSERT INTO school_districts (name) VALUES ('District 29');
+INSERT INTO school_districts (name) VALUES ('District 30');
+INSERT INTO school_districts (name) VALUES ('District 31');
+INSERT INTO school_districts (name) VALUES ('District 32');
+INSERT INTO school_districts (name) VALUES ('District 75');
+INSERT INTO school_districts (name) VALUES ('District 79');
+
 CREATE TABLE community_board_districts (
   id              SERIAL PRIMARY KEY,
   name            VARCHAR(128) NOT NULL
 );
+
+INSERT INTO school_districts (name) VALUES ('Bronx 1');
+INSERT INTO school_districts (name) VALUES ('Bronx 2');
+INSERT INTO school_districts (name) VALUES ('Bronx 3');
+INSERT INTO school_districts (name) VALUES ('Bronx 4');
+INSERT INTO school_districts (name) VALUES ('Bronx 5');
+INSERT INTO school_districts (name) VALUES ('Bronx 6');
+INSERT INTO school_districts (name) VALUES ('Bronx 7');
+INSERT INTO school_districts (name) VALUES ('Bronx 8');
+INSERT INTO school_districts (name) VALUES ('Bronx 9');
+INSERT INTO school_districts (name) VALUES ('Bronx 10');
+INSERT INTO school_districts (name) VALUES ('Bronx 11');
+INSERT INTO school_districts (name) VALUES ('Bronx 12');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 1');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 2');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 3');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 4');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 5');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 6');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 7');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 8');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 9');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 10');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 11');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 12');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 13');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 14');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 15');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 16');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 17');
+INSERT INTO school_districts (name) VALUES ('Brooklyn 18');
+INSERT INTO school_districts (name) VALUES ('Manhattan 1');
+INSERT INTO school_districts (name) VALUES ('Manhattan 2');
+INSERT INTO school_districts (name) VALUES ('Manhattan 3');
+INSERT INTO school_districts (name) VALUES ('Manhattan 4');
+INSERT INTO school_districts (name) VALUES ('Manhattan 5');
+INSERT INTO school_districts (name) VALUES ('Manhattan 6');
+INSERT INTO school_districts (name) VALUES ('Manhattan 7');
+INSERT INTO school_districts (name) VALUES ('Manhattan 8');
+INSERT INTO school_districts (name) VALUES ('Manhattan 9');
+INSERT INTO school_districts (name) VALUES ('Manhattan 10');
+INSERT INTO school_districts (name) VALUES ('Manhattan 11');
+INSERT INTO school_districts (name) VALUES ('Manhattan 12');
+INSERT INTO school_districts (name) VALUES ('Queens 1');
+INSERT INTO school_districts (name) VALUES ('Queens 2');
+INSERT INTO school_districts (name) VALUES ('Queens 3');
+INSERT INTO school_districts (name) VALUES ('Queens 4');
+INSERT INTO school_districts (name) VALUES ('Queens 5');
+INSERT INTO school_districts (name) VALUES ('Queens 6');
+INSERT INTO school_districts (name) VALUES ('Queens 7');
+INSERT INTO school_districts (name) VALUES ('Queens 8');
+INSERT INTO school_districts (name) VALUES ('Queens 9');
+INSERT INTO school_districts (name) VALUES ('Queens 10');
+INSERT INTO school_districts (name) VALUES ('Queens 11');
+INSERT INTO school_districts (name) VALUES ('Queens 12');
+INSERT INTO school_districts (name) VALUES ('Queens 13');
+INSERT INTO school_districts (name) VALUES ('Queens 14');
+INSERT INTO school_districts (name) VALUES ('Staten Island 1');
+INSERT INTO school_districts (name) VALUES ('Staten Island 2');
+INSERT INTO school_districts (name) VALUES ('Staten Island 3');

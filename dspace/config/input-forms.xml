@@ -58,7 +58,7 @@
                     <repeatable>true</repeatable>
                     <label>Sub-Title</label>
                     <input-type>onebox</input-type>
-                    <hint>The remainder of the document's title, if any. 150 characters of fewer.</hint>
+                    <hint>The remainder of the document's title, if any. 150 characters or fewer.</hint>
                     <required></required>
                 </field>
 
@@ -238,7 +238,7 @@
                     <repeatable>false</repeatable>
                     <label>Number of Pages</label>
                     <input-type>onebox</input-type>
-                    <hint>How many pages are in this publication?</hint>
+                    <hint>How many pages are in this document?</hint>
                     <required>You must enter the number of pages in the document.</required>
                 </field>
             </page>

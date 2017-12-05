@@ -73,7 +73,7 @@ for database_name in database_list:
 email += log("Backup job complete.")
 
 try:
-    smtpObj = smtplib.SMTP('doittsmtp.nycnet', 25)
+    smtpObj = smtplib.SMTP(os.environ.get('MAIL_SERVER'), os.environ.get('MAIL_PORT'))
     smtpObj.sendmail(sender, receivers, email)
     print "Successfully sent email"
 except:

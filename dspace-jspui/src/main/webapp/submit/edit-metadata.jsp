@@ -416,9 +416,9 @@
          }
     
          sb.append("</select></span>")
-	            .append("<span class=\"input-group col-md-2\"><span class=\"input-group-addon\">")
+	            .append("<span class=\"input-group col-md-3\"><span class=\"input-group-addon\">")
                 .append(LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.edit-metadata.day"))
-                .append("</span><input class=\"form-control\" type=\"text\" name=\"")
+                .append("</span><input type='number' min='1' max='31' class=\"form-control\" type=\"text\" name=\"")
             .append(fieldName)
             .append("_day");
          if (repeatable)
@@ -430,9 +430,9 @@
          sb.append("\" size=\"2\" maxlength=\"2\" value=\"")
                  .append((dateIssued.getDay() > 0 ?
                      String.valueOf(dateIssued.getDay()) : "" ))
-                .append("\"/></span><span class=\"input-group col-md-4\"><span class=\"input-group-addon\">")
+                .append("\"/></span><span class=\"input-group col-md-3\"><span class=\"input-group-addon\">")
                 .append(LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.edit-metadata.year"))
-                .append("</span><input class=\"form-control\" type=\"text\" name=\"")
+                .append("</span><input type='number' min='1600' max='9999' class=\"form-control\" type=\"text\" name=\"")
             .append(fieldName)
             .append("_year");
          if (repeatable)
@@ -608,7 +608,10 @@
          {
         	 sb.append("<div class=\"col-md-10\">");
          }
-         sb.append("<textarea class=\"form-control\" name=\"").append(fieldNameIdx)
+
+         if (fieldName.equals("dc_description_abstract"))
+         {
+           sb.append("<textarea minlength='100' maxlength='200' class=\"form-control\" name=\"").append(fieldNameIdx)
            .append("\" rows=\"4\" cols=\"45\" id=\"")
            .append(fieldNameIdx).append("_id\" ")
            .append((hasVocabulary(vocabulary)&&closedVocabulary)||readonly?" readonly=\"readonly\" ":"")
@@ -617,6 +620,19 @@
            .append("</textarea>")
            .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
            .append("</div>");
+         }
+         else
+         {
+           sb.append("<textarea class=\"form-control\" name=\"").append(fieldNameIdx)
+           .append("\" rows=\"4\" cols=\"45\" id=\"")
+           .append(fieldNameIdx).append("_id\" ")
+           .append((hasVocabulary(vocabulary)&&closedVocabulary)||readonly?" readonly=\"readonly\" ":"")
+           .append(">")
+           .append(val)
+           .append("</textarea>")
+           .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+           .append("</div>");
+         }
            
          if (language) 
          {
@@ -721,16 +737,80 @@
            {
         	   sb.append("<div class=\"row col-md-10\">");
            }
-           sb.append("<input class=\"form-control\" type=\"text\" name=\"")
+
+           if (fieldName.equals("dc_title"))
+           {
+             sb.append("<input minlength='10' maxlength='150' class=\"form-control\" type=\"text\" name=\"")
              .append(fieldNameIdx)
              .append("\" id=\"")
              .append(fieldNameIdx).append("\" size=\"50\" value=\"")
              .append(val +"\"")
              .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
              .append("/>")
-			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))             
+			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
              .append("</div>");
-           
+           }
+           else if (fieldName.equals("dc_title_alternative"))
+           {
+             sb.append("<input maxlength='150' class=\"form-control\" type=\"text\" name=\"")
+             .append(fieldNameIdx)
+             .append("\" id=\"")
+             .append(fieldNameIdx).append("\" size=\"50\" value=\"")
+             .append(val +"\"")
+             .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
+             .append("/>")
+			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+             .append("</div>");
+           }
+           else if (fieldName.equals("dc_contributor_other") || fieldName.equals("dc_coverage_spatial-place"))
+           {
+             sb.append("<input maxlength='150' class=\"form-control\" type=\"text\" name=\"")
+             .append(fieldNameIdx)
+             .append("\" id=\"")
+             .append(fieldNameIdx).append("\" size=\"50\" value=\"")
+             .append(val +"\"")
+             .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
+             .append("/>")
+			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+             .append("</div>");
+           }
+           else if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calender"))
+           {
+             sb.append("<input type='number' min='1600' max='9999' class=\"form-control\" type=\"text\" name=\"")
+             .append(fieldNameIdx)
+             .append("\" id=\"")
+             .append(fieldNameIdx).append("\" size=\"50\" value=\"")
+             .append(val +"\"")
+             .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
+             .append("/>")
+			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+             .append("</div>");
+           }
+           else if (fieldName.equals("dc_format_extent"))
+           {
+             sb.append("<input type='number' min='0' max='999' class=\"form-control\" type=\"text\" name=\"")
+             .append(fieldNameIdx)
+             .append("\" id=\"")
+             .append(fieldNameIdx).append("\" size=\"50\" value=\"")
+             .append(val +"\"")
+             .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
+             .append("/>")
+			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+             .append("</div>");
+           }
+           else
+           {
+             sb.append("<input class=\"form-control\" type=\"text\" name=\"")
+             .append(fieldNameIdx)
+             .append("\" id=\"")
+             .append(fieldNameIdx).append("\" size=\"50\" value=\"")
+             .append(val +"\"")
+             .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
+             .append("/>")
+			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+             .append("</div>");
+            }
+
            if (language) 
            {
                if(null == lang)

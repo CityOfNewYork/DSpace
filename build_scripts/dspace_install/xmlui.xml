@@ -1,5 +1,0 @@
-<?xml version='1.0'?>
-<Context
-        docBase="/home/vagrant/dspace/webapps/xmlui"
-        reloadable="true"
-        cachingAllowed="false"/>

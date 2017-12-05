@@ -2,6 +2,7 @@
 
 # Create symlink of DSpace configuration file
 ln -s /vagrant/build_scripts/dspace_install/local.cfg /vagrant/dspace/config/local.cfg
+ln -s /vagrant/build_scripts/dspace_install/dspace.cfg /vagrant/dspace/config/dspace.cfg
 
 # Create symlink of DSpace LDAP configuration file
 mv /vagrant/dspace/config/modules/authentication-ldap.cfg /vagrant/dspace/config/modules/authentication-ldap.cfg.orig
@@ -28,5 +29,8 @@ gunzip -c /tmp/GeoLiteCity.dat.gz > /home/vagrant/dspace/config/GeoLiteCity.dat
 
 # Deploy web applications
 mkdir -p /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost
-ln -s /vagrant/build_scripts/dspace_install/jspui.xml /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/jspui.xml
+ln -s /vagrant/build_scripts/dspace_install/ROOT.xml /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/ROOT.xml
 ln -s /vagrant/build_scripts/dspace_install/solr.xml /home/vagrant/apache-tomcat-8.5.23/conf/Catalina/localhost/solr.xml
+
+# Start DSpace
+sh /vagrant/build_scripts/dspace_install/restart_dspace.sh

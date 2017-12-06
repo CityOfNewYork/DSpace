@@ -1250,10 +1250,21 @@
         .append(label)
         .append("</label>");
 
-      sb.append("<span class=\"col-md-8\">")
-        .append("<select class=\"form-control\" name=\"")
-        .append(fieldName)
-        .append("\"");
+      if (fieldName.equals("dc_subject"))
+      {
+        sb.append("<span class=\"col-md-8\">")
+          .append("<select id='subject-multiselect' class=\"form-control\" name=\"")
+          .append(fieldName)
+          .append("\"");
+      }
+      else
+      {
+        sb.append("<span class=\"col-md-8\">")
+          .append("<select class=\"form-control\" name=\"")
+          .append(fieldName)
+          .append("\"");
+      }
+
       if (repeatable)
         sb.append(" size=\"6\"  multiple=\"multiple\"");
       if (readonly)
@@ -1279,8 +1290,14 @@
            .append(display)
            .append("</option>");
       }
-
-      sb.append("</select></span></div><br/>");
+      if (fieldName.equals("dc_subject"))
+      {
+        sb.append("</select><p class='subject-warning' style='color:red; display: none;'>You can only pick up to three subjects.</p></span></div><br/>");
+      }
+      else
+      {
+        sb.append("</select></span></div><br/>");
+      }
       out.write(sb.toString());
     }
 

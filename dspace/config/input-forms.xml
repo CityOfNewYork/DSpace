@@ -158,7 +158,7 @@
                         more" to add additional years. One of either Associated Year - Fiscal or Associated Year -
                         Calender is required.
                     </hint>
-                    <required>You must select a language</required>
+                    <required></required>
                 </field>
 
                 <field>
@@ -172,7 +172,7 @@
                         "Add more" to add additional years. One of either Associated Year - Calender or Associated Year
                         - Fiscal is required.
                     </hint>
-                    <required>You must select a language</required>
+                    <required></required>
                 </field>
 
                 <field>

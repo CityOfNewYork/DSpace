@@ -373,7 +373,7 @@
       if (fieldCount == 0)
          fieldCount = 1;
 
-      sb.append("<div class=\"row\"><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
+      sb.append("<div id='date-published' class=\"row\"><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
         .append(label)
         .append("</label><div class=\"col-md-10\">");
       
@@ -387,7 +387,7 @@
          sb.append("<div class=\"row col-md-12\"><div class=\"input-group col-md-10\"><div class=\"row\">")
 			.append("<span class=\"input-group col-md-6\"><span class=\"input-group-addon\">")
          	.append(LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.edit-metadata.month"))
-            .append("</span><select class=\"form-control\" name=\"")
+            .append("</span><select id='submission-month' class=\"form-control\" name=\"")
             .append(fieldName)
             .append("_month");
          if (repeatable)
@@ -398,13 +398,10 @@
          {
              sb.append("\" readonly=\"readonly\"");
          }
-         sb.append("\"><option value=\"-1\"")
+         sb.append("\"><option value=\"\"")
             .append((dateIssued.getMonth() == -1 ? " selected=\"selected\"" : ""))
-//          .append(">(No month)</option>");
-            .append(">")
-            .append(LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.edit-metadata.no_month"))
-            .append("</option>");
-            
+            .append("></option>");
+
          for (int j = 1; j < 13; j++)
          {
             sb.append("<option value=\"")
@@ -418,7 +415,7 @@
          sb.append("</select></span>")
 	            .append("<span class=\"input-group col-md-3\"><span class=\"input-group-addon\">")
                 .append(LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.edit-metadata.day"))
-                .append("</span><input type='number' min='1' max='31' class=\"form-control\" type=\"text\" name=\"")
+                .append("</span><input id='submission-day' type='number' min='1' max='31' class=\"form-control\" type=\"text\" name=\"")
             .append(fieldName)
             .append("_day");
          if (repeatable)
@@ -432,7 +429,7 @@
                      String.valueOf(dateIssued.getDay()) : "" ))
                 .append("\"/></span><span class=\"input-group col-md-3\"><span class=\"input-group-addon\">")
                 .append(LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.edit-metadata.year"))
-                .append("</span><input type='number' min='1600' max='9999' class=\"form-control\" type=\"text\" name=\"")
+                .append("</span><input id='submission-year' type='number' min='1600' max='9999' class=\"form-control\" type=\"text\" name=\"")
             .append(fieldName)
             .append("_year");
          if (repeatable)
@@ -469,7 +466,7 @@
          // put a blank if nothing else
          sb.append("</div>");
       }
-      sb.append("</div></div><br/>");
+      sb.append("<p class='date-published-warning' style='color: red; display:none;'>You must provide a month, day, and year.</p></div></div><br/>");
       out.write(sb.toString());
     }
 

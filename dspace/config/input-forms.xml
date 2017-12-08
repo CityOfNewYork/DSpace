@@ -118,7 +118,7 @@
                     <label>Date Published</label>
                     <input-type>date</input-type>
                     <hint>This document's date of publication by agency.</hint>
-                    <required>You must enter at least the year.</required>
+                    <required>You must provide a month, day, and year.</required>
                 </field>
 
                 <field>

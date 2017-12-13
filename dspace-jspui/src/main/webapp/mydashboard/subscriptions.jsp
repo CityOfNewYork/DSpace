@@ -44,7 +44,7 @@
 %>
 
 <dspace:layout style="submission" locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                titlekey="jsp.mydspace.subscriptions.title">
 
@@ -144,7 +144,7 @@ for (int i = 0; i < availableSubscriptions.size(); i++)
     }
 %>
     <p align="center">
-        <a href="<%= request.getContextPath() %>/mydspace">
+        <a href="<%= request.getContextPath() %>/mydashboard">
             <fmt:message key="jsp.mydspace.general.goto-mydspace"/>
         </a>
     </p>

@@ -21,7 +21,7 @@
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
-<%@ page import="org.dspace.app.webui.servlet.MyDSpaceServlet" %>
+<%@ page import="org.dspace.app.webui.servlet.MyDashboardServlet" %>
 <%@ page import="org.dspace.content.WorkspaceItem" %>
 
 <%
@@ -29,7 +29,7 @@
 %>
 
 <dspace:layout locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                titlekey="jsp.mydspace.remove-item.title"
                nocache="true">
@@ -40,9 +40,9 @@
 
     <dspace:item item="<%= wi.getItem() %>"/>
 
-    <form action="<%= request.getContextPath() %>/mydspace" method="post">
+    <form action="<%= request.getContextPath() %>/mydashboard" method="post">
         <input type="hidden" name="workspace_id" value="<%= wi.getID() %>"/>
-        <input type="hidden" name="step" value="<%= MyDSpaceServlet.REMOVE_ITEM_PAGE %>"/>
+        <input type="hidden" name="step" value="<%= MyDashboardServlet.REMOVE_ITEM_PAGE %>"/>
 
 		<div class="pull-right">
 			<input class="btn btn-danger" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.remove-item.remove.button"/>" />

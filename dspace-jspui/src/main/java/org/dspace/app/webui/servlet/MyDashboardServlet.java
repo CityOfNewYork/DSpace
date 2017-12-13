@@ -63,10 +63,10 @@ import java.util.UUID;
  * @author Jay Paz
  * @version $Id$
  */
-public class MyDSpaceServlet extends DSpaceServlet
+public class MyDashboardServlet extends DSpaceServlet
 {
     /** Logger */
-    private static final Logger log = Logger.getLogger(MyDSpaceServlet.class);
+    private static final Logger log = Logger.getLogger(MyDashboardServlet.class);
 
     /** The main screen */
     public static final int MAIN_PAGE = 0;
@@ -267,7 +267,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 
                 request.setAttribute("workspace.item", workspaceItem);
                 JSPManager.showJSP(request, response,
-                        "/mydspace/remove-item.jsp");
+                        "/mydashboard/remove-item.jsp");
             }
             else
             {
@@ -288,7 +288,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 
                 request.setAttribute("workflow.item", workflowItem);
                 JSPManager.showJSP(request, response,
-                        "/mydspace/preview-task.jsp");
+                        "/mydashboard/preview-task.jsp");
                 ok = true;
             }
         }
@@ -302,7 +302,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 
                 request.setAttribute("workflow.item", workflowItem);
                 JSPManager.showJSP(request, response,
-                        "/mydspace/perform-task.jsp");
+                        "/mydashboard/perform-task.jsp");
                 ok = true;
             }
         }
@@ -435,7 +435,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 
             // Display "perform task" page
             request.setAttribute("workflow.item", workflowItem);
-            JSPManager.showJSP(request, response, "/mydspace/perform-task.jsp");
+            JSPManager.showJSP(request, response, "/mydashboard/perform-task.jsp");
             context.complete();
         }
         else
@@ -504,12 +504,12 @@ public class MyDSpaceServlet extends DSpaceServlet
 
                 request.setAttribute("handle", displayHandle);
                 JSPManager.showJSP(request, response,
-                        "/mydspace/in-archive.jsp");
+                        "/mydashboard/in-archive.jsp");
             }
             else
             {
                 JSPManager.showJSP(request, response,
-                        "/mydspace/task-complete.jsp");
+                        "/mydashboard/task-complete.jsp");
             }
 
             context.complete();
@@ -523,7 +523,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 
             request.setAttribute("workflow.item", workflowItem);
             JSPManager
-                    .showJSP(request, response, "/mydspace/reject-reason.jsp");
+                    .showJSP(request, response, "/mydashboard/reject-reason.jsp");
         }
         else if (buttonPressed.equals("submit_edit"))
         {
@@ -616,13 +616,13 @@ public class MyDSpaceServlet extends DSpaceServlet
             workspaceItemService.update(context, wsi);
 
             JSPManager
-                    .showJSP(request, response, "/mydspace/task-complete.jsp");
+                    .showJSP(request, response, "/mydashboard/task-complete.jsp");
             context.complete();
         }
         else
         {
             request.setAttribute("workflow.item", workflowItem);
-            JSPManager.showJSP(request, response, "/mydspace/perform-task.jsp");
+            JSPManager.showJSP(request, response, "/mydashboard/perform-task.jsp");
         }
     }
 
@@ -652,7 +652,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 				} catch (ItemExportException iee) {
                     log.warn(LogManager.getHeader(context, "export_too_large_error", UIUtil
 		                    .getRequestLogInfo(request)));
-		            JSPManager.showJSP(request, response, "/mydspace/export-error.jsp");
+		            JSPManager.showJSP(request, response, "/mydashboard/export-error.jsp");
 		            return;
                 }
                 catch (Exception e) {
@@ -664,7 +664,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 			}
 			
 			// success
-			JSPManager.showJSP(request, response, "/mydspace/task-complete.jsp");
+			JSPManager.showJSP(request, response, "/mydashboard/task-complete.jsp");
 		} else if (request.getParameter("collection_id") != null) {
 			Collection col = null;
 			try {
@@ -688,7 +688,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 				} catch (ItemExportException iee) {
                     log.warn(LogManager.getHeader(context, "export_too_large_error", UIUtil
 		                    .getRequestLogInfo(request)));
-		            JSPManager.showJSP(request, response, "/mydspace/export-error.jsp");
+		            JSPManager.showJSP(request, response, "/mydashboard/export-error.jsp");
 		            return;
                 }
                 catch (Exception e) {
@@ -698,7 +698,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 		            return;
 				}
 			}
-			JSPManager.showJSP(request, response, "/mydspace/task-complete.jsp");
+			JSPManager.showJSP(request, response, "/mydashboard/task-complete.jsp");
 		} else if (request.getParameter("community_id") != null) {
 			Community com = null;
 			try {
@@ -722,7 +722,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 				} catch (ItemExportException iee) {
                     log.warn(LogManager.getHeader(context, "export_too_large_error", UIUtil
 		                    .getRequestLogInfo(request)));
-		            JSPManager.showJSP(request, response, "/mydspace/export-error.jsp");
+		            JSPManager.showJSP(request, response, "/mydashboard/export-error.jsp");
 		            return;
                 }
                 catch (Exception e) {
@@ -732,7 +732,7 @@ public class MyDSpaceServlet extends DSpaceServlet
 		            return;
 				}
 			}
-			JSPManager.showJSP(request, response, "/mydspace/task-complete.jsp");
+			JSPManager.showJSP(request, response, "/mydashboard/task-complete.jsp");
 		}
     	
     	
@@ -835,7 +835,7 @@ public class MyDSpaceServlet extends DSpaceServlet
             HttpServletResponse response) throws ServletException, IOException,
             SQLException, AuthorizeException
     {
-        log.info(LogManager.getHeader(context, "view_mydspace", ""));
+        log.info(LogManager.getHeader(context, "view_mydashboard", ""));
         EPerson currentUser = context.getCurrentUser();
 
         List<BasicWorkflowItem> ownedList = workflowService.getOwnedTasks(context, currentUser);
@@ -853,7 +853,7 @@ public class MyDSpaceServlet extends DSpaceServlet
         List<Group> memberships = groupService.allMemberGroups(context, currentUser);
         
         // Should the group memberships be displayed
-        boolean displayMemberships = ConfigurationManager.getBooleanProperty("webui.mydspace.showgroupmemberships", false);
+        boolean displayMemberships = ConfigurationManager.getBooleanProperty("webui.mydashboard.showgroupmemberships", false);
 
         List<WorkspaceItem> supervisedItems = supervisedItemService.findbyEPerson(
                 context, currentUser);
@@ -877,7 +877,7 @@ public class MyDSpaceServlet extends DSpaceServlet
         
         
         // Set attributes
-        request.setAttribute("mydspace.user", currentUser);
+        request.setAttribute("mydashboard.user", currentUser);
         request.setAttribute("workspace.items", workspaceItems);
         request.setAttribute("workflow.items", workflowItems);
         request.setAttribute("workflow.owned", ownedList);
@@ -889,7 +889,7 @@ public class MyDSpaceServlet extends DSpaceServlet
         request.setAttribute("import.uploads", importUploads);
 
         // Forward to main mydspace page
-        JSPManager.showJSP(request, response, "/mydspace/main.jsp");
+        JSPManager.showJSP(request, response, "/mydashboard/main.jsp");
     }
 
     /**
@@ -923,6 +923,6 @@ public class MyDSpaceServlet extends DSpaceServlet
         request.setAttribute("user", context.getCurrentUser());
         request.setAttribute("items", subList);
 
-        JSPManager.showJSP(request, response, "/mydspace/own-submissions.jsp");
+        JSPManager.showJSP(request, response, "/mydashboard/own-submissions.jsp");
     }
 }

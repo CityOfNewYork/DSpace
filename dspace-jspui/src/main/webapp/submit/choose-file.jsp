@@ -204,7 +204,6 @@
                             resultFile = new Object();
                             resultFile.status = null;
                         }
-
                         if (resultFile.status == null || resultFile.status == <%= UploadStep.STATUS_COMPLETE %> || 
                                 resultFile.status == <%= UploadStep.STATUS_UNKNOWN_FORMAT %>)
                         {
@@ -370,7 +369,9 @@
 		<p>
             <fmt:message key="jsp.submit.choose-file.info1"/>
         </p>
-        
+
+        <div id="file-error-warning" class="alert alert-warning" hidden></div>
+
         <%-- FIXME: Collection-specific stuff should go here? --%>
         <%-- <p class="submitFormHelp">Please also note that the DSpace system is
         able to preserve the content of certain types of files better than other
@@ -436,6 +437,7 @@
                 </div>
                 <script>
                     $(document).ready(function(){
+                        var fileWithErrors = [];
                         var r = new Resumable({
                             target:'submit',
                             chunkSize:1024*1024,
@@ -475,7 +477,7 @@
                                 // Add the file to the list
                                 $('.resumable-list tbody')
                                     .append(
-                                        '<tr>' +
+                                        '<tr id="row-'+file.uniqueIdentifier+'">' +
                                         '<td class="resumable-file-'+file.uniqueIdentifier+'">Uploading</td>' +
                                         '<td class="resumable-file-name"></td>' +
                                         '<td class="resumable-file-progress text-center"></td>' +
@@ -493,7 +495,14 @@
                             });
                             r.on('complete', function(){
                                 // Hide pause/resume when the upload has completed
-                                $('.resumable-progress .progress-resume-link, .resumable-progress .progress-pause-link').hide();
+                                if (fileWithErrors.length > 0) {
+                                    $('#file-error-warning').text("There is a problem with " + fileWithErrors.join(', ') + ". Please retry with a different file.").show();
+                                    fileWithErrors = [];
+                                }
+                                else {
+                                    $('#file-error-warning').hide();
+                                }
+                                $('.resumable-progress').hide();
                             });
                             r.on('fileSuccess', function(file,message){
                                 // Reflect that the file upload has completed
@@ -503,10 +512,11 @@
                             });
                             r.on('fileError', function(file, message){
                                 // Reflect that the file upload has resulted in error
+                                fileWithErrors.push(file.fileName);
+                                r.files.length === 1 ? $('.resumable-files').remove() : $('#row-' + file.uniqueIdentifier).remove();
                                 $('.resumable-file-'+file.uniqueIdentifier+' + .resumable-file-name + .resumable-file-progress').html('<span class="glyphicon glyphicon-exclamation-sign"></span>');              
                                 //'+message+')');
                                 r.removeFile(file);
-                                r.upload();
                             });
                             r.on('fileProgress', function(file){
                                 // Handle progress for both the file and the overall upload

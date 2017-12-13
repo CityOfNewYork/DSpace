@@ -164,17 +164,5 @@ if (submissions != null && submissions.count() > 0)
     <%= sideNews %>
 </div>
 </div>
-<div class="container row">
-	<%
-    	int discovery_panel_cols = 8;
-    	int discovery_facet_cols = 4;
-    %>
-	<%@ include file="discovery/static-sidebar-facet.jsp" %>
-</div>
-
-<div class="row">
-	<%@ include file="discovery/static-tagcloud-facet.jsp" %>
-</div>
-	
 </div>
 </dspace:layout>

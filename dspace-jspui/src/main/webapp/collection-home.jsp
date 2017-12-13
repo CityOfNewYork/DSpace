@@ -353,12 +353,12 @@
                 <form method="post" action="<%=request.getContextPath()%>/mydashboard">
                   <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
                   <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_EXPORT_ARCHIVE %>" />
-                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydashboard.request.export.collection"/>" />
+                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.collection"/>" />
                 </form>
                <form method="post" action="<%=request.getContextPath()%>/mydashboard">
                  <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
                  <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_MIGRATE_ARCHIVE %>" />
-                 <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydashboard.request.export.migratecollection"/>" />
+                 <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.migratecollection"/>" />
                </form>
                <form method="post" action="<%=request.getContextPath()%>/dspace-admin/metadataexport">
                  <input type="hidden" name="handle" value="<%= collection.getHandle() %>" />

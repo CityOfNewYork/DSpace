@@ -696,10 +696,20 @@
       if (fieldCount == 0)
          fieldCount = 1;
 
-      sb.append("<div class=\"row\"><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
-          .append(label)
-          .append("</label>");
-      sb.append("<div class=\"col-md-10\">");
+      if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calender") || fieldName.equals("dc_coverage_spatial-place"))
+      {
+          sb.append("<div class=\"row\" style='padding-left: 100px;'><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")
+                  .append(label)
+                  .append("</label>");
+          sb.append("<div class=\"col-md-10\">");
+      }
+      else
+      {
+          sb.append("<div class=\"row\"><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")
+                  .append(label)
+                  .append("</label>");
+          sb.append("<div class=\"col-md-10\">");
+      }
 
       for (int i = 0; i < fieldCount; i++)
       {
@@ -1233,9 +1243,18 @@
       String display, value;
       int j;
 
-      sb.append("<div class=\"row\"><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
-        .append(label)
-        .append("</label>");
+      if (fieldName.equals("dc_coverage_spatial-neighborhood") || fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
+      {
+          sb.append("<div class=\"row\" style='padding-left: 100px;'><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
+                  .append(label)
+                  .append("</label>");
+      }
+      else
+      {
+          sb.append("<div class=\"row\"><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
+                  .append(label)
+                  .append("</label>");
+      }
 
       if (fieldName.equals("dc_subject"))
       {
@@ -1568,9 +1587,20 @@
                 <%
                 }
 
+                if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calender") || fieldName.equals("dc_coverage_spatial-neighborhood") || fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
+                {%>
+                        <div class="help-block" style="padding-left: 100px;">
+                            <%= inputs[z].getHints() %>
+                <%
+                }
+                else
+                {%>
+                        <div class="help-block">
+                            <%= inputs[z].getHints() %>
+                <%
+                }
                 %>
-           		<div class="help-block">
-                	<%= inputs[z].getHints() %>
+
                 <%
                     if (hasVocabulary(vocabulary) &&  !readonly)
                     {

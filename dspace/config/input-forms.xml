@@ -180,7 +180,7 @@
                     <dc-element>coverage</dc-element>
                     <dc-qualifier>spatial-neighborhood</dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Associated Neighborhood</label>
+                    <label>Associated Neighborhood(s)</label>
                     <input-type value-pairs-name="neighborhoods">dropdown</input-type>
                     <hint>The neighborhood associated with this publication. Required if applicable.</hint>
                     <required></required>
@@ -240,54 +240,6 @@
                     <input-type>onebox</input-type>
                     <hint>How many pages are in this document?</hint>
                     <required>You must enter the number of pages in the document.</required>
-                </field>
-            </page>
-
-            <page number="2">
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>subject</dc-element>
-                    <dc-qualifier></dc-qualifier>
-                    <!-- An input-type of twobox MUST be marked as repeatable -->
-                    <repeatable>true</repeatable>
-                    <label>Subject Keywords</label>
-                    <input-type>twobox</input-type>
-                    <hint>Enter appropriate subject keywords or phrases.</hint>
-                    <required></required>
-                    <vocabulary>srsc</vocabulary>
-                </field>
-
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>description</dc-element>
-                    <dc-qualifier>abstract</dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Abstract</label>
-                    <input-type>textarea</input-type>
-                    <hint>Enter the abstract of the item.</hint>
-                    <required></required>
-                </field>
-
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>description</dc-element>
-                    <dc-qualifier>sponsorship</dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Sponsors</label>
-                    <input-type>textarea</input-type>
-                    <hint>Enter the names of any sponsors and/or funding codes in the box.</hint>
-                    <required></required>
-                </field>
-
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>description</dc-element>
-                    <dc-qualifier></dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Description</label>
-                    <input-type>textarea</input-type>
-                    <hint>Enter any other description or comments in this box.</hint>
-                    <required></required>
                 </field>
             </page>
         </form>

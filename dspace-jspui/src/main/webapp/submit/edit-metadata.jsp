@@ -1258,14 +1258,14 @@
 
       if (fieldName.equals("dc_subject"))
       {
-        sb.append("<span class=\"col-md-8\">")
+        sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;>")
           .append("<select id='subject-multiselect' class=\"form-control\" name=\"")
           .append(fieldName)
           .append("\"");
       }
       else
       {
-        sb.append("<span class=\"col-md-8\">")
+        sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")
           .append("<select class=\"form-control\" name=\"")
           .append(fieldName)
           .append("\"");

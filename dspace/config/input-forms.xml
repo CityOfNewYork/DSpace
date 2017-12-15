@@ -91,7 +91,7 @@
                     <dc-element>subject</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Subjects(s)</label>
+                    <label>Subject(s)</label>
                     <input-type value-pairs-name="submission-subject">dropdown</input-type>
                     <hint>Select what subjects you feel are the most relevant subjects covered in this report. Pick up
                         to three.
@@ -156,7 +156,7 @@
                     <input-type>onebox</input-type>
                     <hint>The fiscal year covered by this publication. If multiple fiscal years are covered, select "Add
                         more" to add additional years. One of either Associated Year - Fiscal or Associated Year -
-                        Calender is required.
+                        Calendar is required.
                     </hint>
                     <required></required>
                 </field>
@@ -164,12 +164,12 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>coverage</dc-element>
-                    <dc-qualifier>temporal-calender</dc-qualifier>
+                    <dc-qualifier>temporal-calendar</dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Associated Year - Calender</label>
+                    <label>Associated Year - Calendar</label>
                     <input-type>onebox</input-type>
-                    <hint>The calender year covered by this publication. If multiple calender years are covered, select
-                        "Add more" to add additional years. One of either Associated Year - Calender or Associated Year
+                    <hint>The calendar year covered by this publication. If multiple calendar years are covered, select
+                        "Add more" to add additional years. One of either Associated Year - Calendar or Associated Year
                         - Fiscal is required.
                     </hint>
                     <required></required>

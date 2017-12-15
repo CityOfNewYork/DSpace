@@ -696,7 +696,7 @@
       if (fieldCount == 0)
          fieldCount = 1;
 
-      if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calender") || fieldName.equals("dc_coverage_spatial-place"))
+      if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calendar") || fieldName.equals("dc_coverage_spatial-place"))
       {
           sb.append("<div class=\"row\" style='padding-left: 100px;'><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")
                   .append(label)
@@ -792,12 +792,12 @@
              .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
              .append("/>")
 			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
-			 .append("<p class='fiscal-calender-warning' style='color:red; display: none;'>Either fiscal year or calender year is required.</p>")
+			 .append("<p class='fiscal-calendar-warning' style='color:red; display: none;'>Either fiscal year or calendar year is required.</p>")
              .append("</div>");
            }
-           else if (fieldName.equals("dc_coverage_temporal-calender"))
+           else if (fieldName.equals("dc_coverage_temporal-calendar"))
            {
-             sb.append("<input id='calender-year' type='number' min='1600' max='9999' class=\"form-control\" type=\"text\" name=\"")
+             sb.append("<input id='calendar-year' type='number' min='1600' max='9999' class=\"form-control\" type=\"text\" name=\"")
              .append(fieldNameIdx)
              .append("\" id=\"")
              .append(fieldNameIdx).append("\" size=\"50\" value=\"")
@@ -805,7 +805,7 @@
              .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
              .append("/>")
 			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
-			 .append("<p class='fiscal-calender-warning' style='color:red; display: none;'>Either fiscal year or calender year is required.</p>")
+			 .append("<p class='fiscal-calendar-warning' style='color:red; display: none;'>Either fiscal year or calendar year is required.</p>")
              .append("</div>");
            }
            else if (fieldName.equals("dc_format_extent"))
@@ -1506,7 +1506,6 @@
       <jsp:include page="/submit/progressbar.jsp"></jsp:include>
 
       <h1><fmt:message key="jsp.submit.edit-metadata.heading"/>
-          <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\")%>"><fmt:message key="jsp.submit.edit-metadata.help"/></dspace:popup>
       </h1>
       <p><fmt:message key="jsp.submit.edit-metadata.info1"/></p>
       <p><fmt:message key="jsp.submit.edit-metadata.info2"/></p>
@@ -1578,7 +1577,7 @@
            {
                if (fieldName.equals("dc_coverage_temporal-fiscal"))
                {%>
-                    <h4>Dates Covered: Choose either Fiscal Year or Calender Year *</h4>
+                    <h4>Dates Covered: Choose either Fiscal Year or Calendar Year *</h4>
                 <%
                 }
                 else if (fieldName.equals("dc_coverage_spatial-neighborhood"))
@@ -1587,7 +1586,7 @@
                 <%
                 }
 
-                if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calender") || fieldName.equals("dc_coverage_spatial-neighborhood") || fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
+                if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calendar") || fieldName.equals("dc_coverage_spatial-neighborhood") || fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
                 {%>
                         <div class="help-block" style="padding-left: 100px;">
                             <%= inputs[z].getHints() %>

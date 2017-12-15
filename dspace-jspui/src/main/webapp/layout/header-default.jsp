@@ -147,6 +147,9 @@
 %>
 <div class="container">
     <dspace:include page="/layout/location-bar.jsp" />
+    <p>Welcome to the Government Publications Portal. The Government Publications Portal is a permanent searchable digital repository for all of New York City’s recent agency publications, maintained by the Municipal Library at the New York City Department of Records and Information Services. The portal is part of the New York City government’s ongoing effort to be open and accessible for all citizens. The New York City Charter, Section 1133, requires agencies to submit copies of any publication to us for permanent access and storage.</p>
+    <p>To find publications, search by keyword, such as agency name, subject, title, report type, or date. Once you have search results, you can sort them further using filters, including by relevance, by date, or alphabet.</p>
+    <br/>
 </div>                
 <%
     }

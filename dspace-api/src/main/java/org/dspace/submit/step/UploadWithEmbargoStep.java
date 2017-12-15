@@ -9,6 +9,7 @@ package org.dspace.submit.step;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -123,7 +124,7 @@ public class UploadWithEmbargoStep extends UploadStep
         {
             // This is a multipart request, so it's a file upload
             // (return any status messages or errors reported)
-            int status = processUploadFile(context, request, response, subInfo);
+            int status = processUploadFile(context, request, response, subInfo, null);
 
             // if error occurred, return immediately
             if (status != STATUS_COMPLETE)
@@ -372,7 +373,7 @@ public class UploadWithEmbargoStep extends UploadStep
      */
     @Override
     public int processUploadFile(Context context, HttpServletRequest request,
-                                    HttpServletResponse response, SubmissionInfo subInfo)
+                                    HttpServletResponse response, SubmissionInfo subInfo, File completedFile)
             throws ServletException, IOException, SQLException,
             AuthorizeException
     {

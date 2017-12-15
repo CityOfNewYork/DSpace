@@ -9,6 +9,9 @@ package org.dspace.submit.step;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ByteArrayOutputStream;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.UUID;
@@ -32,6 +35,10 @@ import org.dspace.content.service.BitstreamFormatService;
 import org.dspace.core.Context;
 import org.dspace.curate.Curator;
 import org.dspace.submit.AbstractProcessingStep;
+import org.dspace.submit.util.VirusScanner;
+import org.dspace.submit.util.VirusScanResponse;
+import org.dspace.submit.util.VirusScanCodes;
+import org.dspace.submit.util.VirusScanException;
 
 /**
  * Upload step for DSpace. Processes the actual upload of files
@@ -146,7 +153,7 @@ public class UploadStep extends AbstractProcessingStep
         {
             // This is a multipart request, so it's a file upload
             // (return any status messages or errors reported)
-            int status = processUploadFile(context, request, response, subInfo);
+            int status = processUploadFile(context, request, response, subInfo, null);
 
             // if error occurred, return immediately
             if (status != STATUS_COMPLETE)
@@ -479,7 +486,7 @@ public class UploadStep extends AbstractProcessingStep
      *         no errors occurred!)
      */
     public int processUploadFile(Context context, HttpServletRequest request,
-            HttpServletResponse response, SubmissionInfo subInfo)
+            HttpServletResponse response, SubmissionInfo subInfo, File completedFile)
             throws ServletException, IOException, SQLException,
             AuthorizeException
     {
@@ -532,6 +539,45 @@ public class UploadStep extends AbstractProcessingStep
                     return STATUS_INTEGRITY_ERROR;
                 }
 
+                // Check for virus
+                if (configurationService.getBooleanProperty("submission-curation.virus-scan"))
+                {
+                    ByteArrayOutputStream baos = null;
+                    InputStream bais = null;
+                    byte[] byteArr = null;
+
+                    baos = new ByteArrayOutputStream();
+                    bais = new FileInputStream(completedFile);
+                    int ch;
+                    while ((ch = bais.read()) != -1) {
+                        baos.write(ch);
+                    }
+                    byteArr = baos.toByteArray();
+
+                    if (baos != null) {
+                        baos.flush();
+                        baos.close();
+
+                        if (bais != null) {
+                            bais.close();
+                        }
+                    }
+
+                    String ipAddress = configurationService.getProperty("icap.server.host");
+                    int port = configurationService.getIntProperty("icap.server.port");
+                    String clientHost = configurationService.getProperty("icap.client.host");
+
+                    boolean isInfected;
+                    try {
+                        isInfected = VirusScanner.scan(byteArr, ipAddress, port, clientHost);
+                        if (isInfected) {
+                            // TODO: LOG OR PRINT VIRUS DETECTED
+                            return STATUS_CONTAINS_VIRUS;
+                        }
+                    } catch (Exception e) {
+                        return STATUS_VIRUS_CHECKER_UNAVAILABLE;
+                    }
+                }
 
                 // Create the bitstream
                 Item item = subInfo.getSubmissionItem().getItem();
@@ -581,24 +627,6 @@ public class UploadStep extends AbstractProcessingStep
                     log.warn("Attempt to upload file format marked as internal system use only");
                     backoutBitstream(context, subInfo, b, item);
                     return STATUS_UPLOAD_ERROR;
-                }
-
-                // Check for virus
-                if (configurationService.getBooleanProperty("submission-curation.virus-scan"))
-                {
-                    Curator curator = new Curator();
-                    curator.addTask("vscan").curate(context, item);
-                    int status = curator.getStatus("vscan");
-                    if (status == Curator.CURATE_ERROR)
-                    {
-                        backoutBitstream(context, subInfo, b, item);
-                        return STATUS_VIRUS_CHECKER_UNAVAILABLE;
-                    }
-                    else if (status == Curator.CURATE_FAIL)
-                    {
-                        backoutBitstream(context, subInfo, b, item);
-                        return STATUS_CONTAINS_VIRUS;
-                    }
                 }
 
                 // If we got this far then everything is more or less ok.

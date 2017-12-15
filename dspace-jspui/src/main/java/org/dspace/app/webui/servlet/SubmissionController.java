@@ -311,7 +311,7 @@ public class SubmissionController extends DSpaceServlet
                                 request.setAttribute(fileName + "-path", filePath);
                                 request.setAttribute(fileName + "-inputstream", fileInputStream);
                                 request.setAttribute(fileName + "-description", request.getParameter("description"));
-                                int uploadResult = us.processUploadFile(context, request, response, si);
+                                int uploadResult = us.processUploadFile(context, request, response, si, completedFile);
 
                                 // cleanup our temporary file
                                 if (!completedFile.delete())

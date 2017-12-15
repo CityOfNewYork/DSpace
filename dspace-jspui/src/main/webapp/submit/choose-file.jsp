@@ -469,6 +469,9 @@
 
                             // Handle file add event
                             r.on('fileAdded', function(file){
+                                if ($('#file-error-warning').is(':visible')) {
+                                    $('#file-error-warning').hide();
+                                }
                                 // Show progress pabr
                                 $('.resumable-progress, .resumable-files, .resumable-list').show();
                                 // Show pause, hide resume

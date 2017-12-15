@@ -36,9 +36,6 @@ import org.dspace.core.Context;
 import org.dspace.curate.Curator;
 import org.dspace.submit.AbstractProcessingStep;
 import org.dspace.submit.util.VirusScanner;
-import org.dspace.submit.util.VirusScanResponse;
-import org.dspace.submit.util.VirusScanCodes;
-import org.dspace.submit.util.VirusScanException;
 
 /**
  * Upload step for DSpace. Processes the actual upload of files

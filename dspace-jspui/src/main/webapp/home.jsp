@@ -50,7 +50,7 @@
 		List<Community> communities = (List<Community>) request.getAttribute("communities");
 		if(communities.size() == 0){
 	%>
-		<h1>Please create a community</h1>
+		<h1 style="text-align: center;">No default community detected</h1>
 	<%
 		}
 	    else{
@@ -58,7 +58,7 @@
 		    List<Collection> collections = default_community.getCollections();
 		    if(collections.size() == 0 ){
 	%>
-            <h1>Please create a collection</h1>
+            <h1 style="text-align: center;">No default collection detected</h1>
 	<%		}
 	        else{
 		        String collection_handle = collections.get(0).getHandle();

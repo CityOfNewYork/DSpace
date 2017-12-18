@@ -31,7 +31,7 @@
 
 <%@ page  import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 
-<%@ page import="org.dspace.app.webui.servlet.MyDSpaceServlet" %>
+<%@ page import="org.dspace.app.webui.servlet.MyDashboardServlet" %>
 <%@ page import="org.dspace.content.WorkspaceItem" %>
 <%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
@@ -42,7 +42,7 @@
 <%@ page import="org.dspace.workflowbasic.service.BasicWorkflowService" %>
 
 <%
-    EPerson user = (EPerson) request.getAttribute("mydspace.user");
+    EPerson user = (EPerson) request.getAttribute("mydashboard.user");
 
     List<WorkspaceItem> workspaceItems =
         (List<WorkspaceItem>) request.getAttribute("workspace.items");
@@ -79,8 +79,8 @@
         </div>         
 
 		<div class="panel-body">
-		    <form action="<%= request.getContextPath() %>/mydspace" method="post">
-		        <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
+		    <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+		        <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>" />
                 <input class="btn btn-success" type="submit" name="submit_new" value="<fmt:message key="jsp.mydspace.main.start.button"/>" />
                 <input class="btn btn-info" type="submit" name="submit_own" value="<fmt:message key="jsp.mydspace.main.view.button"/>" />
 		    </form>
@@ -140,8 +140,8 @@
                 <td headers="t4" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                 <!-- <td headers="t5" class="<%= row %>RowOddCol"></td> -->
                 <td headers="t5" class="<%= row %>RowEvenCol">
-                     <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                        <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
+                     <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                        <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>" />
                         <input type="hidden" name="workflow_id" value="<%= owned.get(i).getID() %>" />  
                         <input class="btn btn-primary" type="submit" name="submit_perform" value="<fmt:message key="jsp.mydspace.main.perform.button"/>" />  
                         <input class="btn btn-default" type="submit" name="submit_return" value="<fmt:message key="jsp.mydspace.main.return.button"/>" />
@@ -205,8 +205,8 @@
                     <td headers="t8" class="<%= row %>RowOddCol"><%= pooled.get(i).getCollection().getName() %></td>
                     <td headers="t9" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                     <td class="<%= row %>RowOddCol">
-                        <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                            <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
+                        <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                            <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>" />
                             <input type="hidden" name="workflow_id" value="<%= pooled.get(i).getID() %>" />
                             <input class="btn btn-default" type="submit" name="submit_claim" value="<fmt:message key="jsp.mydspace.main.take.button"/>" />
                         </form> 
@@ -274,8 +274,8 @@
             <td headers="t11" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
             <td headers="t12" class="<%= row %>RowEvenCol"><%= workspaceItems.get(i).getCollection().getName() %></td>
             <td headers="t13" class="<%= row %>RowOddCol">
-                <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
+                <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                    <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItems.get(i).getID() %>"/>
                     <input class="btn btn-danger" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
                 </form> 
@@ -322,8 +322,8 @@
             <td class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
             <td class="<%= row %>RowEvenCol"><%= supervisedItems.get(i).getCollection().getName() %></td>
             <td class="<%= row %>RowOddCol">
-                <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
+                <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                    <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= supervisedItems.get(i).getID() %>"/>
                     <input class="btn btn-default" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
                 </form>  
@@ -364,9 +364,9 @@
             <tr>
                 <td headers="t14" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
                 <td headers="t15" class="<%= row %>RowEvenCol">
-                   <form action="<%= request.getContextPath() %>/mydspace" method="post">
+                   <form action="<%= request.getContextPath() %>/mydashboard" method="post">
                        <%= workflowItems.get(i).getCollection().getName() %>
-                       <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
+                       <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>" />
                        <input type="hidden" name="workflow_id" value="<%= workflowItems.get(i).getID() %>" />
                    </form>   
                 </td>
@@ -441,7 +441,7 @@
 						%>
 					</div>
 					<div style="margin-top:10px">
-						<form action="<%= request.getContextPath() %>/mydspace" method="post">
+						<form action="<%= request.getContextPath() %>/mydashboard" method="post">
 							<input type="hidden" name="step" value="7">
 							<input type="hidden" name="uploadid" value="<%= batchUpload.getDir().getName() %>">
 							<input class="btn btn-info" type="submit" name="submit_mapfile" value="<fmt:message key="jsp.dspace-admin.batchimport.downloadmapfile"/>">

@@ -27,7 +27,7 @@
 
 <dspace:layout style="submission"
 			   locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                titlekey="jsp.mydspace.in-archive.title">
 
@@ -43,7 +43,7 @@
 	<p><fmt:message key="jsp.mydspace.in-archive.text2"/></p>
 
     <p align="center">
-        <a href="<%= request.getContextPath() %>/mydspace">
+        <a href="<%= request.getContextPath() %>/mydashboard">
             <%--Return to My DSpace--%>
 			<fmt:message key="jsp.mydspace.in-archive.return.link"/>
         </a>

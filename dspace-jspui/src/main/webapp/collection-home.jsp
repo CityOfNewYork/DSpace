@@ -109,7 +109,7 @@
     boolean show_items = showItems != null ? showItems.booleanValue() : false;
 %>
 
-<%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
+<%@page import="org.dspace.app.webui.servlet.MyDashboardServlet"%>
 <%@ page import="org.dspace.content.factory.ContentServiceFactory" %>
 <%@ page import="org.dspace.content.service.CollectionService" %>
 <%@ page import="org.dspace.content.service.ItemService" %>
@@ -350,14 +350,14 @@
 		      </form>
 <% } %>
 <% if( editor_button || admin_button) { %>
-                <form method="post" action="<%=request.getContextPath()%>/mydspace">
+                <form method="post" action="<%=request.getContextPath()%>/mydashboard">
                   <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
-                  <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_EXPORT_ARCHIVE %>" />
+                  <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_EXPORT_ARCHIVE %>" />
                   <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.collection"/>" />
                 </form>
-               <form method="post" action="<%=request.getContextPath()%>/mydspace">
+               <form method="post" action="<%=request.getContextPath()%>/mydashboard">
                  <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
-                 <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_MIGRATE_ARCHIVE %>" />
+                 <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_MIGRATE_ARCHIVE %>" />
                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.migratecollection"/>" />
                </form>
                <form method="post" action="<%=request.getContextPath()%>/dspace-admin/metadataexport">

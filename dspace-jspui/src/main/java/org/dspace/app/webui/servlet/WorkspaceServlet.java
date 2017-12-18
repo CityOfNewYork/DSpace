@@ -105,7 +105,7 @@ public class WorkspaceServlet extends DSpaceServlet
         throws ServletException, IOException, SQLException, AuthorizeException
     {
         response.sendRedirect(response.encodeRedirectURL(
-                request.getContextPath() + "/mydspace"));
+                request.getContextPath() + "/mydashboard"));
     }
     
     

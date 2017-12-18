@@ -111,7 +111,7 @@ public class SubscribeServlet extends DSpaceServlet
             // Back to "My DSpace"
             response.sendRedirect(response.encodeRedirectURL(request
                     .getContextPath()
-                    + "/mydspace"));
+                    + "/mydashboard"));
         }
     }
 
@@ -143,6 +143,6 @@ public class SubscribeServlet extends DSpaceServlet
         request.setAttribute("subscriptions", subs);
         request.setAttribute("updated", updated);
 
-        JSPManager.showJSP(request, response, "/mydspace/subscriptions.jsp");
+        JSPManager.showJSP(request, response, "/mydashboard/subscriptions.jsp");
     }
 }

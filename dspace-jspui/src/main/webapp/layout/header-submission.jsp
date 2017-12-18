@@ -129,18 +129,17 @@
 </header>
 
 <main id="content" role="main">
-                <%-- Location bar --%>
+    <%-- Location bar --%>
 <%
     if (locbar)
     {
 %>
-<div class="container">
-                <dspace:include page="/layout/location-bar.jsp" />
-</div>                
+    <div class="container">
+        <dspace:include page="/layout/location-bar.jsp"/>
+    </div>
 <%
     }
 %>
-
 
         <%-- Page contents --%>
 <div class="container">

@@ -37,6 +37,6 @@
     <dspace:include page="/components/contact-info.jsp" />
 
     <%-- <p><a href="<%= request.getContextPath() %>/mydspace">Go to My DSpace</a></p> --%>
-	<p><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.mydspace.general.goto-mydspace"/></a></p>
+	<p><a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.mydspace.general.goto-mydspace"/></a></p>
 
 </dspace:layout>

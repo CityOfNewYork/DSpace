@@ -90,6 +90,6 @@
 <%  } %>	
 	   <p><fmt:message key="jsp.general.goto"/><br />
 	   <a href="<%= request.getContextPath() %>"><fmt:message key="jsp.general.home"/></a><br />
-	   <a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.general.mydspace" /></a>
+	   <a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.general.mydspace" /></a>
 	   </p>	
 </dspace:layout>

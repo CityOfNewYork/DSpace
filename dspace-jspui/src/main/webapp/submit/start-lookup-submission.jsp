@@ -386,7 +386,7 @@
 	<br/>
 	   <p><fmt:message key="jsp.general.goto"/><br />
 	   <a href="<%= request.getContextPath() %>"><fmt:message key="jsp.general.home"/></a><br />
-	   <a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.general.mydspace" /></a>
+	   <a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.general.mydspace" /></a>
 	   </p>
 	<script type="text/javascript"><!--
     	var j = jQuery.noConflict();
@@ -441,7 +441,7 @@
     	});
     	j('button.exit').click(function(event){
     		event.preventDefault();
-    		window.location = "<%= request.getContextPath() %>/mydspace";
+    		window.location = "<%= request.getContextPath() %>/mydashboard";
     	});
     	j('#loading-search-result').on('hide.bs.modal', function () {
     		j(this).data('ajaxCall').abort();

@@ -83,7 +83,7 @@
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
 %>
 
-<%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
+<%@page import="org.dspace.app.webui.servlet.MyDashboardServlet"%>
 <dspace:layout locbar="commLink" title="<%= name %>" feedData="<%= feedData %>">
 <div class="well">
 <div class="row">
@@ -381,15 +381,15 @@
                  </form>
              <% } %>
             <% if( editor_button ) { %>
-                <form method="post" action="<%=request.getContextPath()%>/mydspace">
+                <form method="post" action="<%=request.getContextPath()%>/mydashboard">
                   <input type="hidden" name="community_id" value="<%= community.getID() %>" />
-                  <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_EXPORT_ARCHIVE %>" />
-                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.community"/>" />
+                  <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_EXPORT_ARCHIVE %>" />
+                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydashboard.request.export.community"/>" />
                 </form>
-              <form method="post" action="<%=request.getContextPath()%>/mydspace">
+              <form method="post" action="<%=request.getContextPath()%>/mydashboard">
                 <input type="hidden" name="community_id" value="<%= community.getID() %>" />
-                <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_MIGRATE_ARCHIVE %>" />
-                <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.migratecommunity"/>" />
+                <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_MIGRATE_ARCHIVE %>" />
+                <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydashboard.request.export.migratecommunity"/>" />
               </form>
                <form method="post" action="<%=request.getContextPath()%>/dspace-admin/metadataexport">
                  <input type="hidden" name="handle" value="<%= community.getHandle() %>" />

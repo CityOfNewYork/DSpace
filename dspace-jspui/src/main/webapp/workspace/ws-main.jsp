@@ -20,7 +20,7 @@
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@ page import="org.dspace.app.webui.servlet.MyDSpaceServlet" %>
+<%@ page import="org.dspace.app.webui.servlet.MyDashboardServlet" %>
 <%@ page import="org.dspace.content.Item" %>
 <%@ page import="org.dspace.content.WorkspaceItem" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
@@ -43,7 +43,7 @@
 %>
 
 <dspace:layout locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                titlekey="jsp.workspace.ws-main.title">
 <div class="container">
@@ -78,8 +78,8 @@
         </tr>
         <tr>
             <td class="evenRowOddCol" align="center">
-                <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
+                <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                    <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItem.getID() %>"/>
                     <input type="hidden" name="resume" value="<%= workspaceItem.getID() %>"/>
                     <input class="col-md-2 btn btn-primary btn-group-justified" type="submit" name="submit_resume" value="<fmt:message key="jsp.workspace.ws-main.button.edit"/>"/>
@@ -104,8 +104,8 @@
         
         <tr>
             <td class="evenRowOddCol" align="center">
-                <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
+                <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                    <input type="hidden" name="step" value="<%= MMyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItem.getID() %>"/>
                     <input class="col-md-2 btn btn-danger btn-group-justified" type="submit" name="submit_delete" value="<fmt:message key="jsp.workspace.ws-main.button.remove"/>"/>
                 </form>
@@ -117,6 +117,6 @@
 
     </table>
 
-<p><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.mydspace.general.returnto-mydspace"/></a></p>
+<p><a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.mydspace.general.returnto-mydspace"/></a></p>
 </div>
 </dspace:layout>

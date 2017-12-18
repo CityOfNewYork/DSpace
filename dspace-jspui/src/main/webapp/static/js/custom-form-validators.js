@@ -1,13 +1,13 @@
 $(document).ready(function () {
     $("#submit-next").click(function (e) {
-        // validator for fiscal and calender year
-        if ($("#fiscal-year").val().length === 0 && $("#calender-year").val().length === 0) {
+        // validator for fiscal and calendar year
+        if ($("#fiscal-year").val().length === 0 && $("#calendar-year").val().length === 0) {
             e.preventDefault();
-            $('.fiscal-calender-warning').show();
+            $('.fiscal-calendar-warning').show();
             $(window).scrollTop($("#fiscal-year").offset().top - 110);
         }
         else {
-            $('.fiscal-calender-warning').hide();
+            $('.fiscal-calendar-warning').hide();
         }
 
         // validator for date published

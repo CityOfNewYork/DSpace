@@ -1243,7 +1243,7 @@
       String display, value;
       int j;
 
-      if (fieldName.equals("dc_coverage_spatial-neighborhood") || fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
+      if (fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
       {
           sb.append("<div class=\"row\" style='padding-left: 100px;'><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
                   .append(label)
@@ -1580,13 +1580,13 @@
                     <h4>Dates Covered: Choose either Fiscal Year or Calendar Year *</h4>
                 <%
                 }
-                else if (fieldName.equals("dc_coverage_spatial-neighborhood"))
+                else if (fieldName.equals("dc_coverage_spatial-borough"))
                 {%>
-                    <h4>Place Covered: If applicable, select an associated neighborhood, borough, Community Board District, school district and/or place name.</h4>
+                    <h4>Place Covered: If applicable, select an associated borough, Community Board District, school district and/or place name.</h4>
                 <%
                 }
 
-                if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calendar") || fieldName.equals("dc_coverage_spatial-neighborhood") || fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
+                if (fieldName.equals("dc_coverage_temporal-fiscal") || fieldName.equals("dc_coverage_temporal-calendar") || fieldName.equals("dc_coverage_spatial-borough") || fieldName.equals("dc_coverage_spatial-school-district") || fieldName.equals("dc_coverage_spatial-community-board-district") || fieldName.equals("dc_coverage_spatial-place"))
                 {%>
                         <div class="help-block" style="padding-left: 100px;">
                             <%= inputs[z].getHints() %>

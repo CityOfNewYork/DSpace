@@ -539,26 +539,18 @@ public class UploadStep extends AbstractProcessingStep
                 // Check for virus
                 if (configurationService.getBooleanProperty("submission-curation.virus-scan"))
                 {
-                    ByteArrayOutputStream baos = null;
-                    InputStream bais = null;
-                    byte[] byteArr = null;
-
-                    baos = new ByteArrayOutputStream();
-                    bais = new FileInputStream(completedFile);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    InputStream bais = new FileInputStream(completedFile);
                     int ch;
                     while ((ch = bais.read()) != -1) {
                         baos.write(ch);
                     }
-                    byteArr = baos.toByteArray();
+                    byte[] byteArr = baos.toByteArray();
 
-                    if (baos != null) {
-                        baos.flush();
-                        baos.close();
+                    baos.flush();
+                    baos.close();
 
-                        if (bais != null) {
-                            bais.close();
-                        }
-                    }
+                    bais.close();
 
                     String ipAddress = configurationService.getProperty("icap.server.host");
                     int port = configurationService.getIntProperty("icap.server.port");
@@ -568,10 +560,11 @@ public class UploadStep extends AbstractProcessingStep
                     try {
                         isInfected = VirusScanner.scan(byteArr, ipAddress, port, clientHost);
                         if (isInfected) {
-                            // TODO: LOG OR PRINT VIRUS DETECTED
+                            log.error("Unable to upload file. Virus detected for " + param);
                             return STATUS_CONTAINS_VIRUS;
                         }
                     } catch (Exception e) {
+                        log.error("Unable to upload file. " + e.getMessage());
                         return STATUS_VIRUS_CHECKER_UNAVAILABLE;
                     }
                 }

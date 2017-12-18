@@ -499,7 +499,7 @@
                             r.on('complete', function(){
                                 // Hide pause/resume when the upload has completed
                                 if (fileWithErrors.length > 0) {
-                                    $('#file-error-warning').text("There is a problem with " + fileWithErrors.join(', ') + ". Please retry with a different file.").show();
+                                    $('#file-error-warning').html("There is a problem with " + fileWithErrors.join(', ') + ". You can try with a different file or contact us by telephone at 212-788-8590 or by email at <a href='mailto:munilibnyc@records.nyc.gov'>munilibnyc@records.nyc.gov</a>.").show();
                                     fileWithErrors = [];
                                 }
                                 else {
@@ -516,7 +516,8 @@
                             r.on('fileError', function(file, message){
                                 // Reflect that the file upload has resulted in error
                                 fileWithErrors.push(file.fileName);
-                                r.files.length === 1 ? $('.resumable-files').remove() : $('#row-' + file.uniqueIdentifier).remove();
+                                (r.files.length === 1) && $('.resumable-files').hide();
+                                $('#row-' + file.uniqueIdentifier).remove();
                                 $('.resumable-file-'+file.uniqueIdentifier+' + .resumable-file-name + .resumable-file-progress').html('<span class="glyphicon glyphicon-exclamation-sign"></span>');              
                                 //'+message+')');
                                 r.removeFile(file);

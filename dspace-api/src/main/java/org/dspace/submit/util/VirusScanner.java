@@ -7,13 +7,10 @@ import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.apache.log4j.Logger;
 import org.dspace.services.ConfigurationService;
 import org.dspace.services.factory.DSpaceServicesFactory;
 
 public class VirusScanner {
-
-    private static final Logger log = Logger.getLogger(VirusScanner.class);
 
     private static ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
 
@@ -72,8 +69,7 @@ public class VirusScanner {
             // receive response
             result = input.readLine();
         } catch (Exception e) {
-            log.error("Failed to connect to ICAP server", e);
-            throw e;
+            throw new Exception("Failed to connect to ICAP server: " + e.getMessage());
         } finally {
             if (output != null) {
                 try {
@@ -108,7 +104,7 @@ public class VirusScanner {
                 throw new Exception(results[2]);
             }
         } else {
-            throw new Exception("VirusScanResponse: ICAP response error");
+            throw new Exception("ICAP response error");
         }
 
     }

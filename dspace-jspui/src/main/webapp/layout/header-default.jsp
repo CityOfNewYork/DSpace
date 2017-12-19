@@ -21,6 +21,7 @@
 <%@ page import="org.dspace.app.webui.util.JSPManager" %>
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="org.dspace.app.util.Util" %>
+<%@ page import="org.dspace.content.Collection" %>
 <%@ page import="javax.servlet.jsp.jstl.core.*" %>
 <%@ page import="javax.servlet.jsp.jstl.fmt.*" %>
 
@@ -155,9 +156,29 @@
     }
 %>
 
-        <%-- Page contents --%>
-<div class="container">
-<% if (request.getAttribute("dspace.layout.sidebar") != null) { %>
-    <div class="row">
-    <div class="col-md-9">
-<% } %>	
+    <%-- Page contents --%>
+    <div class="container">
+            <%
+    Collection collection = (Collection) request.getAttribute("collection");
+    if(collection != null && request.getAttribute("dspace.layout.sidebar") != null) {
+%>
+        <p>Welcome to the Government Publications Portal. The Government Publications Portal is a permanent searchable
+            digital repository for all of New York City’s recent agency publications, maintained by the Municipal
+            Library at the New York City Department of Records and Information Services. The portal is part of the New
+            York City government’s ongoing effort to be open and accessible for all citizens. The New York City Charter,
+            Section 1133, requires agencies to submit copies of any publication to us for permanent access and
+            storage.</p>
+        <p>To find publications, search by keyword, such as agency name, subject, title, report type, or date. Once you
+            have search results, you can sort them further using filters, including by relevance, by date, or
+            alphabet.</p>
+        <br/>
+        <div class="row">
+            <div class="col-md-9"> <%
+    }
+    else if (request.getAttribute("dspace.layout.sidebar") != null) {
+%>
+                <div class="row">
+                    <div class="col-md-9">
+                            <%
+    }
+%>

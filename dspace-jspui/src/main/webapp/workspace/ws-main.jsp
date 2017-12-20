@@ -105,7 +105,7 @@
         <tr>
             <td class="evenRowOddCol" align="center">
                 <form action="<%= request.getContextPath() %>/mydashboard" method="post">
-                    <input type="hidden" name="step" value="<%= MMyDashboardServlet.MAIN_PAGE %>"/>
+                    <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItem.getID() %>"/>
                     <input class="col-md-2 btn btn-danger btn-group-justified" type="submit" name="submit_delete" value="<fmt:message key="jsp.workspace.ws-main.button.remove"/>"/>
                 </form>

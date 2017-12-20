@@ -22,7 +22,7 @@
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
-<%@ page import="org.dspace.app.webui.servlet.MyDSpaceServlet" %>
+<%@ page import="org.dspace.app.webui.servlet.MyDashboardServlet" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
 <%@ page import="org.dspace.workflowbasic.BasicWorkflowItem" %>
 
@@ -32,7 +32,7 @@
 %>
 
 <dspace:layout style="submission" locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                title="reject-reason.title"
                nocache="true">
@@ -45,9 +45,9 @@
     a problem and resubmit.</p> --%>
 	<p><fmt:message key="jsp.mydspace.reject-reason.text1"/></p>
     
-    <form action="<%= request.getContextPath() %>/mydspace" method="post">
+    <form action="<%= request.getContextPath() %>/mydashboard" method="post">
         <input type="hidden" name="workflow_id" value="<%= workflowItem.getID() %>"/>
-        <input type="hidden" name="step" value="<%= MyDSpaceServlet.REJECT_REASON_PAGE %>"/>
+        <input type="hidden" name="step" value="<%= MyDashboardServlet.REJECT_REASON_PAGE %>"/>
         <textarea class="form-control" rows="6" cols="50" name="reason"></textarea>
 		<br/>
 		<div class="row container">

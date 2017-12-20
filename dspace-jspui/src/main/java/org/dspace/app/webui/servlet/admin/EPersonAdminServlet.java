@@ -378,7 +378,7 @@ public class EPersonAdminServlet extends DSpaceServlet
                             + String.valueOf(g.getID()));
                 }
 
-                response.sendRedirect(request.getContextPath() + "/mydspace");
+                response.sendRedirect(request.getContextPath() + "/mydashboard");
             }
         }
         else

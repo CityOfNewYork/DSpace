@@ -46,7 +46,7 @@
 <%@page import="org.dspace.eperson.EPerson"%>
 <%@page import="org.dspace.versioning.VersionHistory"%>
 <%@page import="org.dspace.plugin.PluginException"%>
-<%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
+<%@page import="org.dspace.app.webui.servlet.MyDashboardServlet"%>
 <%@page import="org.dspace.content.factory.ContentServiceFactory" %>
 <%@page import="org.dspace.content.MetadataValue" %>
 <%@page import="org.dspace.license.factory.LicenseServiceFactory" %>
@@ -167,14 +167,14 @@
                     <%--<input type="submit" name="submit" value="Edit...">--%>
                     <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.general.edit.button"/>" />
                 </form>
-                <form method="post" action="<%= request.getContextPath() %>/mydspace">
+                <form method="post" action="<%= request.getContextPath() %>/mydashboard">
                     <input type="hidden" name="item_id" value="<%= item.getID() %>" />
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_EXPORT_ARCHIVE %>" />
+                    <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_EXPORT_ARCHIVE %>" />
                     <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.item"/>" />
                 </form>
-                <form method="post" action="<%= request.getContextPath() %>/mydspace">
+                <form method="post" action="<%= request.getContextPath() %>/mydashboard">
                     <input type="hidden" name="item_id" value="<%= item.getID() %>" />
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_MIGRATE_ARCHIVE %>" />
+                    <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_MIGRATE_ARCHIVE %>" />
                     <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.migrateitem"/>" />
                 </form>
                 <form method="post" action="<%= request.getContextPath() %>/dspace-admin/metadataexport">

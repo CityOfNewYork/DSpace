@@ -21,7 +21,7 @@
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
-<%@ page import="org.dspace.app.webui.servlet.MyDSpaceServlet" %>
+<%@ page import="org.dspace.app.webui.servlet.MyDashboardServlet" %>
 <%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.content.Item" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
@@ -37,7 +37,7 @@
 %>
 
 <dspace:layout style="submission" locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                titlekey="jsp.mydspace.perform-task.title"
                nocache="true">
@@ -76,9 +76,9 @@
 
     <p>&nbsp;</p>
 
-    <form action="<%= request.getContextPath() %>/mydspace" method="post">
+    <form action="<%= request.getContextPath() %>/mydashboard" method="post">
         <input type="hidden" name="workflow_id" value="<%= workflowItem.getID() %>"/>
-        <input type="hidden" name="step" value="<%= MyDSpaceServlet.PERFORM_TASK_PAGE %>"/>
+        <input type="hidden" name="step" value="<%= MyDashboardServlet.PERFORM_TASK_PAGE %>"/>
 <%
     
     if (workflowItem.getState() == BasicWorkflowService.WFSTATE_STEP1 ||

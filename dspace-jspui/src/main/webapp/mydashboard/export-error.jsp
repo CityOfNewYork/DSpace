@@ -19,7 +19,7 @@
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
 <dspace:layout locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                title="jsp.mydspace.main.export.error.title">
 
@@ -30,6 +30,6 @@
     <p><fmt:message key="jsp.mydspace.main.export.error.toolarge"/></p>
  
     <%-- <p align="center"><a href="<%= request.getContextPath() %>/mydspace">Return to My DSpace </a></p> --%>
-    <p align="center"><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.mydspace.general.returnto-mydspace"/> </a></p>
+    <p align="center"><a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.mydspace.general.returnto-mydspace"/> </a></p>
  
 </dspace:layout>

@@ -534,15 +534,15 @@ public class DSpaceConfigurationServiceTest {
         // Set System Property for DSpace Home
         new Expectations(System.class) {{
             // return "/mydspace" two times
-            System.getProperty(DSpaceConfigurationService.DSPACE_HOME); result = "/mydspace";
+            System.getProperty(DSpaceConfigurationService.DSPACE_HOME); result = "/mydashboard";
         }};
         // Ensure /mydspace looks like a valid DSpace home directory
         new Expectations(dscs.getClass()) {{
-            dscs.isValidDSpaceHome("/mydspace"); result = true;
+            dscs.isValidDSpaceHome("/mydashboard"); result = true;
         }};
 
         // Assert Home is the same as System Property
-        assertEquals("System property set", "/mydspace", dscs.getDSpaceHome(null));
+        assertEquals("System property set", "/mydashboard", dscs.getDSpaceHome(null));
     }
 
     @Test
@@ -551,15 +551,15 @@ public class DSpaceConfigurationServiceTest {
 
         // Set System Property for DSpace Home
         new Expectations(System.class) {{
-            System.getProperty(DSpaceConfigurationService.DSPACE_HOME); result = "/mydspace";
+            System.getProperty(DSpaceConfigurationService.DSPACE_HOME); result = "/mydashboard";
         }};
         // Ensure /mydspace looks like a valid DSpace home directory
         new Expectations(dscs.getClass()) {{
-            dscs.isValidDSpaceHome("/mydspace"); result = true;
+            dscs.isValidDSpaceHome("/mydashboard"); result = true;
         }};
 
         // Assert System Property overrides the value passed in, if it is valid
-        assertEquals("System property override", "/mydspace", dscs.getDSpaceHome("/myotherdspace"));
+        assertEquals("System property override", "/mydashboard", dscs.getDSpaceHome("/myotherdspace"));
     }
 
     @Test
@@ -573,10 +573,10 @@ public class DSpaceConfigurationServiceTest {
         }};
         // Ensure /mydspace looks like a valid DSpace home directory
         new Expectations(dscs.getClass()) {{
-            dscs.isValidDSpaceHome("/mydspace"); result = true;
+            dscs.isValidDSpaceHome("/mydashboard"); result = true;
         }};
 
         // Assert provided home is used
-        assertEquals("Home based on passed in value", "/mydspace", dscs.getDSpaceHome("/mydspace"));
+        assertEquals("Home based on passed in value", "/mydashboard", dscs.getDSpaceHome("/mydashboard"));
     }
 }

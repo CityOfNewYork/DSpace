@@ -20,7 +20,7 @@
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
-<%@ page import="org.dspace.app.webui.servlet.MyDSpaceServlet" %>
+<%@ page import="org.dspace.app.webui.servlet.MyDashboardServlet" %>
 <%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.content.Item" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
@@ -37,7 +37,7 @@
 
 <dspace:layout style="submission"
 			   locbar="link"
-               parentlink="/mydspace"
+               parentlink="/mydashboard"
                parenttitlekey="jsp.mydspace"
                titlekey="jsp.mydspace.preview-task.title"
                nocache="true">
@@ -73,9 +73,9 @@
     
     <dspace:item item="<%= item %>" />
 
-    <form action="<%= request.getContextPath() %>/mydspace" method="post">
+    <form action="<%= request.getContextPath() %>/mydashboard" method="post">
         <input type="hidden" name="workflow_id" value="<%= workflowItem.getID() %>"/>
-        <input type="hidden" name="step" value="<%= MyDSpaceServlet.PREVIEW_TASK_PAGE %>"/>
+        <input type="hidden" name="step" value="<%= MyDashboardServlet.PREVIEW_TASK_PAGE %>"/>
 		<input class="btn btn-default col-md-2" type="submit" name="submit_cancel" value="<fmt:message key="jsp.mydspace.general.cancel"/>" />
 		<input class="btn btn-primary col-md-2 pull-right" type="submit" name="submit_start" value="<fmt:message key="jsp.mydspace.preview-task.accept.button"/>" />
     </form>

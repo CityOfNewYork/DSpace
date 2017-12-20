@@ -93,8 +93,7 @@
                     <repeatable>true</repeatable>
                     <label>Subject(s)</label>
                     <input-type value-pairs-name="submission-subject">dropdown</input-type>
-                    <hint>Select what subjects you feel are the most relevant subjects covered in this report. Pick up
-                        to three.
+                    <hint>Select what subjects you feel are the most relevant subjects covered in this report. To select multiple subjects, hold down Crtl while clicking an option. Pick up to three.
                     </hint>
                     <required>You must choose at least one subject.</required>
                 </field>

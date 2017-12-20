@@ -1582,7 +1582,7 @@
                 }
                 else if (fieldName.equals("dc_coverage_spatial-borough"))
                 {%>
-                    <h4>Place Covered: If applicable, select an associated borough, Community Board District, school district and/or place name.</h4>
+                    <h4>Place Covered: If applicable, select an associated borough, Community Board District, school district and/or place name. To make multiple selections, hold down Crtl while clicking an option.</h4>
                 <%
                 }
 

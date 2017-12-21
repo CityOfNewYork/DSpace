@@ -18,7 +18,7 @@
     <tr>
         <td class="evenRowEvenCol">
            <form method="post" action="<%= request.getContextPath() %>/ldap-login">
-	    <p><strong><a href="<%= request.getContextPath() %>/register"><fmt:message key="jsp.components.ldap-form.newuser"/></a></strong></p>            
+	    <%--<p><strong><a href="<%= request.getContextPath() %>/register"><fmt:message key="jsp.components.ldap-form.newuser"/></a></strong></p>            --%>
 	    <p><fmt:message key="jsp.components.ldap-form.enter"/></p>
  
                <table border="0" cellpadding="5" align="center">

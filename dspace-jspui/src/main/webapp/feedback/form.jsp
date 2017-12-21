@@ -51,10 +51,6 @@
     <%-- <h1>Feedback Form</h1> --%>
     <h1><fmt:message key="jsp.feedback.form.title"/></h1>
 
-    <%-- <p>Thanks for taking the time to share your feedback about the
-    DSpace system. Your comments are appreciated!</p> --%>
-    <p><fmt:message key="jsp.feedback.form.text1"/></p>
-
 <%
     if (problem)
     {

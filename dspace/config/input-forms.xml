@@ -93,7 +93,7 @@
                     <repeatable>true</repeatable>
                     <label>Subject(s)</label>
                     <input-type value-pairs-name="submission-subject">dropdown</input-type>
-                    <hint>Select what subjects you feel are the most relevant subjects covered in this report. To select multiple subjects, hold down Crtl while clicking an option. Pick up to three.
+                    <hint>Select what subjects you feel are the most relevant subjects covered in this report. To select multiple subjects, hold down CTRL while clicking an option. Pick up to three.
                     </hint>
                     <required>You must choose at least one subject.</required>
                 </field>
@@ -181,7 +181,7 @@
                     <repeatable>true</repeatable>
                     <label>Associated Borough(s)</label>
                     <input-type value-pairs-name="boroughs">dropdown</input-type>
-                    <hint>The borough associated with this publication. Required if applicable.</hint>
+                    <hint>The borough associated with this publication. To select multiple boroughs, hold down CTRL while clicking an option. Required if applicable.</hint>
                     <required></required>
                 </field>
 
@@ -192,7 +192,7 @@
                     <repeatable>true</repeatable>
                     <label>Associated School District(s)</label>
                     <input-type value-pairs-name="school-districts">dropdown</input-type>
-                    <hint>The school district(s) associated with this publication. Required if applicable.</hint>
+                    <hint>The school district(s) associated with this publication. To select multiple school districts, hold down CTRL while clicking an option. Required if applicable.</hint>
                     <required></required>
                 </field>
 
@@ -203,7 +203,7 @@
                     <repeatable>true</repeatable>
                     <label>Associated Community Board District(s)</label>
                     <input-type value-pairs-name="community-board-districts">dropdown</input-type>
-                    <hint>The community board district(s) associated with this publication. Required if applicable.
+                    <hint>The community board district(s) associated with this publication. To select multiple community board districts, hold down CTRL while clicking an option. Required if applicable.
                     </hint>
                     <required></required>
                 </field>

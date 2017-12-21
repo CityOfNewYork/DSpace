@@ -499,7 +499,7 @@
                             r.on('complete', function(){
                                 // Hide pause/resume when the upload has completed
                                 if (fileWithErrors.length > 0) {
-                                    $('#file-error-warning').html("There is a problem with " + fileWithErrors.join(', ') + ". You can try with a different file or contact us by telephone at 212-788-8590 or by email at <a href='mailto:munilibnyc@records.nyc.gov'>munilibnyc@records.nyc.gov</a>.").show();
+                                    $('#file-error-warning').html("There is a problem with " + fileWithErrors.join(', ') + ". You can try with a different file or contact us by telephone at 212-788-8590 or by email at <a href='mailto:municipal-library-admins@records.nyc.gov'>municipal-library-admins@records.nyc.gov</a>.").show();
                                     fileWithErrors = [];
                                 }
                                 else {

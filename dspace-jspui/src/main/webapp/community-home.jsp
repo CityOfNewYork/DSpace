@@ -88,7 +88,7 @@
 <div class="well">
 <div class="row">
 	<div class="col-md-8">
-        <h2><%= name %>
+        <h2><%= Utils.addEntities(name) %>
         <%
             if(configurationService.getBooleanProperty("webui.strengths.show"))
             {
@@ -316,7 +316,7 @@
 <% }  %>		
 
 	      <h4 class="list-group-item-heading"><a href="<%= request.getContextPath() %>/handle/<%= collections.get(i).getHandle() %>">
-	      <%= collections.get(i).getName() %></a>
+	      <%= Utils.addEntities(collections.get(i).getName()) %></a>
 <%
             if(configurationService.getBooleanProperty("webui.strengths.show"))
             {

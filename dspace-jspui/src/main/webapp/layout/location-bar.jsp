@@ -23,7 +23,8 @@
   --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-  
+
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="java.util.List" %>
 <ol class="breadcrumb" style="background-color: #684396;">
 <%
@@ -52,7 +53,7 @@
         else
         {
 %>
-  <li><a href="<%= request.getContextPath() %><%= u %>"><%= s %></a></li>
+  <li><a href="<%= request.getContextPath() %><%= u %>"><%= Utils.addEntities(s) %></a></li>
 <%
         }
 }

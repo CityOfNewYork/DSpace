@@ -26,6 +26,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.apache.commons.lang.time.DateFormatUtils" %>
 <%@ page import="org.dspace.core.Context" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.app.webui.servlet.SubmissionController" %>
 <%@ page import="org.dspace.submit.AbstractProcessingStep" %>
 <%@ page import="org.dspace.app.util.SubmissionInfo" %>
@@ -192,7 +193,7 @@
                 <td headers="t4" class="<%= row %>RowOddCol break-all">
                     <%= (bitstreams.get(i).getDescription() == null || bitstreams.get(i).getDescription().equals("")
                         ? LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.upload-file-list.empty1")
-                        : bitstreams.get(i).getDescription()) %>
+                        : Utils.addEntities(bitstreams.get(i).getDescription())) %>
                     <button type="submit" class="btn btn-default pull-right" name="submit_describe_<%= bitstreams.get(i).getID() %>" value="<fmt:message key="jsp.submit.upload-file-list.button1"/>">
                     <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<fmt:message key="jsp.submit.upload-file-list.button1"/>
                     </button>

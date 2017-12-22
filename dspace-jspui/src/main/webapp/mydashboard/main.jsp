@@ -272,7 +272,7 @@
                 <a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a>
             </td>
             <td headers="t11" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
-            <td headers="t12" class="<%= row %>RowEvenCol"><%= workspaceItems.get(i).getCollection().getName() %></td>
+            <td headers="t12" class="<%= row %>RowEvenCol"><%= Utils.addEntities(workspaceItems.get(i).getCollection().getName()) %></td>
             <td headers="t13" class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/mydashboard" method="post">
                     <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>

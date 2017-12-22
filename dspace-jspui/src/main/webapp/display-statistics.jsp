@@ -26,7 +26,7 @@
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
+<%@page import="org.dspace.app.webui.servlet.MyDashboardServlet"%>
 
 <% Boolean isItem = (Boolean)request.getAttribute("isItem"); %>
 

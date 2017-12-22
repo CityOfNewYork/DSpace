@@ -133,7 +133,7 @@
     <div class="container banner">
         <div class="row">
             <div class="col-md-12 brand">
-                <a href="http:www1.nyc.gov/site/records/index.page">
+                <a href="http://www1.nyc.gov/site/records/index.page">
                     <img src="<%= request.getContextPath() %>/static/img/doris-banner.jpg" style="max-width: 50%; max-height: 50%;" >
                 </a>
             </div>

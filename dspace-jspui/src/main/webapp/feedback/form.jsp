@@ -60,7 +60,7 @@
 <%
     }
 %>
-    <form action="<%= request.getContextPath() %>/feedback" method="post">
+    <form action="<%= request.getContextPath() %>/contact" method="post">
         <center>
             <table>
                 <tr>

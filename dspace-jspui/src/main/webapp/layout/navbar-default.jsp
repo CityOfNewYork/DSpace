@@ -117,7 +117,7 @@
 
             </ul>
           </li>
-          <li><a href="<%= request.getContextPath() %>/feedback">Contact Us</a></li>
+          <li><a href="<%= request.getContextPath() %>/contact">Contact Us</a></li>
        </ul>
 
  <% if (supportedLocales != null && supportedLocales.length > 1)

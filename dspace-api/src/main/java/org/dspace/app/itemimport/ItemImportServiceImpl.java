@@ -1966,7 +1966,7 @@ public class ItemImportServiceImpl implements ItemImportService, InitializingBea
             Email email = Email.getEmail(I18nUtil.getEmailFilename(supportedLocale, "bte_batch_import_error"));
             email.addRecipient(eperson.getEmail());
             email.addArgument(error);
-            email.addArgument(ConfigurationManager.getProperty("dspace.url") + "/feedback");
+            email.addArgument(ConfigurationManager.getProperty("dspace.url") + "/contact");
 
             email.send();
         }

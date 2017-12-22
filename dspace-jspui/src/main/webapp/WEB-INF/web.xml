@@ -243,7 +243,7 @@
   </servlet>
 
   <servlet>
-    <servlet-name>feedback</servlet-name>
+    <servlet-name>contact</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.FeedbackServlet</servlet-class>
   </servlet>
 
@@ -592,8 +592,8 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>feedback</servlet-name>
-    <url-pattern>/feedback</url-pattern>
+    <servlet-name>contact</servlet-name>
+    <url-pattern>/contact</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

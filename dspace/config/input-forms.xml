@@ -155,8 +155,7 @@
                     <label>Associated Year - Fiscal</label>
                     <input-type>onebox</input-type>
                     <hint>The fiscal year covered by this publication. If multiple fiscal years are covered, select "Add
-                        more" to add additional years. One of either Associated Year - Fiscal or Associated Year -
-                        Calendar is required.
+                        more" to add additional years.
                     </hint>
                     <required></required>
                 </field>
@@ -169,8 +168,7 @@
                     <label>Associated Year - Calendar</label>
                     <input-type>onebox</input-type>
                     <hint>The calendar year covered by this publication. If multiple calendar years are covered, select
-                        "Add more" to add additional years. One of either Associated Year - Calendar or Associated Year
-                        - Fiscal is required.
+                        "Add more" to add additional years.
                     </hint>
                     <required></required>
                 </field>

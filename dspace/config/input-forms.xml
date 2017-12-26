@@ -373,8 +373,8 @@
                 <stored-value>Economic Development Corporation (EDC)</stored-value>
             </pair>
             <pair>
-                <displayed-value>Economic Opportunity, Mayor's Office for</displayed-value>
-                <stored-value>Economic Opportunity, Mayor's Office for</stored-value>
+                <displayed-value>Economic Opportunity, Mayor's Office for (Opportunity)</displayed-value>
+                <stored-value>Economic Opportunity, Mayor's Office for (Opportunity)</stored-value>
             </pair>
             <pair>
                 <displayed-value>Education, Department of (DOE)</displayed-value>
@@ -565,12 +565,12 @@
                 <stored-value>Public Advocate (PUB ADV)</stored-value>
             </pair>
             <pair>
-                <displayed-value>Public Design Commission</displayed-value>
-                <stored-value>Public Design Commission</stored-value>
+                <displayed-value>Public Design Commission (DesignCommission)</displayed-value>
+                <stored-value>Public Design Commission (DesignCommission)</stored-value>
             </pair>
             <pair>
-                <displayed-value>Quadrennial Advisory Commission</displayed-value>
-                <stored-value>Quadrennial Advisory Commission</stored-value>
+                <displayed-value>Quadrennial Advisory Commission (QuadAC)</displayed-value>
+                <stored-value>Quadrennial Advisory Commission (QuadAC)</stored-value>
             </pair>
             <pair>
                 <displayed-value>Records and Information Services, Department of (DORIS)</displayed-value>
@@ -597,8 +597,8 @@
                 <stored-value>Standards and Appeals, Board of (BSA)</stored-value>
             </pair>
             <pair>
-                <displayed-value>Sustainability, Mayor's Office of</displayed-value>
-                <stored-value>Sustainability, Mayor's Office of</stored-value>
+                <displayed-value>Sustainability, Mayor's Office of (Sustainability)</displayed-value>
+                <stored-value>Sustainability, Mayor's Office of (Sustainability)</stored-value>
             </pair>
             <pair>
                 <displayed-value>Tax Appeals Tribunal, New York City (TAT)</displayed-value>

@@ -32,6 +32,7 @@
 
 <%@page import="org.dspace.content.Collection" %>
 <%@page import="org.dspace.content.Item" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@page import="org.dspace.core.ConfigurationManager" %>
 <%@page import="org.dspace.handle.HandleServiceImpl" %>
 <%@page import="org.dspace.license.CreativeCommonsServiceImpl" %>

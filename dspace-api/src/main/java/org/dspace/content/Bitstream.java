@@ -16,6 +16,7 @@ import org.dspace.content.factory.ContentServiceFactory;
 import org.dspace.content.service.BitstreamService;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
+import org.dspace.core.Utils;
 import org.hibernate.proxy.HibernateProxyHelper;
 
 import javax.persistence.*;
@@ -168,7 +169,7 @@ public class Bitstream extends DSpaceObject implements DSpaceObjectLegacySupport
      */
     public String getDescription()
     {
-        return getBitstreamService().getMetadataFirstValue(this, MetadataSchema.DC_SCHEMA, "description", null, Item.ANY);
+        return Utils.addEntities(getBitstreamService().getMetadataFirstValue(this, MetadataSchema.DC_SCHEMA, "description", null, Item.ANY));
     }
 
     /**

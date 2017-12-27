@@ -357,7 +357,6 @@
         <%-- <h1>Submit: Upload a File</h1> --%>
 		<h1>
             <fmt:message key="jsp.submit.choose-file.heading"/>
-            <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\") + \"#upload\"%>"><fmt:message key="jsp.morehelp"/></dspace:popup>
         </h1>
     
         <%-- <p>Please enter the name of

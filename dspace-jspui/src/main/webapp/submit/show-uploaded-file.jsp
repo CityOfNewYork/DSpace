@@ -79,7 +79,6 @@
 %>
         <%-- <h1>Submit: File Uploaded Successfully</h1> --%>
 		<h1><fmt:message key="jsp.submit.show-uploaded-file.heading1"/>
-		<dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\")+ \"#uploadedfile\"%>"><fmt:message key="jsp.morehelp"/></dspace:popup></h1>
 
         <%-- <p><strong>Your file was successfully uploaded.</strong></p> --%>
 		<div class="alert aler-info"><fmt:message key="jsp.submit.show-uploaded-file.info1"/></div>

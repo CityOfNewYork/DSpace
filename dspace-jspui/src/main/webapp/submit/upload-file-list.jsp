@@ -193,7 +193,7 @@
                 <td headers="t4" class="<%= row %>RowOddCol break-all">
                     <%= (bitstreams.get(i).getDescription() == null || bitstreams.get(i).getDescription().equals("")
                         ? LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.upload-file-list.empty1")
-                        : Utils.addEntities(bitstreams.get(i).getDescription())) %>
+                        : bitstreams.get(i).getDescription()) %>
                     <button type="submit" class="btn btn-default pull-right" name="submit_describe_<%= bitstreams.get(i).getID() %>" value="<fmt:message key="jsp.submit.upload-file-list.button1"/>">
                     <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<fmt:message key="jsp.submit.upload-file-list.button1"/>
                     </button>

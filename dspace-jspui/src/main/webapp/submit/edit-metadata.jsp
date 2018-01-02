@@ -1577,12 +1577,12 @@
            {
                if (fieldName.equals("dc_coverage_temporal-fiscal"))
                {%>
-                    <h4>Dates Covered: Choose either Fiscal Year or Calendar Year *</h4>
+                    <h4>Dates Covered: You must enter either a Fiscal Year or a Calendar Year. You may enter both if applicable. *</h4>
                 <%
                 }
                 else if (fieldName.equals("dc_coverage_spatial-borough"))
                 {%>
-                    <h4>Place Covered: If applicable, select an associated borough, Community Board District, school district and/or place name. To make multiple selections, hold down Crtl while clicking an option.</h4>
+                    <h4>Place Covered: If applicable, select an associated borough, Community Board District, school district and/or place name.</h4>
                 <%
                 }
 

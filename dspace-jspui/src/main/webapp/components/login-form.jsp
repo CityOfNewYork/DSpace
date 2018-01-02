@@ -15,7 +15,7 @@
     prefix="fmt" %>
 	<div class="panel-body">
      <form name="loginform" class="form-horizontal" id="loginform" method="post" action="<%= request.getContextPath() %>/password-login">  
-      <p><strong><a href="<%= request.getContextPath() %>/register"><fmt:message key="jsp.components.login-form.newuser"/></a></strong></p>
+      <%--<p><strong><a href="<%= request.getContextPath() %>/register"><fmt:message key="jsp.components.login-form.newuser"/></a></strong></p>--%>
 	  <p><fmt:message key="jsp.components.login-form.enter"/></p>
 		<div class="form-group">
             <label class="col-md-offset-3 col-md-2 control-label" for="tlogin_email"><fmt:message key="jsp.components.login-form.email"/></label>
@@ -34,7 +34,7 @@
         	<input type="submit" class="btn btn-success pull-right" name="login_submit" value="<fmt:message key="jsp.components.login-form.login"/>" tabindex="3" />
         </div>
         </div>
-  		<p><a href="<%= request.getContextPath() %>/forgot"><fmt:message key="jsp.components.login-form.forgot"/></a></p>
+  		<%--<p><a href="<%= request.getContextPath() %>/forgot"><fmt:message key="jsp.components.login-form.forgot"/></a></p>--%>
       </form>
       <script type="text/javascript">
 		document.loginform.login_email.focus();

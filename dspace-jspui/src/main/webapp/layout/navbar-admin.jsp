@@ -94,8 +94,8 @@
                <li class="divider"></li>
                <li><a href="<%= request.getContextPath() %>/dspace-admin/license-edit"><fmt:message key="jsp.layout.navbar-admin.editlicense"/></a></li>
             </ul>
-          </li>          
-          <li><a href="">Help</a></li>
+          </li>
+          <li><a href="<%= request.getContextPath() %>/contact">Contact Us</a></li>
        </ul>
        <div class="nav navbar-nav navbar-right">
 		<ul class="nav navbar-nav navbar-right">

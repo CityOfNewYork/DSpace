@@ -1062,7 +1062,7 @@ public class ItemExportServiceImpl implements ItemExportService
             Email email = Email.getEmail(I18nUtil.getEmailFilename(supportedLocale, "export_error"));
             email.addRecipient(eperson.getEmail());
             email.addArgument(error);
-            email.addArgument(ConfigurationManager.getProperty("dspace.url") + "/feedback");
+            email.addArgument(ConfigurationManager.getProperty("dspace.url") + "/contact");
 
             email.send();
         }

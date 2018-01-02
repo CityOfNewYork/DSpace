@@ -65,7 +65,7 @@
 <%
         }
     }
-    
+
     if (osLink)
     {
 %>
@@ -79,7 +79,7 @@
 <%
         }
 %>
-        
+
         <script type='text/javascript' src="<%= request.getContextPath() %>/static/js/jquery/jquery-1.10.2.min.js"></script>
         <script type='text/javascript' src='<%= request.getContextPath() %>/static/js/jquery/jquery-ui-1.10.3.custom.min.js'></script>
         <script type='text/javascript' src='<%= request.getContextPath() %>/static/js/bootstrap/bootstrap.min.js'></script>
@@ -95,7 +95,7 @@
     <%
     }
     %>
-    
+
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -108,7 +108,7 @@
     <%-- HACK: marginwidth, marginheight: for non-CSS compliant Netscape browser --%>
     <body class="undernavigation">
 <a class="sr-only" href="#content">Skip navigation</a>
-<header class="navbar navbar-inverse navbar-fixed-top">    
+<header class="navbar navbar-inverse navbar-fixed-top">
     <%
     if (!navbar.equals("off"))
     {
@@ -133,7 +133,7 @@
     <div class="container banner">
         <div class="row">
             <div class="col-md-12 brand">
-                <a href="http:www1.nyc.gov/site/records/index.page">
+                <a href="http://www1.nyc.gov/site/records/index.page">
                     <img src="<%= request.getContextPath() %>/static/img/doris-banner.jpg" style="max-width: 50%; max-height: 50%;" >
                 </a>
             </div>
@@ -148,7 +148,7 @@
 %>
 <div class="container">
     <dspace:include page="/layout/location-bar.jsp" />
-</div>                
+</div>
 <%
     }
 %>
@@ -159,12 +159,17 @@
     Collection collection = (Collection) request.getAttribute("collection");
     if(collection != null && request.getAttribute("dspace.layout.sidebar") != null) {
 %>
-        <p>Welcome to the Government Publications Portal. The Government Publications Portal is a permanent searchable
-            digital repository for all of New York City’s recent agency publications, maintained by the Municipal
-            Library at the New York City Department of Records and Information Services. The portal is part of the New
-            York City government’s ongoing effort to be open and accessible for all citizens. The New York City Charter,
-            Section 1133, requires agencies to submit copies of any publication to us for permanent access and
-            storage.</p>
+                <p>Welcome to the Government Publications Portal. The Government Publications Portal is a permanent
+                    searchable
+                    digital repository for all of New York City’s recent agency publications, maintained by the
+                    Municipal
+                    Library at the New York City Department of Records and Information Services. The portal is part of
+                    the New
+                    York City government’s ongoing effort to be open and accessible for all citizens. The <a
+                            href="http://library.amlegal.com/nxt/gateway.dll/New%20York/charter/newyorkcitycharter/chapter49officersandemployees?f=templates$fn=default.htm$3.0$vid=amlegal:newyork_ny$anc=JD_1133"
+                            target="_blank">New York City Charter, Section 1133</a>, requires agencies to submit copies
+                    of any publication to us for permanent access and
+                    storage.</p>
         <p>To find publications, search by keyword, such as agency name, subject, title, report type, or date. Once you
             have search results, you can sort them further using filters, including by relevance, by date, or
             alphabet.</p>

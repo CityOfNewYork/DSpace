@@ -22,6 +22,7 @@ import org.dspace.app.util.CollectionDropDown;
 import org.dspace.app.webui.util.UIUtil;
 import org.dspace.content.Collection;
 import org.dspace.core.Context;
+import org.dspace.core.Utils;
 
 /**
  * Renders select element to select collection with parent community
@@ -88,7 +89,7 @@ public class SelectCollectionTag extends TagSupport
                 {
                     sb.append(" selected=\"selected\"");
                 }
-                sb.append(">").append(CollectionDropDown.collectionPath(context, coll)).append("</option>\n");
+                sb.append(">").append(Utils.addEntities(CollectionDropDown.collectionPath(context, coll))).append("</option>\n");
             }
 
             sb.append("</select>\n");

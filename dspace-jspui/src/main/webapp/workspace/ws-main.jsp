@@ -52,7 +52,7 @@
 		if (titleArray.size() > 0)
 		{
 %>
-			<%= titleArray.get(0).getValue() %>
+			<%= Utils.addEntities(titleArray.get(0).getValue()) %>
 <%
 		}
 		else
@@ -69,7 +69,7 @@
     <p><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></p>
 
 	<p><fmt:message key="jsp.workspace.ws-main.submitmsg"/> 
-    <%= workspaceItem.getCollection().getName() %></p>
+    <%= Utils.addEntities(workspaceItem.getCollection().getName()) %></p>
 
     <table class="table">
         <tr>

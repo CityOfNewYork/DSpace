@@ -26,6 +26,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.apache.commons.lang.time.DateFormatUtils" %>
 <%@ page import="org.dspace.core.Context" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.app.webui.servlet.SubmissionController" %>
 <%@ page import="org.dspace.submit.AbstractProcessingStep" %>
 <%@ page import="org.dspace.app.util.SubmissionInfo" %>

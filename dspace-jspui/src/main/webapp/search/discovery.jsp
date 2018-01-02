@@ -194,7 +194,7 @@
     {
 %>
             <option value="<%= dso.getHandle() %>" <%=dso.getHandle().equals(searchScope)?"selected=\"selected\"":"" %>>
-                <%= dso.getName() %>
+                <%= Utils.addEntities(dso.getName()) %>
             </option>
 <%
     }

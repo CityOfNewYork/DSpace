@@ -37,6 +37,7 @@
 <%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.content.Community" %>
 <%@ page import="org.dspace.core.ConfigurationManager" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 <%@ page import="java.io.IOException" %>
 <%@ page import="java.sql.SQLException" %>
@@ -69,7 +70,7 @@
         		request.getContextPath() + "/retrieve/" + logo.getID() + "\" alt=\"community logo\"></a>");
         }
         out.println( "<div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"" + request.getContextPath() + "/handle/" 
-        	+ c.getHandle() + "\">" + c.getName() + "</a>");
+        	+ c.getHandle() + "\">" + Utils.addEntities(c.getName()) + "</a>");
         if(ConfigurationManager.getBooleanProperty("webui.strengths.show"))
         {
             out.println(" <span class=\"badge\">" + ic.getCount(c) + "</span>");
@@ -97,7 +98,7 @@
                 		+ cols.get(j).getHandle() + "\"><img class=\"media-object img-responsive\" src=\"" + 
                 		request.getContextPath() + "/retrieve/" + logoCol.getID() + "\" alt=\"collection logo\"></a>");
                 }
-                out.println("<div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"" + request.getContextPath() + "/handle/" + cols.get(j).getHandle() + "\">" + cols.get(j).getName() +"</a>");
+                out.println("<div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"" + request.getContextPath() + "/handle/" + cols.get(j).getHandle() + "\">" + Utils.addEntities(cols.get(j).getName()) +"</a>");
 				if(ConfigurationManager.getBooleanProperty("webui.strengths.show"))
                 {
                     out.println(" [" + ic.getCount(cols.get(j)) + "]");

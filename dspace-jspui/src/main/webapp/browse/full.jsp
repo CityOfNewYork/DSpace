@@ -22,6 +22,7 @@
 <%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.content.Community" %>
 <%@ page import="org.dspace.browse.BrowseIndex" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="org.dspace.content.DCDate" %>
@@ -217,7 +218,7 @@
 		}
 		else if (bi.hasValue())
 		{
-			%><input type="hidden" name="value" value="<%= bi.getValue() %>"/><%
+			%><input type="hidden" name="value" value="<%= Utils.addEntities(bi.getValue()) %>"/><%
 		}
 %>
 	
@@ -297,7 +298,7 @@
 		}
 		else if (bi.hasValue())
 		{
-			%><input type="hidden" name="value" value="<%= bi.getValue() %>"/><%
+			%><input type="hidden" name="value" value="<%= Utils.addEntities(bi.getValue()) %>"/><%
 		}
 %>
 <%-- The following code can be used to force the browse around the current focus.  Without

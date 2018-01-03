@@ -804,7 +804,7 @@ public class ItemTag extends TagSupport
                 out.print("/handle/");
                 out.print(collections.get(i).getHandle());
                 out.print("\">");
-                out.print(collections.get(i).getName());
+                out.print(Utils.addEntities(collections.get(i).getName()));
                 out.print("</a><br/>");
             }
 

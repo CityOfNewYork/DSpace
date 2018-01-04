@@ -103,7 +103,7 @@
 %>
         <div><fmt:message key="jsp.submit.upload-file-list.info2"/></div>
         
-        <table class="table" align="center" summary="Table dispalying your submitted files">
+        <table class="table" align="left" style="width: 75%" summary="Table dispalying your submitted files">
             <tr>
                 <th id="t2" class="oddRowOddCol"><fmt:message key="jsp.submit.upload-file-list.tableheading2"/></th>
                 <th id="t4" class="oddRowOddCol"><fmt:message key="jsp.submit.upload-file-list.tableheading4"/></th>

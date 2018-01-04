@@ -934,7 +934,7 @@ public class ItemTag extends TagSupport
                         .print(UIUtil.encodeBitstreamName(primaryBitstream
                                 .getName(), Constants.DEFAULT_ENCODING));
                     out.print("\">");
-                    out.print(primaryBitstream.getName());
+                    out.print(Utils.addEntities(primaryBitstream.getName()));
                     out.print("</a>");
                     
                     
@@ -1018,7 +1018,7 @@ public class ItemTag extends TagSupport
                                     .print("<tr><td headers=\"t1\" class=\"standard break-all\">");
                                 out.print("<a ");
             					out.print(bsLink);
-            					out.print(b.getName());
+            					out.print(Utils.addEntities(b.getName()));
                                 out.print("</a>");
                                 // check whether the Bitstream is readable for 
                                 // anonymous users

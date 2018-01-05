@@ -369,7 +369,13 @@
             <fmt:message key="jsp.submit.choose-file.info1"/>
         </p>
 
-        <div id="file-error-warning" class="alert alert-warning" hidden></div>
+        <div id="file-invalid-char-warning" class="alert alert-warning" hidden>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+
+        <div id="file-error-warning" class="alert alert-warning" hidden>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
 
         <%-- FIXME: Collection-specific stuff should go here? --%>
         <%-- <p class="submitFormHelp">Please also note that the DSpace system is
@@ -437,6 +443,7 @@
                 <script>
                     $(document).ready(function(){
                         var fileWithErrors = [];
+                        var invalidCharWarningDiv = $('#file-invalid-char-warning');
                         var r = new Resumable({
                             target:'submit',
                             chunkSize:1024*1024,
@@ -468,8 +475,13 @@
 
                             // Handle file add event
                             r.on('fileAdded', function(file){
-                                if ($('#file-error-warning').is(':visible')) {
-                                    $('#file-error-warning').hide();
+                                var invalidChars = ["<", ">", "{", "}", "[", "]", ";", "\\"];
+                                for (var i = 0; i < invalidChars.length; i++) {
+                                    if ((file.fileName).includes(invalidChars[0])) {
+                                        !invalidCharWarningDiv.is(':visible') && invalidCharWarningDiv.append("<div>The file you are trying to upload contains one more of the following invalid characters: < > { } [ ] ; \\</br>Please rename the file and try again.</div>").show();
+                                        r.removeFile(file);
+                                        return
+                                    }
                                 }
                                 // Show progress pabr
                                 $('.resumable-progress, .resumable-files, .resumable-list').show();
@@ -490,7 +502,7 @@
                                 // Actually start the upload
                                 r.upload();
                             });
-                                r.on('pause', function(){
+                            r.on('pause', function () {
                                 // Show resume, hide pause
                                 $('.resumable-progress .progress-resume-link').show();
                                 $('.resumable-progress .progress-pause-link').hide();

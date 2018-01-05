@@ -103,13 +103,10 @@
 %>
         <div><fmt:message key="jsp.submit.upload-file-list.info2"/></div>
         
-        <table class="table" align="center" summary="Table dispalying your submitted files">
+        <table class="table" align="left" style="width: 75%" summary="Table displaying your submitted files">
             <tr>
-				<th id="t1" class="oddRowEvenCol"><fmt:message key="jsp.submit.upload-file-list.tableheading1"/></th>
                 <th id="t2" class="oddRowOddCol"><fmt:message key="jsp.submit.upload-file-list.tableheading2"/></th>
-                <th id="t3" class="oddRowEvenCol"><fmt:message key="jsp.submit.upload-file-list.tableheading3"/></th>
                 <th id="t4" class="oddRowOddCol"><fmt:message key="jsp.submit.upload-file-list.tableheading4"/></th>
-                <th id="t5" class="oddRowEvenCol"><fmt:message key="jsp.submit.upload-file-list.tableheading5"/></th>
 <%
     String headerClass = "oddRowEvenCol";
 
@@ -165,14 +162,6 @@
         String supportLevelLink = LocaleSupport.getLocalizedMessage(pageContext, "help.formats") +"#" + supportLevel;
 %>
             <tr>
-		<td headers="t1" class="<%= row %>RowEvenCol" align="center">
-		    <input class="form-control" type="radio" name="primary_bitstream_id" value="<%= bitstreams.get(i).getID() %>"
-			   <% if (bundles.get(0) != null) {
-				if (bitstreams.get(i).equals(bundles.get(0).getPrimaryBitstream())) { %>
-			       	  <%="checked='checked'" %>
-			   <%   }
-			      } %> />
-		</td>
                 <td headers="t2" class="<%= row %>RowOddCol break-all">
                 	<a href="<%= request.getContextPath() %>/retrieve/<%= bitstreams.get(i).getID() %>/<%= org.dspace.app.webui.util.UIUtil.encodeBitstreamName(bitstreams.get(i).getName()) %>" target="_blank"><%= bitstreams.get(i).getName() %></a>
             <%      // Don't display "remove" button in workflow mode
@@ -185,19 +174,12 @@
 			<%
 			        } %>	
                 </td>
-                <td headers="t3" class="<%= row %>RowEvenCol"><%= bitstreams.get(i).getSize() %> bytes</td>
                 <td headers="t4" class="<%= row %>RowOddCol break-all">
                     <%= (bitstreams.get(i).getDescription() == null || bitstreams.get(i).getDescription().equals("")
                         ? LocaleSupport.getLocalizedMessage(pageContext, "jsp.submit.upload-file-list.empty1")
                         : bitstreams.get(i).getDescription()) %>
                     <button type="submit" class="btn btn-default pull-right" name="submit_describe_<%= bitstreams.get(i).getID() %>" value="<fmt:message key="jsp.submit.upload-file-list.button1"/>">
                     <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<fmt:message key="jsp.submit.upload-file-list.button1"/>
-                    </button>
-                </td>
-                <td headers="t5" class="<%= row %>RowEvenCol">
-                    <%= description %> <dspace:popup page="<%= supportLevelLink %>">(<%= supportLevel %>)</dspace:popup>
-                    <button type="submit" class="btn btn-default pull-right" name="submit_format_<%= bitstreams.get(i).getID() %>" value="<fmt:message key="jsp.submit.upload-file-list.button1"/>">
-                    <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<fmt:message key="jsp.submit.upload-file-list.button1"/>
                     </button>
                 </td>
 <%
@@ -241,37 +223,6 @@
     }
 %>
 <br/>
-<%-- Show information about how to verify correct upload, but not in workflow
-     mode! --%>
-<%
-    if (allowFileEditing)
-    {
-%>
-        <p class="uploadHelp"><fmt:message key="jsp.submit.upload-file-list.info3"/></p>
-        <ul class="uploadHelp">
-            <li class="uploadHelp"><fmt:message key="jsp.submit.upload-file-list.info4"/></li>
-<%
-        if (showChecksums)
-        {
-%>
-            <li class="uploadHelp"><fmt:message key="jsp.submit.upload-file-list.info5"/>
-            <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\") + \"#checksum\"%>"><fmt:message key="jsp.submit.upload-file-list.help1"/></dspace:popup></li>
-<%
-        }
-        else
-        {
-%>
-            <li class="uploadHelp"><fmt:message key="jsp.submit.upload-file-list.info6"/>
-            <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\") + \"#checksum\"%>"><fmt:message key="jsp.submit.upload-file-list.help2"/></dspace:popup> 
-            <input class="btn btn-info" type="submit" name="submit_show_checksums" value="<fmt:message key="jsp.submit.upload-file-list.button3"/>" /></li>
-<%
-        }
-%>
-        </ul>
-        <br />
-<%
-    }
-%>    
 
         <%-- Hidden fields needed for SubmissionController servlet to know which step is next--%>
         <%= SubmissionController.getSubmissionParameters(context, request) %>

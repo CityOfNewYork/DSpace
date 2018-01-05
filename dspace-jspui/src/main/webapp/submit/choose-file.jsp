@@ -368,6 +368,9 @@
 		<p>
             <fmt:message key="jsp.submit.choose-file.info1"/>
         </p>
+        <p>
+            If this submission has more than one part, please number each part in sequence in the Section field. If the parts are not numbered, please add a short title to the Section field for each part.
+        </p>
 
         <div id="file-error-warning" class="alert alert-warning" hidden></div>
 
@@ -428,7 +431,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th class="text-center">Status</th>
-                                <th>Description</th>
+                                <th>Section</th>
                             </thead>
                             <tbody></tbody>
                         </table>

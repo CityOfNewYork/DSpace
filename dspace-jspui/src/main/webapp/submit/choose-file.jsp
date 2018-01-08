@@ -374,7 +374,6 @@
         </div>
 
         <div id="file-error-warning" class="alert alert-warning" hidden>
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         </div>
 
         <%-- FIXME: Collection-specific stuff should go here? --%>
@@ -477,7 +476,7 @@
                             r.on('fileAdded', function(file){
                                 var invalidChars = ["<", ">", "{", "}", "[", "]", ";", "\\"];
                                 for (var i = 0; i < invalidChars.length; i++) {
-                                    if ((file.fileName).includes(invalidChars[0])) {
+                                    if ((file.fileName).includes(invalidChars[i])) {
                                         !invalidCharWarningDiv.is(':visible') && invalidCharWarningDiv.append("<div>The file you are trying to upload contains one more of the following invalid characters: < > { } [ ] ; \\</br>Please rename the file and try again.</div>").show();
                                         r.removeFile(file);
                                         return

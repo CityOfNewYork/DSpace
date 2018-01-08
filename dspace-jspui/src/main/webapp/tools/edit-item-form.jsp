@@ -263,7 +263,7 @@
 						<td><fmt:message key="jsp.tools.edit-item-form.collections" />
 						</td>
 						<td>
-							<%  for (int i = 0; i < collections.size(); i++) { %> <%= collections.get(i).getName() %>
+							<%  for (int i = 0; i < collections.size(); i++) { %> <%= Utils.addEntities(collections.get(i).getName()) %>
 							<br /> <%  } %>
 						</td>
 					</tr>

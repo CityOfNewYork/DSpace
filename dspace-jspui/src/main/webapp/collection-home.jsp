@@ -134,10 +134,10 @@
 	</div>
 <%
 	if (StringUtils.isNotBlank(intro)) { %>
-	<%= intro %>
+	<%= Utils.addEntities(intro) %>
 <% 	} %>
   </div>
-  <p class="copyrightText"><%= copyright %></p>
+  <p class="copyrightText"><%= Utils.addEntities(copyright) %></p>
   
   <%-- Browse --%>
   <div class="panel panel-primary">
@@ -396,7 +396,7 @@
     <p>&nbsp;</p>
 <%      } %>
 
-    <%= sidebar %>
+    <%= Utils.addEntities(sidebar) %>
     <%
     	int discovery_panel_cols = 12;
     	int discovery_facet_cols = 12;

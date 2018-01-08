@@ -22,6 +22,7 @@
 <%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.content.Community" %>
 <%@ page import="org.dspace.browse.BrowseIndex" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="org.dspace.content.DCDate" %>
@@ -198,7 +199,7 @@
 
 	<%-- Build the header (careful use of spacing) --%>
 	<h2>
-		<fmt:message key="browse.full.header"><fmt:param value="<%= scope %>"/></fmt:message> <fmt:message key="<%= typeKey %>"/> <%= value %>
+		<fmt:message key="browse.full.header"><fmt:param value="<%= scope %>"/></fmt:message> <fmt:message key="<%= typeKey %>"/> <%= Utils.addEntities(value) %>
 	</h2>
 
 	<%-- Include the main navigation for all the browse pages --%>
@@ -217,7 +218,7 @@
 		}
 		else if (bi.hasValue())
 		{
-			%><input type="hidden" name="value" value="<%= bi.getValue() %>"/><%
+			%><input type="hidden" name="value" value="<%= Utils.addEntities(bi.getValue()) %>"/><%
 		}
 %>
 	
@@ -297,7 +298,7 @@
 		}
 		else if (bi.hasValue())
 		{
-			%><input type="hidden" name="value" value="<%= bi.getValue() %>"/><%
+			%><input type="hidden" name="value" value="<%= Utils.addEntities(bi.getValue()) %>"/><%
 		}
 %>
 <%-- The following code can be used to force the browse around the current focus.  Without

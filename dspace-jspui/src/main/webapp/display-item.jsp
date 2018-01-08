@@ -389,10 +389,6 @@
     <%= cc_rdf %>
     -->
 <%
-    } else {
+    }
 %>
-    <p class="submitFormHelp alert alert-info"><fmt:message key="jsp.display-item.copyright"/></p>
-<%
-    } 
-%>    
 </dspace:layout>

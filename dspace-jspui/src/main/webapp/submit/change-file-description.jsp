@@ -15,6 +15,7 @@
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 
 <%@ page import="org.dspace.core.Context" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.app.webui.servlet.SubmissionController" %>
 <%@ page import="org.dspace.app.util.SubmissionInfo" %>
 <%@ page import="org.dspace.app.webui.util.UIUtil" %>
@@ -50,7 +51,7 @@
         <%-- <p>Here are the details of the file.  </p> --%>
 		<div><fmt:message key="jsp.submit.change-file-description.info1"/></div>
 
-        <table class="table" align="center" summary="Change file descripton details">
+        <table class="table" align="center" summary="Change file description details">
             <tr>
            <%-- <th class="oddRowOddCol">File</th>
                 <th class="oddRowEvenCol">Size</th>
@@ -60,7 +61,7 @@
                 <th id="t3" class="oddRowOddCol"><fmt:message key="jsp.submit.change-file-description.format"/></th>
             </tr>
             <tr>
-                <td headers="t1" class="evenRowOddCol"><%= subInfo.getBitstream().getName() %></td>
+                <td headers="t1" class="evenRowOddCol"><%= Utils.addEntities(subInfo.getBitstream().getName()) %></td>
                 <td headers="t2" class="evenRowEvenCol"><%= subInfo.getBitstream().getSize() %> bytes</td>
                 <td headers="t3" class="evenRowOddCol"><%= subInfo.getBitstream().getFormatDescription(context) %></td>
             </tr>

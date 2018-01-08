@@ -479,7 +479,7 @@
                             r.on('fileAdded', function(file){
                                 var invalidChars = ["<", ">", "{", "}", "[", "]", ";", "\\"];
                                 for (var i = 0; i < invalidChars.length; i++) {
-                                    if ((file.fileName).includes(invalidChars[i])) {
+                                    if ((file.fileName).indexOf(invalidChars[i]) !== -1) {
                                         !invalidCharWarningDiv.is(':visible') && invalidCharWarningDiv.append("<div>The file you are trying to upload contains one more of the following invalid characters: < > { } [ ] ; \\</br>Please rename the file and try again.</div>").show();
                                         r.removeFile(file);
                                         return

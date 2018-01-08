@@ -106,7 +106,7 @@
 				out.println("</h4>");
 				if (StringUtils.isNotBlank(colServ.getMetadata(cols.get(j), "short_description")))
 				{
-					out.println(colServ.getMetadata(cols.get(j), "short_description"));
+					out.println(Utils.addEntities(colServ.getMetadata(cols.get(j), "short_description")));
 				}
 				out.println("</div>");
                 out.println("</li>");

@@ -123,7 +123,7 @@ def send_email(sender_name: str, sender_addr: str, smtp: str, port: str,
     msg_root['From'] = formataddr((sender_name, sender_addr))
     msg_root['To'] = COMMASPACE.join(recipient_addr)
     msg_root['Cc'] = None
-    msg_root['Bcc'] = COMMASPACE.join(['jocastillo@records.nyc.gov'])
+    msg_root['Bcc'] = None
     msg_root['Subject'] = Header(subject, 'utf-8')
     msg_root.preamble = 'This is a multi-part message in MIME format.'
 

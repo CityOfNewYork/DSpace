@@ -197,7 +197,7 @@ def main():
                 </html>
                 """.format(email_text),
         text=email_text,
-        fn="submission_tracker-{date}.eml".format(date=datetime.now().strftime('%m-%d-%Y-%H:%M:%S')),
+        fn=os.path.join(os.getenv('EMAIL_PATH'), ('"submission_tracker-{date}.eml".format(date=datetime.now().strftime('%m-%d-%Y-%H:%M:%S')),
         save=True
     )
 

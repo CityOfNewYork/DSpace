@@ -17,5 +17,7 @@ mkdir /home/vagrant/.virtualenvs
 virtualenv --system-site-packages /home/vagrant/.virtualenvs/dspace
 chown -R vagrant:vagrant /home/vagrant
 
+mkdir -p /data/dspace_status
+
 # 5. Automatically Use Virtualenv
 echo "source /home/vagrant/.virtualenvs/dspace/bin/activate" >> /home/vagrant/.bash_profile

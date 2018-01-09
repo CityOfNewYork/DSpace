@@ -1,1 +1,1 @@
-30 8 * * * MAIL_SERVER=<MAIL_SERVER> MAIL_PORT=<MAIL_PORT> RECIPIENT_DL=<RECIPIENT_DL> /home/vagrant/.virtualenvs/dspace/bin/python /vagrant/build_scripts/python_setup/publications_status_email.py
+0 7 * * * sh /vagrant/build_scripts/python_setup/submission_tracker.sh

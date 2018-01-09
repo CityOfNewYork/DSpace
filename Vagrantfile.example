@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
     default.vm.provision "shell", path: "build_scripts/tomcat_setup/setup.sh"
     default.vm.provision "shell", path: "build_scripts/dspace_install/install.sh"
     default.vm.provision "shell", path: "build_scripts/web_setup/setup.sh"
-    default.vm.provision "shell", path: "build_scripts/python_setup/python_setup.sh"
+    default.vm.provision "shell", path: "build_scripts/python_setup/setup.sh"
   end
 
   config.trigger.before :destroy, :force => true, :vm => ["default"] do  # add more VMs if necessary

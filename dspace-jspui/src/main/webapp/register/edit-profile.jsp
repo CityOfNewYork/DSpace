@@ -83,20 +83,8 @@
     {
 %>
         <%-- <p><strong>Optionally</strong>, you can choose a new password and enter it into the box below, and confirm it by typing it
-        again into the second box for verification.  It should be at least six characters long.</p> --%>
-		<p class="alert"><fmt:message key="jsp.register.edit-profile.info5"/></p>
-        <div class="form-group">
-            <label class="col-md-offset-3 col-md-2 control-label" for="tpassword"><fmt:message key="jsp.register.edit-profile.pswd.field"/></label>
-            <div class="col-md-3">
-                <input class="form-control" type="password" name="password" id="tpassword" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-offset-3 col-md-2 control-label" for="tpassword_confirm"><fmt:message key="jsp.register.edit-profile.confirm.field"/></label>
-            <div class="col-md-3">
-                <input class="form-control" type="password" name="password_confirm" id="tpassword_confirm" />
-            </div>
-        </div>
+        again into the second box for verification.  cIt should be at least six characters long.</p> --%>
+		<p class="alert" style="padding-bottom: 0px; text-align: center;"><fmt:message key="jsp.register.edit-profile.info5"/></p>
 <%
     }
 %>

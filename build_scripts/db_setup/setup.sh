@@ -40,3 +40,4 @@ chown postgres:postgres /backup
 
 # Start Postgres
 sudo service rh-postgresql95-postgresql start
+

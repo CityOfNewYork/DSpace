@@ -30,6 +30,7 @@ gunzip -c /tmp/GeoLiteCity.dat.gz > /home/vagrant/dspace/config/GeoLiteCity.dat
 # Add custom metadata fields and constants to the database
 psql -U dspace -h 127.0.0.1 -d dspace -f /vagrant/build_scripts/db_setup/add_metadata_fields.sql
 psql -U dspace -h 127.0.0.1 -d dspace -f /vagrant/build_scripts/db_setup/add_constants.sql
+psql -U dspace -h 127.0.0.1 -d dspace -f /vagrant/build_scripts/db_setup/add_submission_tracker.sql
 
 # Deploy web applications
 mkdir -p /home/vagrant/apache-tomcat-8.5.24/conf/Catalina/localhost

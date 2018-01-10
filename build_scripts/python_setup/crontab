@@ -1,0 +1,1 @@
+0 7 * * * sh /vagrant/build_scripts/python_setup/submission_tracker.sh

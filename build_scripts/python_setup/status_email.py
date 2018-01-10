@@ -68,7 +68,7 @@ SUBMISSION_EMAIL_STRING = """
 -------------------------------------------------------------------------------------------------<br />
 Title: {title}<br />
 Agency: {agency}<br />
-Due Data: {due_date}<br />
+Due Date: {due_date}<br />
 <br />
 """
 

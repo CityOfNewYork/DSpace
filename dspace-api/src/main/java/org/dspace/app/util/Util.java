@@ -20,9 +20,11 @@ import java.util.Properties;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 import org.apache.log4j.Logger;
+import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.Collection;
 import org.dspace.content.Item;
 import org.dspace.content.MetadataValue;
@@ -550,5 +552,15 @@ public class Util {
         }
 
         return toReturn;
+    }
+
+    public static void validateCsrf(HttpServletRequest request) throws AuthorizeException
+    {
+        HttpSession session = request.getSession();
+        String storedToken = (String) session.getAttribute("csrfToken");
+        String formToken = request.getParameter("csrf_token");
+        if (!storedToken.equals(formToken)) {
+            throw new AuthorizeException("CSRF Token is Invalid");
+        }
     }
 }

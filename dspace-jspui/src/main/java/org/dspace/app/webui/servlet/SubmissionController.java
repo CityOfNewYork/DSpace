@@ -21,12 +21,14 @@ import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dspace.app.util.SubmissionInfo;
 import org.dspace.app.util.SubmissionStepConfig;
+import org.dspace.app.util.Util;
 import org.dspace.app.webui.submit.JSPStepManager;
 import org.dspace.app.webui.util.FileUploadRequest;
 import org.dspace.app.webui.util.JSONUploadResponse;
@@ -263,7 +265,9 @@ public class SubmissionController extends DSpaceServlet
             try
             {
                     request = wrapMultipartRequest(request);
-                    
+
+                    Util.validateCsrf(request);
+
                     // check if the POST request was send by resumable.js
                     String resumableFilename = request.getParameter("resumableFilename");
                     
@@ -357,6 +361,8 @@ public class SubmissionController extends DSpaceServlet
             //also, upload any files and save their contents to Request (for later processing by UploadStep)
             uploadFiles(context, request);
         }
+
+        Util.validateCsrf(request);
         
         // Reload submission info from request parameters
         SubmissionInfo subInfo = getSubmissionInfo(context, request);
@@ -1382,6 +1388,10 @@ public class SubmissionController extends DSpaceServlet
         String jspDisplayed = JSPStepManager.getLastJSPDisplayed(request);
         info = info + "<input type=\"hidden\" name=\"jsp\" value=\""
                    + jspDisplayed + "\"/>";
+
+        HttpSession session = request.getSession();
+        info = info + "<input type=\"hidden\" name=\"csrf_token\" value=\""
+                + session.getAttribute("csrfToken") + "\">";
 
         return info;
     }

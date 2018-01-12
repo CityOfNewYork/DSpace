@@ -266,7 +266,7 @@ public class SubmissionController extends DSpaceServlet
             {
                     request = wrapMultipartRequest(request);
 
-                    Util.validateCsrf(request);
+//                    Util.validateCsrf(request);
 
                     // check if the POST request was send by resumable.js
                     String resumableFilename = request.getParameter("resumableFilename");
@@ -362,7 +362,7 @@ public class SubmissionController extends DSpaceServlet
             uploadFiles(context, request);
         }
 
-        Util.validateCsrf(request);
+//        Util.validateCsrf(request);
         
         // Reload submission info from request parameters
         SubmissionInfo subInfo = getSubmissionInfo(context, request);

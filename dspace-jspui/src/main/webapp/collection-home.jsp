@@ -164,6 +164,7 @@
     { %>
           <form class="form-group" action="<%= request.getContextPath() %>/submit" method="post">
             <input type="hidden" name="collection" value="<%= collection.getID() %>" />
+            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 			<input class="btn btn-success col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.collection-home.submit.button"/>" />
           </form>
 <%  } %>

@@ -185,7 +185,10 @@
                     }
 		  if (user != null) {
 		%>
-		<li><a href="<%= request.getContextPath() %>/logout"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
+         <form method="post" id="logout-form" action="<%= request.getContextPath() %>/logout">
+             <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+         </form>
+         <li><a href="#" onclick="javascript:document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
 		<% } %>
              </ul>
            </li>

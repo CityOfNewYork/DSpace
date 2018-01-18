@@ -36,6 +36,7 @@ Vagrant.configure("2") do |config|
     default.vm.network "forwarded_port", guest: 80,   host: 8080
     default.vm.network "forwarded_port", guest: 443,  host: 8443
     default.vm.network "forwarded_port", guest: 5432, host: 8432
+    default.vm.network "forwarded_port", guest: 8000, host: 8000
     default.vm.network "private_network", ip: "10.0.0.2"
     default.vm.provision "shell", path: "build_scripts/java_setup/setup.sh"
     default.vm.provision "shell", path: "build_scripts/maven_setup/setup.sh"

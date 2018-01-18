@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dspace.app.util.Util;
 import org.dspace.app.webui.util.Authenticate;
 import org.dspace.app.webui.util.JSPManager;
+import org.dspace.app.webui.servlet.SubmissionController;
 import org.dspace.app.webui.util.UIUtil;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.factory.AuthorizeServiceFactory;
@@ -82,7 +84,7 @@ public class DSpaceServlet extends HttpServlet
 
     /**
      * Process an incoming request
-     * 
+     *
      * @param request
      *            the request object
      * @param response
@@ -119,6 +121,11 @@ public class DSpaceServlet extends HttpServlet
             // Invoke the servlet code
             if (request.getMethod().equals("POST"))
             {
+                String contentType = request.getContentType();
+                if ((contentType != null) && (contentType.indexOf("multipart/form-data") != -1)) {
+                    request = SubmissionController.wrapMultipartRequest(request);
+                }
+                Util.validateCsrf(request);
                 doDSPost(context, request, response);
             }
             else

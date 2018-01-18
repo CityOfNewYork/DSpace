@@ -264,7 +264,7 @@ public class SubmissionController extends DSpaceServlet
         {
             try
             {
-                    request = wrapMultipartRequest(request);
+//                    request = wrapMultipartRequest(request);
 
 //                    Util.validateCsrf(request);
 
@@ -1493,7 +1493,7 @@ public class SubmissionController extends DSpaceServlet
      * @throws ServletException
      *             if there are no more pages in this step
      */
-    private HttpServletRequest wrapMultipartRequest(HttpServletRequest request)
+    public static HttpServletRequest wrapMultipartRequest(HttpServletRequest request)
             throws ServletException, FileSizeLimitExceededException
     {
         HttpServletRequest wrappedRequest;

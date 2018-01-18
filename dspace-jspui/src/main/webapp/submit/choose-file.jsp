@@ -457,11 +457,11 @@
                             if (subInfo.isInWorkflow())
                             {
                             %>
-                                query:{workflow_id:'<%= subInfo.getSubmissionItem().getID()%>'}
+                                query:{workflow_id:'<%= subInfo.getSubmissionItem().getID()%>', csrf_token: '<%= session.getAttribute("csrfToken")%>'}
                             <%
                             } else {
                             %>
-                                query:{workspace_item_id:'<%= subInfo.getSubmissionItem().getID()%>'}
+                                query:{workspace_item_id:'<%= subInfo.getSubmissionItem().getID()%>', csrf_token: '<%= session.getAttribute("csrfToken")%>'}
                             <%}%>
                         });
                         // Resumable.js isn't supported, fall back on a different method

@@ -714,7 +714,6 @@
 				%>
 
 
-
         <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="item_id" value="<%= item.getID() %>"/>
         <input type="hidden" name="action" value="<%= EditItemServlet.UPDATE_ITEM %>"/>

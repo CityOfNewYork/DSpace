@@ -106,7 +106,7 @@
                     <form method="post" action="">
                         <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="group_id" value="<%= groups.get(i).getID() %>"/>
-  		                <input class="btn btn-default col-md-6" type="submit" name="submit_edit" value="<fmt:message key="jsp.tools.general.edit"/>" />
+                        <input class="btn btn-default col-md-6" type="submit" name="submit_edit" value="<fmt:message key="jsp.tools.general.edit"/>" />
                    </form>
 <%
 	}

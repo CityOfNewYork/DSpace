@@ -142,6 +142,7 @@
                 <!-- <td headers="t5" class="<%= row %>RowOddCol"></td> -->
                 <td headers="t5" class="<%= row %>RowEvenCol">
                      <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>" />
                         <input type="hidden" name="workflow_id" value="<%= owned.get(i).getID() %>" />  
                         <input class="btn btn-primary" type="submit" name="submit_perform" value="<fmt:message key="jsp.mydspace.main.perform.button"/>" />  
@@ -207,6 +208,7 @@
                     <td headers="t9" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                     <td class="<%= row %>RowOddCol">
                         <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                             <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>" />
                             <input type="hidden" name="workflow_id" value="<%= pooled.get(i).getID() %>" />
                             <input class="btn btn-default" type="submit" name="submit_claim" value="<fmt:message key="jsp.mydspace.main.take.button"/>" />
@@ -265,6 +267,7 @@
         <tr>
             <td class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/workspace" method="post">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="workspace_id" value="<%= workspaceItems.get(i).getID() %>"/>
                     <input class="btn btn-default" type="submit" name="submit_open" value="<fmt:message key="jsp.mydspace.general.open" />"/>
                 </form>
@@ -276,6 +279,7 @@
             <td headers="t12" class="<%= row %>RowEvenCol"><%= Utils.addEntities(workspaceItems.get(i).getCollection().getName()) %></td>
             <td headers="t13" class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItems.get(i).getID() %>"/>
                     <input class="btn btn-danger" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>

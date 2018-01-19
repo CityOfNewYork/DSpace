@@ -113,6 +113,7 @@
   <div class="panel-body">
     <form method="post" action="">
       <div class="row col-md-offset-4">
+          <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
           <input type="hidden" name="item_id" value="<%=item.getID()%>" />
           <input class="btn btn-success col-md-4" type="submit" name="submit_item_add_policy" value="<fmt:message key="jsp.dspace-admin.general.addpolicy"/>" />
       </div>
@@ -145,7 +146,8 @@
                     <%= (rp.getGroup()   == null ? "..." : rp.getGroup().getName() ) %>  
             </td>
             <td class="<%= row %>RowOddCol">
-                 <form method="post" action=""> 
+                 <form method="post" action="">
+                     <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                      <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
                      <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                      <input class="btn btn-primary col-md-4" type="submit" name="submit_item_edit_policy" value="<fmt:message key="jsp.dspace-admin.general.edit"/>" />
@@ -179,6 +181,7 @@
 		<div class="panel-body">
         <form method="post" action="">
       		<div class="row col-md-offset-4">
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="item_id" value="<%=item.getID()%>" />
                 <input type="hidden" name="bundle_id" value="<%=myBun.getID()%>" />
                 <input class="btn btn-success col-md-4" type="submit" name="submit_bundle_add_policy" value="<fmt:message key="jsp.dspace-admin.general.addpolicy"/>" />
@@ -212,6 +215,7 @@
             </td>
             <td class="<%= row %>RowOddCol">
                 <form method="post" action="">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
                     <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                     <input type="hidden" name="bundle_id" value="<%= myBun.getID() %>" />
@@ -247,6 +251,7 @@
         <div class="panel-body">    
             <form method="post" action="">
                 <div class="row col-md-offset-4">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="item_id"value="<%=item.getID()%>" />
                     <input type="hidden" name="bitstream_id" value="<%=myBits.getID()%>" />
                     <input class="btn btn-success col-md-4" type="submit" name="submit_bitstream_add_policy" value="<fmt:message key="jsp.dspace-admin.general.addpolicy"/>" />
@@ -280,6 +285,7 @@
             </td>
             <td class="<%= row %>RowOddCol">
                 <form method="post" action="">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="policy_id" value="<%= rp.getID()     %>" />
                     <input type="hidden" name="item_id" value="<%= item.getID()   %>" />
                     <input type="hidden" name="bitstream_id" value="<%= myBits.getID() %>" />

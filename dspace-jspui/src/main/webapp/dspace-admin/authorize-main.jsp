@@ -76,8 +76,9 @@
   
     
     
-    <form method="post" action="">    
+    <form method="post" action="">
 
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 				<div class="btn-group col-md-offset-5">
                     <% if(isAdmin){ %>
 					<div class="row">

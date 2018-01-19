@@ -59,8 +59,6 @@ public class EditProfileServlet extends DSpaceServlet
             HttpServletResponse response) throws ServletException, IOException,
             SQLException, AuthorizeException
     {
-        Util.validateCsrf(request);
-
         // Get the user - authentication should have happened
         EPerson eperson = context.getCurrentUser();
 

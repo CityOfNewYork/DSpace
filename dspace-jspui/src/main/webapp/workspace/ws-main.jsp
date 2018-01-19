@@ -79,6 +79,7 @@
         <tr>
             <td class="evenRowOddCol" align="center">
                 <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItem.getID() %>"/>
                     <input type="hidden" name="resume" value="<%= workspaceItem.getID() %>"/>
@@ -93,6 +94,7 @@
         <tr>
             <td class="oddRowOddCol" align="center">
                 <form action="<%= request.getContextPath() %>/view-workspaceitem" method="post">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                    <input type="hidden" name="workspace_id" value="<%= workspaceItem.getID() %>"/>
                    <input class="col-md-2 btn btn-default btn-group-justified" type="submit" name="submit_view" value="<fmt:message key="jsp.workspace.ws-main.button.view"/>"/>
                 </form>
@@ -105,6 +107,7 @@
         <tr>
             <td class="evenRowOddCol" align="center">
                 <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItem.getID() %>"/>
                     <input class="col-md-2 btn btn-danger btn-group-justified" type="submit" name="submit_delete" value="<fmt:message key="jsp.workspace.ws-main.button.remove"/>"/>

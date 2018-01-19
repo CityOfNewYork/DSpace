@@ -169,16 +169,19 @@
                     <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.general.edit.button"/>" />
                 </form>
                 <form method="post" action="<%= request.getContextPath() %>/mydashboard">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                     <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_EXPORT_ARCHIVE %>" />
                     <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.item"/>" />
                 </form>
                 <form method="post" action="<%= request.getContextPath() %>/mydashboard">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                     <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_MIGRATE_ARCHIVE %>" />
                     <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.mydspace.request.export.migrateitem"/>" />
                 </form>
                 <form method="post" action="<%= request.getContextPath() %>/dspace-admin/metadataexport">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="handle" value="<%= item.getHandle() %>" />
                     <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.general.metadataexport.button"/>" />
                 </form>
@@ -235,6 +238,7 @@
         {
 %>
     <form class="col-md-2" method="post" action="<%= request.getContextPath() %>/view-workspaceitem">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue() %>" />
         <input class="btn btn-default" type="submit" name="submit_simple" value="<fmt:message key="jsp.display-item.text1"/>" />
     </form>
@@ -259,6 +263,7 @@
         {
 %>
     <form class="col-md-2" method="post" action="<%= request.getContextPath() %>/view-workspaceitem">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue() %>" />
         <input class="btn btn-default" type="submit" name="submit_full" value="<fmt:message key="jsp.display-item.text2"/>" />
     </form>
@@ -278,6 +283,7 @@
     {
 %>
    <form class="col-md-2" method="post" action="<%= request.getContextPath() %>/workspace">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workspace_id" value="<%= workspace_id.intValue() %>"/>
         <input class="btn btn-primary" type="submit" name="submit_open" value="<fmt:message key="jsp.display-item.back_to_workspace"/>"/>
     </form>

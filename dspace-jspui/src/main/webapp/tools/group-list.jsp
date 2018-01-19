@@ -72,6 +72,7 @@
    	
     <form method="post" action="">
         <% if(isAdmin){ %>
+            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
             <div class="row col-md-offset-5">
                     <input class="btn btn-success" type="submit" name="submit_add" value="<fmt:message key="jsp.tools.group-list.create.button"/>" />
             </div>
@@ -103,8 +104,9 @@
 	{
 %>                  
                     <form method="post" action="">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="group_id" value="<%= groups.get(i).getID() %>"/>
-  		        <input class="btn btn-default col-md-6" type="submit" name="submit_edit" value="<fmt:message key="jsp.tools.general.edit"/>" />
+  		                <input class="btn btn-default col-md-6" type="submit" name="submit_edit" value="<fmt:message key="jsp.tools.general.edit"/>" />
                    </form>
 <%
 	}
@@ -114,8 +116,9 @@
 	{
 %>   
                     <form method="post" action="">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="group_id" value="<%= groups.get(i).getID() %>"/>
-	                <input class="btn btn-danger col-md-6" type="submit" name="submit_group_delete" value="<fmt:message key="jsp.tools.general.delete"/>" />
+                        <input class="btn btn-danger col-md-6" type="submit" name="submit_group_delete" value="<fmt:message key="jsp.tools.general.delete"/>" />
 <%
 	}
 %>	                

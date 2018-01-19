@@ -123,9 +123,12 @@ public class DSpaceServlet extends HttpServlet
             {
                 String contentType = request.getContentType();
                 if ((contentType != null) && (contentType.indexOf("multipart/form-data") != -1)) {
-                    request = SubmissionController.wrapMultipartRequest(request);
+                    HttpServletRequest wrappedRequest = SubmissionController.wrapMultipartRequest(request);
+                    Util.validateCsrf(wrappedRequest);
                 }
-                Util.validateCsrf(request);
+                else {
+                    Util.validateCsrf(request);
+                }
                 doDSPost(context, request, response);
             }
             else

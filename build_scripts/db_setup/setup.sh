@@ -38,6 +38,34 @@ ln -s /opt/rh/rh-postgresql95/root/usr/lib64/libpq.so.rh-postgresql95-5 /usr/lib
 mkdir /backup
 chown postgres:postgres /backup
 
+
+# Create postgres key and certificates
+openssl req \
+       -newkey rsa:4096 -nodes -keyout /vagrant/build_scripts/db_setup/server.key \
+       -x509 -days 365 -out /vagrant/build_scripts/db_setup/server.crt -subj "/C=US/ST=New York/L=New York/O=NYC Department of Records and Information Services/OU=IT/CN=dspace.dev"
+cp /vagrant/build_scripts/db_setup/server.crt /vagrant/build_scripts/db_setup/root.crt
+
+mv /vagrant/build_scripts/db_setup/root.crt /data/postgres
+chmod 400 /data/postgres/root.crt
+chown postgres:postgres /data/postgres/root.crt
+mv /vagrant/build_scripts/db_setup/server.crt /data/postgres
+chmod 600 /data/postgres/server.crt
+chown postgres:postgres /data/postgres/server.crt
+mv /vagrant/build_scripts/db_setup/server.key /data/postgres
+chmod 600 /data/postgres/server.key
+chown postgres:postgres /data/postgres/server.key
+
+if [ "$1" != single_server ]; then
+  # 8a. Setup Client Certificates for App Server
+  mkdir -p /home/vagrant/.postgresql
+  openssl req -new -nodes -keyout client.key -out client.csr -subj "/C=US/ST=New York/L=New York/O=NYC Department of Records and Information Services/OU=IT/CN=dspace.dev"
+  openssl x509 -req -CAcreateserial -in client.csr -CA /data/postgres/root.crt -CAkey /data/postgres/server.key -out client.crt
+  chown -R vagrant:vagrant /home/vagrant/.postgresql/
+fi
+
 # Start Postgres
 sudo service rh-postgresql95-postgresql start
+
+# MANUAL STEP: Add server.crt to the Java Keystore
+# sudo keytool -import -alias dspace_db_ssl -keystore /usr/lib/jvm/java-1.8.0-openjdk.x86_64/jre/lib/security/cacerts -file /data/postgres/server.crt
 

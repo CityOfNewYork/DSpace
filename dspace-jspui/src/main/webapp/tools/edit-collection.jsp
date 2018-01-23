@@ -332,53 +332,7 @@
 		</div>
 	</div>
 <% } %>
-<div class="panel panel-default">
-	<div class="panel-heading"><fmt:message key="jsp.tools.edit-collection.form.collection-settings" /></div>
-	<div class="panel-body">
-<% if(bTemplateButton) { %>
-			<div class="row">
-<%-- ===========================================================
-     Item template
-     =========================================================== --%>
-                <label class="col-md-6" for="submit_create_template"><fmt:message key="jsp.tools.edit-collection.form.label13"/></label>
-                <span class="col-md-6 btn-group">
-<%  if (template == null) {%>
-                    <input class="btn btn-success col-md-12" type="submit" name="submit_create_template" value="<fmt:message key="jsp.tools.edit-collection.form.button.create"/>" />
 
-<%  } else { %>
-                    <input class="btn btn-default col-md-6" type="submit" name="submit_edit_template" value="<fmt:message key="jsp.tools.edit-collection.form.button.edit"/>" />
-                    <input class="btn btn-default col-md-6" type="submit" name="submit_delete_template" value="<fmt:message key="jsp.tools.edit-collection.form.button.delete"/>" />
-<%  } %>
-				</span>
-			</div><br/>
-<%  } %>
-   
-<% if(bPolicyButton) { %>
-<%-- ===========================================================
-     Edit collection's policies
-     =========================================================== --%>
-     		<div class="row">
-                <label class="col-md-6" for="submit_authorization_edit"><fmt:message key="jsp.tools.edit-collection.form.label14"/></label>
-                <span class="col-md-6 btn-group">
-                    <input class="btn btn-success col-md-12" type="submit" name="submit_authorization_edit" value="<fmt:message key="jsp.tools.edit-collection.form.button.edit"/>" />
-                </span>
-        	</div><br/>    
-<%  } %>
-
-<% if(bAdminCollection) { %>
-<%-- ===========================================================
-     Curate collection
-     =========================================================== --%>
-            <div class="row">
-                <label class="col-md-6" for=""><fmt:message key="jsp.tools.edit-collection.form.label27"/></label>
-                <span  class="col-md-6 btn-group">
-                    <input class="btn btn-success col-md-12" type="submit" name="submit_curate_collection" value="<fmt:message key="jsp.tools.edit-collection.form.button.curate"/>" />
-				</span>
-			</div>
-<%  } %>
-
-		</div>
-   </div>
 <% if(bAdminCollection) { %>
 <%-- ===========================================================
      Harvesting Settings

@@ -122,6 +122,7 @@
     </h3>
     <% if(bDelete) { %>
               <form class="col-md-4" method="post" action="">
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="action" value="<%= EditCommunitiesServlet.START_DELETE_COMMUNITY %>" />
                 <input type="hidden" name="community_id" value="<%= community.getID() %>" />
                 <input class="col-md-12 btn btn-danger" type="submit" name="submit_delete" value="<fmt:message key="jsp.tools.edit-community.button.delete"/>" />
@@ -132,7 +133,8 @@
 %>
 </div>
   
-<form method="post" action="">  
+<form method="post" action="">
+<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 <div class="row">
 	<div class="col-md-<%= community != null?"8":"12" %>">
 	<div class="panel panel-primary">

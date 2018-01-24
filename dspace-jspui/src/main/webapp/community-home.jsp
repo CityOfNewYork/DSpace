@@ -271,6 +271,7 @@
 %>
 	    		<% if (remove_button) { %>
 	                <form class="btn-group" method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
+					  <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 			          <input type="hidden" name="parent_community_id" value="<%= community.getID() %>" />
 			          <input type="hidden" name="community_id" value="<%= subcommunities.get(j).getID() %>" />
 			          <input type="hidden" name="action" value="<%=EditCommunitiesServlet.START_DELETE_COMMUNITY%>" />
@@ -327,6 +328,7 @@
 %>
 	    <% if (remove_button) { %>
 	      <form class="btn-group" method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
+			  <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 	          <input type="hidden" name="parent_community_id" value="<%= community.getID() %>" />
 	          <input type="hidden" name="community_id" value="<%= community.getID() %>" />
 	          <input type="hidden" name="collection_id" value="<%= collections.get(i).getID() %>" />
@@ -360,6 +362,7 @@
              <div class="panel-body">
              <% if(editor_button) { %>
 	            <form method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
+				  <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 		          <input type="hidden" name="community_id" value="<%= community.getID() %>" />
 		          <input type="hidden" name="action" value="<%=EditCommunitiesServlet.START_EDIT_COMMUNITY%>" />
                   <%--<input type="submit" value="Edit..." />--%>
@@ -369,11 +372,13 @@
              <% if(add_button) { %>
 
 				<form method="post" action="<%=request.getContextPath()%>/tools/collection-wizard">
+					<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 		     		<input type="hidden" name="community_id" value="<%= community.getID() %>" />
                     <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.community-home.create1.button"/>" />
                 </form>
                 
                 <form method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
+					<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="action" value="<%= EditCommunitiesServlet.START_CREATE_COMMUNITY%>" />
                     <input type="hidden" name="parent_community_id" value="<%= community.getID() %>" />
                     <%--<input type="submit" name="submit" value="Create Sub-community" />--%>
@@ -382,16 +387,19 @@
              <% } %>
             <% if( editor_button ) { %>
                 <form method="post" action="<%=request.getContextPath()%>/mydashboard">
+				  <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                   <input type="hidden" name="community_id" value="<%= community.getID() %>" />
                   <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_EXPORT_ARCHIVE %>" />
                   <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.community"/>" />
                 </form>
               <form method="post" action="<%=request.getContextPath()%>/mydashboard">
+			    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="community_id" value="<%= community.getID() %>" />
                 <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_MIGRATE_ARCHIVE %>" />
                 <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.migratecommunity"/>" />
               </form>
                <form method="post" action="<%=request.getContextPath()%>/dspace-admin/metadataexport">
+				 <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                  <input type="hidden" name="handle" value="<%= community.getHandle() %>" />
                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.general.metadataexport.button"/>" />
                </form>

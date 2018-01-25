@@ -41,6 +41,7 @@
     <dspace:item item="<%= wi.getItem() %>"/>
 
     <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workspace_id" value="<%= wi.getID() %>"/>
         <input type="hidden" name="step" value="<%= MyDashboardServlet.REMOVE_ITEM_PAGE %>"/>
 

@@ -78,7 +78,7 @@ public class BatchImportServlet extends DSpaceServlet
     		// Process the file uploaded
     		try {
     			// Wrap multipart request to get the submission info
-    			FileUploadRequest wrapper = new FileUploadRequest(request);
+    			FileUploadRequest wrapper = (FileUploadRequest) request;
 
     			String inputType = wrapper.getParameter("inputType");
     			List<String> reqCollectionsTmp = getRepeatedParameter(wrapper, "collections", "collections");
@@ -213,10 +213,6 @@ public class BatchImportServlet extends DSpaceServlet
     				message = e.getMessage();
     				e.printStackTrace();
     			}
-    		} catch (FileSizeLimitExceededException e) {
-    			request.setAttribute("has-error", "true");
-    			message = e.getMessage();
-    			e.printStackTrace();
     		} catch (Exception e) {
     			request.setAttribute("has-error", "true");
     			message = e.getMessage();

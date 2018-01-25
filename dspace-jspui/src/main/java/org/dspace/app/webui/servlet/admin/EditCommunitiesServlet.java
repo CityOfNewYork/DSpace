@@ -950,93 +950,77 @@ public class EditCommunitiesServlet extends DSpaceServlet
             HttpServletResponse response) throws ServletException, IOException,
             SQLException, AuthorizeException
     {
-        try {
-            // Wrap multipart request to get the submission info
-            FileUploadRequest wrapper = new FileUploadRequest(request);
-            Community community = communityService.find(context, UIUtil.getUUIDParameter(wrapper, "community_id"));
-            Collection collection = collectionService.find(context, UIUtil.getUUIDParameter(wrapper, "collection_id"));
-            File temp = wrapper.getFile("file");
+        // Wrap multipart request to get the submission info
+        FileUploadRequest wrapper = (FileUploadRequest) request;
+        Community community = communityService.find(context, UIUtil.getUUIDParameter(wrapper, "community_id"));
+        Collection collection = collectionService.find(context, UIUtil.getUUIDParameter(wrapper, "collection_id"));
+        File temp = wrapper.getFile("file");
 
-            // Read the temp file as logo
-            InputStream is = new BufferedInputStream(new FileInputStream(temp));
-            Bitstream logoBS;
+        // Read the temp file as logo
+        InputStream is = new BufferedInputStream(new FileInputStream(temp));
+        Bitstream logoBS;
 
-            if (collection == null)
-            {
-                logoBS = communityService.setLogo(context, community, is);
-            }
-            else
-            {
-                logoBS = collectionService.setLogo(context, collection, is);
-            }
-
-            // Strip all but the last filename. It would be nice
-            // to know which OS the file came from.
-            String noPath = wrapper.getFilesystemName("file");
-
-            while (noPath.indexOf('/') > -1)
-            {
-                noPath = noPath.substring(noPath.indexOf('/') + 1);
-            }
-
-            while (noPath.indexOf('\\') > -1)
-            {
-                noPath = noPath.substring(noPath.indexOf('\\') + 1);
-            }
-
-            logoBS.setName(context, noPath);
-            logoBS.setSource(context, wrapper.getFilesystemName("file"));
-
-            // Identify the format
-            BitstreamFormat bf = bitstreamFormatService.guessFormat(context, logoBS);
-            logoBS.setFormat(context, bf);
-            myAuthorizeService.addPolicy(context, logoBS, Constants.WRITE, context.getCurrentUser());
-            bitstreamService.update(context, logoBS);
-
-            String jsp;
-            DSpaceObject dso;
-            if (collection == null)
-            {
-                communityService.update(context, community);
-
-                // Show community edit page
-                request.setAttribute("community", community);
-                storeAuthorizeAttributeCommunityEdit(context, request, community);
-                dso = community;
-                jsp = "/tools/edit-community.jsp";
-            } 
-            else
-            {
-                collectionService.update(context, collection);
-
-                // Show collection edit page
-                request.setAttribute("collection", collection);
-                request.setAttribute("community", community);
-                storeAuthorizeAttributeCollectionEdit(context, request, collection);
-                dso = collection;
-                jsp = "/tools/edit-collection.jsp";
-            }
-            
-            if (myAuthorizeService.isAdmin(context, dso))
-            {
-                // set a variable to show all buttons
-                request.setAttribute("admin_button", Boolean.TRUE);
-            }
-
-            JSPManager.showJSP(request, response, jsp);
-
-            // Remove temp file
-            if (!temp.delete())
-            {
-                log.error("Unable to delete temporary file");
-            }
-
-            // Update DB
-            context.complete();
-        } catch (FileSizeLimitExceededException ex)
-        {
-            log.warn("Upload exceeded upload.max");
-            JSPManager.showFileSizeLimitExceededError(request, response, ex.getMessage(), ex.getActualSize(), ex.getPermittedSize());
+        if (collection == null) {
+            logoBS = communityService.setLogo(context, community, is);
+        } else {
+            logoBS = collectionService.setLogo(context, collection, is);
         }
+
+        // Strip all but the last filename. It would be nice
+        // to know which OS the file came from.
+        String noPath = wrapper.getFilesystemName("file");
+
+        while (noPath.indexOf('/') > -1) {
+            noPath = noPath.substring(noPath.indexOf('/') + 1);
+        }
+
+        while (noPath.indexOf('\\') > -1) {
+            noPath = noPath.substring(noPath.indexOf('\\') + 1);
+        }
+
+        logoBS.setName(context, noPath);
+        logoBS.setSource(context, wrapper.getFilesystemName("file"));
+
+        // Identify the format
+        BitstreamFormat bf = bitstreamFormatService.guessFormat(context, logoBS);
+        logoBS.setFormat(context, bf);
+        myAuthorizeService.addPolicy(context, logoBS, Constants.WRITE, context.getCurrentUser());
+        bitstreamService.update(context, logoBS);
+
+        String jsp;
+        DSpaceObject dso;
+        if (collection == null) {
+            communityService.update(context, community);
+
+            // Show community edit page
+            request.setAttribute("community", community);
+            storeAuthorizeAttributeCommunityEdit(context, request, community);
+            dso = community;
+            jsp = "/tools/edit-community.jsp";
+        } else {
+            collectionService.update(context, collection);
+
+            // Show collection edit page
+            request.setAttribute("collection", collection);
+            request.setAttribute("community", community);
+            storeAuthorizeAttributeCollectionEdit(context, request, collection);
+            dso = collection;
+            jsp = "/tools/edit-collection.jsp";
+        }
+
+        if (myAuthorizeService.isAdmin(context, dso)) {
+            // set a variable to show all buttons
+            request.setAttribute("admin_button", Boolean.TRUE);
+        }
+
+        JSPManager.showJSP(request, response, jsp);
+
+        // Remove temp file
+        if (!temp.delete()) {
+            log.error("Unable to delete temporary file");
+        }
+
+        // Update DB
+        context.complete();
     }
 }

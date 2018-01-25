@@ -264,8 +264,6 @@ public class SubmissionController extends DSpaceServlet
         {
             try
             {
-                    request = wrapMultipartRequest(request);
-
                     // check if the POST request was send by resumable.js
                     String resumableFilename = request.getParameter("resumableFilename");
                     
@@ -341,21 +339,21 @@ public class SubmissionController extends DSpaceServlet
                 if (ConfigurationManager.getBooleanProperty("webui.submit.upload.progressbar", true))
                 {
                     Gson gson = new Gson();
-                    // old browser need to see this response as html to work            
+                    // old browser need to see this response as html to work
                     response.setContentType("text/html");
                     JSONUploadResponse jsonResponse = new JSONUploadResponse();
                     jsonResponse.addUploadFileSizeLimitExceeded(
                             e.getActualSize(), e.getPermittedSize());
                     response.getWriter().print(gson.toJson(jsonResponse));
-                    response.flushBuffer();                    
+                    response.flushBuffer();
                 }
                 else
                 {
-                    JSPManager.showFileSizeLimitExceededError(request, response, e.getMessage(), e.getActualSize(), e.getPermittedSize());                    
+                    JSPManager.showFileSizeLimitExceededError(request, response, e.getMessage(), e.getActualSize(), e.getPermittedSize());
                 }
                 return;
             }
-            
+
             //also, upload any files and save their contents to Request (for later processing by UploadStep)
             uploadFiles(context, request);
         }

@@ -132,6 +132,7 @@
 	<p class="alert alert-info"><fmt:message key="jsp.dspace-admin.wizard-permissions.change"/></p>
 
     <form name="epersongroup" action="<%= request.getContextPath() %>/tools/collection-wizard" method="post">
+		<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 
 <%
 	// MIT group checkbox - only if there's an MIT group and on the READ and SUBMIT pages

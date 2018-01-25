@@ -370,7 +370,7 @@
                 <td headers="t14" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
                 <td headers="t15" class="<%= row %>RowEvenCol">
                    <form action="<%= request.getContextPath() %>/mydashboard" method="post">
-                       <%= workflowItems.get(i).getCollection().getName() %>
+                       <%= Utils.addEntities(workflowItems.get(i).getCollection().getName()) %>
                        <input type="hidden" name="step" value="<%= MyDashboardServlet.MAIN_PAGE %>" />
                        <input type="hidden" name="workflow_id" value="<%= workflowItems.get(i).getID() %>" />
                    </form>   

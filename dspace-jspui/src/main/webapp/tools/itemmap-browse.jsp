@@ -35,6 +35,7 @@
 <%@ page import="org.dspace.content.MetadataValue" %>
 <%@ page import="org.dspace.content.service.ItemService" %>
 <%@ page import="org.dspace.content.factory.ContentServiceFactory" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -58,12 +59,12 @@
     <h2>
         <% if (browsetype.equals("Add")) { %>
             <fmt:message key="jsp.tools.itemmap-browse.heading-search">
-                <fmt:param><%= browsetext %></fmt:param>
+                <fmt:param><%= Utils.addEntities(browsetext) %></fmt:param>
             </fmt:message>
         <% } else if (browsetype.equals("Remove")) { %>
             <fmt:message key="jsp.tools.itemmap-browse.heading-collection">
                 <fmt:param><%= browsetext %></fmt:param>
-                <fmt:param><%= collection.getName() %></fmt:param>
+                <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
             </fmt:message>
         <% } %>
     </h2>
@@ -72,14 +73,14 @@
     <% if (browsetype.equals("Add")){ %>
     <p class="alert alert-info">
         <fmt:message key="jsp.tools.itemmap-browse.add">
-            <fmt:param><%= collection.getName() %></fmt:param>
+            <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
         </fmt:message>
     </p>
     <% }%>
     <% if (browsetype.equals("Remove")){ %>
     <p class="alert alert-warning">
         <fmt:message key="jsp.tools.itemmap-browse.remove">
-            <fmt:param><%= collection.getName() %></fmt:param>
+            <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
         </fmt:message>
     </p>
     <% } %>

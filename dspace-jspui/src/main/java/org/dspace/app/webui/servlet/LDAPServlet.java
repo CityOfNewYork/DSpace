@@ -55,6 +55,7 @@ public class LDAPServlet extends DSpaceServlet
         // check if ldap is enables and forward to the correct login form        
         boolean ldap_enabled = ConfigurationManager.getBooleanProperty("authentication-ldap", "enable");
 
+        // Generate CSRF token and add to session
         HttpSession session = request.getSession();
         SecureRandom random = new SecureRandom();
         String randomLong = ""+random.nextLong();

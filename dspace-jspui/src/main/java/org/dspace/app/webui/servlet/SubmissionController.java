@@ -1630,7 +1630,7 @@ public class SubmissionController extends DSpaceServlet
             chunkFile.delete();
         }
         // if we don't have the chunk send a http status code 404
-        response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
     }
 
     // Resumable.js sends chunks of files using http post.

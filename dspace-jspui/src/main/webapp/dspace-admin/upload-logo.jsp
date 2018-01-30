@@ -84,6 +84,7 @@
         </p>
     
     <form method="post" enctype="multipart/form-data" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <p align="center">
             <input type="file" size="40" name="file"/>
         </p>

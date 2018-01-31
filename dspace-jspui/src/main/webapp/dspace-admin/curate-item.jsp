@@ -60,6 +60,7 @@
     </h1>
 	<div class="row container">
     <form action="<%=request.getContextPath()%>/dspace-admin/curate" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 <%
     if (groupOptions != null && !"".equals(groupOptions))
     {
@@ -96,6 +97,7 @@
     
     	<div class="row container">
          	<form method="get" action="<%=request.getContextPath()%>/tools/edit-item">
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
             	<input type="hidden" name="item_id" value="<%= itemID %>"/>
     			<input class="btn btn-default" type="submit" value="<fmt:message key="jsp.dspace-admin.curate.return.item.button"/>"/>
 	        </form>

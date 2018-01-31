@@ -492,83 +492,71 @@ public class CollectionWizardServlet extends DSpaceServlet
             HttpServletResponse response) throws SQLException,
             ServletException, IOException, AuthorizeException
     {
-        try {
-            // Wrap multipart request to get the submission info
-            FileUploadRequest wrapper = new FileUploadRequest(request);
-            Collection collection = collectionService.find(context, UIUtil.getUUIDParameter(wrapper, "collection_id"));
-            if (collection == null)
-            {
-                log.warn(LogManager.getHeader(context, "integrity_error", UIUtil.getRequestLogInfo(wrapper)));
-                JSPManager.showIntegrityError(request, response);
+        // Wrap multipart request to get the submission info
+        FileUploadRequest wrapper = (FileUploadRequest) request;
+        Collection collection = collectionService.find(context, UIUtil.getUUIDParameter(wrapper, "collection_id"));
+        if (collection == null) {
+            log.warn(LogManager.getHeader(context, "integrity_error", UIUtil.getRequestLogInfo(wrapper)));
+            JSPManager.showIntegrityError(request, response);
 
-                return;
-            }
-
-            // Get metadata
-            collectionService.setMetadata(context, collection, "name", wrapper.getParameter("name"));
-            collectionService.setMetadata(context, collection, "short_description", wrapper.getParameter("short_description"));
-            collectionService.setMetadata(context, collection, "introductory_text", wrapper.getParameter("introductory_text"));
-            collectionService.setMetadata(context, collection, "copyright_text", wrapper.getParameter("copyright_text"));
-            collectionService.setMetadata(context, collection, "side_bar_text", wrapper.getParameter("side_bar_text"));
-            collectionService.setMetadata(context, collection, "provenance_description", wrapper.getParameter("provenance_description"));
-            // Need to be more careful about license -- make sure it's null if
-            // nothing was entered
-            String license = wrapper.getParameter("license");
-
-            if (!StringUtils.isEmpty(license))
-            {
-            	collection.setLicense(context, license);
-            }
-
-            File temp = wrapper.getFile("file");
-
-            if (temp != null)
-            {
-                // Read the temp file as logo
-                InputStream is = new BufferedInputStream(new FileInputStream(temp));
-                Bitstream logoBS = collectionService.setLogo(context, collection, is);
-
-                // Strip all but the last filename. It would be nice
-                // to know which OS the file came from.
-                String noPath = wrapper.getFilesystemName("file");
-
-                while (noPath.indexOf('/') > -1)
-                {
-                    noPath = noPath.substring(noPath.indexOf('/') + 1);
-                }
-
-                while (noPath.indexOf('\\') > -1)
-                {
-                    noPath = noPath.substring(noPath.indexOf('\\') + 1);
-                }
-
-                logoBS.setName(context, noPath);
-                logoBS.setSource(context, wrapper.getFilesystemName("file"));
-
-                // Identify the format
-                BitstreamFormat bf = bitstreamFormatService.guessFormat(context, logoBS);
-                logoBS.setFormat(context, bf);
-                authorizeService.addPolicy(context, logoBS, Constants.WRITE, context.getCurrentUser());
-                bitstreamService.update(context, logoBS);
-
-                // Remove temp file
-                if (!temp.delete())
-                {
-                    log.trace("Unable to delete temporary file");
-                }
-            }
-
-            collectionService.update(context, collection);
-
-            // Now work out what next page is
-            showNextPage(context, request, response, collection, BASIC_INFO);
-
-            context.complete();
-        } catch (FileSizeLimitExceededException ex)
-        {
-            log.warn("Upload exceeded upload.max");
-            JSPManager.showFileSizeLimitExceededError(request, response, ex.getMessage(), ex.getActualSize(), ex.getPermittedSize());
+            return;
         }
+
+        // Get metadata
+        collectionService.setMetadata(context, collection, "name", wrapper.getParameter("name"));
+        collectionService.setMetadata(context, collection, "short_description", wrapper.getParameter("short_description"));
+        collectionService.setMetadata(context, collection, "introductory_text", wrapper.getParameter("introductory_text"));
+        collectionService.setMetadata(context, collection, "copyright_text", wrapper.getParameter("copyright_text"));
+        collectionService.setMetadata(context, collection, "side_bar_text", wrapper.getParameter("side_bar_text"));
+        collectionService.setMetadata(context, collection, "provenance_description", wrapper.getParameter("provenance_description"));
+        // Need to be more careful about license -- make sure it's null if
+        // nothing was entered
+        String license = wrapper.getParameter("license");
+
+        if (!StringUtils.isEmpty(license)) {
+            collection.setLicense(context, license);
+        }
+
+        File temp = wrapper.getFile("file");
+
+        if (temp != null) {
+            // Read the temp file as logo
+            InputStream is = new BufferedInputStream(new FileInputStream(temp));
+            Bitstream logoBS = collectionService.setLogo(context, collection, is);
+
+            // Strip all but the last filename. It would be nice
+            // to know which OS the file came from.
+            String noPath = wrapper.getFilesystemName("file");
+
+            while (noPath.indexOf('/') > -1) {
+                noPath = noPath.substring(noPath.indexOf('/') + 1);
+            }
+
+            while (noPath.indexOf('\\') > -1) {
+                noPath = noPath.substring(noPath.indexOf('\\') + 1);
+            }
+
+            logoBS.setName(context, noPath);
+            logoBS.setSource(context, wrapper.getFilesystemName("file"));
+
+            // Identify the format
+            BitstreamFormat bf = bitstreamFormatService.guessFormat(context, logoBS);
+            logoBS.setFormat(context, bf);
+            authorizeService.addPolicy(context, logoBS, Constants.WRITE, context.getCurrentUser());
+            bitstreamService.update(context, logoBS);
+
+            // Remove temp file
+            if (!temp.delete()) {
+                log.trace("Unable to delete temporary file");
+            }
+        }
+
+        collectionService.update(context, collection);
+
+        // Now work out what next page is
+        showNextPage(context, request, response, collection, BASIC_INFO);
+
+        context.complete();
     }
 
     /**

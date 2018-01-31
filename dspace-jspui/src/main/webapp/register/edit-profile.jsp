@@ -75,6 +75,7 @@
     <form class="form-horizontal" action="<%= request.getContextPath() %>/profile" method="post">
 
         <dspace:include page="/register/profile-form.jsp" />
+        <input type="hidden" name="csrf_token" value="<%=session.getAttribute("csrfToken")%>">
 
 <%
     // Only show password update section if the user doesn't use

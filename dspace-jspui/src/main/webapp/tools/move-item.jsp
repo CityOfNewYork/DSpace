@@ -28,6 +28,7 @@
 <dspace:layout style="submission" titlekey="jsp.tools.move-item.title">
 	<div class="container">
    	<form class="form-horizontal" action="<%=request.getContextPath()%>/tools/edit-item" method="post">
+			<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 			<div class="form-group">   		
 				  <label><fmt:message key="jsp.tools.move-item.item.name.msg"/></label>
 			      <%=item.getName()%></font>

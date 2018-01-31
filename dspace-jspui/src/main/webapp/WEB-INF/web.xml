@@ -95,10 +95,10 @@
     <url-pattern>/submit</url-pattern>
   </filter-mapping>
 
-  <filter-mapping>
-    <filter-name>registered-only</filter-name>
-    <url-pattern>/subscribe</url-pattern>
-  </filter-mapping>
+  <!--<filter-mapping>-->
+    <!--<filter-name>registered-only</filter-name>-->
+    <!--<url-pattern>/subscribe</url-pattern>-->
+  <!--</filter-mapping>-->
 
   <filter-mapping>
     <filter-name>registered-only</filter-name>
@@ -393,10 +393,10 @@
     <servlet-class>org.dspace.app.webui.servlet.SubmissionController</servlet-class>
   </servlet>
 
-  <servlet>
-    <servlet-name>subscribe</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.SubscribeServlet</servlet-class>
-  </servlet>
+  <!--<servlet>-->
+    <!--<servlet-name>subscribe</servlet-name>-->
+    <!--<servlet-class>org.dspace.app.webui.servlet.SubscribeServlet</servlet-class>-->
+  <!--</servlet>-->
   
   <servlet>
     <servlet-name>suggest</servlet-name>
@@ -731,10 +731,10 @@
     <url-pattern>/submit</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>subscribe</servlet-name>
-    <url-pattern>/subscribe</url-pattern>
-  </servlet-mapping>
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>subscribe</servlet-name>-->
+    <!--<url-pattern>/subscribe</url-pattern>-->
+  <!--</servlet-mapping>-->
   
   <servlet-mapping>
     <servlet-name>suggest</servlet-name>

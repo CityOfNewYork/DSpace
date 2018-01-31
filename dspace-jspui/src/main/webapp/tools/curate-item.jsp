@@ -76,6 +76,7 @@
     </h1>
 	<div class="row container">
 	<form action="<%=request.getContextPath()%>/tools/curate" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 <%
     if (groupOptions != null && !"".equals(groupOptions))
     {

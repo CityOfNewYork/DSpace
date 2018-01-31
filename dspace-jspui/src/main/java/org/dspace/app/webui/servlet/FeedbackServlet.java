@@ -9,6 +9,7 @@ package org.dspace.app.webui.servlet;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.apache.commons.validator.EmailValidator;
@@ -142,6 +144,15 @@ public class FeedbackServlet extends DSpaceServlet
         }
         else
         {
+            // Generate CSRF token and add to session
+            if (currentUser == null)
+            {
+                HttpSession session = request.getSession();
+                SecureRandom random = new SecureRandom();
+                String randomLong = "" + random.nextLong();
+                session.setAttribute("csrfToken", randomLong);
+            }
+
             // Display feedback form
             log.info(LogManager.getHeader(context, "show_feedback_form",
                     "problem=false"));

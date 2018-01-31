@@ -164,52 +164,10 @@
     { %>
           <form class="form-group" action="<%= request.getContextPath() %>/submit" method="post">
             <input type="hidden" name="collection" value="<%= collection.getID() %>" />
+            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 			<input class="btn btn-success col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.collection-home.submit.button"/>" />
           </form>
 <%  } %>
-        <form class="well" method="get" action="">
-<%  if (loggedIn && subscribed)
-    { %>
-                <small><fmt:message key="jsp.collection-home.subscribed"/> <a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.collection-home.info"/></a></small>
-           		<input class="btn btn-sm btn-warning" type="submit" name="submit_unsubscribe" value="<fmt:message key="jsp.collection-home.unsub"/>" />
-<%  } else { %>
-                <small>
-            		  <fmt:message key="jsp.collection-home.subscribe.msg"/>
-                </small>
-				<input class="btn btn-sm btn-info" type="submit" name="submit_subscribe" value="<fmt:message key="jsp.collection-home.subscribe"/>" />
-<%  }
-    if(feedEnabled)
-    { %>
-    <span class="pull-right">
-    <%
-    	String[] fmts = feedData.substring(5).split(",");
-    	String icon = null;
-    	int width = 0;
-    	for (int j = 0; j < fmts.length; j++)
-    	{
-    		if ("rss_1.0".equals(fmts[j]))
-    		{
-    		   icon = "rss1.gif";
-    		   width = 80;
-    		}
-    		else if ("rss_2.0".equals(fmts[j]))
-    		{
-    		   icon = "rss2.gif";
-    		   width = 80;
-    		}
-    		else
-    	    {
-    	       icon = "rss.gif";
-    	       width = 36;
-    	    }
-%>
-    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= collection.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" style="margin: 3px 0 3px" /></a>
-<%
-    	} %>
-    	</span><%
-    }
-%>
-        </form>
 
 <div class="row">
 	<%@ include file="discovery/static-tagcloud-facet.jsp" %>
@@ -330,6 +288,7 @@
                  <div class="panel-body">              
 <% if( editor_button ) { %>
                 <form method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
+                  <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                   <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
                   <input type="hidden" name="community_id" value="<%= community.getID() %>" />
                   <input type="hidden" name="action" value="<%= EditCommunitiesServlet.START_EDIT_COLLECTION %>" />
@@ -339,6 +298,7 @@
 
 <% if( admin_button ) { %>
                  <form method="post" action="<%=request.getContextPath()%>/tools/itemmap">
+                  <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                   <input type="hidden" name="cid" value="<%= collection.getID() %>" />
 				  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.collection-home.item.button"/>" />                  
                 </form>
@@ -350,16 +310,19 @@
 <% } %>
 <% if( editor_button || admin_button) { %>
                 <form method="post" action="<%=request.getContextPath()%>/mydashboard">
+                  <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                   <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
                   <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_EXPORT_ARCHIVE %>" />
                   <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.collection"/>" />
                 </form>
                <form method="post" action="<%=request.getContextPath()%>/mydashboard">
+                 <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                  <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
                  <input type="hidden" name="step" value="<%= MyDashboardServlet.REQUEST_MIGRATE_ARCHIVE %>" />
                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.migratecollection"/>" />
                </form>
                <form method="post" action="<%=request.getContextPath()%>/dspace-admin/metadataexport">
+                 <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                  <input type="hidden" name="handle" value="<%= collection.getHandle() %>" />
                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.general.metadataexport.button"/>" />
                </form>

@@ -55,6 +55,7 @@
 	<p class="alert alert-info"><fmt:message key="jsp.submit.complete.info"/></p> 
 
     <form action="<%= request.getContextPath() %>/submit" method="post" onkeydown="return disableEnterKey(event);">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="collection" value="<%= collection.getID() %>"/>
 	    <input class="btn btn-success pull-right" type="submit" name="submit" value="<fmt:message key="jsp.submit.complete.again"/>"/>
     </form>

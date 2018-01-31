@@ -89,7 +89,7 @@
 %>
 
     <form method="post" action="<%= request.getContextPath() %>/dspace-admin/batchimport" enctype="multipart/form-data">
-	
+		<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 		<div class="form-group">
 			<label for="inputType"><fmt:message key="jsp.dspace-admin.batchmetadataimport.selectinputfile"/></label>
 	        <select class="form-control" name="inputType" id="import-type">

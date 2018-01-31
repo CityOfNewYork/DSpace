@@ -15,15 +15,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.apache.log4j.Logger;
+import org.dspace.app.util.Util;
 import org.dspace.app.webui.util.Authenticate;
+import org.dspace.app.webui.util.JSONUploadResponse;
 import org.dspace.app.webui.util.JSPManager;
+import org.dspace.app.webui.servlet.SubmissionController;
 import org.dspace.app.webui.util.UIUtil;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.authorize.factory.AuthorizeServiceFactory;
 import org.dspace.authorize.service.AuthorizeService;
+import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
 import org.dspace.core.LogManager;
+
+import com.google.gson.Gson;
 
 /**
  * Base class for DSpace servlets. This manages the initialisation of a context,
@@ -82,7 +89,7 @@ public class DSpaceServlet extends HttpServlet
 
     /**
      * Process an incoming request
-     * 
+     *
      * @param request
      *            the request object
      * @param response
@@ -119,6 +126,11 @@ public class DSpaceServlet extends HttpServlet
             // Invoke the servlet code
             if (request.getMethod().equals("POST"))
             {
+                String contentType = request.getContentType();
+                if ((contentType != null) && (contentType.indexOf("multipart/form-data") != -1)) {
+                    request = SubmissionController.wrapMultipartRequest(request);
+                }
+                Util.validateCsrf(request);
                 doDSPost(context, request, response);
             }
             else

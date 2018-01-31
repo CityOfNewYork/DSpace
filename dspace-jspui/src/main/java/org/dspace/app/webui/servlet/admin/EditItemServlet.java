@@ -970,92 +970,78 @@ public class EditItemServlet extends DSpaceServlet
             throws ServletException, IOException, SQLException,
             AuthorizeException
     {
-        try {
-            // Wrap multipart request to get the submission info
-            FileUploadRequest wrapper = new FileUploadRequest(request);
-            Bitstream b = null;
-            Item item = itemService.find(context, UIUtil.getUUIDParameter(wrapper, "item_id"));
-            File temp = wrapper.getFile("file");
+        // Wrap multipart request to get the submission info
+        FileUploadRequest wrapper = (FileUploadRequest) request;
+        Bitstream b = null;
+        Item item = itemService.find(context, UIUtil.getUUIDParameter(wrapper, "item_id"));
+        File temp = wrapper.getFile("file");
 
-            if(temp == null)
-            {
-                boolean noFileSelected = true;
+        if (temp == null) {
+            boolean noFileSelected = true;
 
-                // Show upload bitstream page
-                request.setAttribute("noFileSelected", noFileSelected);
-                request.setAttribute("item", item);
-                JSPManager
-                        .showJSP(request, response, UPLOAD_BITSTREAM_JSP);
-                return;
-            }
-            // Read the temp file as logo
-            InputStream is = new BufferedInputStream(new FileInputStream(temp));
-
-            // now check to see if person can edit item
-            checkEditAuthorization(context, item);
-
-            // do we already have an ORIGINAL bundle?
-            List<Bundle> bundles = itemService.getBundles(item, "ORIGINAL");
-
-            if (bundles == null || bundles.size() == 0)
-            {
-                // set bundle's name to ORIGINAL
-                b = itemService.createSingleBitstream(context, is, item, "ORIGINAL");
-
-                // set the permission as defined in the owning collection
-                Collection owningCollection = item.getOwningCollection();
-                if (owningCollection != null)
-                {
-                    Bundle bnd = b.getBundles().get(0);
-                    bundleService.inheritCollectionDefaultPolicies(context, bnd,
-                    		owningCollection);
-                }
-            }
-            else
-            {
-                // we have a bundle already, just add bitstream
-                b = bitstreamService.create(context, bundles.get(0), is);
-            }
-
-            // Strip all but the last filename. It would be nice
-            // to know which OS the file came from.
-            String noPath = wrapper.getFilesystemName("file");
-
-            while (noPath.indexOf('/') > -1)
-            {
-                noPath = noPath.substring(noPath.indexOf('/') + 1);
-            }
-
-            while (noPath.indexOf('\\') > -1)
-            {
-                noPath = noPath.substring(noPath.indexOf('\\') + 1);
-            }
-
-            b.setName(context, noPath);
-            b.setSource(context, wrapper.getFilesystemName("file"));
-
-            // Identify the format
-            BitstreamFormat bf = bitstreamFormatService.guessFormat(context, b);
-            b.setFormat(context, bf);
-            bitstreamService.update(context, b);
-
-            itemService.update(context, item);
-
-            // Back to edit form
-            showEditForm(context, request, response, item);
-
-            // Remove temp file
-            if (!temp.delete())
-            {
-                log.error("Unable to delete temporary file");
-            }
-
-            // Update DB
-            context.complete();
-        } catch (FileSizeLimitExceededException ex)
-        {
-            log.warn("Upload exceeded upload.max");
-            JSPManager.showFileSizeLimitExceededError(request, response, ex.getMessage(), ex.getActualSize(), ex.getPermittedSize());
+            // Show upload bitstream page
+            request.setAttribute("noFileSelected", noFileSelected);
+            request.setAttribute("item", item);
+            JSPManager
+                    .showJSP(request, response, UPLOAD_BITSTREAM_JSP);
+            return;
         }
+        // Read the temp file as logo
+        InputStream is = new BufferedInputStream(new FileInputStream(temp));
+
+        // now check to see if person can edit item
+        checkEditAuthorization(context, item);
+
+        // do we already have an ORIGINAL bundle?
+        List<Bundle> bundles = itemService.getBundles(item, "ORIGINAL");
+
+        if (bundles == null || bundles.size() == 0) {
+            // set bundle's name to ORIGINAL
+            b = itemService.createSingleBitstream(context, is, item, "ORIGINAL");
+
+            // set the permission as defined in the owning collection
+            Collection owningCollection = item.getOwningCollection();
+            if (owningCollection != null) {
+                Bundle bnd = b.getBundles().get(0);
+                bundleService.inheritCollectionDefaultPolicies(context, bnd,
+                        owningCollection);
+            }
+        } else {
+            // we have a bundle already, just add bitstream
+            b = bitstreamService.create(context, bundles.get(0), is);
+        }
+
+        // Strip all but the last filename. It would be nice
+        // to know which OS the file came from.
+        String noPath = wrapper.getFilesystemName("file");
+
+        while (noPath.indexOf('/') > -1) {
+            noPath = noPath.substring(noPath.indexOf('/') + 1);
+        }
+
+        while (noPath.indexOf('\\') > -1) {
+            noPath = noPath.substring(noPath.indexOf('\\') + 1);
+        }
+
+        b.setName(context, noPath);
+        b.setSource(context, wrapper.getFilesystemName("file"));
+
+        // Identify the format
+        BitstreamFormat bf = bitstreamFormatService.guessFormat(context, b);
+        b.setFormat(context, bf);
+        bitstreamService.update(context, b);
+
+        itemService.update(context, item);
+
+        // Back to edit form
+        showEditForm(context, request, response, item);
+
+        // Remove temp file
+        if (!temp.delete()) {
+            log.error("Unable to delete temporary file");
+        }
+
+        // Update DB
+        context.complete();
     }
 }

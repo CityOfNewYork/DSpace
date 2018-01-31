@@ -96,7 +96,7 @@
 <%  } %>
 
     <form method="post" action="">
-
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 		<div class="row">
             <%-- <td>Email:</td> --%>         
             <label class="col-md-2" for="temail"><fmt:message key="jsp.dspace-admin.eperson-edit.email"/></label>

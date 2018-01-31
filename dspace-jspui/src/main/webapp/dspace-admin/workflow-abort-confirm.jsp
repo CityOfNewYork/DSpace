@@ -66,6 +66,7 @@
         </fmt:message></span>
     	</div>
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workflow_id" value="<%= workflow.getID() %>"/> 
 
                         <%-- <input type="submit" name="submit_abort_confirm" value="Abort"/> --%>

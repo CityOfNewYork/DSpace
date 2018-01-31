@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dspace.app.util.Util;
 import org.dspace.app.webui.util.Authenticate;
 import org.dspace.app.webui.util.JSPManager;
 import org.dspace.authorize.AuthorizeException;
@@ -48,6 +49,28 @@ public class LogoutServlet extends DSpaceServlet
             return;
         }
         
+        // Display logged out message
+        JSPManager.showJSP(request, response, "/login/logged-out.jsp");
+    }
+
+    protected void doDSPost(Context context, HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException,
+            SQLException, AuthorizeException
+    {
+        Util.validateCsrf(request);
+
+        log.info(LogManager.getHeader(context, "logout", ""));
+
+        Authenticate.loggedOut(context, request);
+
+        // if the user still logged in (i.e. it was a login as)?
+        if (context.getCurrentUser() != null)
+        {
+            // redirect to the admin home page
+            response.sendRedirect(request.getContextPath()+"/dspace-admin/");
+            return;
+        }
+
         // Display logged out message
         JSPManager.showJSP(request, response, "/login/logged-out.jsp");
     }

@@ -92,6 +92,7 @@ if (error!=null) {
       <tr>
          <td>
              <form class="form-inline" method="post" action="">
+                 <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                  <span class="col-md-1"><%= types.get(i).getID() %></span>
 
                     <div class="form-group">
@@ -125,7 +126,8 @@ if (error!=null) {
  </table>
 
       <form method="post" action="">
-        <input type="hidden" name="dc_schema_id" value="<%= schema.getID() %>"/>
+          <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+          <input type="hidden" name="dc_schema_id" value="<%= schema.getID() %>"/>
         	 <h2><fmt:message key="jsp.dspace-admin.list-metadata-fields.addfield"/></h2>
               <p class="alert alert-info"><fmt:message key="jsp.dspace-admin.list-metadata-fields.addfieldnote"/></p>
                       
@@ -144,8 +146,8 @@ if (error!=null) {
 
 
     <form method="post" action="">
-      
-      <h2><fmt:message key="jsp.dspace-admin.list-metadata-fields.move"/></h2>
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+        <h2><fmt:message key="jsp.dspace-admin.list-metadata-fields.move"/></h2>
 <% if (schemas.size() > 1) { %>
         <p class="alert alert-info">
         <fmt:message key="jsp.dspace-admin.list-metadata-fields.movenote"/></p>

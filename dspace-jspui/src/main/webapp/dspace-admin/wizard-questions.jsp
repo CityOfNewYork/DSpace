@@ -56,6 +56,7 @@
 </h1>
 
     <form action="<%= request.getContextPath() %>/tools/collection-wizard" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <%--<p>Please check the boxes next to the statements that apply to the collection. --%>
         <div class="help-block"><fmt:message key="jsp.dspace-admin.wizard-questions.text"/></div>
 

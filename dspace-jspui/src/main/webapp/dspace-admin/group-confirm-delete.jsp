@@ -35,6 +35,7 @@
     <p class="alert alert-warning"><fmt:message key="jsp.dspace-admin.group-confirm-delete.confirm"/></p>
 				
                     <form method="post" action="">
+                            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                       		<div class="btn-group col-md-offset-5">
 								<input type="hidden" name="group_id" value="<%= group.getID() %>"/>
                     			<input class="btn btn-danger" type="submit" name="submit_confirm_delete" value="<fmt:message key="jsp.dspace-admin.general.delete"/>" />

@@ -61,6 +61,7 @@
     }
 %>
     <form action="<%= request.getContextPath() %>/contact" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <center>
             <table>
                 <tr>

@@ -52,6 +52,7 @@
     </ul>
     
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
         <input type="hidden" name="community_id" value="<%= community.getID() %>" />
         <input type="hidden" name="action" value="<%= EditCommunitiesServlet.CONFIRM_DELETE_COLLECTION %>" />

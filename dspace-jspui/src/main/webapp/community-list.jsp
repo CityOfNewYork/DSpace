@@ -146,8 +146,9 @@
 			</div>
 			<div class="panel-body">
                 <form method="post" action="<%=request.getContextPath()%>/dspace-admin/edit-communities">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="action" value="<%=EditCommunitiesServlet.START_CREATE_COMMUNITY%>" />
-					<input class="btn btn-default" type="submit" name="submit" value="<fmt:message key="jsp.community-list.create.button"/>" />
+                    <input class="btn btn-default" type="submit" name="submit" value="<fmt:message key="jsp.community-list.create.button"/>" />
                 </form>
             </div>
 </dspace:sidebar>

@@ -73,6 +73,7 @@
     <div><fmt:message key="jsp.dspace-admin.item-select.enter"/></div>
       
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     	<div class="row">
             <label class="col-md-2" for="thandle"><fmt:message key="jsp.dspace-admin.item-select.handle"/></label>            
            	<span class="col-md-3"><input class="form-control" type="text" name="handle" id="thandle" value="<%= ConfigurationManager.getProperty("handle.prefix") %>/" size="12"/></span>
@@ -88,6 +89,7 @@
     </form>
     <br/>
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     	<div class="row col-md-offset-11">
     		<input class="btn btn-default" type="submit" name="submit_collection_select_cancel" value="<fmt:message key="jsp.dspace-admin.general.cancel"/>" />
     	</div>

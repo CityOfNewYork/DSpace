@@ -102,6 +102,7 @@
             
     <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
 
+            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
             <div class="input-group">
                 <span class="col-md-2">
                     <%-- <td>Group:</td> --%>

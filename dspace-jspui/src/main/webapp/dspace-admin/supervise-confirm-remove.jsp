@@ -91,6 +91,7 @@
 <div class="pull-right">
 <%-- form to request removal of supervisory linking --%>
 <form method="post" action="">
+    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     <input type="hidden" name="gID" value="<%= group.getID() %>"/>
     <input type="hidden" name="siID" value="<%= wsItem.getID() %>"/>
     <input class="btn btn-default" type="submit" name="submit_base" value="<fmt:message key="jsp.dspace-admin.general.cancel"/>"/>

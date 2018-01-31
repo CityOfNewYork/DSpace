@@ -86,6 +86,7 @@
     
     <%-- %>p><fmt:message key="jsp.tools.itemmap-browse.infomsg"/></p--%>
     <form method="post" action="<%= request.getContextPath() %>/tools/itemmap">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="cid" value="<%=collection.getID()%>" />
 	<div class="btn-group">		
 		<input type="hidden" name="action" value="<%=browsetype%>" />
@@ -210,6 +211,7 @@
 <% if (pageResult > 1) { %>			
 
 	<form method="post" class="standard10" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="cid" value="<%=collection.getID()%>"/>
         <input type="hidden" name="action" value="search"/>
         <input type="hidden" name="index" id="index" value="<%= index %>"/>
@@ -222,6 +224,7 @@
 	if (bMore) { %>    		
     		
 	<form method="post" class="standard10" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="cid" value="<%=collection.getID()%>"/>
         <input type="hidden" name="action" value="search"/>
         <input type="hidden" name="index" id="index" value="<%= index %>"/>

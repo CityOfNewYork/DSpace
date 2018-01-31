@@ -65,6 +65,7 @@
     <dspace:item item="<%= item %>" style="full" />
 
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="item_id" value="<%= item.getID() %>"/>
         <input type="hidden" name="action" value="<%= EditItemServlet.CONFIRM_WITHDRAW %>"/>
 

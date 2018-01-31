@@ -80,6 +80,7 @@ if (error!=null) {
             <td class="<%= row %>RowOddCol">
 		<% if ( schemas.get(i).getID() != 1 ) { %>
                 <form method="post" action="">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="dc_schema_id" value="<%= schemas.get(i).getID() %>"/>
                     <input class="btn btn-primary" type="button" name="submit_update" value="<fmt:message key="jsp.dspace-admin.general.update"/>" onclick="javascript:document.schema.namespace.value='<%= schemas.get(i).getNamespace() %>';document.schema.short_name.value='<%= schemas.get(i).getName() %>';document.schema.dc_schema_id.value='<%= schemas.get(i).getID() %>';return null;"/>
                     <input class="btn btn-danger" type="submit" name="submit_delete" value="<fmt:message key="jsp.dspace-admin.general.delete-w-confirm"/>"/>
@@ -94,7 +95,8 @@ if (error!=null) {
     </table>
         
   <form method="post" name="schema" action="">
-  <input type="hidden" name="dc_schema_id" value=""/>
+      <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+      <input type="hidden" name="dc_schema_id" value=""/>
   	
          <p class="alert alert-info">
              <fmt:message key="jsp.dspace-admin.list-metadata-schemas.instruction"/>

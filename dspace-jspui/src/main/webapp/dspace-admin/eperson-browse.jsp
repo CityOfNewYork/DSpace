@@ -114,6 +114,7 @@
         String commandString = request.getContextPath() + "/dspace-admin/edit-epeople?submit_edit&amp;eperson_id=" + e.getID();
 %>
         <form method="post" action="<%= request.getContextPath() %>/dspace-admin/edit-epeople">
+            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
             <tr>
                 <td headers="t1" class="<%= row %>RowOddCol"><%= e.getID() %></td>
                 <td headers="t2" class="<%= row %>RowEvenCol">
@@ -158,10 +159,12 @@
     </table>
 
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     <%=previousButton%>
     </form>
 
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     <%=nextButton%>
     </form>
 

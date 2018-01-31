@@ -61,6 +61,7 @@
 	<p><fmt:message key="jsp.dspace-admin.wizard-default-item.text2"/></p>
 	
     <form method="post" action="<%= request.getContextPath() %>/tools/collection-wizard">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <center><table class="miscTable" summary="Enter default metadata table">
             <tr>
                 <%-- <th class="oddRowOddCol"><strong>Dublin Core Field</strong></th> --%>

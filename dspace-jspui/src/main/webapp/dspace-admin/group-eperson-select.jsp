@@ -52,7 +52,7 @@
 
     <form method="post" action="">
 
-    
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="group_id" value="<%=group.getID()%>"/>
     			<div class="row col-md-4 col-md-offset-4">
                     <select class="form-control" size="15" name="eperson_id" multiple="multiple">

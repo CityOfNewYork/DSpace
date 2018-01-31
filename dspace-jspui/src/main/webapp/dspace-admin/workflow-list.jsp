@@ -76,6 +76,7 @@
             </td>
             <td class="<%= row %>RowOddCol">
                <form method="post" action="">
+                   <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                    <input type="hidden" name="workflow_id" value="<%= workflows.get(i).getID() %>"/>
                    <input class="btn btn-default" type="submit" name="submit_abort" value="<fmt:message key="jsp.dspace-admin.general.abort-w-confirm"/>" />
               </form>

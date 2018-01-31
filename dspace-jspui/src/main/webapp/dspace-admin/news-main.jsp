@@ -52,7 +52,8 @@
       <dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.site-admin\") + \"#editnews\"%>"><fmt:message key="jsp.help"/></dspace:popup>
 	  </h1>
 			
-		<form action="<%= request.getContextPath() %>/dspace-admin/news-edit" method="post">			
+		<form action="<%= request.getContextPath() %>/dspace-admin/news-edit" method="post">
+            <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 			<select class="form-control" name="position" size="5">
 				<option value="<fmt:message key="news-top.html"/>"><fmt:message key="jsp.dspace-admin.news-main.news.top"/></option>
 				<option value="<fmt:message key="news-side.html"/>"><fmt:message key="jsp.dspace-admin.news-main.news.sidebar"/></option>

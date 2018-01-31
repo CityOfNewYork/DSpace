@@ -49,8 +49,8 @@
     in the <strong><%= positionStr%></strong> of the DSpace home page.</p> --%>
 
  <form action="<%= request.getContextPath() %>/dspace-admin/news-edit" method="post">
-
-    <p class="alert alert-info">
+     <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+     <p class="alert alert-info">
 <% if (position.contains("top"))
    { %>
     <fmt:message key="jsp.dspace-admin.news-edit.text.topbox"/>

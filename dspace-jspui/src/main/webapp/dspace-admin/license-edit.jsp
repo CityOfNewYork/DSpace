@@ -55,6 +55,7 @@
     </h1>
     
     <form action="<%= request.getContextPath() %>/dspace-admin/license-edit" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 
     <%
     	if (edited)

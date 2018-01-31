@@ -40,6 +40,7 @@
 <%@ page import="org.dspace.authorize.ResourcePolicy" %>
 <%@ page import="org.dspace.content.Collection"       %>
 <%@ page import="org.dspace.core.Constants"           %>
+<%@ page import="org.dspace.core.Utils"               %>
 <%@ page import="org.dspace.eperson.EPerson"          %>
 <%@ page import="org.dspace.eperson.Group"            %>
 <%@ page import="org.dspace.authorize.factory.AuthorizeServiceFactory" %>
@@ -79,7 +80,7 @@
                nocache="true">
 
 		<h1><fmt:message key="jsp.dspace-admin.authorize-collection-edit.policies">
-            <fmt:param><%= collection.getName() %></fmt:param>
+            <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
             <fmt:param>hdl:<%= collection.getHandle() %></fmt:param>
             <fmt:param><%= collection.getID() %></fmt:param>
         </fmt:message>
@@ -116,7 +117,7 @@
                     <%= resourcePolicyService.getActionText(rp) %>
                </td>
                <td class="<%= row %>RowOddCol">
-                    <%= (rp.getGroup()   == null ? "..." : rp.getGroup().getName() ) %>
+                    <%= (rp.getGroup()   == null ? "..." : Utils.addEntities(rp.getGroup().getName()) ) %>
                </td>
                <td class="<%= row %>RowEvenCol">
                <form action="<%= request.getContextPath() %>/tools/authorize" method="post">

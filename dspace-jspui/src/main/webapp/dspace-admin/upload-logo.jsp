@@ -24,6 +24,7 @@
 <%@ page import="org.dspace.app.webui.servlet.admin.EditCommunitiesServlet" %>
 <%@ page import="org.dspace.content.Community" %>
 <%@ page import="org.dspace.content.Collection" %>
+<%@ page import="org.dspace.core.Utils" %>
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
@@ -69,14 +70,14 @@
 	    	if (collection != null){
 	    %>
 	    		<fmt:message key="jsp.dspace-admin.upload-logo.select.col">
-                    <fmt:param><%= collection.getName() %></fmt:param>
+                    <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
                 </fmt:message>
 	    <%	
 	    	}
 	    	else{
 	    %>
 	    		<fmt:message key="jsp.dspace-admin.upload-logo.select.com">
-                    <fmt:param><%= community.getName() %></fmt:param>
+                    <fmt:param><%= Utils.addEntities(community.getName()) %></fmt:param>
                 </fmt:message>
 	    <%
 	    	}

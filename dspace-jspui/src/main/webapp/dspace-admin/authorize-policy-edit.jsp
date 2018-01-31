@@ -45,9 +45,10 @@
 <%@ page import="org.dspace.authorize.ResourcePolicy" %>
 <%@ page import="org.dspace.content.Collection"       %>
 <%@ page import="org.dspace.core.Constants"           %>
+<%@ page import="org.dspace.core.Utils"               %>
 <%@ page import="org.dspace.eperson.EPerson"          %>
 <%@ page import="org.dspace.eperson.Group"            %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List"                      %>
 
 
 <%
@@ -111,7 +112,7 @@
                 <select class="form-control" size="15" name="group_id" id="tgroup_id">
                     <%  for(int i = 0; i < groups.size(); i++ ) { %>
                             <option value="<%= groups.get(i).getID() %>" <%= (groups.get(i).equals((policy.getGroup()))  ? "selected=\"selected\"" : "" ) %> >
-                            <%= groups.get(i).getName()%>
+                            <%= Utils.addEntities(groups.get(i).getName())%>
                             </option>
                         <%  } %>
                 </select>

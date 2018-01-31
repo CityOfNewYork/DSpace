@@ -8,4 +8,7 @@ chown -R vagrant:vagrant /home/vagrant/apache-tomcat-8.5.24
 
 # Create symlink of Tomcat configuration
 mv /home/vagrant/apache-tomcat-8.5.24/conf/server.xml /home/vagrant/apache-tomcat-8.5.24/conf/server.xml.orig
+mv /home/vagrant/apache-tomcat-8.5.24/conf/web.xml /home/vagrant/apache-tomcat-8.5.24/conf/web.xml.orig
+
 ln -s /vagrant/build_scripts/tomcat_setup/server.xml /home/vagrant/apache-tomcat-8.5.24/conf/server.xml
+ln -s /vagrant/build_scripts/tomcat_setup/web.xml /home/vagrant/apache-tomcat-8.5.24/conf/web.xml

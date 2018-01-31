@@ -88,6 +88,7 @@
         <td class="<%= row %>RowOddCol">
             <%-- form to navigate to the item policies --%>
             <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="item_id" value="<%=supervisedItems.get(i).getItem().getID() %>"/>
                 <input class="btn btn-info" type="submit" name="submit_item_select" value="<fmt:message key="jsp.dspace-admin.supervise-list.policies.button"/>"/>
             </form>
@@ -117,9 +118,10 @@
         <td class="<%= row %>RowOddCol">
             <%-- form to request removal of supervisory linking --%>
             <form method="post" action="">
-            <input type="hidden" name="gID" value="<%= supervisors.get(j).getID() %>"/>
-            <input type="hidden" name="siID" value="<%= supervisedItems.get(i).getID() %>"/>
-            <input class="btn btn-danger" type="submit" name="submit_remove" value="<fmt:message key="jsp.dspace-admin.general.remove"/>"/>
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+                <input type="hidden" name="gID" value="<%= supervisors.get(j).getID() %>"/>
+                <input type="hidden" name="siID" value="<%= supervisedItems.get(i).getID() %>"/>
+                <input class="btn btn-danger" type="submit" name="submit_remove" value="<fmt:message key="jsp.dspace-admin.general.remove"/>"/>
             </form>
         </td>
     </tr> 
@@ -134,6 +136,7 @@
 <div class="pull-right">
 <%-- form to navigate to the "add supervisory settings" page --%> 
 <form method="post" action="">
+    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     <input class="btn btn-default" type="submit" name="submit_base" value="<fmt:message key="jsp.dspace-admin.supervise-list.back.button"/>"/>
     <input class="btn btn-success" type="submit" name="submit_add" value="<fmt:message key="jsp.dspace-admin.supervise-list.add.button"/>"/>
 </form>

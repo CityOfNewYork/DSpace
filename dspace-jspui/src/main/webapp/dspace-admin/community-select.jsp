@@ -68,7 +68,7 @@
     <h1><fmt:message key="jsp.dspace-admin.community-select.com"/></h1>
 
     <form method="post" action="">
-
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 				<div class="row col-md-4 col-md-offset-4">
                     <select class="form-control" size="12" name="community_id">
                         <%  for (int i = 0; i < communities.size(); i++) { %>

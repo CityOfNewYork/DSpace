@@ -87,8 +87,9 @@
        	</h1>
 
 
- <form action="<%= request.getContextPath() %>/tools/authorize" method="post"> 
-	<div class="row"> 
+ <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
+     <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+     <div class="row">
             <input type="hidden" name="collection_id" value="<%=collection.getID()%>" />
             <input class="btn btn-success col-md-2 col-md-offset-5"  type="submit" name="submit_collection_add_policy" value="<fmt:message key="jsp.dspace-admin.general.addpolicy"/>" />
     </div>
@@ -120,16 +121,18 @@
                </td>
                <td class="<%= row %>RowEvenCol">
                <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
-                    <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
-                    <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
-                    <input class="btn btn-primary" type="submit" name="submit_collection_edit_policy" value="<fmt:message key="jsp.dspace-admin.general.edit"/>" />
+                   <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+                   <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
+                   <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
+                   <input class="btn btn-primary" type="submit" name="submit_collection_edit_policy" value="<fmt:message key="jsp.dspace-admin.general.edit"/>" />
                </form>
                </td>
                <td class="<%= row %>RowOddCol">
                <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
-                    <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
-                    <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
-                    <input class="btn btn-danger" type="submit" name="submit_collection_delete_policy" value="<fmt:message key="jsp.dspace-admin.general.delete"/>" />
+                   <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
+                   <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
+                   <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
+                   <input class="btn btn-danger" type="submit" name="submit_collection_delete_policy" value="<fmt:message key="jsp.dspace-admin.general.delete"/>" />
                </form>
                </td>
             </tr>

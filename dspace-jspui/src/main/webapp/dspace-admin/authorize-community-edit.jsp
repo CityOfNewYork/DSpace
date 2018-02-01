@@ -88,6 +88,7 @@
   
 
   <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
+      <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     <div class="row">    
             <input type="hidden" name="community_id" value="<%=community.getID()%>" />
             <input class="btn btn-success col-md-2 col-md-offset-5" type="submit" name="submit_community_add_policy" value="<fmt:message key="jsp.dspace-admin.general.addpolicy"/>" />
@@ -120,6 +121,7 @@
              </td>
              <td headers="t4" class="<%= row %>RowEvenCol">
                 <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
                     <input type="hidden" name="community_id" value="<%= community.getID() %>" />
                     <input class="btn btn-primary" type="submit" name="submit_community_edit_policy" value="<fmt:message key="jsp.dspace-admin.general.edit"/>" />
@@ -127,6 +129,7 @@
              </td>
              <td headers="t5" class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/tools/authorize" method="post">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <input type="hidden" name="policy_id" value="<%= rp.getID() %>" />
                     <input type="hidden" name="community_id" value="<%= community.getID() %>" />
                     <input class="btn btn-danger" type="submit" name="submit_community_delete_policy" value="<fmt:message key="jsp.dspace-admin.general.delete"/>" />

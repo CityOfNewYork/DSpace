@@ -49,6 +49,7 @@
     <p class="alert alert-warning"><fmt:message key="jsp.dspace-admin.confirm-delete-format.warning"/></p>
 
     <form method="post" action="">
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         			<input type="hidden" name="format_id" value="<%= format.getID() %>"/>
 					<div class="btn-group">
                         <%-- <input type="submit" name="submit_confirm_delete" value="Delete"> --%>

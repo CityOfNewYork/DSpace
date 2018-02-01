@@ -74,6 +74,7 @@
     <dspace:item item="<%= item %>" />
 
     <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workflow_id" value="<%= workflowItem.getID() %>"/>
         <input type="hidden" name="step" value="<%= MyDashboardServlet.PREVIEW_TASK_PAGE %>"/>
 		<input class="btn btn-default col-md-2" type="submit" name="submit_cancel" value="<fmt:message key="jsp.mydspace.general.cancel"/>" />

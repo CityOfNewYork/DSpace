@@ -45,6 +45,7 @@
     </div>
     
     <form method="post" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="eperson_id" value="<%= eperson.getID() %>"/>
 		<div class="btn-group col-md-offset-5">
 			<%-- <input type="submit" name="submit_confirm_delete" value="Delete"> --%>

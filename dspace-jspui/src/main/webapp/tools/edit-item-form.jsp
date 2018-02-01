@@ -295,6 +295,7 @@
     {
 %>
                     <form method="post" action="<%= request.getContextPath() %>/tools/edit-item">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                         <input type="hidden" name="action" value="<%= EditItemServlet.START_WITHDRAW %>" />
                         <%-- <input type="submit" name="submit" value="Withdraw..."> --%>
@@ -306,6 +307,7 @@
     {
 %>
                     <form method="post" action="<%= request.getContextPath() %>/tools/edit-item">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                         <input type="hidden" name="action" value="<%= EditItemServlet.REINSTATE %>" />
                         <%-- <input type="submit" name="submit" value="Reinstate"> --%>
@@ -319,6 +321,7 @@
   {
 %>
                     <form method="post" action="<%= request.getContextPath() %>/tools/edit-item">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                         <input type="hidden" name="action" value="<%= EditItemServlet.START_DELETE %>" />
                         <%-- <input type="submit" name="submit" value="Delete (Expunge)..."> --%>
@@ -332,6 +335,7 @@
   {
 %>                     
 					<form method="post" action="<%= request.getContextPath() %>/tools/edit-item">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                         <input type="hidden" name="action" value="<%= EditItemServlet.START_MOVE_ITEM %>" />
 						<input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.tools.edit-item-form.move-item.button"/>"/>
@@ -344,6 +348,7 @@
     {
 %>
                     <form method="post" action="<%= request.getContextPath() %>/tools/edit-item">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                         <input type="hidden" name="action" value="<%= EditItemServlet.START_PRIVATING %>" />
                         <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.tools.edit-item-form.privating-w-confirm.button"/>"/>
@@ -354,6 +359,7 @@
     {
 %>
                     <form method="post" action="<%= request.getContextPath() %>/tools/edit-item">
+                        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                         <input type="hidden" name="item_id" value="<%= item.getID() %>" />
                         <input type="hidden" name="action" value="<%= EditItemServlet.PUBLICIZE %>" />
                         <input class="btn btn-default col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.tools.edit-item-form.publicize.button"/>"/>
@@ -371,6 +377,7 @@
      =========================================================== --%>
 							<form method="post"
 								action="<%= request.getContextPath() %>/tools/authorize">
+                                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 								<input type="hidden" name="handle"
 									value="<%= ConfigurationManager.getProperty("handle.prefix") %>" />
 								<input type="hidden" name="item_id" value="<%= item.getID() %>" />
@@ -391,6 +398,7 @@
      =========================================================== --%>
 							<form method="post"
 								action="<%= request.getContextPath() %>/tools/curate">
+                                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 								<input type="hidden" name="item_id" value="<%= item.getID() %>" />
 								<input class="btn btn-default col-md-12" type="submit"
 									name="submit_item_select"
@@ -704,9 +712,9 @@
        			<%
               		}
 				%>
-	
 
 
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="item_id" value="<%= item.getID() %>"/>
         <input type="hidden" name="action" value="<%= EditItemServlet.UPDATE_ITEM %>"/>
 					

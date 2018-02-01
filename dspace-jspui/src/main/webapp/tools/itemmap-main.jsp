@@ -127,6 +127,7 @@
     <p><fmt:message key="jsp.tools.itemmap-main.info5"/></p>
 
     <form method="post" class="standard10" action="">
+    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     <div class="form-group">
     	<div class="input-group col-md-10">
         	<input type="hidden" name="cid" value="<%=collection.getID()%>"/>

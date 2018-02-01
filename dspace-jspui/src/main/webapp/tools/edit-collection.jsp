@@ -174,6 +174,7 @@
 	</h3>    
 <% if(bDeleteButton) { %>
               <form class="col-md-4" method="post" action="">
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="action" value="<%= EditCommunitiesServlet.START_DELETE_COLLECTION %>" />
                 <input type="hidden" name="community_id" value="<%= community.getID() %>" />
                 <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
@@ -183,6 +184,7 @@
 </div>
 <div class="row">
 <form class="form-group" method="post" action="<%= request.getContextPath() %>/tools/edit-communities">
+    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 	<div class="col-md-8">
     
 <%-- ===========================================================

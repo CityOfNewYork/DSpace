@@ -21,12 +21,14 @@ import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dspace.app.util.SubmissionInfo;
 import org.dspace.app.util.SubmissionStepConfig;
+import org.dspace.app.util.Util;
 import org.dspace.app.webui.submit.JSPStepManager;
 import org.dspace.app.webui.util.FileUploadRequest;
 import org.dspace.app.webui.util.JSONUploadResponse;
@@ -262,8 +264,6 @@ public class SubmissionController extends DSpaceServlet
         {
             try
             {
-                    request = wrapMultipartRequest(request);
-                    
                     // check if the POST request was send by resumable.js
                     String resumableFilename = request.getParameter("resumableFilename");
                     
@@ -339,21 +339,21 @@ public class SubmissionController extends DSpaceServlet
                 if (ConfigurationManager.getBooleanProperty("webui.submit.upload.progressbar", true))
                 {
                     Gson gson = new Gson();
-                    // old browser need to see this response as html to work            
+                    // old browser need to see this response as html to work
                     response.setContentType("text/html");
                     JSONUploadResponse jsonResponse = new JSONUploadResponse();
                     jsonResponse.addUploadFileSizeLimitExceeded(
                             e.getActualSize(), e.getPermittedSize());
                     response.getWriter().print(gson.toJson(jsonResponse));
-                    response.flushBuffer();                    
+                    response.flushBuffer();
                 }
                 else
                 {
-                    JSPManager.showFileSizeLimitExceededError(request, response, e.getMessage(), e.getActualSize(), e.getPermittedSize());                    
+                    JSPManager.showFileSizeLimitExceededError(request, response, e.getMessage(), e.getActualSize(), e.getPermittedSize());
                 }
                 return;
             }
-            
+
             //also, upload any files and save their contents to Request (for later processing by UploadStep)
             uploadFiles(context, request);
         }
@@ -1383,6 +1383,10 @@ public class SubmissionController extends DSpaceServlet
         info = info + "<input type=\"hidden\" name=\"jsp\" value=\""
                    + jspDisplayed + "\"/>";
 
+        HttpSession session = request.getSession();
+        info = info + "<input type=\"hidden\" name=\"csrf_token\" value=\""
+                + session.getAttribute("csrfToken") + "\">";
+
         return info;
     }
 
@@ -1483,7 +1487,7 @@ public class SubmissionController extends DSpaceServlet
      * @throws ServletException
      *             if there are no more pages in this step
      */
-    private HttpServletRequest wrapMultipartRequest(HttpServletRequest request)
+    public static HttpServletRequest wrapMultipartRequest(HttpServletRequest request)
             throws ServletException, FileSizeLimitExceededException
     {
         HttpServletRequest wrappedRequest;
@@ -1626,7 +1630,7 @@ public class SubmissionController extends DSpaceServlet
             chunkFile.delete();
         }
         // if we don't have the chunk send a http status code 404
-        response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
     }
 
     // Resumable.js sends chunks of files using http post.

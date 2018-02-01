@@ -56,6 +56,7 @@
     </h1>
 
       <form action="<%=request.getContextPath()%>/dspace-admin/curate" method="post">
+          <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 <%
     if (groupOptions != null && !"".equals(groupOptions))
     {
@@ -86,6 +87,7 @@
    </form>
 
           <form method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
+              <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
             <input type="hidden" name="community_id" value="<%= communityID %>"/>
             <input type="hidden" name="action" value="<%=EditCommunitiesServlet.START_EDIT_COMMUNITY%>""/>
             <input class="btn btn-default" type="submit" value="<fmt:message key="jsp.dspace-admin.curate.return.community.button"/>" />

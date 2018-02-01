@@ -46,6 +46,7 @@
 	<p><fmt:message key="jsp.mydspace.reject-reason.text1"/></p>
     
     <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+		<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workflow_id" value="<%= workflowItem.getID() %>"/>
         <input type="hidden" name="step" value="<%= MyDashboardServlet.REJECT_REASON_PAGE %>"/>
         <textarea class="form-control" rows="6" cols="50" name="reason"></textarea>

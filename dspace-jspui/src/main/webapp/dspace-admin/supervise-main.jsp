@@ -37,6 +37,7 @@
 <div align="center" />
 <%-- form to navigate to any of the three options available --%>
 <form method="post" action="">
+    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
     <div class="row">
     	<input class="btn btn-primary col-md-6 col-md-offset-3" type="submit" name="submit_add" value="<fmt:message key="jsp.dspace-admin.supervise-main.add.button"/>"/>
     </div>

@@ -325,10 +325,12 @@
         %>
         <p align="center">
             <form method="post" action="">
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="type" value="confirm" />
                 <input class="btn btn-default" type="submit" name="submit" value="<fmt:message key="jsp.dspace-admin.metadataimport.apply"/>" />
             </form>
             <form method="post" action="">
+                <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                 <input type="hidden" name="type" value="cancel" />
                 <input class="btn btn-default" type="submit" name="submit" value="<fmt:message key="jsp.dspace-admin.general.cancel"/>" />
             </form>

@@ -53,7 +53,7 @@
 <p class="help-block"><fmt:message key="jsp.dspace-admin.supervise-link.choose"/></p>
 
 <form method="post" action="">
-
+    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 <div class="input-group">
 <%-- Select the group to supervise --%>
     

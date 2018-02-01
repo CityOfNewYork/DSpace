@@ -39,7 +39,7 @@
     <h1><fmt:message key="jsp.dspace-admin.metadataimport.title"/></h1>
 
     <form method="post" enctype="multipart/form-data" action="">
-
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <%= message %>
 
         <p align="center">

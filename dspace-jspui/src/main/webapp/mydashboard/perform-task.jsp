@@ -77,6 +77,7 @@
     <p>&nbsp;</p>
 
     <form action="<%= request.getContextPath() %>/mydashboard" method="post">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input type="hidden" name="workflow_id" value="<%= workflowItem.getID() %>"/>
         <input type="hidden" name="step" value="<%= MyDashboardServlet.PERFORM_TASK_PAGE %>"/>
 <%

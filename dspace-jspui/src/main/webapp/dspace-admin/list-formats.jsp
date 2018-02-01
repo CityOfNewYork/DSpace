@@ -101,7 +101,7 @@
         <tr>
             <td>
                 <form class="form-inline" method="post" action="">
-
+                    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
                     <span class="col-md-1"><%= format.getID() %></span>
                     <div class="form-group">
                         <label class="sr-only" for="mimetype">
@@ -211,7 +211,7 @@
     </table>
 
     <form method="post" action="">
-
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <input class="btn btn-success col-md-offset-5"
                type="submit"
                name="submit_add"

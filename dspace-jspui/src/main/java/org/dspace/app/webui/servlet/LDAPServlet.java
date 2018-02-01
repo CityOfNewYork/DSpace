@@ -8,12 +8,14 @@
 package org.dspace.app.webui.servlet;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 
 import org.apache.log4j.Logger;
@@ -52,6 +54,13 @@ public class LDAPServlet extends DSpaceServlet
     {
         // check if ldap is enables and forward to the correct login form        
         boolean ldap_enabled = ConfigurationManager.getBooleanProperty("authentication-ldap", "enable");
+
+        // Generate CSRF token and add to session
+        HttpSession session = request.getSession();
+        SecureRandom random = new SecureRandom();
+        String randomLong = ""+random.nextLong();
+        session.setAttribute("csrfToken", randomLong);
+
         if (ldap_enabled)
         {
             JSPManager.showJSP(request, response, "/login/ldap.jsp");

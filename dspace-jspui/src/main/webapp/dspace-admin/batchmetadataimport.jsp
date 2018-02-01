@@ -61,7 +61,7 @@
 %>
 
     <form method="post" enctype="multipart/form-data" action="">
-	
+		<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 
 		<div class="form-group">
 			<label for="file"><fmt:message key="jsp.dspace-admin.batchmetadataimport.selectfile"/></label>

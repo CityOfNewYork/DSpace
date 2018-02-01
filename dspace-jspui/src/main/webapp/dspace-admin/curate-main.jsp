@@ -53,7 +53,7 @@
 <%@ include file="/tools/curate-message.jsp" %>
 
 <form action="<%=request.getContextPath()%>/dspace-admin/curate" method="post">
-
+    <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
   <h1><fmt:message key="jsp.dspace-admin.curate.main.heading"/></h1>
 
 	<div class="input-group">

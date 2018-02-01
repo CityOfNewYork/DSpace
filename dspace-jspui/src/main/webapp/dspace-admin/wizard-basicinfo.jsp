@@ -41,6 +41,7 @@
         </h1>
 
     <form action="<%= request.getContextPath() %>/tools/collection-wizard" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 
 				<div class="form-group"> 
 	           		<label for="short_description"><fmt:message key="jsp.dspace-admin.wizard-basicinfo.name"/></label>

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.UUID;
+import java.security.SecureRandom;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -287,6 +288,10 @@ public class Authenticate
 
             // Give the user a new session
             session = request.getSession();
+
+            SecureRandom random = new SecureRandom();
+            String randomLong = ""+random.nextLong();
+            session.setAttribute("csrfToken", randomLong);
 
             // Restore the session locale
             if (sessionLocale != null)

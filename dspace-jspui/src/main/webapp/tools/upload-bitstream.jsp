@@ -47,6 +47,7 @@
 	<p class="alert alert-info"><fmt:message key="jsp.tools.upload-bitstream.info"/></p>
     <%}%>
     <form method="post" enctype="multipart/form-data" action="">
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
         <div class="container row">        	
             <input class="form-control" type="file" size="40" name="file"/>
         </div>

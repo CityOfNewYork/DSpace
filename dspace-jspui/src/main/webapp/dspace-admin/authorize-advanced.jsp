@@ -83,7 +83,7 @@
 	<div class="alert alert-info"><fmt:message key="jsp.dspace-admin.authorize-advanced.text"/></div>
 
     <form method="post" action="">
-         
+        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
             <%-- <td>Collection:</td> --%>
 		<div class="input-group">
             <span class="col-md-2"><label for="tcollection"><fmt:message key="jsp.dspace-admin.authorize-advanced.col"/></label></span>

@@ -167,7 +167,7 @@
                     the New
                     York City government’s ongoing effort to be open and accessible for all citizens. The <a
                             href="http://library.amlegal.com/nxt/gateway.dll/New%20York/charter/newyorkcitycharter/chapter49officersandemployees?f=templates$fn=default.htm$3.0$vid=amlegal:newyork_ny$anc=JD_1133"
-                            target="_blank">New York City Charter, Section 1133</a>, requires agencies to submit copies
+                            target="_blank" rel="noopener noreferrer">New York City Charter, Section 1133</a>, requires agencies to submit copies
                     of any publication to us for permanent access and
                     storage.</p>
         <p>To find publications, search by keyword, such as agency name, subject, title, report type, or date. Once you

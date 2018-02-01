@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
             		<td class="standard" align="right"><strong><fmt:message key="jsp.components.ldap-form.password"/></strong></td>
-                        <td><input tabindex="2" type="password" name="login_password"></td>
+                        <td><input tabindex="2" type="password" name="login_password" autocomplete="off"></td>
                     </tr>
                     <tr>
                         <td align="center" colspan="2">

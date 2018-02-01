@@ -30,6 +30,7 @@
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
 <%@ page import="org.dspace.content.Collection" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -73,7 +74,7 @@
                     <select class="form-control" size="12" name="collection_id">
                         <%  for (int i = 0; i < collections.size(); i++) { %>
                             <option value="<%= collections.get(i).getID()%>">
-                                <%= collections.get(i).getName()%>
+                                <%= Utils.addEntities(collections.get(i).getName())%>
                             </option>
                         <%  } %>
                     </select>

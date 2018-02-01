@@ -34,6 +34,7 @@
 <%@ page import="org.dspace.content.Collection"  %>
 <%@ page import="org.dspace.content.Item"        %>
 <%@ page import="org.dspace.core.ConfigurationManager" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="java.util.UUID" %>
 
 <%
@@ -60,7 +61,7 @@
 
     <%--  <p>Collection: "<%=collection.getMetadata("name")%>"</p> --%>
     <h2><fmt:message key="jsp.tools.itemmap-main.collection">
-        <fmt:param><%=collection.getName()%></fmt:param>
+        <fmt:param><%=Utils.addEntities(collection.getName())%></fmt:param>
     </fmt:message></h2>
 	 
     <%-- <p>There are <%=count_native%> items owned by this collection, and

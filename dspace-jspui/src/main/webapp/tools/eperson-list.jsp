@@ -114,11 +114,11 @@
 	String jumpLink;
 	if (search != null && !search.equals(""))
 	{
-		jumpLink = request.getContextPath() + "/tools/eperson-list?multiple=" + multiple + "&sortby=" + sortByParam + "&first="+first+"&search="+search+"&offset=";
+		jumpLink = Utils.addEntities(request.getContextPath() + "/tools/eperson-list?multiple=" + multiple + "&sortby=" + sortByParam + "&first="+first+"&search="+search+"&offset=");
 	}
 	else
 	{
-		jumpLink = request.getContextPath() + "/tools/eperson-list?multiple=" + multiple + "&sortby=" + sortByParam + "&first=";
+		jumpLink = Utils.addEntities(request.getContextPath() + "/tools/eperson-list?multiple=" + multiple + "&sortby=" + sortByParam + "&first=");
 	}
 	String sortLink = request.getContextPath() + "/tools/eperson-list?multiple=" + multiple + "&first=" + first + "&sortby=";
 %>
@@ -184,7 +184,7 @@ function clearEPeople()
 	    <input type="hidden" name="sortby" value="<%= sortBy %>" />
 	    <input type="hidden" name="multiple" value="<%= multiple %>" />    
 	    <label for="search"><fmt:message key="jsp.tools.eperson-list.search.query"/></label>
-	    <input class="form-control" style="width:200px;"type="text" name="search" value="<%= search %>"/>
+	    <input class="form-control" style="width:200px;"type="text" name="search" value="<%= Utils.addEntities(search) %>"/>
 	    <input class="btn btn-success" type="submit" value="<fmt:message key="jsp.tools.eperson-list.search.submit" />" />
 	<%
 	    if (search != null && !search.equals("")){   %>

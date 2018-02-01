@@ -21,6 +21,7 @@
 <%@ page import="java.util.UUID"            %>
 <%@ page import="java.util.ArrayList"            %>
 <%@ page import="org.dspace.content.Collection"            %>
+<%@ page import="org.dspace.core.Utils"            		   %>
 
 <%
 
@@ -135,7 +136,7 @@
  		for (Collection collection : collections){
 				String selected = ((owningCollectionID != null) && (owningCollectionID.equals(collection.getID()))) ? "selected" : "";
 %> 			
- 				<option <%= selected %> value="<%= collection.getID() %>"><%= collection.getName() %></option>	
+ 				<option <%= selected %> value="<%= collection.getID() %>"><%= Utils.addEntities(collection.getName()) %></option>
  <%
  		}
  %>           	
@@ -150,7 +151,7 @@
  		for (Collection collection : collections){
 			String selected = ((otherCollections != null) && (otherCollections.contains(""+collection.getID()))) ? "selected" : "";
 %> 				
- 			<option <%= selected %> value="<%= collection.getID() %>"><%= collection.getName() %></option>	
+ 			<option <%= selected %> value="<%= collection.getID() %>"><%= Utils.addEntities(collection.getName()) %></option>
  <%
  		}
  %>           	

@@ -30,6 +30,7 @@
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 
 <%@ page import="org.dspace.content.Community" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -73,7 +74,7 @@
                     <select class="form-control" size="12" name="community_id">
                         <%  for (int i = 0; i < communities.size(); i++) { %>
                             <option value="<%= communities.get(i).getID()%>">
-                                <%= communities.get(i).getName()%>
+                                <%= Utils.addEntities(communities.get(i).getName())%>
                             </option>
                         <%  } %>
                     </select>

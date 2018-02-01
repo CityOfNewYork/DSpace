@@ -17,6 +17,7 @@ import javax.servlet.jsp.jstl.fmt.LocaleSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import org.dspace.content.Community;
+import org.dspace.core.Utils;
 
 /**
  * Tag for display a list of communities
@@ -57,7 +58,7 @@ public class CommunityListTag extends TagSupport
             for (Community com : communities)
             {
                 // name
-                String name = com.getName();
+                String name = Utils.addEntities(com.getName());
 
                 // first and only column is 'name'
                 out.print("<tr><td headers=\"t5\" class=\"" + row + "RowEvenCol\">");

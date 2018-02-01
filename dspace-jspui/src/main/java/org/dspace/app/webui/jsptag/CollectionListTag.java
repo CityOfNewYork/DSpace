@@ -17,6 +17,7 @@ import javax.servlet.jsp.jstl.fmt.LocaleSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import org.dspace.content.Collection;
+import org.dspace.core.Utils;
 
 /**
  * Tag for display a list of collections
@@ -57,7 +58,7 @@ public class CollectionListTag extends TagSupport
             for (Collection col : collections)
             {
                 // name
-                String name = col.getName();
+                String name = Utils.addEntities(col.getName());
 
                 // first and only column is 'name'
                 out.print("<tr><td headers=\"t4\" class=\"" + row + "RowEvenCol\">");

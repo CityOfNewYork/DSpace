@@ -39,6 +39,7 @@
 
 <%@ page import="org.dspace.content.Collection"       %>
 <%@ page import="org.dspace.core.Constants"           %>
+<%@ page import="org.dspace.core.Utils"           %>
 <%@ page import="org.dspace.eperson.Group"            %>
 
 <%
@@ -90,7 +91,7 @@
             <span class="col-md-10">
                 <select class="form-control" size="10" name="collection_id" id="tcollection">
                     <%  for(int i = 0; i < collections.size(); i++ ) { %>
-                            <option value="<%= collections.get(i).getID() %>"> <%= collections.get(i).getName()%>
+                            <option value="<%= collections.get(i).getID() %>"> <%= Utils.addEntities(collections.get(i).getName())%>
                             </option>
                         <%  } %>
                 </select>
@@ -114,7 +115,7 @@
             <span class="col-md-10">
             	<select class="form-control" size="10" name="group_id" id="tgroup_id">
                     <%  for(int i = 0; i < groups.size(); i++ ) { %>
-                            <option value="<%= groups.get(i).getID() %>"> <%= groups.get(i).getName()%>
+                            <option value="<%= groups.get(i).getID() %>"> <%= Utils.addEntities(groups.get(i).getName())%>
                             </option>
                         <%  } %>
                 </select>

@@ -63,7 +63,7 @@
     for (int i = 0; i < groups.size(); i++)
     {
 %>
-                <option value="<%= groups.get(i).getID() %>"><%= groups.get(i).getName() %></option>
+                <option value="<%= groups.get(i).getID() %>"><%= Utils.addEntities(groups.get(i).getName()) %></option>
 <%
     }
 %>
@@ -114,7 +114,7 @@
 					if (StringUtils.isNotBlank(title))
 					{
 %>
-						<%= title %>
+						<%= Utils.addEntities(title) %>
 <%
 					}
 					else
@@ -126,7 +126,7 @@
 %>
                     </td>
                     <td class="<%= row %>RowEvenCol">
-                        <%= workspaceItems.get(i).getCollection().getName() %>
+                        <%= Utils.addEntities(workspaceItems.get(i).getCollection().getName()) %>
                     </td>
                     <td class="<%= row %>RowOddCol" align="center">
                         <input type="radio" name="TargetWSItem" value="<%= workspaceItems.get(i).getID() %>"/>

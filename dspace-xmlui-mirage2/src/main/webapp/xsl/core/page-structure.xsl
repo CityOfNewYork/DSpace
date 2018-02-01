@@ -703,7 +703,7 @@
                     <hr/>
                     <div class="col-xs-7 col-sm-8">
                         <div>
-                            <a href="http://www.dspace.org/" target="_blank">DSpace software</a> copyright&#160;&#169;&#160;2002-2016&#160; <a href="http://www.duraspace.org/" target="_blank">DuraSpace</a>
+                            <a href="http://www.dspace.org/" target="_blank" rel="noopener noreferrer">DSpace software</a> copyright&#160;&#169;&#160;2002-2016&#160; <a href="http://www.duraspace.org/" target="_blank" rel="noopener noreferrer">DuraSpace</a>
                         </div>
                         <div class="hidden-print">
                             <a>
@@ -729,7 +729,7 @@
                         <div class="pull-right">
                             <span class="theme-by">Theme by&#160;</span>
                             <br/>
-                            <a title="Atmire NV" target="_blank" href="http://atmire.com">
+                            <a title="Atmire NV" target="_blank" rel="noopener noreferrer" href="http://atmire.com">
                                 <img alt="Atmire NV" src="{concat($theme-path, 'images/atmire-logo-small.svg')}"/>
                             </a>
                         </div>

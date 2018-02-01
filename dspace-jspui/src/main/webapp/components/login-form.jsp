@@ -27,7 +27,7 @@
         <div class="form-group">
             <label class="col-md-offset-3 col-md-2 control-label" for="tlogin_password"><fmt:message key="jsp.components.login-form.password"/></label>
             <div class="col-md-3">
-            	<input class="form-control" type="password" name="login_password" id="tlogin_password" tabindex="2" />
+            	<input class="form-control" type="password" name="login_password" id="tlogin_password" tabindex="2" autocomplete="off"/>
             </div>
         </div>
         <div class="row">

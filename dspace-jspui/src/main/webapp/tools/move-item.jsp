@@ -13,6 +13,7 @@
 	
 <%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.content.Item" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.app.webui.servlet.admin.EditItemServlet" %>
 <%@ page import="java.util.List" %>
 
@@ -31,7 +32,7 @@
 			<input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
 			<div class="form-group">   		
 				  <label><fmt:message key="jsp.tools.move-item.item.name.msg"/></label>
-			      <%=item.getName()%></font>
+			      <%=Utils.addEntities(item.getName())%></font>
 			</div>
 		  <div class="form-group">
 		  	<div class="input-group">
@@ -43,7 +44,7 @@
         for (int i = 0; i < linkedCollections.size(); i++)
         {
 %>
-            <option value="<%= linkedCollections.get(i).getID() %>"><%= linkedCollections.get(i).getName() %></option>
+            <option value="<%= linkedCollections.get(i).getID() %>"><%= Utils.addEntities(linkedCollections.get(i).getName()) %></option>
 <%
         }
 %>
@@ -61,7 +62,7 @@
         for (int i = 0; i < notLinkedCollections.size(); i++)
         {
 %>
-            <option value="<%= notLinkedCollections.get(i).getID() %>"><%= notLinkedCollections.get(i).getName() %></option>
+            <option value="<%= notLinkedCollections.get(i).getID() %>"><%= Utils.addEntities(notLinkedCollections.get(i).getName()) %></option>
 <%
         }
 %>

@@ -949,7 +949,7 @@ public class ItemTag extends TagSupport
             		out.print("</td><td headers=\"t3\" class=\"standard\">");
                     out.print(UIUtil.formatFileSize(primaryBitstream.getSize()));
                     out.print("</td><td headers=\"t4\" class=\"standard\">");
-            		out.print(primaryBitstream.getFormatDescription(context));
+            		out.print(Utils.addEntities(primaryBitstream.getFormatDescription(context)));
             		out
                         .print("</td><td class=\"standard\"><a class=\"btn btn-primary\" target=\"_blank\" href=\"");
             		out.print(request.getContextPath());
@@ -1107,7 +1107,7 @@ public class ItemTag extends TagSupport
                                 out.print(UIUtil.formatFileSize(b.getSize()));
             					out
                                 .print("</td><td headers=\"t4\" class=\"standard\">");
-            					out.print(b.getFormatDescription(context));
+            					out.print(Utils.addEntities(b.getFormatDescription(context)));
             					out
                                     .print("</td><td class=\"standard\" align=\"center\">");
 

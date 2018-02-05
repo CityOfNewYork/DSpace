@@ -1,4 +1,5 @@
 <%@ page import="org.dspace.app.webui.util.CurateTaskResult" %>
+<%@ page import="org.dspace.core.Utils" %>
 
 <%--
 
@@ -20,7 +21,7 @@
     <div class="alert alert-<%= resultClass %>">
       <b>
         <fmt:message key="jsp.tools.curate.task.name">
-          <fmt:param value="<%= result.getTask() %>"/>
+          <fmt:param value="<%= Utils.addEntities(result.getTask()) %>"/>
         </fmt:message>
       </b>
 <%

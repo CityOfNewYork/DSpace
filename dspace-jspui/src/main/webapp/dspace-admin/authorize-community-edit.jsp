@@ -40,6 +40,7 @@
 <%@ page import="org.dspace.authorize.ResourcePolicy" %>
 <%@ page import="org.dspace.content.Community"        %>
 <%@ page import="org.dspace.core.Constants"           %>
+<%@ page import="org.dspace.core.Utils"               %>
 <%@ page import="org.dspace.eperson.EPerson"          %>
 <%@ page import="org.dspace.eperson.Group"            %>
 <%@ page import="org.dspace.authorize.factory.AuthorizeServiceFactory" %>
@@ -79,7 +80,7 @@
                nocache="true">
   
 	<h1><fmt:message key="jsp.dspace-admin.authorize-community-edit.policies">
-        <fmt:param><%= community.getName() %></fmt:param>
+        <fmt:param><%= Utils.addEntities(community.getName()) %></fmt:param>
         <fmt:param>hdl:<%= community.getHandle() %></fmt:param>
         <fmt:param><%=community.getID()%></fmt:param>
     </fmt:message>

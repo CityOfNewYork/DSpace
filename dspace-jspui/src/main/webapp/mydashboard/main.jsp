@@ -137,7 +137,7 @@
 %>
                 </td>
                 <td headers="t2" class="<%= row %>RowEvenCol"><%= Utils.addEntities(title) %></td>
-                <td headers="t3" class="<%= row %>RowOddCol"><%= owned.get(i).getCollection().getName() %></td>
+                <td headers="t3" class="<%= row %>RowOddCol"><%= Utils.addEntities(owned.get(i).getCollection().getName()) %></td>
                 <td headers="t4" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                 <!-- <td headers="t5" class="<%= row %>RowOddCol"></td> -->
                 <td headers="t5" class="<%= row %>RowEvenCol">
@@ -204,7 +204,7 @@
 %>
                     </td>
                     <td headers="t7" class="<%= row %>RowEvenCol"><%= Utils.addEntities(title) %></td>
-                    <td headers="t8" class="<%= row %>RowOddCol"><%= pooled.get(i).getCollection().getName() %></td>
+                    <td headers="t8" class="<%= row %>RowOddCol"><%= Utils.addEntities(pooled.get(i).getCollection().getName()) %></td>
                     <td headers="t9" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                     <td class="<%= row %>RowOddCol">
                         <form action="<%= request.getContextPath() %>/mydashboard" method="post">

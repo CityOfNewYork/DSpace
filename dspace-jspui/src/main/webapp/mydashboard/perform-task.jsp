@@ -24,6 +24,7 @@
 <%@ page import="org.dspace.app.webui.servlet.MyDashboardServlet" %>
 <%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.content.Item" %>
+<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
 <%@ page import="org.dspace.workflowbasic.BasicWorkflowItem" %>
 <%@ page import="org.dspace.workflowbasic.service.BasicWorkflowService" %>
@@ -50,7 +51,7 @@
     {
 %>
 	<p><fmt:message key="jsp.mydspace.perform-task.text1">
-        <fmt:param><%= collection.getName() %></fmt:param>
+        <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
          </fmt:message></p>
 <%
     }
@@ -58,7 +59,7 @@
     {
 %>
 	<p><fmt:message key="jsp.mydspace.perform-task.text3">
-        <fmt:param><%= collection.getName() %></fmt:param>
+        <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
 	</fmt:message></p>
 <%
     }
@@ -66,7 +67,7 @@
     {
 %>
 	<p><fmt:message key="jsp.mydspace.perform-task.text4">
-        <fmt:param><%= collection.getName() %></fmt:param>
+        <fmt:param><%= Utils.addEntities(collection.getName()) %></fmt:param>
     </fmt:message></p>
 <%
     }

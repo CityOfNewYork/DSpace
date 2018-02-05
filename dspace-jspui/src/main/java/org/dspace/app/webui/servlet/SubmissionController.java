@@ -43,6 +43,7 @@ import org.dspace.content.service.WorkspaceItemService;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
 import org.dspace.core.LogManager;
+import org.dspace.core.Utils;
 import org.dspace.submit.AbstractProcessingStep;
 import org.dspace.submit.step.UploadStep;
 import org.dspace.workflow.WorkflowItem;
@@ -1381,7 +1382,7 @@ public class SubmissionController extends DSpaceServlet
         // save the current JSP name to a hidden variable
         String jspDisplayed = JSPStepManager.getLastJSPDisplayed(request);
         info = info + "<input type=\"hidden\" name=\"jsp\" value=\""
-                   + jspDisplayed + "\"/>";
+                   + Utils.addEntities(jspDisplayed) + "\"/>";
 
         HttpSession session = request.getSession();
         info = info + "<input type=\"hidden\" name=\"csrf_token\" value=\""

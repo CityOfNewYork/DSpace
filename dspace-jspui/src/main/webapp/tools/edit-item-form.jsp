@@ -491,7 +491,7 @@
                                 dcv.get(i), collection).toString()
                     %>
                     <% } else { %>
-                        <textarea class="form-control" id="value_<%= key %>_<%= sequenceNumber %>" name="value_<%= key %>_<%= sequenceNumber %>" rows="3" cols="50"><%= dcv.get(i).getValue() %></textarea>
+                        <textarea class="form-control" id="value_<%= key %>_<%= sequenceNumber %>" name="value_<%= key %>_<%= sequenceNumber %>" rows="3" cols="50"><%= Utils.addEntities(dcv.get(i).getValue()) %></textarea>
                     <% } %>
                 </td>
                 <td headers="t4" class="<%= row %>RowOddCol">
@@ -606,7 +606,7 @@
                     <input class="form-control" type="text" name="bitstream_name_<%= key %>" value="<%= ((bitstream).getName() == null ? "" : Utils.addEntities(bitstream.getName())) %>"/>
                 </td>
                 <td headers="t13" class="<%= row %>RowEvenCol">
-                    <input class="form-control" type="text" name="bitstream_source_<%= key %>" value="<%= ((bitstream).getSource() == null ? "" : bitstream.getSource()) %>"/>
+                    <input class="form-control" type="text" name="bitstream_source_<%= key %>" value="<%= ((bitstream).getSource() == null ? "" : Utils.addEntities(bitstream.getSource())) %>"/>
                 </td>
                 <td headers="t14" class="<%= row %>RowOddCol">
                     <input class="form-control" type="text" name="bitstream_description_<%= key %>" value="<%= ((bitstream).getDescription() == null ? "" : Utils.addEntities(bitstream.getDescription())) %>"/>

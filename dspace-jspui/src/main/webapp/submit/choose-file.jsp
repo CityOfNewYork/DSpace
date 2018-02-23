@@ -372,7 +372,7 @@
             If this submission has more than one part, please number each part in sequence in the Section field. If the parts are not numbered, please add a short title to the Section field for each part.
         </p>
         <p>
-            Maximum file size for uploads is 20 Mb. Contact the Municipal Library for help with larger files.
+            Maximum file size for uploads is 20 MB. Contact the Municipal Library for help with larger files.
         </p>
 
         <div id="file-invalid-char-warning" class="alert alert-warning" hidden>

@@ -16,6 +16,12 @@ mv /etc/opt/rh/rh-nginx18/nginx/nginx.conf /etc/opt/rh/rh-nginx18/nginx/nginx.co
 # SymLink nginx.conf
 ln -s /vagrant/build_scripts/web_setup/nginx_conf/nginx.conf /etc/opt/rh/rh-nginx18/nginx/nginx.conf
 
+# Add nginx user to vagrant group so nginx has access to static files
+usermod -a -G vagrant nginx
+
+# Change permissions of /home/vagrant so nginx has access to static files
+chmod 710 /home/vagrant/
+
 # Create ssl certs
 mkdir /home/vagrant/ssl
 openssl req \

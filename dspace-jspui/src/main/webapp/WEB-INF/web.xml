@@ -341,6 +341,11 @@
   </servlet>
 
   <servlet>
+    <servlet-name>saml-login</servlet-name>
+    <servlet-class>org.dspace.app.webui.servlet.SAMLServlet</servlet-class>
+  </servlet>
+
+  <servlet>
     <servlet-name>certificate-login</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.X509CertificateServlet</servlet-class>
   </servlet>
@@ -684,6 +689,11 @@
   <servlet-mapping>
     <servlet-name>ldap-login</servlet-name>
     <url-pattern>/ldap-login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>saml-login</servlet-name>
+    <url-pattern>/saml-login</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

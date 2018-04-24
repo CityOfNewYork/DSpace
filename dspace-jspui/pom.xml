@@ -133,6 +133,31 @@
     		<artifactId>opencloud</artifactId>
     		<version>0.3</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.security.extensions</groupId>
+            <artifactId>spring-security-saml2-core</artifactId>
+            <version>1.0.3.RELEASE</version>
+            <exclusions>
+                <!-- A more recent version is retrieved from another dependency -->
+                <exclusion>
+                    <groupId>xalan</groupId>
+                    <artifactId>serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>joda-time</groupId>
+                    <artifactId>joda-time</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-expression</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

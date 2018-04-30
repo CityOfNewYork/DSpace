@@ -35,6 +35,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.saml.SAMLCredential;
 
 /**
+ * SAML authentication servlet.
  *
  */
 public class SAMLServlet extends DSpaceServlet {
@@ -83,6 +84,9 @@ public class SAMLServlet extends DSpaceServlet {
 
     private static final String ALGORITHM = "HmacSHA256";
 
+    /**
+     * Calculate the authentication signature using HMAC-SHA256.
+     */
     private static String getSignature(String value, String key) {
         try {
             // Get an hmac_sha256 key from the raw key bytes
@@ -106,6 +110,14 @@ public class SAMLServlet extends DSpaceServlet {
         }
     }
 
+    /**
+     * Generate a string that can be signed to produce an authentication signature.
+     *
+     * @param method HTTP method
+     * @param endpoint path part of HTTP Request-URI
+     * @param params query string parameters
+     * @return String of authentication signature (StringToSign)
+     */
     private static String getStringToSign(String method, String endpoint, Map<String, String> params) {
         StringBuilder stringBuilder = new StringBuilder();
         // Use TreeMap to sort params (Map) on its keys
@@ -117,6 +129,15 @@ public class SAMLServlet extends DSpaceServlet {
         return stringBuilder.toString();
     }
 
+    /**
+     * Build URI using URIBuilder.
+     *
+     * @param scheme URL scheme
+     * @param host host name
+     * @param path URL path
+     * @param params query string parameters
+     * @return
+     */
     public static URI getURI(String scheme, String host, String path, List<NameValuePair> params) {
         URIBuilder builder = new URIBuilder();
         builder.setScheme(scheme)
@@ -134,6 +155,16 @@ public class SAMLServlet extends DSpaceServlet {
         }
     }
 
+    /**
+     * Perform a request on an NYC.ID Web Services endpoint.
+     * "username" and "signature" are added to the specified params.
+     *
+     * @param endpoint web services endpoint (e.g. "/account/validateEmail.html")
+     * @param paramsMap request parameters excluding "userName" and "signature"
+     * @param method HTTP method
+     * @return {@link WebServicesResponse} of request
+     * @throws IOException
+     */
     private static WebServicesResponse webServicesRequest(String endpoint, Map<String, String> paramsMap, String method)
             throws IOException {
         log.info(String.format("NYC.ID Web Services Request: %s %s", method, endpoint));
@@ -152,9 +183,11 @@ public class SAMLServlet extends DSpaceServlet {
 
         URI uri = getURI(WEB_SERVICES_SCHEME, WEB_SERVICES_HOST, endpoint, paramsList);
         URL url = new URL(uri.toString());
+
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod(method);
 
+        // Build string of response body
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader in = new BufferedReader(new InputStreamReader(
                 connection.getInputStream()));
@@ -165,12 +198,33 @@ public class SAMLServlet extends DSpaceServlet {
         return new WebServicesResponse(connection.getResponseCode(), stringBuilder.toString());
     }
 
+    /**
+     * Log an error message if the specified's status code is not 200.
+     *
+     * @param response {@link WebServicesResponse} of web service request
+     * @param message error message
+     */
     private static void checkWebServicesResponse(WebServicesResponse response, String message) {
         if (response.getStatusCode() != 200) {
             log.error(String.format("%s\n%s", message, response.getResponseString()));
         }
     }
 
+    /**
+     * If the user did not log in via NYC.ID (i.e. user_type is not "EDIRSSO"),
+     * no email validation is necessary.
+     *
+     * If the email validation flag is "FALSE", the Email Validation Web Service
+     * is invoked.
+     *
+     * If the return validation status equals False, return string of url to the
+     * Email Confirmation Required page where the user can request a validation
+     * email.
+     *
+     * @param credential SAML entities
+     * @return String of url or null
+     * @throws IOException
+     */
     private static String validateEmail(SAMLCredential credential) throws IOException {
         String redirectURL = null;
         if (credential.getAttributeAsString("userType").equals("EDIRSSO") &&
@@ -204,6 +258,22 @@ public class SAMLServlet extends DSpaceServlet {
         return redirectURL;
     }
 
+    /**
+     * If the user has logged in using the NYC Employees button
+     * (i.e. userType is "Saml2In: NYC Employees"), no TOU
+     * acceptance is necessary.
+     *
+     * Otherwise, invoke the Terms of Use Web Service to determine
+     * if the user has accepted the latest TOU version.
+     *
+     * If the return TOU status equals False, return string of url
+     * to the NYC.ID TOU page where the user can accept the latest
+     * terms of use.
+     *
+     * @param credential SAML entities
+     * @return String of url or null
+     * @throws IOException
+     */
     private static String acceptTermsOfUse(SAMLCredential credential) throws IOException {
         String redirectURL = null;
         if (!credential.getAttributeAsString("userType").equals("Saml2In:NYC Employees")) {
@@ -234,6 +304,12 @@ public class SAMLServlet extends DSpaceServlet {
         return redirectURL;
     }
 
+    /**
+     * Create an enrollment record for a specified user.
+     *
+     * @param credential SAML entities
+     * @throws IOException
+     */
     private static void enrollment(SAMLCredential credential) throws IOException {
         Map<String, String> map = new HashMap<>();
         map.put("guid", credential.getAttributeAsString("guid"));
@@ -244,8 +320,20 @@ public class SAMLServlet extends DSpaceServlet {
         checkWebServicesResponse(webServicesResponse, ENROLLMENT_FAILURE);
     }
 
+    /**
+     * After successful SAML authentication, invalidate the current
+     * session and copy the request attributes into a new session.
+     *
+     * Since Spring's SessionRegistry is not being used, we cannot
+     * take advantage of session-management.
+     * See https://stackoverflow.com/a/28611119
+     *
+     * @param request HTTP request
+     */
     private static void regenerateSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
+
+        // Store current request attributes in a Map
         Enumeration keys = session.getAttributeNames();
         HashMap<String, Object> hashMap = new HashMap<>();
         while (keys.hasMoreElements())
@@ -254,8 +342,14 @@ public class SAMLServlet extends DSpaceServlet {
             hashMap.put(key, session.getAttribute(key));
             session.removeAttribute(key);
         }
+
+        // Invalidate session
         session.invalidate();
+
+        // Give the user a new session
         session = request.getSession(true);
+
+        // Restore request attributes from previous session
         for (Map.Entry entry:hashMap.entrySet())
         {
             session.setAttribute((String)entry.getKey(), entry.getValue());
@@ -263,19 +357,38 @@ public class SAMLServlet extends DSpaceServlet {
         }
     }
 
+    /**
+     * Nested custom class to store the web service request's response
+     * status code and response body.
+     */
     private static class WebServicesResponse {
         private int statusCode;
         private String responseString;
 
+        /**
+         * Create a new WebServiceResponse object
+         * @param statusCode response status code
+         * @param responseString response body
+         */
         private WebServicesResponse(int statusCode, String responseString) {
             this.statusCode = statusCode;
             this.responseString = responseString;
         }
 
+        /**
+         * Get the status code.
+         *
+         * @return int status code
+         */
         private int getStatusCode() {
             return statusCode;
         }
 
+        /**
+         * Get the response body.
+         *
+         * @return String response body
+         */
         private String getResponseString() {
             return responseString;
         }

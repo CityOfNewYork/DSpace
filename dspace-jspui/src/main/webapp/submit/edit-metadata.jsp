@@ -608,7 +608,7 @@
 
          if (fieldName.equals("dc_description_abstract"))
          {
-           sb.append("<textarea minlength='100' maxlength='200' class=\"form-control\" name=\"").append(fieldNameIdx)
+           sb.append("<textarea minlength='100' maxlength='300' class=\"form-control\" name=\"").append(fieldNameIdx)
            .append("\" rows=\"4\" cols=\"45\" id=\"")
            .append(fieldNameIdx).append("_id\" ")
            .append((hasVocabulary(vocabulary)&&closedVocabulary)||readonly?" readonly=\"readonly\" ":"")
@@ -616,6 +616,7 @@
            .append(val)
            .append("</textarea>")
            .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+           .append("<div id=\"description-character-count\"></div>")
            .append("</div>");
          }
          else
@@ -756,6 +757,7 @@
              .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
              .append("/>")
 			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
+             .append("<div id=\"title-character-count\"></div>")
              .append("</div>");
            }
            else if (fieldName.equals("dc_title_alternative"))

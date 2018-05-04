@@ -49,14 +49,14 @@ public class SAMLServlet extends DSpaceServlet {
 
     private static final String NYC_ID_USERNAME = configurationService.getProperty("nyc.id.username");
     private static final String NYC_ID_PASSWORD = configurationService.getProperty("nyc.id.password");
-    public static final String WEB_SERVICES_SCHEME = configurationService.getProperty("web.services.scheme");
-    public static final String WEB_SERVICES_HOST = configurationService.getProperty("web.services.host");
-    public static final String EMAIL_VALIDATION_STATUS_ENDPOINT = "/account/api/isEmailValidated.htm";
-    public static final String TOU_STATUS_ENDPOINT = "/account/api/isTermsOfUseCurrent.htm";
-    public static final String ENROLLMENT_ENDPOINT = "/account/api/enrollment.htm";
-    public static final String EMAIL_STATUS_CHECK_FAILURE = "Failed to check email validation status.";
-    public static final String TOU_STATUS_CHECK_FAILURE = "Failed to check terms of use version.";
-    public static final String ENROLLMENT_FAILURE = "Failed to enroll.";
+    private static final String WEB_SERVICES_SCHEME = configurationService.getProperty("web.services.scheme");
+    private static final String WEB_SERVICES_HOST = configurationService.getProperty("web.services.host");
+    private static final String EMAIL_VALIDATION_STATUS_ENDPOINT = "/account/api/isEmailValidated.htm";
+    private static final String TOU_STATUS_ENDPOINT = "/account/api/isTermsOfUseCurrent.htm";
+    private static final String ENROLLMENT_ENDPOINT = "/account/api/enrollment.htm";
+    private static final String EMAIL_STATUS_CHECK_FAILURE = "Failed to check email validation status.";
+    private static final String TOU_STATUS_CHECK_FAILURE = "Failed to check terms of use version.";
+    private static final String ENROLLMENT_FAILURE = "Failed to enroll.";
 
     @Override
     protected void doDSGet(Context context, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException,
@@ -136,7 +136,7 @@ public class SAMLServlet extends DSpaceServlet {
      * @param host host name
      * @param path URL path
      * @param params query string parameters
-     * @return
+     * @return URI
      */
     public static URI getURI(String scheme, String host, String path, List<NameValuePair> params) {
         URIBuilder builder = new URIBuilder();
@@ -147,11 +147,8 @@ public class SAMLServlet extends DSpaceServlet {
         try {
             return builder.build();
         } catch (URISyntaxException e) {
-            log.error("The URL constructed for a web services request "
-                    + "produced a URISyntaxException. Please check the configuration parameters!");
-            log.error("The URL was " + scheme + host + path);
             throw new RuntimeException("The URL constructed for a web services request "
-                    + "produced a URISyntaxException. Please check the configuration parameters!", e);
+                    + "produced a URISyntaxException. \nThe URL was " + scheme + host + path);
         }
     }
 
@@ -252,7 +249,8 @@ public class SAMLServlet extends DSpaceServlet {
                             targetURL);
                 }
             } catch (JSONException e) {
-                // TODO: DO SOMETHING
+                throw new RuntimeException("Unable to create JSON from response body. The string was " +
+                        webServicesResponse.getResponseString());
             }
         }
         return redirectURL;
@@ -298,7 +296,8 @@ public class SAMLServlet extends DSpaceServlet {
                             targetURL);
                 }
             } catch (JSONException e) {
-                // TODO: DO SOMETHING
+                throw new RuntimeException("Unable to create JSON from response body. The string was " +
+                        webServicesResponse.getResponseString());
             }
         }
         return redirectURL;

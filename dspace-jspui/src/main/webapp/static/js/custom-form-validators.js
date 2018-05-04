@@ -40,14 +40,14 @@ $(function () {
 
     // Set character counter text
     characterCounter("#title-character-count", 150, titleField.val().length, 10);
-    characterCounter("#description-character-count", 300, descriptionField.val().length);
+    characterCounter("#description-character-count", 300, descriptionField.val().length, 100);
 
     titleField.keyup(function () {
         characterCounter("#title-character-count", 150, $(this).val().length, 10)
     });
 
     descriptionField.keyup(function () {
-        characterCounter("#description-character-count", 300, $(this).val().length)
+        characterCounter("#description-character-count", 300, $(this).val().length, 100)
     });
 });
 

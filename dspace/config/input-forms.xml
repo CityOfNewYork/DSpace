@@ -106,7 +106,7 @@
                     <repeatable>false</repeatable>
                     <label>Description</label>
                     <input-type>textarea</input-type>
-                    <hint>A brief (100-200 characters) explanation of the contents of this document.</hint>
+                    <hint>A brief (100-300 characters) explanation of the contents of this document.</hint>
                     <required>You must provide a description about this submission.</required>
                 </field>
 

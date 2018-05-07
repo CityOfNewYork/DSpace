@@ -46,7 +46,7 @@
                     <label>Title</label>
                     <input-type>onebox</input-type>
                     <hint>On the front page, the first page or in the Executive Summary (if any) of the document, what
-                        is it called? 150 characters or fewer.
+                        is it called? 10-150 characters.
                     </hint>
                     <required>You must enter a main title for this item.</required>
                 </field>

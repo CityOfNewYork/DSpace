@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.*;
@@ -25,9 +26,16 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
+import org.dspace.app.webui.util.Authenticate;
+import org.dspace.app.webui.util.RequestInfo;
+import org.dspace.app.webui.util.UIUtil;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
+import org.dspace.core.LogManager;
+import org.dspace.eperson.EPerson;
+import org.dspace.eperson.factory.EPersonServiceFactory;
+import org.dspace.eperson.service.EPersonService;
 import org.dspace.services.ConfigurationService;
 import org.dspace.services.factory.DSpaceServicesFactory;
 import org.springframework.security.core.Authentication;
@@ -46,6 +54,7 @@ public class SAMLServlet extends DSpaceServlet {
     private static final Logger log = Logger.getLogger(SAMLServlet.class);
 
     private static final ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
+    protected EPersonService ePersonService = EPersonServiceFactory.getInstance().getEPersonService();
 
     private static final String NYC_ID_USERNAME = configurationService.getProperty("nyc.id.username");
     private static final String NYC_ID_PASSWORD = configurationService.getProperty("nyc.id.password");
@@ -76,9 +85,59 @@ public class SAMLServlet extends DSpaceServlet {
             return;
         }
 
+        // Authorize user in dspace
+        EPerson eperson = null;
+        eperson = ePersonService.findByEmail(context, credential.getAttributeAsString("mail"));
+
+        if (eperson != null) {
+            if (!eperson.canLogIn()) {
+                // TODO: Don't let user login
+                return;
+            }
+
+            context.setCurrentUser(eperson);
+            log.info(LogManager.getHeader(context, "authenticate", "type=saml"));
+            Authenticate.loggedIn(context, request, eperson);
+        }
+        else {
+            // TODO: Create stuff
+            String email = credential.getAttributeAsString("mail");
+
+            context.turnOffAuthorisationSystem();
+            eperson = ePersonService.create(context);
+            eperson.setEmail(email);
+            eperson.setGuid(context, credential.getAttributeAsString("GUID"));
+            eperson.setFirstName(context, credential.getAttributeAsString("givenName"));
+            eperson.setLastName(context, credential.getAttributeAsString("sn"));
+            eperson.setUserType(context, credential.getAttributeAsString("userType"));
+            eperson.setCanLogIn(true);
+//            authenticationService.initEPerson(context, request, eperson);
+            ePersonService.update(context, eperson);
+            context.dispatchEvents();
+            context.setCurrentUser(eperson);
+            context.restoreAuthSystemState();
+
+//            regenerateSession(request);
+
+            Authenticate.loggedIn(context, request, eperson);
+            enrollment(credential);
+
+//            if ((!session.isNew()) && (session.getAttribute("dspace.current.user.id") == null)) {
+//                Locale sessionLocale = UIUtil.getSessionLocale(request);
+//
+//                RequestInfo requestInfo = (RequestInfo) session.getAttribute("interrupted.request.info");
+//
+//                String requestUrl = (String) session.getAttribute("interrupted.request.url");
+//
+//                SecureRandom random = new SecureRandom();
+//                String randomLong = ""+random.nextLong();
+//                session.setAttribute("csrfToken", randomLong);
+//            }
+        }
+
         // TODO: enrollment should happen after user is authorized in dspace
-        enrollment(credential);
-        regenerateSession(request);
+//        enrollment(credential);
+//        regenerateSession(request);
         response.sendRedirect(request.getContextPath());
     }
 
@@ -227,7 +286,7 @@ public class SAMLServlet extends DSpaceServlet {
         if (credential.getAttributeAsString("userType").equals("EDIRSSO") &&
                 credential.getAttributeAsString("nycExtEmailValidationFlag").equals("FALSE")) {
             // Store query string parameters into map
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, String> map = new HashMap<>();
             map.put("guid", credential.getAttributeAsString("guid"));
 
             // Send web services request
@@ -331,6 +390,10 @@ public class SAMLServlet extends DSpaceServlet {
      */
     private static void regenerateSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
+
+        if (session.getAttribute("csrfToken") != null) {
+            session.removeAttribute("csrfToken");
+        }
 
         // Store current request attributes in a Map
         Enumeration keys = session.getAttributeNames();

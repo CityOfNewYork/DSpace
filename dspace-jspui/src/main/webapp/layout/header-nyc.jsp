@@ -7,15 +7,25 @@
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.core.Authentication"%>
 <%@ page import="org.springframework.security.saml.SAMLCredential" %>
+<%@ page import="org.dspace.eperson.EPerson" %>
 
 <%
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String user = (String) authentication.getPrincipal();
+//    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//    String user = (String) authentication.getPrincipal();
+//
+//    String userType = "";
+//    if (!user.equals("anonymousUser")) {
+//        SAMLCredential credential = (SAMLCredential) authentication.getCredentials();
+//        userType = credential.getAttributeAsString("userType");
+//    }
+
+    // Is anyone logged in?
+    EPerson user = (EPerson) request.getAttribute("dspace.current.user");
 
     String userType = "";
-    if (!user.equals("anonymousUser")) {
-        SAMLCredential credential = (SAMLCredential) authentication.getCredentials();
-        userType = credential.getAttributeAsString("userType");
+    if (user != null)
+    {
+        userType = user.getUserType();
     }
 
     String logoutURL = ConfigurationManager.getProperty("logout.url");
@@ -37,7 +47,8 @@
                 </span>
             </span>
 
-            <% if (user.equals("anonymousUser")) { %>
+            <%--<% if (user.equals("anonymousUser")) { %>--%>
+            <% if (user == null) { %>
                 <span class="upper-header-right">
                     <span class="upper-header-a">
                         <a href="<%= request.getContextPath() %>/saml/login">Log In</a>

@@ -698,10 +698,6 @@
                 <stored-value>Bronx</stored-value>
             </pair>
             <pair>
-                <displayed-value>Brooklyn (City)</displayed-value>
-                <stored-value>Brooklyn (City)</stored-value>
-            </pair>
-            <pair>
                 <displayed-value>Budget and Finance</displayed-value>
                 <stored-value>Budget and Finance</stored-value>
             </pair>
@@ -820,22 +816,6 @@
             <pair>
                 <displayed-value>Drugs</displayed-value>
                 <stored-value>Drugs</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Education</displayed-value>
-                <stored-value>Education</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Education</displayed-value>
-                <stored-value>Education</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Education</displayed-value>
-                <stored-value>Education</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Education</displayed-value>
-                <stored-value>Education</stored-value>
             </pair>
             <pair>
                 <displayed-value>Education</displayed-value>
@@ -1224,14 +1204,6 @@
             <pair>
                 <displayed-value>Staten Island</displayed-value>
                 <stored-value>Staten Island</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Statistics</displayed-value>
-                <stored-value>Statistics</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Statistics</displayed-value>
-                <stored-value>Statistics</stored-value>
             </pair>
             <pair>
                 <displayed-value>Statistics</displayed-value>

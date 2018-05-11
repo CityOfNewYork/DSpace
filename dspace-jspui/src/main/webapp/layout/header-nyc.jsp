@@ -4,23 +4,16 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <%@ page import="org.dspace.core.ConfigurationManager" %>
-<%@ page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@ page import="org.springframework.security.core.Authentication"%>
-<%@ page import="org.springframework.security.saml.SAMLCredential" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 
 <%
-//    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//    String user = (String) authentication.getPrincipal();
-//
-//    String userType = "";
-//    if (!user.equals("anonymousUser")) {
-//        SAMLCredential credential = (SAMLCredential) authentication.getCredentials();
-//        userType = credential.getAttributeAsString("userType");
-//    }
-
     // Is anyone logged in?
     EPerson user = (EPerson) request.getAttribute("dspace.current.user");
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Boolean samlLoggedIn = !authentication.getPrincipal().equals("anonymousUser");
 
     String userType = "";
     if (user != null)
@@ -39,7 +32,6 @@
     <div class="upper-header-black">
         <div class="container-nycidm">
             <span class="upper-header-left">
-            <!-- The logo should link to nyc-dev-web.csc.nycnet for development environments and nyc-stg-web.csc.nycnet for staging environments. -->
     		<a href="http://www1.nyc.gov/"><img class="small-nyc-logo" alt="" src="<%= request.getContextPath() %>/static/img/nyc_white@x2.png"></a>
     		<img class="vert-divide" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
                 <span class="upper-header-black-title">
@@ -47,8 +39,7 @@
                 </span>
             </span>
 
-            <%--<% if (user.equals("anonymousUser")) { %>--%>
-            <% if (user == null) { %>
+            <% if (user == null && !samlLoggedIn) { %>
                 <span class="upper-header-right">
                     <span class="upper-header-a">
                         <a href="<%= request.getContextPath() %>/saml/login">Log In</a>

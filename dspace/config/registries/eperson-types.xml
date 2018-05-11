@@ -22,6 +22,12 @@
 
     <dc-type>
         <schema>eperson</schema>
+        <element>middleinitial</element>
+        <scope_note>Metadata field used for the first name</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>eperson</schema>
         <element>lastname</element>
         <scope_note>Metadata field used for the last name</scope_note>
     </dc-type>
@@ -37,5 +43,19 @@
         <element>language</element>
         <scope_note>Metadata field used for the language</scope_note>
     </dc-type>
+
+    <dc-type>
+        <schema>eperson</schema>
+        <element>guid</element>
+        <scope_note>Metadata field used for the guid</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>eperson</schema>
+        <element>usertype</element>
+        <scope_note>Metadata field used for the user type</scope_note>
+    </dc-type>
+
+
 
 </dspace-dc-types>

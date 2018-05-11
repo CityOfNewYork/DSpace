@@ -1,23 +1,5 @@
 package org.dspace.app.webui.servlet;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.security.SecureRandom;
-import java.sql.SQLException;
-import java.text.MessageFormat;
-import java.util.*;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.ServletException;
-
 import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
 import org.apache.commons.codec.binary.Hex;
@@ -27,13 +9,12 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 import org.dspace.app.webui.util.Authenticate;
-import org.dspace.app.webui.util.RequestInfo;
-import org.dspace.app.webui.util.UIUtil;
+import org.dspace.authenticate.AuthenticationMethod;
+import org.dspace.authenticate.factory.AuthenticateServiceFactory;
+import org.dspace.authenticate.service.AuthenticationService;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
-import org.dspace.core.LogManager;
-import org.dspace.eperson.EPerson;
 import org.dspace.eperson.factory.EPersonServiceFactory;
 import org.dspace.eperson.service.EPersonService;
 import org.dspace.services.ConfigurationService;
@@ -41,6 +22,25 @@ import org.dspace.services.factory.DSpaceServicesFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.saml.SAMLCredential;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.text.MessageFormat;
+import java.util.*;
+
+import static org.dspace.app.webui.util.JSPManager.showJSP;
 
 /**
  * SAML authentication servlet.
@@ -52,6 +52,9 @@ public class SAMLServlet extends DSpaceServlet {
      * log4j logger
      */
     private static final Logger log = Logger.getLogger(SAMLServlet.class);
+
+    private final transient AuthenticationService authenticationService
+            = AuthenticateServiceFactory.getInstance().getAuthenticationService();
 
     private static final ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
     protected EPersonService ePersonService = EPersonServiceFactory.getInstance().getEPersonService();
@@ -85,60 +88,19 @@ public class SAMLServlet extends DSpaceServlet {
             return;
         }
 
-        // Authorize user in dspace
-        EPerson eperson = null;
-        eperson = ePersonService.findByEmail(context, credential.getAttributeAsString("mail"));
+        int status = authenticationService.authenticate(context, null, null, null, request);
 
-        if (eperson != null) {
-            if (!eperson.canLogIn()) {
-                // TODO: Don't let user login
-                return;
+        if (status == AuthenticationMethod.SUCCESS) {
+            if (credential.getAttributeAsString("userType").equals("Saml2In:NYC Employees")) {
+                enrollment(credential);
+                Authenticate.loggedIn(context, request, context.getCurrentUser());
             }
-
-            context.setCurrentUser(eperson);
-            log.info(LogManager.getHeader(context, "authenticate", "type=saml"));
-            Authenticate.loggedIn(context, request, eperson);
+            response.sendRedirect(request.getContextPath());
         }
         else {
-            // TODO: Create stuff
-            String email = credential.getAttributeAsString("mail");
-
-            context.turnOffAuthorisationSystem();
-            eperson = ePersonService.create(context);
-            eperson.setEmail(email);
-            eperson.setGuid(context, credential.getAttributeAsString("GUID"));
-            eperson.setFirstName(context, credential.getAttributeAsString("givenName"));
-            eperson.setLastName(context, credential.getAttributeAsString("sn"));
-            eperson.setUserType(context, credential.getAttributeAsString("userType"));
-            eperson.setCanLogIn(true);
-//            authenticationService.initEPerson(context, request, eperson);
-            ePersonService.update(context, eperson);
-            context.dispatchEvents();
-            context.setCurrentUser(eperson);
-            context.restoreAuthSystemState();
-
-//            regenerateSession(request);
-
-            Authenticate.loggedIn(context, request, eperson);
-            enrollment(credential);
-
-//            if ((!session.isNew()) && (session.getAttribute("dspace.current.user.id") == null)) {
-//                Locale sessionLocale = UIUtil.getSessionLocale(request);
-//
-//                RequestInfo requestInfo = (RequestInfo) session.getAttribute("interrupted.request.info");
-//
-//                String requestUrl = (String) session.getAttribute("interrupted.request.url");
-//
-//                SecureRandom random = new SecureRandom();
-//                String randomLong = ""+random.nextLong();
-//                session.setAttribute("csrfToken", randomLong);
-//            }
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            showJSP(request, response, "/error/internal.jsp");
         }
-
-        // TODO: enrollment should happen after user is authorized in dspace
-//        enrollment(credential);
-//        regenerateSession(request);
-        response.sendRedirect(request.getContextPath());
     }
 
     private static final String ALGORITHM = "HmacSHA256";

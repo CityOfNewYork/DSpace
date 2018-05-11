@@ -103,6 +103,14 @@ public class EPersonServiceImpl extends DSpaceObjectServiceImpl<EPerson> impleme
     }
 
     @Override
+    public EPerson findByGuidAndUserType(Context context, String guid, String userType) throws SQLException {
+        MetadataField guidField = metadataFieldService.findByElement(context, "eperson", "guid", null);
+        MetadataField userTypeField = metadataFieldService.findByElement(context, "eperson", "userType", null);
+
+        return ePersonDAO.findByGuidAndUserType(context, guid, userType, Arrays.asList(guidField, userTypeField));
+    }
+
+    @Override
     public List<EPerson> search(Context context, String query) throws SQLException {
         if(StringUtils.isBlank(query))
         {

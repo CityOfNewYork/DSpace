@@ -5,6 +5,7 @@
 
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
+<%@ page import="org.dspace.app.webui.servlet.SAMLServlet" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 
@@ -51,7 +52,7 @@
                         <a id="logout" href="<%= request.getContextPath() %>/saml-logout">Log Out</a>
                     </span>
                 </span>
-                <% if (userType.equals("EDIRSSO")) { %>
+                <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
                     <img class="vert-divide-right" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
                     <span class="upper-header-b">
                         <a id="profile-link" href="#">Profile</a>
@@ -93,7 +94,7 @@
     });
 
     // TODO: SAMLProfile Servlet (NYC.ID web service)
-    <% if (userType.equals("EDIRSSO")) { %>
+    <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
         $("#profile-link").attr(
             "href",
             "<%= webServicesScheme %>" + "://" + "<%= webServicesHost %>" + "/account/?returnOnSave=true&target=" + btoa(window.location.href)

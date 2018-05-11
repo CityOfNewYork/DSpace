@@ -45,6 +45,10 @@
     Boolean collectionAdmin = (Boolean)request.getAttribute("is.collectionAdmin");
     boolean isCollectionAdmin = (collectionAdmin == null ? false : collectionAdmin.booleanValue());
 
+    Boolean isSamlAuthentication = ConfigurationManager.getProperty(
+            "plugin.sequence.org.dspace.authenticate.AuthenticationMethod")
+            .equals("org.dspace.authenticate.SAMLAuthentication");
+
     // Get the current page, minus query string
     String currentPage = UIUtil.getOriginalURL(request);
     int c = currentPage.indexOf( '?' );
@@ -162,7 +166,9 @@
 		<%
     } else {
 		%>
+        <% if (!isSamlAuthentication) { %>
              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <fmt:message key="jsp.layout.navbar-default.sign"/> <b class="caret"></b></a>
+        <% } %>
 	<% } %>             
              <ul class="dropdown-menu">
                <li><a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
@@ -182,7 +188,7 @@
                 <fmt:message key="jsp.administer"/></a></li>
                 <%
                     }
-		  if (user != null) {
+		  if (user != null && !isSamlAuthentication) {
 		%>
          <form method="post" id="logout-form" action="<%= request.getContextPath() %>/logout">
              <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">

@@ -810,18 +810,6 @@
 			 .append("<p class='fiscal-calendar-warning' style='color:red; display: none;'>Either fiscal year or calendar year is required.</p>")
              .append("</div>");
            }
-           else if (fieldName.equals("dc_format_extent"))
-           {
-             sb.append("<input type='number' min='0' max='999' class=\"form-control\" type=\"text\" name=\"")
-             .append(fieldNameIdx)
-             .append("\" id=\"")
-             .append(fieldNameIdx).append("\" size=\"50\" value=\"")
-             .append(val +"\"")
-             .append((hasVocabulary(vocabulary)&&closedVocabulary) || readonly?" readonly=\"readonly\" ":"")
-             .append("/>")
-			 .append(doControlledVocabulary(fieldNameIdx, pageContext, vocabulary, readonly))
-             .append("</div>");
-           }
            else
            {
              sb.append("<input class=\"form-control\" type=\"text\" name=\"")

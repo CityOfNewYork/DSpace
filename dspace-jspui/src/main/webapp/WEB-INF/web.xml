@@ -63,6 +63,15 @@
       <filter-name>rdf-content-negotiation</filter-name>
       <filter-class>org.dspace.rdf.negotiation.NegotiationFilter</filter-class>
   </filter>
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
   <!-- Filter mappings -->
   <filter-mapping>
@@ -338,6 +347,16 @@
   <servlet>
     <servlet-name>ldap-login</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.LDAPServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>saml-login</servlet-name>
+    <servlet-class>org.dspace.app.webui.servlet.SAMLServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>saml-logout</servlet-name>
+    <servlet-class>org.dspace.app.webui.servlet.SAMLLogoutServlet</servlet-class>
   </servlet>
 
   <servlet>
@@ -684,6 +703,16 @@
   <servlet-mapping>
     <servlet-name>ldap-login</servlet-name>
     <url-pattern>/ldap-login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>saml-login</servlet-name>
+    <url-pattern>/saml-login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>saml-logout</servlet-name>
+    <url-pattern>/saml-logout</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

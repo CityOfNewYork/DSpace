@@ -186,6 +186,9 @@ public class DSpaceServlet extends HttpServlet
             log.warn(LogManager.getHeader(context, "general_jspui_error", e
                     .toString()), e);
 
+            // Also email an alert
+            UIUtil.sendAlert(request, e);
+
             abortContext(context);
             JSPManager.showInternalError(request, response);
         }

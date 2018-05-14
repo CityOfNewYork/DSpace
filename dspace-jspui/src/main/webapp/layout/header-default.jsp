@@ -108,7 +108,8 @@
     <%-- HACK: marginwidth, marginheight: for non-CSS compliant Netscape browser --%>
     <body class="undernavigation">
 <a class="sr-only" href="#content">Skip navigation</a>
-<header class="navbar navbar-inverse navbar-fixed-top">
+<dspace:include page="/layout/header-nyc.jsp" />
+<header class="navbar navbar-inverse">
     <%
     if (!navbar.equals("off"))
     {

@@ -258,7 +258,7 @@ public class SAMLServlet extends DSpaceServlet {
 
     /**
      * If the user has logged in using the NYC Employees button
-     * (i.e. userType is "Saml2In: NYC Employees"), no TOU
+     * (i.e. userType is "Saml2In:NYC Employees"), no TOU
      * acceptance is necessary.
      *
      * Otherwise, invoke the Terms of Use Web Service to determine

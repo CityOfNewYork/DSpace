@@ -9,6 +9,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 import org.dspace.app.webui.util.Authenticate;
+import org.dspace.app.webui.util.JSPManager;
 import org.dspace.authenticate.AuthenticationMethod;
 import org.dspace.authenticate.factory.AuthenticateServiceFactory;
 import org.dspace.authenticate.service.AuthenticationService;
@@ -35,8 +36,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.*;
-
-import static org.dspace.app.webui.util.JSPManager.showJSP;
 
 /**
  * SAML authentication servlet.
@@ -96,7 +95,7 @@ public class SAMLServlet extends DSpaceServlet {
         }
         else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            showJSP(request, response, "/error/internal.jsp");
+            JSPManager.showJSP(request, response, "/error/internal.jsp");
         }
     }
 

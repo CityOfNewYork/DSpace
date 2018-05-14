@@ -13,16 +13,9 @@
         <namespace>http://dspace.org/eperson</namespace>
     </dc-schema>
 
-
     <dc-type>
         <schema>eperson</schema>
         <element>firstname</element>
-        <scope_note>Metadata field used for the first name</scope_note>
-    </dc-type>
-
-    <dc-type>
-        <schema>eperson</schema>
-        <element>middleinitial</element>
         <scope_note>Metadata field used for the first name</scope_note>
     </dc-type>
 
@@ -55,7 +48,5 @@
         <element>usertype</element>
         <scope_note>Metadata field used for the user type</scope_note>
     </dc-type>
-
-
 
 </dspace-dc-types>

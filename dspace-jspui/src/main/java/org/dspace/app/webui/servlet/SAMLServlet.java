@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -62,6 +63,7 @@ public class SAMLServlet extends DSpaceServlet {
     private static final String EMAIL_VALIDATION_STATUS_ENDPOINT = "/account/api/isEmailValidated.htm";
     private static final String TOU_STATUS_ENDPOINT = "/account/api/isTermsOfUseCurrent.htm";
     private static final String ENROLLMENT_ENDPOINT = "/account/api/enrollment.htm";
+    private static final String ENROLLMENT_STATUS_ENDPOINT = "/account/api/getEnrollment.htm";
     private static final String EMAIL_STATUS_CHECK_FAILURE = "Failed to check email validation status.";
     private static final String TOU_STATUS_CHECK_FAILURE = "Failed to check terms of use version.";
     private static final String ENROLLMENT_FAILURE = "Failed to enroll.";
@@ -203,11 +205,21 @@ public class SAMLServlet extends DSpaceServlet {
 
         // Build string of response body
         StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-                connection.getInputStream()));
-        String inputLine;
-        while ((inputLine = in.readLine()) != null)
-            stringBuilder.append(inputLine).append("\n");
+        InputStream responseStream = null;
+
+        // Get response body
+        try {
+            responseStream = connection.getInputStream();
+        } catch (IOException e) {
+            responseStream = connection.getErrorStream();
+        }
+
+        if (responseStream != null) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(responseStream));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null)
+                stringBuilder.append(inputLine).append("\n");
+        }
 
         return new WebServicesResponse(connection.getResponseCode(), stringBuilder.toString());
     }
@@ -331,9 +343,14 @@ public class SAMLServlet extends DSpaceServlet {
         map.put("guid", credential.getAttributeAsString("guid"));
         map.put("userType", credential.getAttributeAsString("userType"));
 
-        WebServicesResponse webServicesResponse = webServicesRequest(ENROLLMENT_ENDPOINT, map, "PUT");
+        // Create shallow copy of request parameters
+        Map<String, String> getEnrollmentParams = new HashMap<>(map);
 
-        checkWebServicesResponse(webServicesResponse, ENROLLMENT_FAILURE);
+        WebServicesResponse getEnrollmentResponse = webServicesRequest(ENROLLMENT_STATUS_ENDPOINT, getEnrollmentParams, "GET");
+        if (getEnrollmentResponse.getStatusCode() != 200) {
+            WebServicesResponse webServicesResponse = webServicesRequest(ENROLLMENT_ENDPOINT, map, "PUT");
+            checkWebServicesResponse(webServicesResponse, ENROLLMENT_FAILURE);
+        }
     }
 
     /**

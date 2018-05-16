@@ -229,7 +229,12 @@ public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport
 
     /**
      * Set the e-person's guid
-     * @param guid the new guid
+     *
+     * @param context
+     *  The dspace context.
+     *
+     * @param guid
+     *  The new guid.
      */
     public void setGuid(Context context, String guid) throws SQLException {
         getePersonService().setMetadataSingleValue(context, this, "eperson", "guid", null, null, guid);

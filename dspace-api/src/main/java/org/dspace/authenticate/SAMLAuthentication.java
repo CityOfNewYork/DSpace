@@ -28,6 +28,21 @@ public class SAMLAuthentication implements AuthenticationMethod {
             = AuthenticateServiceFactory.getInstance().getAuthenticationService();
     protected EPersonService ePersonService = EPersonServiceFactory.getInstance().getEPersonService();
 
+    /**
+     *
+     * @param context
+     *  DSpace context
+     *
+     * @param request
+     *  HTTP request, in case it's needed. May be null.
+     *
+     * @param username
+     *  Username, if available.  May be null.
+     *
+     * @return true
+     *
+     * @throws SQLException
+     */
     @Override
     public boolean canSelfRegister(Context context,
                                    HttpServletRequest request,
@@ -36,6 +51,11 @@ public class SAMLAuthentication implements AuthenticationMethod {
         return true;
     }
 
+    /**
+     * Nothing here, initialization is done when auto-registering.
+     *
+     * @throws SQLException if database error
+     */
     @Override
     public void initEPerson(Context context,
                             HttpServletRequest request,
@@ -44,6 +64,11 @@ public class SAMLAuthentication implements AuthenticationMethod {
         // We don't do anything because all our work is done in authenticate
     }
 
+    /**
+     * We never allow the user to change their password.
+     *
+     * @throws SQLException if database error
+     */
     @Override
     public boolean allowSetPassword(Context context,
                                     HttpServletRequest request,
@@ -52,11 +77,23 @@ public class SAMLAuthentication implements AuthenticationMethod {
         return false;
     }
 
+    /**
+     * This is an explicit method, since it needs username and password
+     * from some source.
+     *
+     * @return false
+     */
     @Override
     public boolean isImplicit() {
         return false;
     }
 
+    /**
+     * login.specialgroup property is not set for this class so we just
+     * return an empty List.
+     *
+     * @return empty List
+     */
     @Override
     public List<Group> getSpecialGroups(Context context, HttpServletRequest request) {
         return ListUtils.EMPTY_LIST;
@@ -67,6 +104,39 @@ public class SAMLAuthentication implements AuthenticationMethod {
         return "org.dspace.authenticate.SAMLAuthentication.title";
     }
 
+    /**
+     * Authenticate the user in dspace after successful SAML login.
+     * SAML entities will be stored in SAMLCredential object inside Authentication.
+     *
+     * Query database if eperson exists by guid and userType.
+     * If eperson does not exist, call registerNewEPerson method to create
+     * new eperson object.
+     * If eperson exist, call updateEPerson to update user attributes.
+     *
+     * @param context
+     *  DSpace context, will be modified (ePerson set) upon success.
+     *
+     * @param username
+     *  null, we get username (or email) from Security Context.
+     *
+     * @param password
+     *  Password for explicit auth, or null for implicit method.
+     *
+     * @param realm
+     *  Realm is an extra parameter used by some authentication methods, leave null if
+     *  not applicable.
+     *
+     * @param request
+     *  The HTTP request that started this operation, or null if not applicable.
+     *
+     * @return One of:
+     *   SUCCESS, NO_SUCH_USER, BAD_ARGS
+     * <p>Meaning:
+     * <br>SUCCESS         - authenticated OK.
+     * <br>NO_SUCH_USER    - no EPerson with matching email address.
+     * <br>BAD_ARGS        - user matched but cannot login.
+     * @throws SQLException if database error
+     */
     @Override
     public int authenticate(Context context,
                             String username,
@@ -74,9 +144,11 @@ public class SAMLAuthentication implements AuthenticationMethod {
                             String realm,
                             HttpServletRequest request)
         throws SQLException {
+        // Get credential object for user attributes
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SAMLCredential credential = (SAMLCredential) authentication.getCredentials();
 
+        // Check if eperson exists by guid and userType
         EPerson eperson = null;
         eperson = ePersonService.findByGuidAndUserType(context,
                 credential.getAttributeAsString("GUID"),
@@ -97,11 +169,28 @@ public class SAMLAuthentication implements AuthenticationMethod {
             return SUCCESS;
 
         } catch (AuthorizeException e) {
+            log.error("Unable to successfully authenticate using SAML because of an exception.", e);
+            context.setCurrentUser(null);
             return NO_SUCH_USER;
         }
     }
 
 
+    /**
+     * When user accesses a authenticated required page, return to 404 page instead
+     * of a login page. This method prevents users from accessing a login page.
+     *
+     * @param context
+     *  DSpace context.
+     *
+     * @param request
+     *  The HTTP request that started this operation, or null if not applicable.
+     *
+     * @param response
+     *  The HTTP response from the servlet method.
+     *
+     * @return fully-qualified URL to /error/404.jsp
+     */
     @Override
     public String loginPageURL (Context context,
                                 HttpServletRequest request,
@@ -109,6 +198,26 @@ public class SAMLAuthentication implements AuthenticationMethod {
         return response.encodeRedirectURL(request.getContextPath() + "/error/404.jsp");
     }
 
+    /**
+     * Register a new eperson object. This method is called when no existing user was
+     * found for the guid and userType and autoregister is enabled. When these conditions
+     * are met this method will create a new eperson object.
+     *
+     *
+     *
+     * @param context
+     *  The current DSpace database context
+     *
+     * @param credential
+     *  The object that contains the SAML entities.
+     *
+     * @param request
+     *  The HTTP request that started this operation.
+     *
+     * @return eperson
+     * @throws SQLException if database error
+     * @throws AuthorizeException
+     */
     private EPerson registerNewEPerson(Context context, SAMLCredential credential, HttpServletRequest request)
             throws SQLException, AuthorizeException {
         context.turnOffAuthorisationSystem();
@@ -127,6 +236,22 @@ public class SAMLAuthentication implements AuthenticationMethod {
         return eperson;
     }
 
+    /**
+     * Update specified eperson with the information provided from IDP as the
+     * attributes may have changed since the last time they logged in.
+     *
+     * @param context
+     *  The current DSpace database context.
+     *
+     * @param credential
+     *  The object that contains the SAML entities.
+     *
+     * @param eperson
+     *  The eperson object to update.
+     *
+     * @throws SQLException if database error
+     * @throws AuthorizeException
+     */
     private void updateEPerson(Context context, SAMLCredential credential, EPerson eperson)
             throws SQLException, AuthorizeException {
         context.turnOffAuthorisationSystem();

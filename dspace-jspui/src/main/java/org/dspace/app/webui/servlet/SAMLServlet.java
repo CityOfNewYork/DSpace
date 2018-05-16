@@ -89,6 +89,8 @@ public class SAMLServlet extends DSpaceServlet {
         int status = authenticationService.authenticate(context, null, null, null, request);
 
         if (status == AuthenticationMethod.SUCCESS) {
+            // If userType is not AGENCY_USER_TYPE, enrollment is not called and user is not logged into dspace
+            // User will be redirected to the home page.
             if (credential.getAttributeAsString("userType").equals(AGENCY_USER_TYPE)) {
                 enrollment(credential);
                 Authenticate.loggedIn(context, request, context.getCurrentUser());

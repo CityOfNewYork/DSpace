@@ -59,6 +59,25 @@ public class EPersonDAOImpl extends AbstractHibernateDSODAO<EPerson> implements 
         return uniqueResult(criteria);
     }
 
+    /**
+     * Create a query that joins the eperson table with the metadatavalue table
+     * and checks if an eperson exists with the specified guid and userType.
+     *
+     * @param context
+     *  The DSpace database context.
+     *
+     * @param guid
+     *  The guid to query for.
+     *
+     * @param userType
+     *  The userType to query for.
+     *
+     * @param queryFields
+     *  List of MetadataField objects.
+     *
+     * @return eperson or null
+     * @throws SQLException if database error
+     */
     @Override
     public EPerson findByGuidAndUserType(Context context, String guid, String userType, List<MetadataField> queryFields)
             throws SQLException {

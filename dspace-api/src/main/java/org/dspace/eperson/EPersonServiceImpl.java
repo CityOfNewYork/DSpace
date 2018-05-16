@@ -102,6 +102,22 @@ public class EPersonServiceImpl extends DSpaceObjectServiceImpl<EPerson> impleme
         return ePersonDAO.findByNetid(context, netId);
     }
 
+    /**
+     * This method overrides method in {@link EPersonService}.
+     * We get the MetadataField objects for guid and userType here instead of
+     * in ePersonDAO because metadataFieldService is already initialized in
+     * this class.
+     *
+     * @param context
+     *            DSpace context
+     * @param guid
+     *            eperson's guid
+     * @param userType
+     *            eperson's userType
+     *
+     * @return result of ePersonDAO.findByGuidAndUserType, which is null or an eperson
+     * @throws SQLException if database error
+     */
     @Override
     public EPerson findByGuidAndUserType(Context context, String guid, String userType) throws SQLException {
         MetadataField guidField = metadataFieldService.findByElement(context, "eperson", "guid", null);

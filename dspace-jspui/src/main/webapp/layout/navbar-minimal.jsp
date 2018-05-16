@@ -37,6 +37,10 @@
     Boolean admin = (Boolean)request.getAttribute("is.admin");
     boolean isAdmin = (admin == null ? false : admin.booleanValue());
 
+    Boolean isSamlAuthentication = ConfigurationManager.getProperty(
+            "plugin.sequence.org.dspace.authenticate.AuthenticationMethod")
+            .equals("org.dspace.authenticate.SAMLAuthentication");
+
     // Get the current page, minus query string
     String currentPage = UIUtil.getOriginalURL(request);
     int c = currentPage.indexOf( '?' );
@@ -85,7 +89,7 @@
                <li><a href="<%= request.getContextPath() %>/dspace-admin"><fmt:message key="jsp.administer"/></a></li>
 		<%
 		  }
-		  if (user != null) {
+		  if (user != null && !isSamlAuthentication) {
 		%>
 		<li><a href="<%= request.getContextPath() %>/logout"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
 		<% } %>

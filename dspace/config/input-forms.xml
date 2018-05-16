@@ -222,17 +222,6 @@
                     <hint>The place associated with this publication. Required if applicable.</hint>
                     <required></required>
                 </field>
-
-                <field>
-                    <dc-schema>dc</dc-schema>
-                    <dc-element>format</dc-element>
-                    <dc-qualifier>extent</dc-qualifier>
-                    <repeatable>false</repeatable>
-                    <label>Number of Pages</label>
-                    <input-type>onebox</input-type>
-                    <hint>How many pages are in this document?</hint>
-                    <required>You must enter the number of pages in the document.</required>
-                </field>
             </page>
         </form>
 

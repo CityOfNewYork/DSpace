@@ -219,6 +219,43 @@ public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport
     }
 
     /**
+     * Get the e-person's guid
+     *
+     * @return their guid
+     */
+    public String getGuid() {
+        return getePersonService().getMetadataFirstValue(this, "eperson", "guid", null, Item.ANY);
+    }
+
+    /**
+     * Set the e-person's guid
+     *
+     * @param context
+     *  The dspace context.
+     *
+     * @param guid
+     *  The new guid.
+     */
+    public void setGuid(Context context, String guid) throws SQLException {
+        getePersonService().setMetadataSingleValue(context, this, "eperson", "guid", null, null, guid);
+        setModified();
+    }
+
+    /**
+     * Get the e-person's user type
+     */
+    public String getUserType() {
+        return getePersonService().getMetadataFirstValue(this, "eperson", "userType", null, Item.ANY);
+    }
+
+    /**
+     * Set the e-person's user type
+     */
+    public void setUserType(Context context, String userType) throws SQLException {
+        getePersonService().setMetadataSingleValue(context, this, "eperson", "userType", null, null, userType);
+    }
+
+    /**
      * Get the e-person's full name, combining first and last name in a
      * displayable string.
      * 

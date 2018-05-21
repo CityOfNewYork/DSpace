@@ -19,6 +19,7 @@
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 
 <%@ page import="org.dspace.browse.BrowseInfo" %>
+<%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="org.dspace.sort.SortOption" %>
 <%@ page import="org.dspace.app.webui.util.UIUtil" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
@@ -30,6 +31,10 @@
 <%
 	// Is anyone logged in?
 	EPerson user = (EPerson) request.getAttribute("dspace.current.user");
+
+	Boolean isSamlAuthentication = ConfigurationManager.getProperty(
+            "plugin.sequence.org.dspace.authenticate.AuthenticationMethod")
+            .equals("org.dspace.authenticate.SAMLAuthentication");
 
     // Get the current page, minus query string
     String currentPage = UIUtil.getOriginalURL(request);    
@@ -108,9 +113,9 @@
                <li><a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
                <li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
 
-		
-		<li><a href="<%= request.getContextPath() %>/logout"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
-		
+		<% if (!isSamlAuthentication) { %>
+		    <li><a href="<%= request.getContextPath() %>/logout"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
+		<% } %>
         </ul>
        </li>
     </ul>

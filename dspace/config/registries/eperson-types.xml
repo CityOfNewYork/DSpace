@@ -13,7 +13,6 @@
         <namespace>http://dspace.org/eperson</namespace>
     </dc-schema>
 
-
     <dc-type>
         <schema>eperson</schema>
         <element>firstname</element>
@@ -36,6 +35,18 @@
         <schema>eperson</schema>
         <element>language</element>
         <scope_note>Metadata field used for the language</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>eperson</schema>
+        <element>guid</element>
+        <scope_note>Metadata field used for the guid</scope_note>
+    </dc-type>
+
+    <dc-type>
+        <schema>eperson</schema>
+        <element>usertype</element>
+        <scope_note>Metadata field used for the user type</scope_note>
     </dc-type>
 
 </dspace-dc-types>

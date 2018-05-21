@@ -59,6 +59,45 @@ public class EPersonDAOImpl extends AbstractHibernateDSODAO<EPerson> implements 
         return uniqueResult(criteria);
     }
 
+    /**
+     * Create a query that joins the eperson table with the metadatavalue table
+     * and checks if an eperson exists with the specified guid and userType.
+     *
+     * @param context
+     *  The DSpace database context.
+     *
+     * @param guid
+     *  The guid to query for.
+     *
+     * @param userType
+     *  The userType to query for.
+     *
+     * @param queryFields
+     *  List of MetadataField objects.
+     *
+     * @return eperson or null
+     * @throws SQLException if database error
+     */
+    @Override
+    public EPerson findByGuidAndUserType(Context context, String guid, String userType, List<MetadataField> queryFields)
+            throws SQLException {
+        Query query = createQuery(context,
+                "SELECT eperson FROM EPerson as eperson " +
+                        "left join eperson.metadata eperson_guid " +
+                        "WITH eperson_guid.metadataField.id = :eperson_guid " +
+                        "left join eperson.metadata eperson_userType " +
+                        "WITH eperson_userType.metadataField.id = :eperson_userType " +
+                        "WHERE  eperson_guid.value = :guidValue AND eperson_userType.value = :userTypeValue");
+        query.setParameter("guidValue", guid);
+        query.setParameter("userTypeValue", userType);
+
+        for (MetadataField metadataField : queryFields) {
+            query.setParameter(metadataField.toString(), metadataField.getID());
+        }
+
+        return singleResult(query);
+    }
+
     @Override
     public List<EPerson> search(Context context, String query, List<MetadataField> queryFields, List<MetadataField> sortFields, int offset, int limit) throws SQLException
     {

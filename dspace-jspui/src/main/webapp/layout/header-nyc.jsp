@@ -4,18 +4,22 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <%@ page import="org.dspace.core.ConfigurationManager" %>
-<%@ page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@ page import="org.springframework.security.core.Authentication"%>
-<%@ page import="org.springframework.security.saml.SAMLCredential" %>
+<%@ page import="org.dspace.eperson.EPerson" %>
+<%@ page import="org.dspace.app.webui.servlet.SAMLServlet" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 
 <%
+    // Is anyone logged in?
+    EPerson user = (EPerson) request.getAttribute("dspace.current.user");
+
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String user = (String) authentication.getPrincipal();
+    Boolean samlLoggedIn = !authentication.getPrincipal().equals("anonymousUser");
 
     String userType = "";
-    if (!user.equals("anonymousUser")) {
-        SAMLCredential credential = (SAMLCredential) authentication.getCredentials();
-        userType = credential.getAttributeAsString("userType");
+    if (user != null)
+    {
+        userType = user.getUserType();
     }
 
     String logoutURL = ConfigurationManager.getProperty("logout.url");
@@ -29,7 +33,6 @@
     <div class="upper-header-black">
         <div class="container-nycidm">
             <span class="upper-header-left">
-            <!-- The logo should link to nyc-dev-web.csc.nycnet for development environments and nyc-stg-web.csc.nycnet for staging environments. -->
     		<a href="http://www1.nyc.gov/"><img class="small-nyc-logo" alt="" src="<%= request.getContextPath() %>/static/img/nyc_white@x2.png"></a>
     		<img class="vert-divide" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
                 <span class="upper-header-black-title">
@@ -37,7 +40,7 @@
                 </span>
             </span>
 
-            <% if (user.equals("anonymousUser")) { %>
+            <% if (user == null && !samlLoggedIn) { %>
                 <span class="upper-header-right">
                     <span class="upper-header-a">
                         <a href="<%= request.getContextPath() %>/saml/login">Log In</a>
@@ -49,7 +52,7 @@
                         <a id="logout" href="<%= request.getContextPath() %>/saml-logout">Log Out</a>
                     </span>
                 </span>
-                <% if (userType.equals("EDIRSSO")) { %>
+                <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
                     <img class="vert-divide-right" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
                     <span class="upper-header-b">
                         <a id="profile-link" href="#">Profile</a>
@@ -91,7 +94,7 @@
     });
 
     // TODO: SAMLProfile Servlet (NYC.ID web service)
-    <% if (userType.equals("EDIRSSO")) { %>
+    <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
         $("#profile-link").attr(
             "href",
             "<%= webServicesScheme %>" + "://" + "<%= webServicesHost %>" + "/account/?returnOnSave=true&target=" + btoa(window.location.href)

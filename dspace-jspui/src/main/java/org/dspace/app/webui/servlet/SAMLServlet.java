@@ -1,22 +1,5 @@
 package org.dspace.app.webui.servlet;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.text.MessageFormat;
-import java.util.*;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.ServletException;
-
 import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
 import org.apache.commons.codec.binary.Hex;
@@ -25,14 +8,35 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
+import org.dspace.app.webui.util.Authenticate;
+import org.dspace.app.webui.util.JSPManager;
+import org.dspace.authenticate.AuthenticationMethod;
+import org.dspace.authenticate.factory.AuthenticateServiceFactory;
+import org.dspace.authenticate.service.AuthenticationService;
 import org.dspace.authorize.AuthorizeException;
-import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
 import org.dspace.services.ConfigurationService;
 import org.dspace.services.factory.DSpaceServicesFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.saml.SAMLCredential;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.text.MessageFormat;
+import java.util.*;
 
 /**
  * SAML authentication servlet.
@@ -45,7 +49,12 @@ public class SAMLServlet extends DSpaceServlet {
      */
     private static final Logger log = Logger.getLogger(SAMLServlet.class);
 
+    private final transient AuthenticationService authenticationService
+            = AuthenticateServiceFactory.getInstance().getAuthenticationService();
     private static final ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
+
+    public static final String PUBLIC_USER_TYPE = "EDIRSSO";
+    public static final String AGENCY_USER_TYPE = "Saml2In:NYC Employees";
 
     private static final String NYC_ID_USERNAME = configurationService.getProperty("nyc.id.username");
     private static final String NYC_ID_PASSWORD = configurationService.getProperty("nyc.id.password");
@@ -54,6 +63,7 @@ public class SAMLServlet extends DSpaceServlet {
     private static final String EMAIL_VALIDATION_STATUS_ENDPOINT = "/account/api/isEmailValidated.htm";
     private static final String TOU_STATUS_ENDPOINT = "/account/api/isTermsOfUseCurrent.htm";
     private static final String ENROLLMENT_ENDPOINT = "/account/api/enrollment.htm";
+    private static final String ENROLLMENT_STATUS_ENDPOINT = "/account/api/getEnrollment.htm";
     private static final String EMAIL_STATUS_CHECK_FAILURE = "Failed to check email validation status.";
     private static final String TOU_STATUS_CHECK_FAILURE = "Failed to check terms of use version.";
     private static final String ENROLLMENT_FAILURE = "Failed to enroll.";
@@ -76,10 +86,21 @@ public class SAMLServlet extends DSpaceServlet {
             return;
         }
 
-        // TODO: enrollment should happen after user is authorized in dspace
-        enrollment(credential);
-        regenerateSession(request);
-        response.sendRedirect(request.getContextPath());
+        int status = authenticationService.authenticate(context, null, null, null, request);
+
+        if (status == AuthenticationMethod.SUCCESS) {
+            // If userType is not AGENCY_USER_TYPE, enrollment is not called and user is not logged into dspace
+            // User will be redirected to the home page.
+            if (credential.getAttributeAsString("userType").equals(AGENCY_USER_TYPE)) {
+                enrollment(credential);
+                Authenticate.loggedIn(context, request, context.getCurrentUser());
+            }
+            response.sendRedirect(request.getContextPath());
+        }
+        else {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            JSPManager.showJSP(request, response, "/error/internal.jsp");
+        }
     }
 
     private static final String ALGORITHM = "HmacSHA256";
@@ -186,11 +207,21 @@ public class SAMLServlet extends DSpaceServlet {
 
         // Build string of response body
         StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-                connection.getInputStream()));
-        String inputLine;
-        while ((inputLine = in.readLine()) != null)
-            stringBuilder.append(inputLine).append("\n");
+        InputStream responseStream = null;
+
+        // Get response body
+        try {
+            responseStream = connection.getInputStream();
+        } catch (IOException e) {
+            responseStream = connection.getErrorStream();
+        }
+
+        if (responseStream != null) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(responseStream));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null)
+                stringBuilder.append(inputLine).append("\n");
+        }
 
         return new WebServicesResponse(connection.getResponseCode(), stringBuilder.toString());
     }
@@ -224,10 +255,10 @@ public class SAMLServlet extends DSpaceServlet {
      */
     private static String validateEmail(SAMLCredential credential) throws IOException {
         String redirectURL = null;
-        if (credential.getAttributeAsString("userType").equals("EDIRSSO") &&
+        if (credential.getAttributeAsString("userType").equals(PUBLIC_USER_TYPE) &&
                 credential.getAttributeAsString("nycExtEmailValidationFlag").equals("FALSE")) {
             // Store query string parameters into map
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, String> map = new HashMap<>();
             map.put("guid", credential.getAttributeAsString("guid"));
 
             // Send web services request
@@ -238,7 +269,7 @@ public class SAMLServlet extends DSpaceServlet {
             try {
                 JSONObject jsonResponse = new JSONObject(webServicesResponse.getResponseString());
                 if (!jsonResponse.getBoolean("validated")) {
-                    String targetURL = ConfigurationManager.getProperty("dspace.baseUrl") + "/saml/login";
+                    String targetURL = configurationService.getProperty("dspace.baseUrl") + "/saml/login";
                     targetURL = Base64.getEncoder().encodeToString(targetURL.getBytes());
 
                     redirectURL = MessageFormat.format("{0}://{1}{2}emailAddress={3}&target={4}",
@@ -274,7 +305,7 @@ public class SAMLServlet extends DSpaceServlet {
      */
     private static String acceptTermsOfUse(SAMLCredential credential) throws IOException {
         String redirectURL = null;
-        if (!credential.getAttributeAsString("userType").equals("Saml2In:NYC Employees")) {
+        if (!credential.getAttributeAsString("userType").equals(AGENCY_USER_TYPE)) {
             Map<String, String> map = new HashMap<>();
             map.put("guid", credential.getAttributeAsString("guid"));
             map.put("userType", credential.getAttributeAsString("userType"));
@@ -286,7 +317,7 @@ public class SAMLServlet extends DSpaceServlet {
             try {
                 JSONObject jsonResponse = new JSONObject(webServicesResponse.getResponseString());
                 if (!jsonResponse.getBoolean("current")) {
-                    String targetURL = ConfigurationManager.getProperty("dspace.baseUrl") + "/saml/login";
+                    String targetURL = configurationService.getProperty("dspace.baseUrl") + "/saml/login";
                     targetURL = Base64.getEncoder().encodeToString(targetURL.getBytes());
 
                     redirectURL = MessageFormat.format("{0}://{1}{2}target={3}",
@@ -314,45 +345,13 @@ public class SAMLServlet extends DSpaceServlet {
         map.put("guid", credential.getAttributeAsString("guid"));
         map.put("userType", credential.getAttributeAsString("userType"));
 
-        WebServicesResponse webServicesResponse = webServicesRequest(ENROLLMENT_ENDPOINT, map, "PUT");
+        // Create shallow copy of request parameters
+        Map<String, String> getEnrollmentParams = new HashMap<>(map);
 
-        checkWebServicesResponse(webServicesResponse, ENROLLMENT_FAILURE);
-    }
-
-    /**
-     * After successful SAML authentication, invalidate the current
-     * session and copy the request attributes into a new session.
-     *
-     * Since Spring's SessionRegistry is not being used, we cannot
-     * take advantage of session-management.
-     * See https://stackoverflow.com/a/28611119
-     *
-     * @param request HTTP request
-     */
-    private static void regenerateSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-
-        // Store current request attributes in a Map
-        Enumeration keys = session.getAttributeNames();
-        HashMap<String, Object> hashMap = new HashMap<>();
-        while (keys.hasMoreElements())
-        {
-            String key = (String)keys.nextElement();
-            hashMap.put(key, session.getAttribute(key));
-            session.removeAttribute(key);
-        }
-
-        // Invalidate session
-        session.invalidate();
-
-        // Give the user a new session
-        session = request.getSession(true);
-
-        // Restore request attributes from previous session
-        for (Map.Entry entry:hashMap.entrySet())
-        {
-            session.setAttribute((String)entry.getKey(), entry.getValue());
-            hashMap.remove(entry);
+        WebServicesResponse getEnrollmentResponse = webServicesRequest(ENROLLMENT_STATUS_ENDPOINT, getEnrollmentParams, "GET");
+        if (getEnrollmentResponse.getStatusCode() != 200) {
+            WebServicesResponse webServicesResponse = webServicesRequest(ENROLLMENT_ENDPOINT, map, "PUT");
+            checkWebServicesResponse(webServicesResponse, ENROLLMENT_FAILURE);
         }
     }
 

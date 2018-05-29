@@ -414,7 +414,7 @@ public class EPersonCLITool {
         // wild or regex match user/netid
         // select details (pseudo-format string)
         try {
-            for (EPerson person : ePersonService.findAll(context, EPerson.EMAIL))
+            for (EPerson person : ePersonService.findAll(context, EPerson.EMAIL, false))
             {
                 System.out.printf("%s\t%s/%s\t%s, %s\n",
                         person.getID().toString(),

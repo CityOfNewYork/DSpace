@@ -134,7 +134,7 @@ public interface EPersonService extends DSpaceObjectService<EPerson>, DSpaceObje
      *
      * @return array of EPerson objects
      */
-    public List<EPerson> findAll(Context context, int sortField)
+    public List<EPerson> findAll(Context context, int sortField, boolean agency)
             throws SQLException;
 
     /**

@@ -176,7 +176,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
 					groupService.findByName(c, Group.ANONYMOUS), null, -1, null);
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to item permission page
             request.setAttribute("edit_title", "Item " + item.getID());
@@ -203,7 +203,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
             policy = resourcePolicyService.find(c, policyId);
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to collection permission page
             request.setAttribute("edit_title", "Item " + item.getID());
@@ -228,7 +228,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
 					groupService.findByName(c, Group.ANONYMOUS), null, -1, null);
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to item permission page
             request.setAttribute("edit_title", "(Item, Bundle) = ("
@@ -256,7 +256,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
 					groupService.findByName(c, Group.ANONYMOUS), null, -1, null);
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to item permission page
             request.setAttribute("edit_title", "(Item,Bitstream) = ("
@@ -305,7 +305,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
 
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to collection permission page
             request.setAttribute("edit_title", "Collection "
@@ -398,7 +398,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
             }
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to collection permission page
             request.setAttribute("edit_title", "Collection "
@@ -435,7 +435,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
             }
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to collection permission page
             request
@@ -461,7 +461,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
 
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to collection permission page
             request.setAttribute("edit_title", "Collection "
@@ -488,7 +488,7 @@ public class AuthorizeAdminServlet extends DSpaceServlet
 
 
             List<Group> groups = groupService.findAll(c, null);
-            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL);
+            List<EPerson> epeople = personService.findAll(c, EPerson.EMAIL, false);
 
             // return to collection permission page
             request

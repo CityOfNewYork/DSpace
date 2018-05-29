@@ -51,6 +51,9 @@ public class EPersonListServlet extends DSpaceServlet
         // Are we for selecting a single or multiple epeople?
         boolean multiple = UIUtil.getBoolParameter(request, "multiple");
 
+        // Are we filtering only agency users?
+        boolean agency = UIUtil.getBoolParameter(request, "agency");
+
         // What are we sorting by. Lastname is default
         int sortBy = EPerson.LASTNAME;
 
@@ -96,7 +99,7 @@ public class EPersonListServlet extends DSpaceServlet
         else
         {
             // Retrieve the e-people in the specified order
-            epeople = personService.findAll(context, sortBy);
+            epeople = personService.findAll(context, sortBy, agency);
             request.setAttribute("offset", 0);
         }        
         

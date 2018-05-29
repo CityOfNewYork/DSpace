@@ -126,16 +126,21 @@ public class EPersonDAOImpl extends AbstractHibernateDSODAO<EPerson> implements 
     }
 
     @Override
-    public List<EPerson> findAll(Context context, MetadataField metadataSortField, String sortField) throws SQLException {
+    public List<EPerson> findAll(Context context, MetadataField metadataSortField, String sortField, MetadataField userTypeField) throws SQLException {
         String queryString = "SELECT " + EPerson.class.getSimpleName().toLowerCase() + " FROM EPerson as " + EPerson.class.getSimpleName().toLowerCase();
 
+        List<MetadataField> queryFields = ListUtils.EMPTY_LIST;
+        if (userTypeField != null) {
+            queryFields = Collections.singletonList(userTypeField);
+        }
         List<MetadataField> sortFields = ListUtils.EMPTY_LIST;
 
         if(metadataSortField!=null){
             sortFields =  Collections.singletonList(metadataSortField);
         }
 
-        Query query = getSearchQuery(context, queryString, null, ListUtils.EMPTY_LIST, sortFields, sortField);
+        Query query = getSearchQuery(context, queryString, null, queryFields, sortFields, sortField);
+
         return list(query);
 
     }
@@ -188,6 +193,13 @@ public class EPersonDAOImpl extends AbstractHibernateDSODAO<EPerson> implements 
         if(queryParam != null) {
             addMetadataValueWhereQuery(queryBuilder, queryFields, "like", EPerson.class.getSimpleName().toLowerCase() + ".email like :queryParam");
         }
+
+        // If MetadataField for userType is provided, add where clause
+        for (MetadataField metadataField : queryFields) {
+            if (metadataField.getElement().equals("userType")) {
+                queryBuilder.append(" WHERE eperson_userType.value = :userTypeValue");
+            }
+        }
         if(!CollectionUtils.isEmpty(sortFields)) {
             addMetadataSortQuery(queryBuilder, sortFields, Collections.singletonList(sortField));
         }
@@ -198,6 +210,10 @@ public class EPersonDAOImpl extends AbstractHibernateDSODAO<EPerson> implements 
         }
         for (MetadataField metadataField : metadataFieldsToJoin) {
             query.setParameter(metadataField.toString(), metadataField.getID());
+            // If MetadataField for userType is provided, add value
+            if (metadataField.getElement().equals("userType")) {
+                query.setParameter("userTypeValue", "Saml2In:NYC Employees");
+            }
         }
 
         return query;

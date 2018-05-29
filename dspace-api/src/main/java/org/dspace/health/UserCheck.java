@@ -39,7 +39,7 @@ public class UserCheck extends Check {
         String ret = "";
         Map<String, Integer> info = new HashMap<String, Integer>();
         try {
-            List<EPerson> epersons = ePersonService.findAll(context, EPerson.LASTNAME);
+            List<EPerson> epersons = ePersonService.findAll(context, EPerson.LASTNAME, false);
             info.put("Count", epersons.size());
             info.put("Can log in (password)", 0);
             info.put("Have email", 0);

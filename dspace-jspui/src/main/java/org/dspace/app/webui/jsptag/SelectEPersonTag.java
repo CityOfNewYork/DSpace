@@ -144,11 +144,16 @@ public class SelectEPersonTag extends TagSupport
                                                 "org.dspace.app.webui.jsptag.SelectEPersonTag.removeSelected")
                                         + "\" onclick=\"javascript:removeSelected(window.document.epersongroup.eperson_id);\"/>");
             }
-            
+
+            // If on on Edit Group pages, set agency query param to true to query for agency users only
+            boolean agency = false;
+            if (req.getServletPath().equals("/tools/group-edit.jsp")) {
+                agency = true;
+            }
             out.print("<input class=\"btn btn-primary pull-right\" type=\"button\" value=\"" + p
                     + "\" onclick=\"javascript:popup_window('"
                     + req.getContextPath() + "/tools/eperson-list?multiple="
-                    + multiple + "', 'eperson_popup');\" />");
+                    + multiple + "&agency=" + agency + "', 'eperson_popup');\" />");
             out.print("</div>");
         }
         catch (IOException ie)

@@ -646,7 +646,7 @@ public class RoleDisseminator implements PackageDisseminator
     {
         if(object.getType()==Constants.SITE)
         {
-            return ePersonService.findAll(context, EPerson.EMAIL);
+            return ePersonService.findAll(context, EPerson.EMAIL, false);
         }
 
         //by default, return nothing

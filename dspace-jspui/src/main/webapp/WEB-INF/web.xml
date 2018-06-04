@@ -147,6 +147,13 @@
         org.apache.commons.fileupload.servlet.FileCleanerCleanup
      </listener-class>
   </listener>
+
+    <!-- Listener to keep track of sessions -->
+    <listener>
+        <listener-class>
+            org.dspace.app.util.MySessionListener
+        </listener-class>
+    </listener>
   
 
   <!-- Load Spring applicationContext -->

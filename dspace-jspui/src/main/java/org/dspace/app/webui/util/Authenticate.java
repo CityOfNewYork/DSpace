@@ -9,7 +9,6 @@ package org.dspace.app.webui.util;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.UUID;
@@ -22,7 +21,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 
 import org.apache.log4j.Logger;
-import org.dspace.app.util.MySessionListener;
 import org.dspace.authenticate.AuthenticationMethod;
 import org.dspace.authenticate.factory.AuthenticateServiceFactory;
 import org.dspace.authenticate.service.AuthenticationService;
@@ -270,17 +268,6 @@ public class Authenticate
     	
         HttpSession session = request.getSession();
 
-//        Collection<HttpSession> sessions = MySessionListener.getSessionMap(getServletContext()).values();
-//        for (HttpSession elem : sessions) {
-//            try {
-//                EPerson sessionEPerson = EPersonServiceFactory.getInstance().getEPersonService().find(context, (UUID) elem.getAttribute("dspace.current.user.id"));
-//                if (sessionEPerson.getEmail().equals(eperson.getEmail())) {
-//                    sessions.remove(elem);
-//                }
-//            } catch (SQLException e) {
-//            }
-//        }
-
         // For security reasons after login, give the user a new session
         if ((!session.isNew()) && (session.getAttribute("dspace.current.user.id") == null))
         {
@@ -301,6 +288,9 @@ public class Authenticate
 
             // Give the user a new session
             session = request.getSession();
+
+            // Add eperson to session to invoke valueBound() of EPerson class
+            session.setAttribute("eperson", eperson);
 
             SecureRandom random = new SecureRandom();
             String randomLong = ""+random.nextLong();

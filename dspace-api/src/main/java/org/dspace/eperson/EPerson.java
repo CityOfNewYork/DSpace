@@ -20,10 +20,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.proxy.HibernateProxyHelper;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class representing an e-person.
@@ -35,7 +36,7 @@ import java.util.List;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, include = "non-lazy")
 @Table(name = "eperson")
-public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport
+public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport, HttpSessionBindingListener
 {
     @Column(name="eperson_id", insertable = false, updatable = false)
     private Integer legacyId;
@@ -70,6 +71,9 @@ public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "epeople")
     private final List<Group> groups = new ArrayList<>();
+
+    /** Map containing all logged in users */
+    private static Map<EPerson, HttpSession> authenticatedUsers = new HashMap<>();
 
     /** The e-mail field (for sorting) */
     public static final int EMAIL = 1;
@@ -123,7 +127,7 @@ public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport
             return false;
         }
         final EPerson other = (EPerson) obj;
-        if (this.getID() != other.getID())
+        if (!this.getID().equals(other.getID()))
         {
             return false;
         }
@@ -457,5 +461,30 @@ public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport
             ePersonService = EPersonServiceFactory.getInstance().getEPersonService();
         }
         return ePersonService;
+    }
+
+    /**
+     * Remove user from authenticatedUsers map and invalidate session if user is already logged in.
+     * Add new session into authenticatedUsers map.
+     *
+     * @param event the event of an object bound to a session
+     */
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+        HttpSession session = authenticatedUsers.remove(this);
+        if (session != null) {
+            session.invalidate();
+        }
+        authenticatedUsers.put(this, event.getSession());
+    }
+
+    /**
+     * Remove user from authenticatedUsers map when user logs out.
+     *
+     * @param event the event of an object unbound from a session
+     */
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event) {
+        authenticatedUsers.remove(this);
     }
 }

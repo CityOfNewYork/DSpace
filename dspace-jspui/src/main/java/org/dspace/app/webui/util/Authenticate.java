@@ -289,6 +289,9 @@ public class Authenticate
             // Give the user a new session
             session = request.getSession();
 
+            // Add eperson to session to invoke valueBound() of EPerson class
+            session.setAttribute("eperson", eperson);
+
             SecureRandom random = new SecureRandom();
             String randomLong = ""+random.nextLong();
             session.setAttribute("csrfToken", randomLong);

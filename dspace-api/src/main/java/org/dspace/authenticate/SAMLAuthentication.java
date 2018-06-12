@@ -17,6 +17,7 @@ import org.springframework.security.saml.SAMLCredential;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class SAMLAuthentication implements AuthenticationMethod {
@@ -160,6 +161,13 @@ public class SAMLAuthentication implements AuthenticationMethod {
                     return BAD_ARGS;
                 } else {
                     updateEPerson(context, credential, eperson);
+
+                    // Store string formatted user's last active timestamp in request
+                    String pattern = "EEEEE MMMMM dd yyyy HH:mm:ss";
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+                    String lastActiveDate = simpleDateFormat.format(eperson.getLastActive());
+                    request.setAttribute("last.active", lastActiveDate);
                 }
             } else {
                 eperson = registerNewEPerson(context, credential, request);

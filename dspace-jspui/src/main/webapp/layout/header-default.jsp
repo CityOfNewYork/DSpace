@@ -41,6 +41,7 @@
     String dsVersion = Util.getSourceVersion();
     String generator = dsVersion == null ? "DSpace" : "DSpace "+dsVersion;
     String analyticsKey = ConfigurationManager.getProperty("jspui.google.analytics.key");
+    String lastActive = (String) request.getAttribute("last.active");
 %>
 
 <!DOCTYPE html>
@@ -131,6 +132,14 @@
 </header>
 
 <main id="content" role="main">
+    <!-- Previous logon (access) notification -->
+    <% if (lastActive != null) { %>
+        <div class="container alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Last login: <%= lastActive %>
+        </div>
+    <% } %>
+
     <div class="container banner">
         <div class="row">
             <div class="col-md-12 brand">

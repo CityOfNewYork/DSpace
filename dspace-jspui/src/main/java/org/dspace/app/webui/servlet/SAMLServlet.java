@@ -94,6 +94,9 @@ public class SAMLServlet extends DSpaceServlet {
             if (credential.getAttributeAsString("userType").equals(AGENCY_USER_TYPE)) {
                 enrollment(credential);
                 Authenticate.loggedIn(context, request, context.getCurrentUser());
+
+                // Store user's last active time from request to session
+                request.getSession().setAttribute("last.active", request.getAttribute("last.active"));
             }
             response.sendRedirect(request.getContextPath());
         }

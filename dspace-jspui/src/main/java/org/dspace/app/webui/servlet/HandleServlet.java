@@ -299,6 +299,13 @@ public class HandleServlet extends DSpaceServlet
             request.setAttribute("dspace.communities", getParents(context, parents.get(0),
                     true));
 
+            // Store string formatted user's last active timestamp in request
+            String lastActive = (String) request.getSession().getAttribute("last.active");
+            if (lastActive != null) {
+                request.setAttribute("last.active", lastActive);
+                request.getSession().removeAttribute("last.active");
+            }
+
             // home page, or forward to another page?
             if ((extraPathInfo == null) || (extraPathInfo.equals("/")))
             {

@@ -155,6 +155,12 @@ public class SAMLAuthentication implements AuthenticationMethod {
                 credential.getAttributeAsString("GUID"),
                 credential.getAttributeAsString("userType"));
 
+        // If eperson cannot be found by guid and userType, query by email
+        if (eperson == null) {
+            eperson = ePersonService.findByEmail(context, credential.getAttributeAsString("mail"));
+        }
+
+        // Update or create user
         try {
             if (eperson != null) {
                 if (!eperson.canLogIn()) {
@@ -162,12 +168,14 @@ public class SAMLAuthentication implements AuthenticationMethod {
                 } else {
                     updateEPerson(context, credential, eperson);
 
-                    // Store string formatted user's last active timestamp in request
-                    String pattern = "EEEEE MMMMM dd yyyy HH:mm:ss";
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                    if (eperson.getLastActive() != null) {
+                        String pattern = "EEEEE MMMMM dd yyyy HH:mm:ss";
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-                    String lastActiveDate = simpleDateFormat.format(eperson.getLastActive());
-                    request.setAttribute("last.active", lastActiveDate);
+                        // Store string formatted user's last active timestamp in request
+                        String lastActiveDate = simpleDateFormat.format(eperson.getLastActive());
+                        request.setAttribute("last.active", lastActiveDate);
+                    }
                 }
             } else {
                 eperson = registerNewEPerson(context, credential, request);

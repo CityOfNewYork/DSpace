@@ -5,6 +5,8 @@
  *
  * http://www.dspace.org/license/
  */
+"use strict";
+
 submissionLookupIdentifiers = function(identInputs){
 	var mydata = new Object();
 	mydata['s_uuid'] = j('#suuid-identifier').val();

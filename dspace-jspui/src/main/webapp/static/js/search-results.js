@@ -5,6 +5,8 @@
  *
  * http://www.dspace.org/license/
  */
+"use strict";
+
 $.noConflict();
 (function ($) {
 

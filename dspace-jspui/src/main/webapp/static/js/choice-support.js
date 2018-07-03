@@ -40,6 +40,8 @@
 //
 // NOTE: Successful autocomplete always sets confidence to 'accepted' since
 //  authority value (if any) *was* chosen interactively by a human.
+"use strict";
+
 function DSpaceSetupAutocomplete(formID, args)
 {
     if (args.authorityName == null)

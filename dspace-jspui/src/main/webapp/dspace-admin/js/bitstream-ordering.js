@@ -5,6 +5,8 @@
  *
  * http://www.dspace.org/license/
  */
+"use strict";
+
 (function ($) {
     $(document).ready(function() {
         var bitstreamTable = $("table#bitstream-edit-form-table");

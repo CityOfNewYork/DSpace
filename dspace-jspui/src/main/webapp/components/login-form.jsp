@@ -38,6 +38,7 @@
   		<%--<p><a href="<%= request.getContextPath() %>/forgot"><fmt:message key="jsp.components.login-form.forgot"/></a></p>--%>
       </form>
       <script type="text/javascript">
-		document.loginform.login_email.focus();
+          "use strict";
+          document.loginform.login_email.focus();
 	  </script>
 	</div>

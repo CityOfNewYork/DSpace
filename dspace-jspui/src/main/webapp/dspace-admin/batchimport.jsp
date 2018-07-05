@@ -163,6 +163,8 @@
     </form>
     
     <script>
+		"use strict";
+
 	    $( "#import-type" ).change(function() {
 	    	var index = $("#import-type").prop("selectedIndex");
 	    	if (index <= 1){

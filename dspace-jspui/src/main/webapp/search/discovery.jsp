@@ -119,6 +119,8 @@
 
 <c:set var="dspace.layout.head.last" scope="request">
 <script type="text/javascript">
+	"use strict";
+
 	var jQ = jQuery.noConflict();
 	jQ(document).ready(function() {
 		jQ( "#spellCheckQuery").click(function(){

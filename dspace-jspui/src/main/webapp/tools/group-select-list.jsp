@@ -83,6 +83,7 @@
 		
 <script type="text/javascript">
 <!-- Begin
+"use strict";
 
 // Add the selected items to main group list by calling method of parent
 function addGroup(id, name)

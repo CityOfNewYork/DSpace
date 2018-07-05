@@ -117,6 +117,8 @@
     </form>
     <script type="text/javascript">
 <!--
+"use strict";
+
 jQuery("#licenseclass_chooser").change(function() {
     var make_id = jQuery(this).find(":selected").val();
     var request = jQuery.ajax({

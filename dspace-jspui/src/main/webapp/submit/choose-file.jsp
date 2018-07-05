@@ -63,6 +63,8 @@
         <% if (bSherpa) { %>
             <link rel="stylesheet" href="<%=request.getContextPath()%>/sherpa/css/sherpa.css" type="text/css" />
             <script type="text/javascript">
+                "use strict";
+
                 jQuery(document).ready(function(html){
                     jQuery.ajax({
                         url: '<%= request.getContextPath() + "/tools/sherpaPolicy" %>', 
@@ -79,6 +81,8 @@
             <!-- CSS adjustments for browsers with JavaScript disabled -->
             <noscript><link rel="stylesheet" href="<%= request.getContextPath() %>/static/css/jquery.fileupload-ui-noscript.css"></noscript>
             <script type="text/javascript">
+                "use strict";
+
                 var bootstrapButton = $.fn.button.noConflict(); // return $.fn.button to previously assigned value
                 $.fn.bootstrapBtn = bootstrapButton;            // give $().bootstrapBtn the Bootstrap functionality
 
@@ -446,6 +450,8 @@
                     </div>
                 </div>
                 <script>
+                    "use strict";
+
                     $(document).ready(function(){
                         var fileWithErrors = [];
                         var invalidCharWarningDiv = $('#file-invalid-char-warning');

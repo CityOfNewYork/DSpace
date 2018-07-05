@@ -85,7 +85,8 @@
         }, 1000);
     }
 
-    $("#logout").click(function (e) {
+    // Use jQuery instead of $ because Prototype.js loads after jQuery and overwrites $
+    jQuery("#logout").click(function (e) {
         e.preventDefault();
         var logoutPage = this.href;
         idpLogout(function() {
@@ -95,7 +96,7 @@
 
     // TODO: SAMLProfile Servlet (NYC.ID web service)
     <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
-        $("#profile-link").attr(
+        jQuery("#profile-link").attr(
             "href",
             "<%= webServicesScheme %>" + "://" + "<%= webServicesHost %>" + "/account/?returnOnSave=true&target=" + btoa(window.location.href)
         );

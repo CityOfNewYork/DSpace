@@ -41,6 +41,7 @@
 
 
   <script type="text/javascript">
+    "use strict";
 	<%
 		if(request.getParameter("ID")!=null) {
 			session.setAttribute("controlledvocabulary.ID", request.getParameter("ID"));

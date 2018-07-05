@@ -43,6 +43,8 @@
 %>
 <c:set var="dspace.layout.head.last" scope="request">
 <script type="text/javascript">
+    "use strict";
+
 var j = jQuery.noConflict();
 </script>
 </c:set>

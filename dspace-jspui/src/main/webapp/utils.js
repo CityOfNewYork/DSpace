@@ -8,6 +8,7 @@
 /*
  * Utility Javascript methods for DSpace
  */
+"use strict";
 
 // Popup window - here so it can be referred to by several methods
 var popupWindow;
@@ -256,8 +257,8 @@ function isMicrosoft() {
 
 
 function isBrowser(b,v) {
-		  browserOk = false;
-		  versionOk = false;
+		  var browserOk = false;
+		  var versionOk = false;
 
 		  browserOk = (navigator.appName.indexOf(b) != -1);
 		  if (v == 0) versionOk = true;

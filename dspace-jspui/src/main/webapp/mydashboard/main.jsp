@@ -477,6 +477,8 @@
 	<%} %>
 	
 	<script>
+        "use strict";
+
 		function showMoreClicked(index){
 			$('#moreinfo_'+index).toggle( "slow", function() {
 				// Animation complete.

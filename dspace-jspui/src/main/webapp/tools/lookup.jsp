@@ -137,6 +137,7 @@
   </fieldset>
 </form>
 <script type="text/javascript">
+        "use strict";
         var form = document.getElementById('aspect_general_ChoiceLookupTransformer_div_lookup');
         DSpaceChoicesSetup(form);
 </script>

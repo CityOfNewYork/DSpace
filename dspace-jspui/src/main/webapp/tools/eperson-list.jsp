@@ -143,6 +143,7 @@
 							
 <script type="text/javascript">
 <!-- Begin
+"use strict";
 
 // Add the selected items to main e-people list by calling method of parent
 function addEPerson(id, email, name)

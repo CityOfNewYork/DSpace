@@ -389,6 +389,8 @@
 	   <a href="<%= request.getContextPath() %>/mydashboard"><fmt:message key="jsp.general.mydspace" /></a>
 	   </p>
 	<script type="text/javascript"><!--
+		"use strict";
+
     	var j = jQuery.noConflict();
     	j("#tabs").tabs({
     		beforeActivate: function( event, ui ) {

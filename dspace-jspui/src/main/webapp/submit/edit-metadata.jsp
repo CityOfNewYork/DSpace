@@ -182,6 +182,7 @@
                   .append("</span><div id=\"").append(fieldInput).append("_autocomplete\" class=\"autocomplete\" style=\"display: none;\"> </div>");
 
                 sb.append("<script type=\"text/javascript\">")
+                  .append("\"use strict\";")
                   .append("var gigo = DSpaceSetupAutocomplete('edit_metadata',")
                   .append("{ metadataField: '").append(fieldName).append("', isClosed: '").append(required?"true":"false").append("', inputName: '")
                   .append(fieldInput).append("', authorityName: '").append(authorityName).append("', containerID: '")

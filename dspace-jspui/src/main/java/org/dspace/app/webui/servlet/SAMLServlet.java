@@ -76,12 +76,14 @@ public class SAMLServlet extends DSpaceServlet {
 
         String validateEmailURL = validateEmail(credential);
         if (validateEmailURL != null && !validateEmailURL.isEmpty()) {
+            SecurityContextHolder.clearContext();
             response.sendRedirect(validateEmailURL);
             return;
         }
 
         String termsOfUseURL = acceptTermsOfUse(credential);
         if (termsOfUseURL != null && !termsOfUseURL.isEmpty()) {
+            SecurityContextHolder.clearContext();
             response.sendRedirect(termsOfUseURL);
             return;
         }

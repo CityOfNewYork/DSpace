@@ -33,7 +33,7 @@ public class LogManager
     public static String getHeader(Context context, String action,
             String extrainfo)
     {
-        String email = "anonymous";
+        String userID = "anonymous";
         String contextExtraInfo;
 
         if (context != null)
@@ -42,7 +42,7 @@ public class LogManager
 
             if (e != null)
             {
-                email = e.getEmail();
+                userID = e.getID().toString();
             }
 
             contextExtraInfo = context.getExtraLogInfo();
@@ -57,7 +57,7 @@ public class LogManager
         // Escape everthing but the extra context info because for some crazy reason two fields
         // are generated inside this entry one for the session id, and another for the ip 
         // address. Everything else should be escaped.
-        result.append(escapeLogField(email)).append(":").append(contextExtraInfo).append(":").append(escapeLogField(action)).append(":").append(escapeLogField(extrainfo));
+        result.append(escapeLogField(userID)).append(":").append(contextExtraInfo).append(":").append(escapeLogField(action)).append(":").append(escapeLogField(extrainfo));
         return result.toString();
     }
     

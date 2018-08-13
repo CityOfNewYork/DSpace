@@ -46,6 +46,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -259,18 +260,30 @@ public class MyDashboardServlet extends DSpaceServlet
         }
         else if (buttonPressed.equals("submit_delete"))
         {
+            HttpSession session = request.getSession();
+
             // User clicked on a "Remove" button for a workspace item
-            if (workspaceItem != null)
+            if ((session.getAttribute("mydashboard.page").equals("remove") ||
+                    (Integer) session.getAttribute("mydashboard.step") == MAIN_PAGE)
+                    && workspaceItem != null)
             {
                 log.info(LogManager.getHeader(context, "confirm_removal",
-                        "workspace_item_id=" + workspaceItem.getID()));
+                        "workspace_item_id=" +           workspaceItem.getID()));
 
                 request.setAttribute("workspace.item", workspaceItem);
+
+                // Store step and page into session to protect page navigation flow
+                session.setAttribute("mydashboard.step", REMOVE_ITEM_PAGE);
+                session.setAttribute("mydashboard.page", "remove");
                 JSPManager.showJSP(request, response,
                         "/mydashboard/remove-item.jsp");
             }
             else
             {
+                // User attempted to skip steps
+                session.removeAttribute("mydashboard.step");
+                session.removeAttribute("mydashboard.page");
+
                 log.warn(LogManager.getHeader(context, "integrity_error",
                         UIUtil.getRequestLogInfo(request)));
                 JSPManager.showIntegrityError(request, response);
@@ -373,12 +386,26 @@ public class MyDashboardServlet extends DSpaceServlet
         if (buttonPressed.equals("submit_delete"))
         {
             // User has clicked on "delete"
-            log.info(LogManager.getHeader(context, "remove_submission",
-                    "workspace_item_id=" + workspaceItem.getID() + ",item_id="
-                            + workspaceItem.getItem().getID()));
-            workspaceItemService.deleteAll(context, workspaceItem);
-            showMainPage(context, request, response);
-            context.complete();
+            HttpSession session = request.getSession();
+
+            if ((Integer) session.getAttribute("mydashboard.step") == REMOVE_ITEM_PAGE) {
+                // User is coming from remove item page
+                log.info(LogManager.getHeader(context, "remove_submission",
+                        "workspace_item_id=" + workspaceItem.getID() + ",item_id="
+                                + workspaceItem.getItem().getID()));
+                workspaceItemService.deleteAll(context, workspaceItem);
+                session.removeAttribute("mydashboard.page");
+                showMainPage(context, request, response);
+                context.complete();
+            }
+            else {
+                // User attempted to skip steps
+                session.removeAttribute("mydashboard.step");
+                session.removeAttribute("mydashboard.page");
+                log.warn(LogManager.getHeader(context, "integrity_error",
+                        UIUtil.getRequestLogInfo(request)));
+                JSPManager.showIntegrityError(request, response);
+            }
         }
         else 
         {
@@ -887,6 +914,15 @@ public class MyDashboardServlet extends DSpaceServlet
         request.setAttribute("supervised.items", supervisedItems);
         request.setAttribute("export.archives", exportArchives);
         request.setAttribute("import.uploads", importUploads);
+
+        // Set dashboard step
+        HttpSession session = request.getSession();
+        session.setAttribute("mydashboard.step", 0);
+        session.setAttribute("mydashboard.page", "main");
+
+        if (session.getAttribute("step") != null) {
+            session.removeAttribute("step");
+        }
 
         // Forward to main mydspace page
         JSPManager.showJSP(request, response, "/mydashboard/main.jsp");

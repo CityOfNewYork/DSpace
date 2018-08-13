@@ -595,6 +595,9 @@ public class SubmissionController extends DSpaceServlet
                
                 // save our current Submission information into the Request object
                 saveSubmissionInfo(request, subInfo);
+
+                // remove step from session
+                request.getSession().removeAttribute("step");
     
                 // forward to completion JSP
                 showProgressAwareJSP(request, response, subInfo, COMPLETE_JSP);
@@ -1143,7 +1146,7 @@ public class SubmissionController extends DSpaceServlet
             HttpServletRequest request, SubmissionInfo si)
     {
         int stepNum = -1;
-        SubmissionStepConfig step = (SubmissionStepConfig) request
+        SubmissionStepConfig step = (SubmissionStepConfig) request.getSession()
                 .getAttribute("step");
 
         if (step == null)
@@ -1179,7 +1182,8 @@ public class SubmissionController extends DSpaceServlet
             SubmissionStepConfig step)
     {
         // save to request
-        request.setAttribute("step", step);
+        request.getSession().setAttribute("step", step);
+//        request.setAttribute("step", step);
     }
 
     /**

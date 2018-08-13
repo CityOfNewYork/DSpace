@@ -1183,7 +1183,6 @@ public class SubmissionController extends DSpaceServlet
     {
         // save to request
         request.getSession().setAttribute("step", step);
-//        request.setAttribute("step", step);
     }
 
     /**

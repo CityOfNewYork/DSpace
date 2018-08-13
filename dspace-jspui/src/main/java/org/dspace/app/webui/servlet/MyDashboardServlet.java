@@ -268,7 +268,7 @@ public class MyDashboardServlet extends DSpaceServlet
                     && workspaceItem != null)
             {
                 log.info(LogManager.getHeader(context, "confirm_removal",
-                        "workspace_item_id=" +           workspaceItem.getID()));
+                        "workspace_item_id=" + workspaceItem.getID()));
 
                 request.setAttribute("workspace.item", workspaceItem);
 
@@ -917,7 +917,7 @@ public class MyDashboardServlet extends DSpaceServlet
 
         // Set dashboard step
         HttpSession session = request.getSession();
-        session.setAttribute("mydashboard.step", 0);
+        session.setAttribute("mydashboard.step", MAIN_PAGE);
         session.setAttribute("mydashboard.page", "main");
 
         if (session.getAttribute("step") != null) {

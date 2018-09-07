@@ -106,9 +106,20 @@
         <property name="searchFilters">
             <list>
                 <ref bean="searchFilterTitle" />
+                <ref bean="searchFilterSubTitle" />
                 <ref bean="searchFilterAuthor" />
+                <ref bean="searchFilterAdditionalCreator" />
                 <ref bean="searchFilterSubject" />
+                <ref bean="searchFilterDescription" />
                 <ref bean="searchFilterIssued" />
+                <ref bean="searchFilterReportType" />
+                <ref bean="searchFilterLanguage" />
+                <ref bean="searchFilterAssociatedYearFiscal" />
+                <ref bean="searchFilterAssociatedYearCalendar" />
+                <ref bean="searchFilterAssociatedBorough" />
+                <ref bean="searchFilterAssociatedSchool" />
+                <ref bean="searchFilterAssociatedCommunity" />
+                <ref bean="searchFilterAssociatedPlace" />
 		        <ref bean="searchFilterContentInOriginalBundle"/>
             </list>
         </property>
@@ -213,9 +224,20 @@
         <property name="searchFilters">
             <list>
                 <ref bean="searchFilterTitle" />
+                <ref bean="searchFilterSubTitle" />
                 <ref bean="searchFilterAuthor" />
+                <ref bean="searchFilterAdditionalCreator" />
                 <ref bean="searchFilterSubject" />
+                <ref bean="searchFilterDescription" />
                 <ref bean="searchFilterIssued" />
+                <ref bean="searchFilterReportType" />
+                <ref bean="searchFilterLanguage" />
+                <ref bean="searchFilterAssociatedYearFiscal" />
+                <ref bean="searchFilterAssociatedYearCalendar" />
+                <ref bean="searchFilterAssociatedBorough" />
+                <ref bean="searchFilterAssociatedSchool" />
+                <ref bean="searchFilterAssociatedCommunity" />
+                <ref bean="searchFilterAssociatedPlace" />
 		        <ref bean="searchFilterContentInOriginalBundle"/>
             </list>
         </property>
@@ -373,6 +395,15 @@
         </property>
     </bean>
 
+    <bean id="searchFilterSubTitle" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="subTitle"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.title.alternative</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="searchFilterAuthor" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="author"/>
         <property name="metadataFields">
@@ -384,6 +415,15 @@
         <property name="facetLimit" value="10"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
+    </bean>
+
+    <bean id="searchFilterAdditionalCreator" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="additionalCreator"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.contributor.other</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="searchFilterSubject" class="org.dspace.discovery.configuration.HierarchicalSidebarFacetConfiguration">
@@ -399,6 +439,15 @@
         <property name="splitter" value="::"/>
     </bean>
 
+    <bean id="searchFilterDescription" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="description"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.description.abstract</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="searchFilterIssued" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="dateIssued"/>
         <property name="metadataFields">
@@ -410,7 +459,79 @@
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
-    
+
+    <bean id="searchFilterReportType" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="reportType"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.type</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterLanguage" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="language"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.language.iso</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterAssociatedYearFiscal" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="associatedYearFiscal"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.coverage.temporal-fiscal</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterAssociatedYearCalendar" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="associatedYearCalendar"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.coverage.temporal-calendar</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterAssociatedBorough" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="associatedBorough"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.coverage.spatial-borough</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterAssociatedSchool" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="associatedSchool"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.coverage.spatial-school-district</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterAssociatedCommunity" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="associatedCommunity"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.coverage.spatial-community-board-district</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterAssociatedPlace" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="associatedPlace"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.coverage.spatial-place</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="searchFilterContentInOriginalBundle" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="has_content_in_original_bundle"/>
         <property name="metadataFields">

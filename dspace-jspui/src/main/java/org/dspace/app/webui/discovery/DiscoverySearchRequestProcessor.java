@@ -314,6 +314,12 @@ public class DiscoverySearchRequestProcessor implements SearchRequestProcessor
             for (Community com : topCommunities)
             {
                 scopes.add(com);
+
+                // add collections to options in location field
+                for (Collection coll : com.getCollections())
+                {
+                    scopes.add(coll);
+                }
             }
         }
         else

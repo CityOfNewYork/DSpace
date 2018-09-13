@@ -96,7 +96,12 @@
             <list>
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterSubject" />
-                <ref bean="searchFilterIssued" />
+                <ref bean="searchFilterReportType" />
+                <!--<ref bean="searchFilterIssued" />-->
+                <ref bean="searchFilterLanguage" />
+                <ref bean="searchFilterAssociatedYearFiscal" />
+                <ref bean="searchFilterAssociatedYearCalendar" />
+                <ref bean="searchFilterAssociatedBorough" />
 		        <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
@@ -214,8 +219,13 @@
             <list>
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterSubject" />
-                <ref bean="searchFilterIssued" />
-		        <ref bean="searchFilterContentInOriginalBundle"/>
+                <ref bean="searchFilterReportType" />
+                <ref bean="searchFilterLanguage" />
+                <!--<ref bean="searchFilterIssued" />-->
+                <ref bean="searchFilterAssociatedYearFiscal" />
+                <ref bean="searchFilterAssociatedYearCalendar" />
+                <ref bean="searchFilterAssociatedBorough" />
+                <ref bean="searchFilterContentInOriginalBundle"/>
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -460,49 +470,64 @@
         <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterReportType" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+    <bean id="searchFilterReportType" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="reportType"/>
         <property name="metadataFields">
             <list>
                 <value>dc.type</value>
             </list>
         </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterLanguage" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+    <bean id="searchFilterLanguage" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="language"/>
         <property name="metadataFields">
             <list>
                 <value>dc.language.iso</value>
             </list>
         </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterAssociatedYearFiscal" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+    <bean id="searchFilterAssociatedYearFiscal" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="associatedYearFiscal"/>
         <property name="metadataFields">
             <list>
                 <value>dc.coverage.temporal-fiscal</value>
             </list>
         </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterAssociatedYearCalendar" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+    <bean id="searchFilterAssociatedYearCalendar" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="associatedYearCalendar"/>
         <property name="metadataFields">
             <list>
                 <value>dc.coverage.temporal-calendar</value>
             </list>
         </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
-    <bean id="searchFilterAssociatedBorough" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+    <bean id="searchFilterAssociatedBorough" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="associatedBorough"/>
         <property name="metadataFields">
             <list>
                 <value>dc.coverage.spatial-borough</value>
             </list>
         </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
     </bean>
 
     <bean id="searchFilterAssociatedSchool" class="org.dspace.discovery.configuration.DiscoverySearchFilter">

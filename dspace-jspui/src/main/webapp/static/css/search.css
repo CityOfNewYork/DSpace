@@ -1,0 +1,8 @@
+#advanced-options-toggle {
+    color: #337ab7;
+    cursor: pointer;
+}
+
+#advanced-options-toggle:hover {
+    text-decoration: underline;
+}

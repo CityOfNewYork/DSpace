@@ -117,6 +117,8 @@
     boolean admin_button = (admin_b == null ? false : admin_b.booleanValue());
 %>
 
+<link rel="stylesheet" href="<%= request.getContextPath() %>/static/css/search.css" type="text/css" />
+
 <c:set var="dspace.layout.head.last" scope="request">
 <script type="text/javascript">
 	"use strict";
@@ -261,9 +263,11 @@
 <% } %>
 <a class="btn btn-default" href="<%= request.getContextPath()+"/simple-search" %>"><fmt:message key="jsp.search.general.new-search" /></a>	
 		</form>
+		<span id="advanced-options-toggle">Advanced Search Options&nbsp;<span
+				class="glyphicon glyphicon-chevron-down"></span></span>
 		</div>
 <% if (availableFilters.size() > 0) { %>
-		<div class="discovery-search-filters panel-body">
+		<div class="discovery-search-filters panel-body advanced-search-options" style="display: none;">
 		<h5><fmt:message key="jsp.search.filter.heading" /></h5>
 		<p class="discovery-search-filters-hint"><fmt:message key="jsp.search.filter.hint" /></p>
 		<form action="simple-search" method="get">
@@ -309,7 +313,7 @@
 		</div>        
 <% } %>
         <%-- Include a component for modifying sort by, order, results per page, and et-al limit --%>
-   <div class="discovery-pagination-controls panel-footer">
+   <div class="discovery-pagination-controls panel-footer advanced-search-options" style="display: none;">
    <form action="simple-search" method="get">
    <input type="hidden" value="<%= Utils.addEntities(searchScope) %>" name="location" />
    <input type="hidden" value="<%= Utils.addEntities(query) %>" name="query" />
@@ -414,6 +418,14 @@
     }
 %>
 </form>
+	   <script type="text/javascript">
+           "use strict";
+           // Toggle advanced search options (hide/show) and glyphicons directions on click
+           jQ("#advanced-options-toggle").click(function() {
+               jQ(this).find("span").toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+               jQ(".advanced-search-options").toggle('hidden');
+           });
+	   </script>
    </div>
 </div>   
 <% 
@@ -756,7 +768,6 @@ else
 	}
 
 %>
-
 </div>
 <% } %>
 </dspace:sidebar>

@@ -92,12 +92,12 @@ import com.google.gson.Gson;
  * "previous version ID verification" screen) have numbers much higher than
  * SUBMISSION_COMPLETE. These conventions allow the progress bar component of
  * the submission forms to render the user's progress through the process.
- * 
+ *
  * @see org.dspace.app.util.SubmissionInfo
  * @see org.dspace.app.util.SubmissionConfig
  * @see org.dspace.app.util.SubmissionStepConfig
  * @see org.dspace.app.webui.submit.JSPStepManager
- * 
+ *
  * @author Tim Donohue
  * @version $Revision$
  */
@@ -110,52 +110,52 @@ public class SubmissionController extends DSpaceServlet
 
     /** First step after "select collection" */
     public static final int FIRST_STEP = 1;
-    
+
     /** For workflows, first step is step #0 (since Select Collection is already filtered out) */
     public static final int WORKFLOW_FIRST_STEP = 0;
-    
+
     /** path to the JSP shown once the submission is completed */
     private static final String COMPLETE_JSP = "/submit/complete.jsp";
-    
+
     private String tempDir = null;
-    
+
     private static Object mutex = new Object();
-    
+
     /** log4j logger */
     private static Logger log = Logger
             .getLogger(SubmissionController.class);
 
     private static WorkspaceItemService workspaceItemService;
-    
+
     private static BitstreamService bitstreamService;
-    
+
     private static BundleService bundleService;
-    
+
     private static WorkflowItemService workflowItemService;
-    
+
     @Override
     public void init() throws ServletException {
-    	super.init();
-    	// this is a sort of HACK as we are injecting static services using the singleton nature of the servlet...
-    	workspaceItemService = ContentServiceFactory.getInstance().getWorkspaceItemService();
-    	bitstreamService = ContentServiceFactory.getInstance().getBitstreamService();
-    	bundleService = ContentServiceFactory.getInstance().getBundleService();
-    	workflowItemService = BasicWorkflowServiceFactory.getInstance().getBasicWorkflowItemService();    	
+        super.init();
+        // this is a sort of HACK as we are injecting static services using the singleton nature of the servlet...
+        workspaceItemService = ContentServiceFactory.getInstance().getWorkspaceItemService();
+        bitstreamService = ContentServiceFactory.getInstance().getBitstreamService();
+        bundleService = ContentServiceFactory.getInstance().getBundleService();
+        workflowItemService = BasicWorkflowServiceFactory.getInstance().getBasicWorkflowItemService();
     }
-    
+
     protected void doDSGet(Context context, HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException,
+                           HttpServletResponse response) throws ServletException, IOException,
             SQLException, AuthorizeException
     {
         /*
          * Possible GET parameters:
-         * 
+         *
          * resume= <workspace_item_id> - Resumes submitting the given workspace
          * item
-         * 
+         *
          * workflow= <workflow_id> - Starts editing the given workflow item in
          * workflow mode
-         * 
+         *
          * With no parameters, doDSGet() just calls doDSPost(), which continues
          * the current submission (if one exists in the Request), or creates a
          * new submission (if no existing submission can be found).
@@ -177,7 +177,7 @@ public class SubmissionController extends DSpaceServlet
 
                 //load submission information
                 SubmissionInfo si = SubmissionInfo.load(request, wi);
-                
+
                 //TD: Special case - If a user is resuming a submission
                 //where the submission process now has less steps, then
                 //we will need to reset the stepReached in the database
@@ -187,17 +187,17 @@ public class SubmissionController extends DSpaceServlet
                     //update Stage Reached to the last step in the Process
                     int lastStep = si.getSubmissionConfig().getNumberOfSteps()-1;
                     wi.setStageReached(lastStep);
-                    
+
                     //flag that user is on last page of last step
                     wi.setPageReached(AbstractProcessingStep.LAST_PAGE_REACHED);
-                    
+
                     //commit all changes to database immediately
                     workspaceItemService.update(context, wi);
-                    
+
                     //update submission info
                     si.setSubmissionItem(wi);
                 }
-                    
+
                 // start over at beginning of first step
                 setBeginningOfStep(request, true);
                 doStep(context, request, response, si, FIRST_STEP);
@@ -220,7 +220,7 @@ public class SubmissionController extends DSpaceServlet
 
                 //load submission information
                 SubmissionInfo si = SubmissionInfo.load(request, wi);
-                
+
                 // start over at beginning of first workflow step
                 setBeginningOfStep(request, true);
                 doStep(context, request, response, si, WORKFLOW_FIRST_STEP);
@@ -249,12 +249,12 @@ public class SubmissionController extends DSpaceServlet
     }
 
     protected void doDSPost(Context context, HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException,
+                            HttpServletResponse response) throws ServletException, IOException,
             SQLException, AuthorizeException
     {
-    	// Configuration of current step in Item Submission Process
+        // Configuration of current step in Item Submission Process
         SubmissionStepConfig currentStepConfig;
-        
+
         //need to find out what type of form we are dealing with
         String contentType = request.getContentType();
 
@@ -265,74 +265,76 @@ public class SubmissionController extends DSpaceServlet
         {
             try
             {
-                    // check if the POST request was send by resumable.js
-                    String resumableFilename = request.getParameter("resumableFilename");
-                    
-                    if (!StringUtils.isEmpty(resumableFilename))
+                // check if the POST request was send by resumable.js
+                String resumableFilename = request.getParameter("resumableFilename");
+
+                if (!StringUtils.isEmpty(resumableFilename))
+                {
+                    log.debug("resumable Filename: '" + resumableFilename + "'.");
+                    File completedFile = null;
+                    try
                     {
-                        log.debug("resumable Filename: '" + resumableFilename + "'.");
-                        File completedFile = null;
-                        try
-                        {
-                            log.debug("Starting doPostResumable method.");
-                            completedFile = doPostResumable(request);
-                        } catch(IOException e){
-                            // we were unable to receive the complete chunk => initialize reupload
-                            response.sendError(HttpServletResponse.SC_REQUESTED_RANGE_NOT_SATISFIABLE);
-                        }
-                        
-                        if (completedFile == null)
-                        {
-                            // if a part/chunk was uploaded, but the file is not completly uploaded yet
-                            log.debug("Got one file chunk, but the upload is not completed yet.");
-                            return;
-                        }
-                        else
-                        {
-                            // We got the complete file. Assemble it and store
-                            // it in the repository.
-                            log.debug("Going to assemble file chunks.");
+                        log.debug("Starting doPostResumable method.");
+                        completedFile = doPostResumable(request);
+                    } catch(IOException e){
+                        // we were unable to receive the complete chunk => initialize reupload
+                        response.sendError(HttpServletResponse.SC_REQUESTED_RANGE_NOT_SATISFIABLE);
+                    } catch(NullPointerException e) {
+                        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    }
 
-                            if (completedFile.length() > 0)
+                    if (completedFile == null)
+                    {
+                        // if a part/chunk was uploaded, but the file is not completly uploaded yet
+                        log.debug("Got one file chunk, but the upload is not completed yet.");
+                        return;
+                    }
+                    else
+                    {
+                        // We got the complete file. Assemble it and store
+                        // it in the repository.
+                        log.debug("Going to assemble file chunks.");
+
+                        if (completedFile.length() > 0)
+                        {
+                            String fileName = completedFile.getName();
+                            String filePath = tempDir + File.separator + fileName;
+                            // Read the temporary file
+                            InputStream fileInputStream =
+                                    new BufferedInputStream(new FileInputStream(completedFile));
+
+                            // to safely store the file in the repository
+                            // we have to add it as a bitstream to the
+                            // appropriate item (or to be specific its
+                            // bundle). Instead of rewriting this code,
+                            // we should use the same code, that's used for
+                            // the "old" file upload (which is not using JS).
+                            SubmissionInfo si = getSubmissionInfo(context, request);
+                            UploadStep us = new UploadStep();
+                            request.setAttribute(fileName + "-path", filePath);
+                            request.setAttribute(fileName + "-inputstream", fileInputStream);
+                            request.setAttribute(fileName + "-description", request.getParameter("description"));
+                            int uploadResult = us.processUploadFile(context, request, response, si, completedFile);
+
+                            // cleanup our temporary file
+                            if (!completedFile.delete())
                             {
-                                String fileName = completedFile.getName();
-                                String filePath = tempDir + File.separator + fileName;
-                                // Read the temporary file
-                                InputStream fileInputStream = 
-                                        new BufferedInputStream(new FileInputStream(completedFile));
-                                
-                                // to safely store the file in the repository
-                                // we have to add it as a bitstream to the
-                                // appropriate item (or to be specific its
-                                // bundle). Instead of rewriting this code,
-                                // we should use the same code, that's used for
-                                // the "old" file upload (which is not using JS).
-                                SubmissionInfo si = getSubmissionInfo(context, request);
-                                UploadStep us = new UploadStep();
-                                request.setAttribute(fileName + "-path", filePath);
-                                request.setAttribute(fileName + "-inputstream", fileInputStream);
-                                request.setAttribute(fileName + "-description", request.getParameter("description"));
-                                int uploadResult = us.processUploadFile(context, request, response, si, completedFile);
-
-                                // cleanup our temporary file
-                                if (!completedFile.delete())
-                                {
-                                    log.error("Unable to delete temporary file " + filePath);
-                                }
-
-                                // We already assembled the complete file.
-                                // In case of any error it won't help to
-                                // reupload the last chunk. That makes the error
-                                // handling realy easy:
-                                if (uploadResult != UploadStep.STATUS_COMPLETE)
-                                {
-                                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                                    return;
-                                }
+                                log.error("Unable to delete temporary file " + filePath);
                             }
-                            return;
+
+                            // We already assembled the complete file.
+                            // In case of any error it won't help to
+                            // reupload the last chunk. That makes the error
+                            // handling realy easy:
+                            if (uploadResult != UploadStep.STATUS_COMPLETE)
+                            {
+                                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                                return;
+                            }
                         }
-                   }
+                        return;
+                    }
+                }
             }
             catch (FileSizeLimitExceededException e)
             {
@@ -358,7 +360,7 @@ public class SubmissionController extends DSpaceServlet
             //also, upload any files and save their contents to Request (for later processing by UploadStep)
             uploadFiles(context, request);
         }
-        
+
         // Reload submission info from request parameters
         SubmissionInfo subInfo = getSubmissionInfo(context, request);
 
@@ -391,10 +393,10 @@ public class SubmissionController extends DSpaceServlet
         // First, check for a click on "Cancel/Save" button.
         if (UIUtil.getSubmitButton(request, "").equals(AbstractProcessingStep.CANCEL_BUTTON))
         {
-        	// Get the current step
+            // Get the current step
             currentStepConfig = getCurrentStepConfig(request, subInfo);
-            
-        	// forward user to JSP which will confirm 
+
+            // forward user to JSP which will confirm
             // the cancel/save request.
             doCancelOrSave(context, request, response, subInfo,
                     currentStepConfig);
@@ -419,7 +421,7 @@ public class SubmissionController extends DSpaceServlet
             //if user already confirmed the cancel/save request
             if (UIUtil.getBoolParameter(request, "cancellation"))
             {
-                // user came from the cancel/save page, 
+                // user came from the cancel/save page,
                 // so we need to process that page before proceeding
                 processCancelOrSave(context, request, response, subInfo, currentStepConfig);
             }
@@ -439,7 +441,7 @@ public class SubmissionController extends DSpaceServlet
             }
             else
             {
-                // by default, load step class to start 
+                // by default, load step class to start
                 // or continue its processing
                 doStep(context, request, response, subInfo, currentStepConfig.getStepNumber());
             }
@@ -448,7 +450,7 @@ public class SubmissionController extends DSpaceServlet
 
     /**
      * Forward processing to the specified step.
-     * 
+     *
      * @param context
      *            DSpace context
      * @param request
@@ -461,12 +463,12 @@ public class SubmissionController extends DSpaceServlet
      *            The number of the step to perform
      */
     private void doStep(Context context, HttpServletRequest request,
-            HttpServletResponse response, SubmissionInfo subInfo, int stepNumber)
+                        HttpServletResponse response, SubmissionInfo subInfo, int stepNumber)
             throws ServletException, IOException, SQLException,
             AuthorizeException
     {
-    	SubmissionStepConfig currentStepConfig = null;
-    	
+        SubmissionStepConfig currentStepConfig = null;
+
         if (subInfo.getSubmissionConfig() != null)
         {
             // get step to perform
@@ -486,11 +488,11 @@ public class SubmissionController extends DSpaceServlet
         {
             // update submission info
             userHasReached(context, subInfo, currentStepConfig.getStepNumber());
-            
+
             // flag that we just started this step (for JSPStepManager class)
             setBeginningOfStep(request, true);
         }
-       
+
         // save current step to request attribute
         saveCurrentStepConfig(request, currentStepConfig);
 
@@ -499,12 +501,12 @@ public class SubmissionController extends DSpaceServlet
 
         try
         {
-            
+
             JSPStepManager stepManager = JSPStepManager.loadStep(currentStepConfig);
-           
+
             //tell the step class to do its processing
             boolean stepFinished = stepManager.processStep(context, request, response, subInfo);
-            
+
             //if this step is finished, continue to next step
             if(stepFinished)
             {
@@ -514,10 +516,10 @@ public class SubmissionController extends DSpaceServlet
                 {
                     request = ((FileUploadRequest)request).getOriginalRequest();
                 }
-                
+
                 //retrieve any changes to the SubmissionInfo object
                 subInfo = getSubmissionInfo(context, request);
-                
+
                 //do the next step!
                 doNextStep(context, request, response, subInfo, currentStepConfig);
             }
@@ -529,7 +531,7 @@ public class SubmissionController extends DSpaceServlet
         }
         catch (AuthorizeException ae)
         {
-        	throw ae;
+            throw ae;
         }
         catch (Exception e)
         {
@@ -541,7 +543,7 @@ public class SubmissionController extends DSpaceServlet
 
     /**
      * Forward processing to the next step.
-     * 
+     *
      * @param context
      *            DSpace context
      * @param request
@@ -552,7 +554,7 @@ public class SubmissionController extends DSpaceServlet
      *            SubmissionInfo pertaining to this submission
      */
     private void doNextStep(Context context, HttpServletRequest request,
-            HttpServletResponse response, SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig)
+                            HttpServletResponse response, SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig)
             throws ServletException, IOException, SQLException,
             AuthorizeException
     {
@@ -573,7 +575,7 @@ public class SubmissionController extends DSpaceServlet
         {
             // update the current step & do this step
             currentStepNum++;
-            
+
             //flag that we are going to the start of this next step (for JSPStepManager class)
             setBeginningOfStep(request, true);
 
@@ -581,7 +583,7 @@ public class SubmissionController extends DSpaceServlet
         }
         else
         {
-            //if this submission is in the workflow process, 
+            //if this submission is in the workflow process,
             //forward user back to relevant task page
             if(subInfo.isInWorkflow())
             {
@@ -592,16 +594,16 @@ public class SubmissionController extends DSpaceServlet
             else
             {
                 // The Submission is COMPLETE!!
-               
+
                 // save our current Submission information into the Request object
                 saveSubmissionInfo(request, subInfo);
 
                 // remove step from session
                 request.getSession().removeAttribute("step");
-    
+
                 // forward to completion JSP
                 showProgressAwareJSP(request, response, subInfo, COMPLETE_JSP);
-        
+
             }
         }
     }
@@ -609,7 +611,7 @@ public class SubmissionController extends DSpaceServlet
     /**
      * Forward processing to the previous step. This method is called if it is
      * determined that the "previous" button was pressed.
-     * 
+     *
      * @param context
      *            DSpace context
      * @param request
@@ -620,12 +622,12 @@ public class SubmissionController extends DSpaceServlet
      *            SubmissionInfo pertaining to this submission
      */
     private void doPreviousStep(Context context, HttpServletRequest request,
-            HttpServletResponse response, SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig)
+                                HttpServletResponse response, SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig)
             throws ServletException, IOException, SQLException,
             AuthorizeException
     {
         int result = doSaveCurrentState(context, request, response, subInfo, currentStepConfig);
-        
+
         // find current Step number
         int currentStepNum;
         if (currentStepConfig == null)
@@ -641,32 +643,32 @@ public class SubmissionController extends DSpaceServlet
         double currStepAndPage = Double.parseDouble(currentStepNum+"."+currPage);
         // default value if we are in workflow
         double stepAndPageReached = -1;
-        
+
         if (!subInfo.isInWorkflow())
         {
             stepAndPageReached = Double.parseDouble(getStepReached(subInfo)+"."+JSPStepManager.getPageReached(subInfo));
         }
-        
+
         if (result != AbstractProcessingStep.STATUS_COMPLETE && currStepAndPage != stepAndPageReached)
         {
             doStep(context, request, response, subInfo, currentStepNum);
         }
-        
+
         //Check to see if we are actually just going to a
         //previous PAGE within the same step.
         int currentPageNum = AbstractProcessingStep.getCurrentPage(request);
-        
+
         boolean foundPrevious = false;
-        
+
         //since there are pages before this one in this current step
         //just go backwards one page.
         if(currentPageNum > 1)
         {
             //decrease current page number
             AbstractProcessingStep.setCurrentPage(request, currentPageNum-1);
-     
+
             foundPrevious = true;
-            
+
             //send user back to the beginning of same step!
             //NOTE: the step should handle going back one page
             // in its doPreProcessing() method
@@ -674,33 +676,33 @@ public class SubmissionController extends DSpaceServlet
 
             doStep(context, request, response, subInfo, currentStepNum);
         }
-        // Since we cannot go back one page, 
-        // check if there is a step before this step. 
+        // Since we cannot go back one page,
+        // check if there is a step before this step.
         // If so, go backwards one step
         else if (currentStepNum > FIRST_STEP)
         {
-            
+
             currentStepConfig = getPreviousVisibleStep(request, subInfo);
-            
+
             if(currentStepConfig != null)
             {
                 currentStepNum = currentStepConfig.getStepNumber();
                 foundPrevious = true;
             }
-                
+
             if(foundPrevious)
-            {    
+            {
                 //flag to JSPStepManager that we are going backwards
                 //an entire step
                 request.setAttribute("step.backwards", Boolean.TRUE);
-                
+
                 // flag that we are going back to the start of this step (for JSPStepManager class)
                 setBeginningOfStep(request, true);
-    
+
                 doStep(context, request, response, subInfo, currentStepNum);
-            }    
+            }
         }
-        
+
         //if there is no previous, visible step, throw an error!
         if(!foundPrevious)
         {
@@ -717,7 +719,7 @@ public class SubmissionController extends DSpaceServlet
     /**
      * Process a click on a button in the progress bar. This jumps to the step
      * whose button was pressed.
-     * 
+     *
      * @param context
      *            DSpace context object
      * @param request
@@ -728,7 +730,7 @@ public class SubmissionController extends DSpaceServlet
      *            SubmissionInfo pertaining to this submission
      */
     private void doStepJump(Context context, HttpServletRequest request,
-            HttpServletResponse response, SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig)
+                            HttpServletResponse response, SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig)
             throws ServletException, IOException, SQLException,
             AuthorizeException
     {
@@ -804,12 +806,12 @@ public class SubmissionController extends DSpaceServlet
             double currStepAndPage = Double.parseDouble(currStep + "." + currPage);
             // default value if we are in workflow
             double stepAndPageReached = -1;
-            
+
             if (!subInfo.isInWorkflow())
             {
                 stepAndPageReached = Double.parseDouble(getStepReached(subInfo)+"."+JSPStepManager.getPageReached(subInfo));
             }
-            
+
             if (result != AbstractProcessingStep.STATUS_COMPLETE
                     && currStepAndPage != stepAndPageReached)
             {
@@ -835,11 +837,11 @@ public class SubmissionController extends DSpaceServlet
     }
 
     /**
-     * Respond to the user clicking "cancel/save" 
+     * Respond to the user clicking "cancel/save"
      * from any of the steps.  This method first calls
-     * the "doPostProcessing()" method of the step, in 
+     * the "doPostProcessing()" method of the step, in
      * order to ensure any inputs are saved.
-     * 
+     *
      * @param context
      *            DSpace context
      * @param request
@@ -852,8 +854,8 @@ public class SubmissionController extends DSpaceServlet
      *            config of step who's page the user clicked "cancel" on.
      */
     private void doCancelOrSave(Context context, HttpServletRequest request,
-            HttpServletResponse response, SubmissionInfo subInfo,
-            SubmissionStepConfig stepConfig) throws ServletException, IOException,
+                                HttpServletResponse response, SubmissionInfo subInfo,
+                                SubmissionStepConfig stepConfig) throws ServletException, IOException,
             SQLException, AuthorizeException
     {
         // If this is a workflow item, we need to return the
@@ -861,7 +863,7 @@ public class SubmissionController extends DSpaceServlet
         if (subInfo.isInWorkflow())
         {
             int result = doSaveCurrentState(context, request, response, subInfo, stepConfig);
-            
+
             if (result == AbstractProcessingStep.STATUS_COMPLETE)
             {
                 request.setAttribute("workflow.item", subInfo.getSubmissionItem());
@@ -888,22 +890,22 @@ public class SubmissionController extends DSpaceServlet
                 //tell the step class to do its processing (to save any inputs)
                 //but, send flag that this is a "cancellation"
                 setCancellationInProgress(request, true);
-                
+
                 int result = doSaveCurrentState(context, request, response, subInfo,
                         stepConfig);
-                
+
                 int currStep=stepConfig.getStepNumber();
                 int currPage=AbstractProcessingStep.getCurrentPage(request);
                 double currStepAndPage = Float.parseFloat(currStep+"."+currPage);
                 double stepAndPageReached = Float.parseFloat(getStepReached(subInfo)+"."+JSPStepManager.getPageReached(subInfo));
-                
+
                 if (result != AbstractProcessingStep.STATUS_COMPLETE && currStepAndPage < stepAndPageReached){
                     setReachedStepAndPage(context, subInfo, currStep, currPage);
                 }
-                
+
                 //commit & close context
                 context.complete();
-                
+
                 // save changes to submission info & step info for JSP
                 saveSubmissionInfo(request, subInfo);
                 saveCurrentStepConfig(request, stepConfig);
@@ -916,8 +918,8 @@ public class SubmissionController extends DSpaceServlet
     }
 
     private int doSaveCurrentState(Context context,
-            HttpServletRequest request, HttpServletResponse response,
-            SubmissionInfo subInfo, SubmissionStepConfig stepConfig)
+                                   HttpServletRequest request, HttpServletResponse response,
+                                   SubmissionInfo subInfo, SubmissionStepConfig stepConfig)
             throws ServletException
     {
         int result = -1;
@@ -961,7 +963,7 @@ public class SubmissionController extends DSpaceServlet
      * Process information from "submission cancelled" page.
      * This saves the item if the user decided to "cancel & save",
      * or removes the item if the user decided to "cancel & remove".
-     * 
+     *
      * @param context
      *            current DSpace context
      * @param request
@@ -972,8 +974,8 @@ public class SubmissionController extends DSpaceServlet
      *            submission info object
      */
     private void processCancelOrSave(Context context,
-            HttpServletRequest request, HttpServletResponse response,
-            SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig) throws ServletException, IOException,
+                                     HttpServletRequest request, HttpServletResponse response,
+                                     SubmissionInfo subInfo, SubmissionStepConfig currentStepConfig) throws ServletException, IOException,
             SQLException, AuthorizeException
     {
         String buttonPressed = UIUtil.getSubmitButton(request, "submit_back");
@@ -1017,7 +1019,7 @@ public class SubmissionController extends DSpaceServlet
 
     /**
      * Show a JSP after setting attributes needed by progress bar
-     * 
+     *
      * @param request
      *            the request object
      * @param response
@@ -1028,7 +1030,7 @@ public class SubmissionController extends DSpaceServlet
      *            relative path to JSP
      */
     private static void showProgressAwareJSP(HttpServletRequest request,
-            HttpServletResponse response, SubmissionInfo subInfo, String jspPath)
+                                             HttpServletResponse response, SubmissionInfo subInfo, String jspPath)
             throws ServletException, IOException
     {
         saveSubmissionInfo(request, subInfo);
@@ -1039,19 +1041,19 @@ public class SubmissionController extends DSpaceServlet
     /**
      * Reloads a filled-out submission info object from the parameters in the
      * current request. If there is a problem, <code>null</code> is returned.
-     * 
+     *
      * @param context
      *            DSpace context
      * @param request
      *            HTTP request
-     * 
+     *
      * @return filled-out submission info, or null
      */
     public static SubmissionInfo getSubmissionInfo(Context context,
-            HttpServletRequest request) throws SQLException, ServletException
+                                                   HttpServletRequest request) throws SQLException, ServletException
     {
         SubmissionInfo info = null;
-        
+
         // Is full Submission Info in Request Attribute?
         if (request.getAttribute("submission.info") != null)
         {
@@ -1060,20 +1062,20 @@ public class SubmissionController extends DSpaceServlet
         }
         else
         {
-            
-            
+
+
             // Need to rebuild Submission Info from Request Parameters
             if (request.getParameter("workflow_id") != null)
             {
                 int workflowID = UIUtil.getIntParameter(request, "workflow_id");
-                
+
                 info = SubmissionInfo.load(request, workflowItemService.find(context, workflowID));
             }
             else if(request.getParameter("workspace_item_id") != null)
             {
                 int workspaceID = UIUtil.getIntParameter(request,
                         "workspace_item_id");
-                
+
                 info = SubmissionInfo.load(request, workspaceItemService.find(context, workspaceID));
             }
             else
@@ -1081,7 +1083,7 @@ public class SubmissionController extends DSpaceServlet
                 //by default, initialize Submission Info with no item
                 info = SubmissionInfo.load(request, null);
             }
-            
+
             // We must have a submission object if after the first step,
             // otherwise something is wrong!
             if ((getStepReached(info) > FIRST_STEP)
@@ -1092,7 +1094,7 @@ public class SubmissionController extends DSpaceServlet
                         "InProgressSubmission is null!"));
                 return null;
             }
-               
+
 
             if (request.getParameter("bundle_id") != null)
             {
@@ -1116,30 +1118,30 @@ public class SubmissionController extends DSpaceServlet
 
     /**
      * Saves the submission info object to the current request.
-     * 
+     *
      * @param request
      *            HTTP request
      * @param si
      *            the current submission info
-     * 
+     *
      */
     public static void saveSubmissionInfo(HttpServletRequest request,
-            SubmissionInfo si)
+                                          SubmissionInfo si)
     {
         // save to request
         request.setAttribute("submission.info", si);
     }
 
     /**
-     * Get the configuration of the current step from parameters in the request, 
-     * along with the current SubmissionInfo object. 
+     * Get the configuration of the current step from parameters in the request,
+     * along with the current SubmissionInfo object.
      * If there is a problem, <code>null</code> is returned.
-     * 
+     *
      * @param request
      *            HTTP request
      * @param si
      *            The current SubmissionInfo object
-     * 
+     *
      * @return the current SubmissionStepConfig
      */
     public static SubmissionStepConfig getCurrentStepConfig(
@@ -1172,14 +1174,14 @@ public class SubmissionController extends DSpaceServlet
 
     /**
      * Saves the current step configuration into the request.
-     * 
+     *
      * @param request
      *            HTTP request
      * @param step
      *            The current SubmissionStepConfig
      */
     public static void saveCurrentStepConfig(HttpServletRequest request,
-            SubmissionStepConfig step)
+                                             SubmissionStepConfig step)
     {
         // save to request
         request.getSession().setAttribute("step", step);
@@ -1188,51 +1190,51 @@ public class SubmissionController extends DSpaceServlet
     /**
      * Checks if the current step is also the first "visibile" step in the item submission
      * process.
-     * 
+     *
      * @param request
      *            HTTP request
      * @param si
      *            The current Submission Info
-     * 
+     *
      * @return whether or not the current step is the first step
      */
     public static boolean isFirstStep(HttpServletRequest request,
-            SubmissionInfo si)
+                                      SubmissionInfo si)
     {
         SubmissionStepConfig step = getCurrentStepConfig(request, si);
 
         return ((step != null) && (getPreviousVisibleStep(request, si) == null));
     }
-    
+
     /**
      * Return the previous "visibile" step in the item submission
      * process if any, <code>null</code> otherwise.
-     * 
+     *
      * @param request
      *            HTTP request
      * @param si
      *            The current Submission Info
-     * 
+     *
      * @return the previous step in the item submission process if any
      */
     public static SubmissionStepConfig getPreviousVisibleStep(HttpServletRequest request,
-            SubmissionInfo si)
+                                                              SubmissionInfo si)
     {
         SubmissionStepConfig step = getCurrentStepConfig(request, si);
 
         SubmissionStepConfig currentStepConfig, previousStep = null;
 
         int currentStepNum = step.getStepNumber();
-        
+
         //need to find a previous step that is VISIBLE to the user!
         while(currentStepNum>FIRST_STEP)
         {
             // update the current step & do this previous step
             currentStepNum--;
-        
+
             //get previous step
             currentStepConfig = si.getSubmissionConfig().getStep(currentStepNum);
-        
+
             if(currentStepConfig.isVisible())
             {
                 previousStep = currentStepConfig;
@@ -1247,10 +1249,10 @@ public class SubmissionController extends DSpaceServlet
      * if we've done any pre-processing yet. If the step is just started, we
      * need to do pre-processing, otherwise we should be doing post-processing.
      * If there is a problem, <code>false</code> is returned.
-     * 
+     *
      * @param request
      *            HTTP request
-     * 
+     *
      * @return true if the step has just started (and JSP has not been loaded
      *         for this step), false otherwise.
      */
@@ -1273,27 +1275,27 @@ public class SubmissionController extends DSpaceServlet
      * if we've done any pre-processing yet. If the step is just started, we
      * need to do pre-processing, otherwise we should be doing post-processing.
      * If there is a problem, <code>false</code> is returned.
-     * 
+     *
      * @param request
      *            HTTP request
      * @param beginningOfStep
      *            true if step just began
      */
     public static void setBeginningOfStep(HttpServletRequest request,
-            boolean beginningOfStep)
+                                          boolean beginningOfStep)
     {
         request.setAttribute("step.start", Boolean.valueOf(beginningOfStep));
     }
 
-    
+
     /**
-     * Get whether or not a cancellation is in progress (i.e. the 
+     * Get whether or not a cancellation is in progress (i.e. the
      * user clicked on the "Cancel/Save" button from any submission
      * page).
-     * 
+     *
      * @param request
      *            HTTP request
-     *            
+     *
      * @return true if a cancellation is in progress
      */
     public static boolean isCancellationInProgress(HttpServletRequest request)
@@ -1309,12 +1311,12 @@ public class SubmissionController extends DSpaceServlet
             return false;
         }
     }
-    
+
     /**
-     * Sets whether or not a cancellation is in progress (i.e. the 
+     * Sets whether or not a cancellation is in progress (i.e. the
      * user clicked on the "Cancel/Save" button from any submission
      * page).
-     * 
+     *
      * @param request
      *            HTTP request
      * @param cancellationInProgress
@@ -1324,12 +1326,12 @@ public class SubmissionController extends DSpaceServlet
     {
         request.setAttribute("submission.cancellation", Boolean.valueOf(cancellationInProgress));
     }
-    
-    
+
+
     /**
      * Return the submission info as hidden parameters for an HTML form on a JSP
      * page.
-     * 
+     *
      * @param context
      *            DSpace context
      * @param request
@@ -1337,7 +1339,7 @@ public class SubmissionController extends DSpaceServlet
      * @return HTML hidden parameters
      */
     public static String getSubmissionParameters(Context context,
-            HttpServletRequest request) throws SQLException, ServletException
+                                                 HttpServletRequest request) throws SQLException, ServletException
     {
         SubmissionInfo si = getSubmissionInfo(context, request);
 
@@ -1385,7 +1387,7 @@ public class SubmissionController extends DSpaceServlet
         // save the current JSP name to a hidden variable
         String jspDisplayed = JSPStepManager.getLastJSPDisplayed(request);
         info = info + "<input type=\"hidden\" name=\"jsp\" value=\""
-                   + Utils.addEntities(jspDisplayed) + "\"/>";
+                + Utils.addEntities(jspDisplayed) + "\"/>";
 
         HttpSession session = request.getSession();
         info = info + "<input type=\"hidden\" name=\"csrf_token\" value=\""
@@ -1394,7 +1396,7 @@ public class SubmissionController extends DSpaceServlet
         return info;
     }
 
-   
+
 
     /**
      * Indicate the user has advanced to the given stage. This will only
@@ -1403,7 +1405,7 @@ public class SubmissionController extends DSpaceServlet
      * where a user has reached. Whenever the "stage reached" column is
      * increased, the "page reached" column is reset to 1, since you've now
      * reached page #1 of the next stage.
-     * 
+     *
      * @param subInfo
      *            the SubmissionInfo object pertaining to the current submission
      * @param step
@@ -1420,23 +1422,23 @@ public class SubmissionController extends DSpaceServlet
             {
                 wi.setStageReached(step);
                 wi.setPageReached(1); // reset page reached back to 1 (since
-                                        // it's page 1 of the new step)
+                // it's page 1 of the new step)
                 workspaceItemService.update(c, wi);
             }
         }
     }
-    
+
     /**
-    * Set a specific step and page as reached. 
-    * It will also "set back" where a user has reached.
-    * 
-    * @param subInfo
+     * Set a specific step and page as reached.
+     * It will also "set back" where a user has reached.
+     *
+     * @param subInfo
      *            the SubmissionInfo object pertaining to the current submission
-    * @param step the step to set as reached, can be also a previous reached step
-    * @param page the page (within the step) to set as reached, can be also a previous reached page
-    */
+     * @param step the step to set as reached, can be also a previous reached step
+     * @param page the page (within the step) to set as reached, can be also a previous reached page
+     */
     private void setReachedStepAndPage(Context c, SubmissionInfo subInfo, int step,
-            int page) throws SQLException, AuthorizeException, IOException
+                                       int page) throws SQLException, AuthorizeException, IOException
     {
         if (!subInfo.isInWorkflow() && subInfo.getSubmissionItem() != null)
         {
@@ -1448,14 +1450,14 @@ public class SubmissionController extends DSpaceServlet
         }
     }
 
-    
+
     /**
      * Find out which step a user has reached in the submission process. If the
      * submission is in the workflow process, this returns -1.
-     * 
+     *
      * @param subInfo
      *            submission info object
-     * 
+     *
      * @return step reached
      */
     public static int getStepReached(SubmissionInfo subInfo)
@@ -1481,13 +1483,13 @@ public class SubmissionController extends DSpaceServlet
         }
     }
 
-    
+
     /**
      * Wraps a multipart form request, so that its attributes and parameters can
      * still be accessed as normal.
-     * 
+     *
      * @return wrapped multipart request object
-     * 
+     *
      * @throws ServletException
      *             if there are no more pages in this step
      */
@@ -1521,12 +1523,12 @@ public class SubmissionController extends DSpaceServlet
             throw new ServletException(e);
         }
     }
-    
-    
+
+
     /**
-     * Upload any files found on the Request or in assembledFiles, and save them back as 
+     * Upload any files found on the Request or in assembledFiles, and save them back as
      * Request attributes, for further processing by the appropriate user interface.
-     * 
+     *
      * @param context
      *            current DSpace context
      * @param request
@@ -1552,18 +1554,18 @@ public class SubmissionController extends DSpaceServlet
                 // Wrap multipart request to get the submission info
                 wrapper = new FileUploadRequest(request);
             }
-            
+
             log.debug("Did not recoginze resumable upload, falling back to "
                     + "simple upload.");
             Enumeration fileParams = wrapper.getFileParameterNames();
-            while (fileParams.hasMoreElements()) 
+            while (fileParams.hasMoreElements())
             {
                 String fileName = (String) fileParams.nextElement();
 
                 File temp = wrapper.getFile(fileName);
 
                 //if file exists and has a size greater than zero
-                if (temp != null && temp.length() > 0) 
+                if (temp != null && temp.length() > 0)
                 {
                     // Read the temp file into an inputstream
                     fileInputStream = new BufferedInputStream(
@@ -1572,7 +1574,7 @@ public class SubmissionController extends DSpaceServlet
                     filePath = wrapper.getFilesystemName(fileName);
 
                     // cleanup our temp file
-                    if (!temp.delete()) 
+                    if (!temp.delete())
                     {
                         log.error("Unable to delete temporary file");
                     }
@@ -1591,11 +1593,11 @@ public class SubmissionController extends DSpaceServlet
             throw new ServletException(e);
         }
     }
-    
-    // Resumable.js uses HTTP Get to recognize whether a specific part/chunk of 
+
+    // Resumable.js uses HTTP Get to recognize whether a specific part/chunk of
     // a file was uploaded already. This method handles those requests.
-    protected void DoGetResumable(HttpServletRequest request, HttpServletResponse response) 
-        throws IOException
+    protected void DoGetResumable(HttpServletRequest request, HttpServletResponse response)
+            throws IOException
     {
         if (ConfigurationManager.getProperty("upload.temp.dir") != null)
         {
@@ -1608,8 +1610,16 @@ public class SubmissionController extends DSpaceServlet
 
         String resumableIdentifier = request.getParameter("resumableIdentifier");
         String resumableChunkNumber = request.getParameter("resumableChunkNumber");
-        long resumableCurrentChunkSize = 
-                Long.valueOf(request.getParameter("resumableCurrentChunkSize"));
+
+        long resumableCurrentChunkSize;
+        try {
+            resumableCurrentChunkSize = Long.valueOf(request.getParameter("resumableCurrentChunkSize"));
+        }
+        catch (NumberFormatException e)
+        {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
         tempDir = tempDir + File.separator + resumableIdentifier;
 
@@ -1629,7 +1639,7 @@ public class SubmissionController extends DSpaceServlet
                 response.setStatus(HttpServletResponse.SC_OK);
                 return;
             }
-            // The chunk file does not have the expected size, delete it and 
+            // The chunk file does not have the expected size, delete it and
             // pretend that it wasn't uploaded already.
             chunkFile.delete();
         }
@@ -1641,11 +1651,11 @@ public class SubmissionController extends DSpaceServlet
     // If a chunk was the last missing one, we have to assemble the file and
     // return it. If other chunks are missing, we just return null.
     protected File doPostResumable(HttpServletRequest request)
-            throws FileSizeLimitExceededException, IOException, ServletException 
+            throws FileSizeLimitExceededException, IOException, ServletException
     {
         File completedFile = null;
         FileUploadRequest wrapper = null;
-        
+
         if (ConfigurationManager.getProperty("upload.temp.dir") != null)
         {
             tempDir = ConfigurationManager.getProperty("upload.temp.dir");
@@ -1653,14 +1663,14 @@ public class SubmissionController extends DSpaceServlet
         else {
             tempDir = System.getProperty("java.io.tmpdir");
         }
-        
+
         try
         {
             // if we already have a FileUploadRequest, use it
             if (Class.forName("org.dspace.app.webui.util.FileUploadRequest").isInstance(request))
             {
                 wrapper = (FileUploadRequest) request;
-            } 
+            }
             else // if not wrap the mulitpart request to get the submission info
             {
                 wrapper = new FileUploadRequest(request);
@@ -1681,15 +1691,15 @@ public class SubmissionController extends DSpaceServlet
         File chunkDirPathFile = new File(chunkDirPath);
         boolean foundAll = true;
         long currentSize = 0l;
-        
+
         // check whether all chunks were received.
         if(chunkDirPathFile.exists())
         {
-            for (int p = 1; p <= resumableTotalChunks; p++) 
+            for (int p = 1; p <= resumableTotalChunks; p++)
             {
                 File file = new File(chunkDirPath + File.separator + "part" + Integer.toString(p));
 
-                if (!file.exists()) 
+                if (!file.exists())
                 {
                     foundAll = false;
                     break;
@@ -1697,14 +1707,14 @@ public class SubmissionController extends DSpaceServlet
                 currentSize += file.length();
             }
         }
-        
-        if (foundAll && currentSize >= resumableTotalSize) 
+
+        if (foundAll && currentSize >= resumableTotalSize)
         {
             try {
                 // assemble the file from it chunks.
                 File file = makeFileFromChunks(tempDir, chunkDirPathFile, wrapper);
-            
-                if (file != null) 
+
+                if (file != null)
                 {
                     completedFile = file;
                 }
@@ -1716,11 +1726,14 @@ public class SubmissionController extends DSpaceServlet
             }
         }
 
+        if (resumableTotalChunks == Integer.valueOf(wrapper.getParameter("resumableChunkNumber")) && completedFile == null) {
+            throw new NullPointerException("File cannot be null if resumable has finished uploading");
+        }
         return completedFile;
     }
-    
+
     // assembles a file from it chunks
-    protected File makeFileFromChunks(String tmpDir, File chunkDirPath, HttpServletRequest request) 
+    protected File makeFileFromChunks(String tmpDir, File chunkDirPath, HttpServletRequest request)
             throws IOException
     {
         int resumableTotalChunks = Integer.valueOf(request.getParameter("resumableTotalChunks"));
@@ -1737,10 +1750,10 @@ public class SubmissionController extends DSpaceServlet
             destFile.createNewFile();
             os = new FileOutputStream(destFile);
 
-            for (int i = 1; i <= resumableTotalChunks; i++) 
+            for (int i = 1; i <= resumableTotalChunks; i++)
             {
                 File fi = new File(chunkPath.concat(Integer.toString(i)));
-                try 
+                try
                 {
                     is = new FileInputStream(fi);
 
@@ -1748,50 +1761,50 @@ public class SubmissionController extends DSpaceServlet
 
                     int lenght;
 
-                    while ((lenght = is.read(buffer)) > 0) 
+                    while ((lenght = is.read(buffer)) > 0)
                     {
                         os.write(buffer, 0, lenght);
                     }
-                } 
-                catch (IOException e) 
+                }
+                catch (IOException e)
                 {
                     // try to delete destination file, as we got an exception while writing it.
                     if(!destFile.delete())
                     {
                         log.warn("While writing an uploaded file an error occurred. "
-                                + "We were unable to delete the damaged file: " 
+                                + "We were unable to delete the damaged file: "
                                 + destFile.getAbsolutePath() + ".");
                     }
                     // throw IOException to handle it in the calling method
                     throw e;
                 }
             }
-        } 
-        finally 
+        }
+        finally
         {
-            try 
+            try
             {
-                if (is != null) 
+                if (is != null)
                 {
                     is.close();
                 }
-            } 
-            catch (IOException ex) 
+            }
+            catch (IOException ex)
             {
                 // nothing to do here
             }
-            try 
+            try
             {
-                if (os != null) 
+                if (os != null)
                 {
                     os.close();
                 }
-            } 
-            catch (IOException ex) 
+            }
+            catch (IOException ex)
             {
                 // nothing to do here
             }
-            if (!deleteDirectory(chunkDirPath)) 
+            if (!deleteDirectory(chunkDirPath))
             {
                 log.warn("Coudln't delete temporary upload path " + chunkDirPath.getAbsolutePath() + ", ignoring it.");
             }
@@ -1799,24 +1812,24 @@ public class SubmissionController extends DSpaceServlet
         return destFile;
     }
 
-    public boolean deleteDirectory(File path) 
+    public boolean deleteDirectory(File path)
     {
-        if (path.exists()) 
+        if (path.exists())
         {
             File[] files = path.listFiles();
-            for (int i = 0; i < files.length; i++) 
+            for (int i = 0; i < files.length; i++)
             {
-                if (files[i].isDirectory()) 
+                if (files[i].isDirectory())
                 {
                     deleteDirectory(files[i]);
-                } 
-                else 
+                }
+                else
                 {
                     files[i].delete();
                 }
             }
         }
-        
+
         return (path.delete());
     }
 

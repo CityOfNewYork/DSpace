@@ -18,7 +18,7 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util-3.0.xsd"
-    default-autowire-candidates="*Service,*DAO,javax.sql.DataSource">
+       default-autowire-candidates="*Service,*DAO,javax.sql.DataSource">
 
     <context:annotation-config /> <!-- allows us to use spring annotations in beans -->
 
@@ -27,7 +27,7 @@
     <bean id="solrServiceMetadataBrowseIndexingPlugin" class="org.dspace.discovery.SolrServiceMetadataBrowseIndexingPlugin" scope="prototype"/>
 
     <alias name="solrServiceResourceIndexPlugin" alias="org.dspace.discovery.SolrServiceResourceRestrictionPlugin"/>
-    
+
     <!-- Additional indexing plugin make filtering by has content in original bundle (like pdf's, images) posible via SOLR -->
     <bean id="hasContentInOriginalBundle" class="org.dspace.discovery.SolrServiceContentInOriginalBundleFilterPlugin"/>
 
@@ -40,11 +40,11 @@
                     the value-ref is a reference to an identifier of the DiscoveryConfiguration format
                     -->
                 <!--The default entry, DO NOT REMOVE the system requires this-->
-               <entry key="default" value-ref="defaultConfiguration" />
+                <entry key="default" value-ref="defaultConfiguration" />
 
-               <!--Use site to override the default configuration for the home page & default discovery page-->
-               <entry key="site" value-ref="homepageConfiguration" />
-               <!--<entry key="123456789/7621" value-ref="defaultConfiguration"/>-->
+                <!--Use site to override the default configuration for the home page & default discovery page-->
+                <entry key="site" value-ref="homepageConfiguration" />
+                <!--<entry key="123456789/7621" value-ref="defaultConfiguration"/>-->
             </map>
         </property>
         <property name="toIgnoreMetadataFields">
@@ -97,12 +97,10 @@
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterReportType" />
-                <!--<ref bean="searchFilterIssued" />-->
                 <ref bean="searchFilterLanguage" />
                 <ref bean="searchFilterAssociatedYearFiscal" />
                 <ref bean="searchFilterAssociatedYearCalendar" />
                 <ref bean="searchFilterAssociatedBorough" />
-		        <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -125,7 +123,6 @@
                 <ref bean="searchFilterAssociatedSchool" />
                 <ref bean="searchFilterAssociatedCommunity" />
                 <ref bean="searchFilterAssociatedPlace" />
-		        <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -221,11 +218,9 @@
                 <ref bean="searchFilterSubject" />
                 <ref bean="searchFilterReportType" />
                 <ref bean="searchFilterLanguage" />
-                <!--<ref bean="searchFilterIssued" />-->
                 <ref bean="searchFilterAssociatedYearFiscal" />
                 <ref bean="searchFilterAssociatedYearCalendar" />
                 <ref bean="searchFilterAssociatedBorough" />
-                <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -248,7 +243,6 @@
                 <ref bean="searchFilterAssociatedSchool" />
                 <ref bean="searchFilterAssociatedCommunity" />
                 <ref bean="searchFilterAssociatedPlace" />
-		        <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
         <!--The sort filters for the discovery search (same as defaultConfiguration above)-->
@@ -315,8 +309,8 @@
             </list>
         </property>
     </bean>
-    
-     <!--TagCloud configuration bean for default discovery configuration-->
+
+    <!--TagCloud configuration bean for default discovery configuration-->
     <bean id="defaultTagCloudFacetConfiguration" class="org.dspace.discovery.configuration.TagCloudFacetConfiguration">
         <!-- Actual configuration of the tagcloud (colors, sorting, etc.) -->
         <property name="tagCloudConfiguration" ref="tagCloudConfiguration"/>
@@ -327,74 +321,74 @@
             </list>
         </property>
     </bean>
-    
+
     <bean id="tagCloudConfiguration" class="org.dspace.discovery.configuration.TagCloudConfiguration">
-		<!-- Should display the score of each tag next to it? Default: false -->
-		<!-- <property name="displayScore" value="true"/> -->
-		
-		<!-- Should display the tag as center aligned in the page or left aligned? Possible values: true | false. Default: true  -->
-		<!-- <property name="shouldCenter" value="true"/> -->
-		
-		<!-- How many tags will be shown. Value -1 means all of them. Default: -1 -->
-		<!--<property name="totalTags" value="-1"/> -->
-		
-		<!-- The letter case of the tags. 
-			 Possible values: Case.LOWER | Case.UPPER | Case.CAPITALIZATION | Case.PRESERVE_CASE | Case.CASE_SENSITIVE
-			 Default: Case.PRESERVE_CASE -->
-		<!--<property name="cloudCase" value="Case.PRESERVE_CASE"/> -->
-		
-		<!-- If the 3 colors of the tag cloud should be independent of score (random=yes) or based on the score. Possible values: true | false . Default: true-->
-		<!-- <property name="randomColors" value="true"/> -->
+        <!-- Should display the score of each tag next to it? Default: false -->
+        <!-- <property name="displayScore" value="true"/> -->
 
-		<!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 1.1 -->
-		<!-- <property name="fontFrom" value="1.1"/>-->
-		
-		<!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 3.2 -->
-		<!-- <property name="fontTo" value="3.2"/>-->
-		
-		<!-- The score that tags with lower than that will not appear in the rag cloud. Possible values: any integer from 1 to infinity. Default: 0 -->
-		<!-- <property name="cuttingLevel" value="0"/>-->
+        <!-- Should display the tag as center aligned in the page or left aligned? Possible values: true | false. Default: true  -->
+        <!-- <property name="shouldCenter" value="true"/> -->
 
-		<!-- The ordering of the tags (based either on the name or the score of the tag)
-			 Possible values: Tag.NameComparatorAsc | Tag.NameComparatorDesc | Tag.ScoreComparatorAsc | Tag.ScoreComparatorDesc
-			 Default: Tag.NameComparatorAsc  -->
-		<!-- <property name="ordering" value="Tag.NameComparatorAsc"/>-->	
+        <!-- How many tags will be shown. Value -1 means all of them. Default: -1 -->
+        <!--<property name="totalTags" value="-1"/> -->
+
+        <!-- The letter case of the tags.
+             Possible values: Case.LOWER | Case.UPPER | Case.CAPITALIZATION | Case.PRESERVE_CASE | Case.CASE_SENSITIVE
+             Default: Case.PRESERVE_CASE -->
+        <!--<property name="cloudCase" value="Case.PRESERVE_CASE"/> -->
+
+        <!-- If the 3 colors of the tag cloud should be independent of score (random=yes) or based on the score. Possible values: true | false . Default: true-->
+        <!-- <property name="randomColors" value="true"/> -->
+
+        <!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 1.1 -->
+        <!-- <property name="fontFrom" value="1.1"/>-->
+
+        <!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 3.2 -->
+        <!-- <property name="fontTo" value="3.2"/>-->
+
+        <!-- The score that tags with lower than that will not appear in the rag cloud. Possible values: any integer from 1 to infinity. Default: 0 -->
+        <!-- <property name="cuttingLevel" value="0"/>-->
+
+        <!-- The ordering of the tags (based either on the name or the score of the tag)
+             Possible values: Tag.NameComparatorAsc | Tag.NameComparatorDesc | Tag.ScoreComparatorAsc | Tag.ScoreComparatorDesc
+             Default: Tag.NameComparatorAsc  -->
+        <!-- <property name="ordering" value="Tag.NameComparatorAsc"/>-->
     </bean>
-    
+
     <!-- The tag cloud parameters for the tag clouds that appear in the browse pages -->
     <bean id="browseTagCloudConfiguration" class="org.dspace.discovery.configuration.TagCloudConfiguration">
-		<!-- Should display the score of each tag next to it? Default: false -->
-		<!-- <property name="displayScore" value="true"/> -->
-		
-		<!-- Should display the tag as center aligned in the page or left aligned? Possible values: true | false. Default: true  -->
-		<!-- <property name="shouldCenter" value="true"/> -->
-		
-		<!-- How many tags will be shown. Value -1 means all of them. Default: -1 -->
-		<!--<property name="totalTags" value="-1"/> -->
-		
-		<!-- The letter case of the tags. 
-			 Possible values: Case.LOWER | Case.UPPER | Case.CAPITALIZATION | Case.PRESERVE_CASE | Case.CASE_SENSITIVE
-			 Default: Case.PRESERVE_CASE -->
-		<!--<property name="cloudCase" value="Case.PRESERVE_CASE"/> -->
-		
-		<!-- If the 3 colors of the tag cloud should be independent of score (random=yes) or based on the score. Possible values: true | false . Default: true-->
-		<!-- <property name="randomColors" value="true"/> -->
+        <!-- Should display the score of each tag next to it? Default: false -->
+        <!-- <property name="displayScore" value="true"/> -->
 
-		<!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 1.1 -->
-		<!-- <property name="fontFrom" value="1.1"/>-->
-		
-		<!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 3.2 -->
-		<!-- <property name="fontTo" value="3.2"/>-->
-		
-		<!-- The tags with score lower than this will not appear in the tag cloud. Possible values: any integer from 1 to infinity. Default: 0 -->
-		<!-- <property name="cuttingLevel" value="0"/>-->
-	
-		<!-- The ordering of the tags (based either on the name or the score of the tag)
-			 Possible values: Tag.NameComparatorAsc | Tag.NameComparatorDesc | Tag.ScoreComparatorAsc | Tag.ScoreComparatorDesc
-			 Default: Tag.NameComparatorAsc  -->
-		<!-- <property name="ordering" value="Tag.NameComparatorAsc"/>-->	
+        <!-- Should display the tag as center aligned in the page or left aligned? Possible values: true | false. Default: true  -->
+        <!-- <property name="shouldCenter" value="true"/> -->
+
+        <!-- How many tags will be shown. Value -1 means all of them. Default: -1 -->
+        <!--<property name="totalTags" value="-1"/> -->
+
+        <!-- The letter case of the tags.
+             Possible values: Case.LOWER | Case.UPPER | Case.CAPITALIZATION | Case.PRESERVE_CASE | Case.CASE_SENSITIVE
+             Default: Case.PRESERVE_CASE -->
+        <!--<property name="cloudCase" value="Case.PRESERVE_CASE"/> -->
+
+        <!-- If the 3 colors of the tag cloud should be independent of score (random=yes) or based on the score. Possible values: true | false . Default: true-->
+        <!-- <property name="randomColors" value="true"/> -->
+
+        <!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 1.1 -->
+        <!-- <property name="fontFrom" value="1.1"/>-->
+
+        <!-- The font size (in em) for the tag with the lowest score. Possible values: any decimal. Default: 3.2 -->
+        <!-- <property name="fontTo" value="3.2"/>-->
+
+        <!-- The tags with score lower than this will not appear in the tag cloud. Possible values: any integer from 1 to infinity. Default: 0 -->
+        <!-- <property name="cuttingLevel" value="0"/>-->
+
+        <!-- The ordering of the tags (based either on the name or the score of the tag)
+             Possible values: Tag.NameComparatorAsc | Tag.NameComparatorDesc | Tag.ScoreComparatorAsc | Tag.ScoreComparatorDesc
+             Default: Tag.NameComparatorAsc  -->
+        <!-- <property name="ordering" value="Tag.NameComparatorAsc"/>-->
     </bean>
-    
+
     <!--Search filter configuration beans-->
     <bean id="searchFilterTitle" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="title"/>
@@ -577,5 +571,5 @@
         <property name="metadataField" value="dc.date.issued"/>
         <property name="type" value="date"/>
     </bean>
-    
+
 </beans>

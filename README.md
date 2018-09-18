@@ -1,7 +1,7 @@
 
 # DSpace
 
-[![Build Status](https://travis-ci.org/DSpace/DSpace.png?branch=master)](https://travis-ci.org/DSpace/DSpace)
+[![Build Status](https://travis-ci.org/CityOfNewYork/DSpace.svg?branch=master)](https://travis-ci.org/CityofNewYork/DSpace)
 
 [DSpace Documentation](https://wiki.duraspace.org/display/DSDOC/) | 
 [DSpace Releases](https://github.com/DSpace/DSpace/releases) |

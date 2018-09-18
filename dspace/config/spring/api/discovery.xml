@@ -546,7 +546,7 @@
                 <value>dc.coverage.spatial-community-board-district</value>
             </list>
         </property>
-    </bean>2
+    </bean>
 
     <bean id="searchFilterAssociatedPlace" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="associatedPlace"/>

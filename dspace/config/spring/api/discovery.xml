@@ -125,7 +125,7 @@
                 <ref bean="searchFilterAssociatedSchool" />
                 <ref bean="searchFilterAssociatedCommunity" />
                 <ref bean="searchFilterAssociatedPlace" />
-		        <ref bean="searchFilterContentInOriginalBundle"/>
+		        <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -225,7 +225,7 @@
                 <ref bean="searchFilterAssociatedYearFiscal" />
                 <ref bean="searchFilterAssociatedYearCalendar" />
                 <ref bean="searchFilterAssociatedBorough" />
-                <ref bean="searchFilterContentInOriginalBundle"/>
+                <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -248,7 +248,7 @@
                 <ref bean="searchFilterAssociatedSchool" />
                 <ref bean="searchFilterAssociatedCommunity" />
                 <ref bean="searchFilterAssociatedPlace" />
-		        <ref bean="searchFilterContentInOriginalBundle"/>
+		        <!--<ref bean="searchFilterContentInOriginalBundle"/>-->
             </list>
         </property>
         <!--The sort filters for the discovery search (same as defaultConfiguration above)-->
@@ -546,7 +546,7 @@
                 <value>dc.coverage.spatial-community-board-district</value>
             </list>
         </property>
-    </bean>
+    </bean>2
 
     <bean id="searchFilterAssociatedPlace" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
         <property name="indexFieldName" value="associatedPlace"/>

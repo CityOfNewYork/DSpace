@@ -117,6 +117,8 @@
     boolean admin_button = (admin_b == null ? false : admin_b.booleanValue());
 %>
 
+<link rel="stylesheet" href="<%= request.getContextPath() %>/static/css/search.css" type="text/css" />
+
 <c:set var="dspace.layout.head.last" scope="request">
 <script type="text/javascript">
 	"use strict";
@@ -174,34 +176,35 @@
     <%-- Controls for a repeat search --%>
 	<div class="discovery-query panel-heading">
     <form action="simple-search" method="get">
-        <label for="tlocation">
-         	<fmt:message key="jsp.search.results.searchin"/>
-        </label>
-        <select name="location" id="tlocation">
-<%
-    if (scope == null)
-    {
-        // Scope of the search was all of DSpace.  The scope control will list
-        // "all of DSpace" and the communities.
-%>
-            <%-- <option selected value="/">All of DSpace</option> --%>
-            <option selected="selected" value="/"><fmt:message key="jsp.general.genericScope"/></option>
-<%  }
-    else
-    {
-%>
-            <option value="/"><fmt:message key="jsp.general.genericScope"/></option>
-<%  }      
-    for (DSpaceObject dso : scopes)
-    {
-%>
-            <option value="<%= dso.getHandle() %>" <%=dso.getHandle().equals(searchScope)?"selected=\"selected\"":"" %>>
-                <%= Utils.addEntities(dso.getName()) %>
-            </option>
-<%
-    }
-%>
-        </select><br/>
+		<input type="hidden" name="location" value="gpp/2"/>
+        <%--<label for="tlocation">--%>
+         	<%--<fmt:message key="jsp.search.results.searchin"/>--%>
+        <%--</label>--%>
+        <%--<select name="location" id="tlocation">--%>
+<%--<%--%>
+    <%--if (scope == null)--%>
+    <%--{--%>
+        <%--// Scope of the search was all of DSpace.  The scope control will list--%>
+        <%--// "all of DSpace" and the communities.--%>
+<%--%>--%>
+            <%--&lt;%&ndash; <option selected value="/">All of DSpace</option> &ndash;%&gt;--%>
+            <%--<option selected="selected" value="/"><fmt:message key="jsp.general.genericScope"/></option>--%>
+<%--<%  }--%>
+    <%--else--%>
+    <%--{--%>
+<%--%>--%>
+            <%--<option value="/"><fmt:message key="jsp.general.genericScope"/></option>--%>
+<%--<%  }      --%>
+    <%--for (DSpaceObject dso : scopes)--%>
+    <%--{--%>
+<%--%>--%>
+            <%--<option value="<%= dso.getHandle() %>" <%=dso.getHandle().equals(searchScope)?"selected=\"selected\"":"" %>>--%>
+                <%--<%= Utils.addEntities(dso.getName()) %>--%>
+            <%--</option>--%>
+<%--<%--%>
+    <%--}--%>
+<%--%>--%>
+        <%--</select><br/>--%>
         <label for="query"><fmt:message key="jsp.search.results.searchfor"/></label>
         <input type="text" size="50" id="query" name="query" value="<%= (query==null ? "" : Utils.addEntities(query)) %>"/>
         <input type="submit" id="main-query-submit" class="btn btn-primary" value="<fmt:message key="jsp.general.go"/>" />
@@ -260,9 +263,11 @@
 <% } %>
 <a class="btn btn-default" href="<%= request.getContextPath()+"/simple-search" %>"><fmt:message key="jsp.search.general.new-search" /></a>	
 		</form>
+		<span id="advanced-options-toggle">Advanced Search Options&nbsp;<span
+				class="glyphicon glyphicon-chevron-down"></span></span>
 		</div>
 <% if (availableFilters.size() > 0) { %>
-		<div class="discovery-search-filters panel-body">
+		<div class="discovery-search-filters panel-body advanced-search-options" style="display: none;">
 		<h5><fmt:message key="jsp.search.filter.heading" /></h5>
 		<p class="discovery-search-filters-hint"><fmt:message key="jsp.search.filter.hint" /></p>
 		<form action="simple-search" method="get">
@@ -308,7 +313,7 @@
 		</div>        
 <% } %>
         <%-- Include a component for modifying sort by, order, results per page, and et-al limit --%>
-   <div class="discovery-pagination-controls panel-footer">
+   <div class="discovery-pagination-controls panel-footer advanced-search-options" style="display: none;">
    <form action="simple-search" method="get">
    <input type="hidden" value="<%= Utils.addEntities(searchScope) %>" name="location" />
    <input type="hidden" value="<%= Utils.addEntities(query) %>" name="query" />
@@ -362,48 +367,48 @@
                <option value="ASC" <%= ascSelected %>><fmt:message key="search.order.asc" /></option>
                <option value="DESC" <%= descSelected %>><fmt:message key="search.order.desc" /></option>
            </select>
-           <label for="etal"><fmt:message key="search.results.etal" /></label>
-           <select name="etal" id="etal">
-<%
-               String unlimitedSelect = "";
-               if (etAl < 1)
-               {
-                   unlimitedSelect = "selected=\"selected\"";
-               }
-%>
-               <option value="0" <%= unlimitedSelect %>><fmt:message key="browse.full.etal.unlimited"/></option>
-<%
-               boolean insertedCurrent = false;
-               for (int i = 0; i <= 50 ; i += 5)
-               {
-                   // for the first one, we want 1 author, not 0
-                   if (i == 0)
-                   {
-                       String sel = (i + 1 == etAl ? "selected=\"selected\"" : "");
-                       %><option value="1" <%= sel %>>1</option><%
-                   }
+           <%--<label for="etal"><fmt:message key="search.results.etal" /></label>--%>
+           <%--<select name="etal" id="etal">--%>
+<%--<%--%>
+               <%--String unlimitedSelect = "";--%>
+               <%--if (etAl < 1)--%>
+               <%--{--%>
+                   <%--unlimitedSelect = "selected=\"selected\"";--%>
+               <%--}--%>
+<%--%>--%>
+               <%--<option value="0" <%= unlimitedSelect %>><fmt:message key="browse.full.etal.unlimited"/></option>--%>
+<%--<%--%>
+               <%--boolean insertedCurrent = false;--%>
+               <%--for (int i = 0; i <= 50 ; i += 5)--%>
+               <%--{--%>
+                   <%--// for the first one, we want 1 author, not 0--%>
+                   <%--if (i == 0)--%>
+                   <%--{--%>
+                       <%--String sel = (i + 1 == etAl ? "selected=\"selected\"" : "");--%>
+                       <%--%><option value="1" <%= sel %>>1</option><%--%>
+                   <%--}--%>
 
-                   // if the current i is greated than that configured by the user,
-                   // insert the one specified in the right place in the list
-                   if (i > etAl && !insertedCurrent && etAl > 1)
-                   {
-                       %><option value="<%= etAl %>" selected="selected"><%= etAl %></option><%
-                       insertedCurrent = true;
-                   }
+                   <%--// if the current i is greated than that configured by the user,--%>
+                   <%--// insert the one specified in the right place in the list--%>
+                   <%--if (i > etAl && !insertedCurrent && etAl > 1)--%>
+                   <%--{--%>
+                       <%--%><option value="<%= etAl %>" selected="selected"><%= etAl %></option><%--%>
+                       <%--insertedCurrent = true;--%>
+                   <%--}--%>
 
-                   // determine if the current not-special case is selected
-                   String selected = (i == etAl ? "selected=\"selected\"" : "");
+                   <%--// determine if the current not-special case is selected--%>
+                   <%--String selected = (i == etAl ? "selected=\"selected\"" : "");--%>
 
-                   // do this for all other cases than the first and the current
-                   if (i != 0 && i != etAl)
-                   {
-%>
-                       <option value="<%= i %>" <%= selected %>><%= i %></option>
-<%
-                   }
-               }
-%>
-           </select>
+                   <%--// do this for all other cases than the first and the current--%>
+                   <%--if (i != 0 && i != etAl)--%>
+                   <%--{--%>
+<%--%>--%>
+                       <%--<option value="<%= i %>" <%= selected %>><%= i %></option>--%>
+<%--<%--%>
+                   <%--}--%>
+               <%--}--%>
+<%--%>--%>
+           <%--</select>--%>
            <input class="btn btn-default" type="submit" name="submit_search" value="<fmt:message key="search.update" />" />
 
 <%
@@ -413,6 +418,14 @@
     }
 %>
 </form>
+	   <script type="text/javascript">
+           "use strict";
+           // Toggle advanced search options (hide/show) and glyphicons directions on click
+           jQ("#advanced-options-toggle").click(function() {
+               jQ(this).find("span").toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+               jQ(".advanced-search-options").toggle('hidden');
+           });
+	   </script>
    </div>
 </div>   
 <% 
@@ -755,7 +768,6 @@ else
 	}
 
 %>
-
 </div>
 <% } %>
 </dspace:sidebar>

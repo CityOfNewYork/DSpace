@@ -14,7 +14,8 @@
     EPerson user = (EPerson) request.getAttribute("dspace.current.user");
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Boolean samlLoggedIn = !authentication.getPrincipal().equals("anonymousUser");
+
+    Boolean samlLoggedIn = (authentication != null) && !authentication.getPrincipal().equals("anonymousUser");
 
     String userType = "";
     if (user != null)

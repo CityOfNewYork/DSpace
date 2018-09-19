@@ -256,15 +256,6 @@
   </servlet>
 
   <servlet>
-    <servlet-name>forgot</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.RegisterServlet</servlet-class>
-    <init-param>
-      <param-name>register</param-name>
-      <param-value>false</param-value>
-    </init-param>
-  </servlet>
-
-  <servlet>
     <servlet-name>format-registry</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.admin.BitstreamFormatRegistry</servlet-class>
   </servlet>
@@ -291,11 +282,6 @@
   <servlet>
     <servlet-name>internal-error</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.InternalErrorServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <servlet-name>logout</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.LogoutServlet</servlet-class>
   </servlet>
 
   <servlet>
@@ -339,16 +325,6 @@
   </servlet>
 
   <servlet>
-    <servlet-name>password-login</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.PasswordServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <servlet-name>ldap-login</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.LDAPServlet</servlet-class>
-  </servlet>
-
-  <servlet>
     <servlet-name>saml-login</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.SAMLServlet</servlet-class>
   </servlet>
@@ -359,22 +335,8 @@
   </servlet>
 
   <servlet>
-    <servlet-name>certificate-login</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.X509CertificateServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
     <servlet-name>profile</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.EditProfileServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <servlet-name>register</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.RegisterServlet</servlet-class>
-    <init-param>
-      <param-name>register</param-name>
-      <param-value>true</param-value>
-    </init-param>
   </servlet>
 
   <servlet>
@@ -615,11 +577,6 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>forgot</servlet-name>
-    <url-pattern>/forgot</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
     <servlet-name>format-registry</servlet-name>
     <url-pattern>/dspace-admin/format-registry</url-pattern>
   </servlet-mapping>
@@ -647,11 +604,6 @@
   <servlet-mapping>
     <servlet-name>internal-error</servlet-name>
     <url-pattern>/internal-error</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>logout</servlet-name>
-    <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -695,16 +647,6 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>password-login</servlet-name>
-    <url-pattern>/password-login</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>ldap-login</servlet-name>
-    <url-pattern>/ldap-login</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
     <servlet-name>saml-login</servlet-name>
     <url-pattern>/saml-login</url-pattern>
   </servlet-mapping>
@@ -713,20 +655,10 @@
     <servlet-name>saml-logout</servlet-name>
     <url-pattern>/saml-logout</url-pattern>
   </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>certificate-login</servlet-name>
-    <url-pattern>/certificate-login</url-pattern>
-  </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>profile</servlet-name>
     <url-pattern>/profile</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>register</servlet-name>
-    <url-pattern>/register</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

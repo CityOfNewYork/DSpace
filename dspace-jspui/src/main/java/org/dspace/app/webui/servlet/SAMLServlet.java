@@ -99,6 +99,9 @@ public class SAMLServlet extends DSpaceServlet {
 
                 // Store user's last active time from request to session
                 request.getSession().setAttribute("last.active", request.getAttribute("last.active"));
+            } else if (credential.getAttributeAsString("userType").equals(PUBLIC_USER_TYPE)) {
+                request.getSession().invalidate();
+                request.getSession();
             }
             response.sendRedirect(request.getContextPath());
         }

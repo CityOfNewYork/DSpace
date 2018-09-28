@@ -1,6 +1,3 @@
-<%--
-
---%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <%@ page import="org.dspace.core.ConfigurationManager" %>
@@ -21,6 +18,10 @@
     if (user != null)
     {
         userType = user.getUserType();
+    } else if (request.getSession().getAttribute("userType") != null) {
+        // TODO: temporary fix for public user login
+        // Implement storing public user as (EPerson) request attribute via SAMLAuthentication at a later date
+        userType = (String) request.getSession().getAttribute("userType");
     }
 
     String logoutURL = ConfigurationManager.getProperty("logout.url");
@@ -62,6 +63,11 @@
             <% } %>
         </div>
     </div>
+    <div id="dialog" title="Session Timeout Info" style="display:none">
+        <p>
+            Your session will expire in approximately 5 minutes.
+        </p>
+     </div>
 </div>
 
 <script type="text/javascript">
@@ -94,6 +100,65 @@
             window.location = logoutPage;
         });
     });
+
+    let timeoutID;
+
+    <% if (samlLoggedIn) { %>
+        function resetTimeout() {
+            // Only clear session timeout if timeout is set and if dialog is hidden
+            if (timeoutID && !$("#dialog").is(":visible")) {
+                clearTimeout(timeoutID);
+                loadDialog();
+            }
+        }
+
+        function loadDialog() {
+            var sessionAlive = ${pageContext.session.maxInactiveInterval};
+            var notifyBefore = 300;
+            timeoutID = setTimeout(function() {
+                    $(function() {
+                        $("#dialog").dialog({
+                            autoOpen: true,
+                            dialogClass: "no-close",
+                            position: 'center',
+                            maxWidth:400,
+                            maxHeight: 200,
+                            width: 400,
+                            height: 200,
+                            modal: true,
+                            closeOnEscape: false,
+                            open: function() {
+                                setTimeout(function() {
+                                    $('#dialog').dialog("close");
+                                }, notifyBefore * 1000);
+                            },
+                            buttons: [
+                            {
+                                text: "Log Out",
+                                click: function() {
+                                    $('#dialog').dialog("close");
+                                    window.location.href = "<%= request.getContextPath() %>/saml-logout";
+                                }
+                            },
+                            {
+                                text: "Stay Logged In",
+                                click: function() {
+                                    window.location.href = "<%= request.getContextPath() %>";
+                                },
+                            },
+                            ],
+                            close: function() {
+                                window.location.href = "<%= request.getContextPath() %>/saml-logout";
+                            }
+                        });
+                    });
+                }, (sessionAlive - notifyBefore) * 1000);
+            }
+
+            loadDialog();
+
+            document.onclick = resetTimeout;
+        <% } %>
 
     // TODO: SAMLProfile Servlet (NYC.ID web service)
     <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>

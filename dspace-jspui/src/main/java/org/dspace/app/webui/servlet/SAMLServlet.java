@@ -102,6 +102,7 @@ public class SAMLServlet extends DSpaceServlet {
             } else if (credential.getAttributeAsString("userType").equals(PUBLIC_USER_TYPE)) {
                 request.getSession().invalidate();
                 request.getSession();
+                request.getSession().setAttribute("userType", PUBLIC_USER_TYPE);
             }
             response.sendRedirect(request.getContextPath());
         }

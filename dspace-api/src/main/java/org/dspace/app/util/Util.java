@@ -559,8 +559,12 @@ public class Util {
         HttpSession session = request.getSession();
         String storedToken = (String) session.getAttribute("csrfToken");
         String formToken = request.getParameter("csrf_token");
-        if (!storedToken.equals(formToken)) {
-            throw new AuthorizeException("CSRF Token is Invalid");
+        if (storedToken == null) {
+            throw new AuthorizeException("CSRF Token cannot be null");
+        } else {
+            if (!storedToken.equals(formToken)) {
+                throw new AuthorizeException("CSRF Token is Invalid");
+            }
         }
     }
 }

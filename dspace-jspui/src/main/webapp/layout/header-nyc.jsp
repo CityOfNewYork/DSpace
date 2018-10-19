@@ -2,7 +2,6 @@
 
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
-<%@ page import="org.dspace.app.webui.servlet.SAMLServlet" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 
@@ -13,16 +12,6 @@
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     Boolean samlLoggedIn = (authentication != null) && !authentication.getPrincipal().equals("anonymousUser");
-
-    String userType = "";
-    if (user != null)
-    {
-        userType = user.getUserType();
-    } else if (request.getSession().getAttribute("userType") != null) {
-        // TODO: temporary fix for public user login
-        // Implement storing public user as (EPerson) request attribute via SAMLAuthentication at a later date
-        userType = (String) request.getSession().getAttribute("userType");
-    }
 
     String logoutURL = ConfigurationManager.getProperty("logout.url");
     String webServicesScheme = ConfigurationManager.getProperty("web.services.scheme");
@@ -51,15 +40,13 @@
             <% } else { %>
                 <span class="upper-header-right">
                     <span class="upper-header-a">
-                        <a id="logout" href="<%= request.getContextPath() %>/saml-logout">Log Out</a>
+                        <a id="logout" href="<%= request.getContextPath() %>/saml/logout">Log Out</a>
                     </span>
                 </span>
-                <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
-                    <img class="vert-divide-right" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
-                    <span class="upper-header-b">
-                        <a id="profile-link" href="#">Profile</a>
-                    </span>
-                <% } %>
+                <img class="vert-divide-right" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
+                <span class="upper-header-b">
+                    <a id="profile-link" href="#">Profile</a>
+                </span>
             <% } %>
         </div>
     </div>
@@ -91,15 +78,6 @@
             }
         }, 1000);
     }
-
-    // Use jQuery instead of $ because Prototype.js loads after jQuery and overwrites $
-    jQuery("#logout").click(function (e) {
-        e.preventDefault();
-        var logoutPage = this.href;
-        idpLogout(function() {
-            window.location = logoutPage;
-        });
-    });
 
     let timeoutID;
 
@@ -160,11 +138,8 @@
             document.onclick = resetTimeout;
         <% } %>
 
-    // TODO: SAMLProfile Servlet (NYC.ID web service)
-    <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
-        jQuery("#profile-link").attr(
-            "href",
-            "<%= webServicesScheme %>" + "://" + "<%= webServicesHost %>" + "/account/?returnOnSave=true&target=" + btoa(window.location.href)
-        );
-    <% } %>
+    jQuery("#profile-link").attr(
+        "href",
+        "<%= webServicesScheme %>" + "://" + "<%= webServicesHost %>" + "/account/user/profile.htm?returnOnSave=true&target=" + btoa(window.location.href)
+    );
 </script>

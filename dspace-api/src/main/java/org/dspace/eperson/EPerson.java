@@ -248,15 +248,15 @@ public class EPerson extends DSpaceObject implements DSpaceObjectLegacySupport, 
     /**
      * Get the e-person's user type
      */
-    public String getUserType() {
-        return getePersonService().getMetadataFirstValue(this, "eperson", "userType", null, Item.ANY);
+    public String getNYCEmployee() {
+        return getePersonService().getMetadataFirstValue(this, "eperson", "nycEmployee", null, Item.ANY);
     }
 
     /**
      * Set the e-person's user type
      */
-    public void setUserType(Context context, String userType) throws SQLException {
-        getePersonService().setMetadataSingleValue(context, this, "eperson", "userType", null, null, userType);
+    public void setNYCEmployee(Context context, String nycEmployee) throws SQLException {
+        getePersonService().setMetadataSingleValue(context, this, "eperson", "nycEmployee", null, null, nycEmployee);
     }
 
     /**

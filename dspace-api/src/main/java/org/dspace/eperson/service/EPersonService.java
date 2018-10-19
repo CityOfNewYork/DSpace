@@ -64,18 +64,16 @@ public interface EPersonService extends DSpaceObjectService<EPerson>, DSpaceObje
             throws SQLException;
 
     /**
-     * Find the eperson by their guid and userType.
+     * Find the eperson by their guid.
      *
      * @param context
      *            DSpace context
      * @param guid
      *            eperson's guid
-     * @param userType
-     *            eperson's userType
      *
      * @return EPerson, or {@code null} if none such exists
      */
-    public EPerson findByGuidAndUserType(Context context, String guid, String userType) throws SQLException;
+    public EPerson findByGuid(Context context, String guid) throws SQLException;
 
     /**
      * Find the epeople that match the search query across firstname, lastname or email.

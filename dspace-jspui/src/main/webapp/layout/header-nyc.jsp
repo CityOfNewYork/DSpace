@@ -13,7 +13,6 @@
 
     Boolean samlLoggedIn = (authentication != null) && !authentication.getPrincipal().equals("anonymousUser");
 
-    String logoutURL = ConfigurationManager.getProperty("logout.url");
     String webServicesScheme = ConfigurationManager.getProperty("web.services.scheme");
     String webServicesHost = ConfigurationManager.getProperty("web.services.host");
 %>
@@ -60,25 +59,6 @@
 <script type="text/javascript">
     "use strict";
 
-    /**
-     * Open NYC.ID Logout page in new tab and close it
-     * after 1000 milliseconds (the page must have been loaded by this time).
-     *
-     * After closing, call afterTimeout if specified.
-     *
-     * @param afterTimeout function to redirect to application's logout link
-     */
-    function idpLogout(afterTimeout) {
-        var logoutTab = window.open("<%= logoutURL %>");
-        logoutTab.opener =- null;
-        setTimeout(function() {
-            logoutTab.close();
-            if (typeof afterTimeout === "function") {
-                afterTimeout();
-            }
-        }, 1000);
-    }
-
     let timeoutID;
 
     <% if (samlLoggedIn) { %>
@@ -115,7 +95,7 @@
                                 text: "Log Out",
                                 click: function() {
                                     $('#dialog').dialog("close");
-                                    window.location.href = "<%= request.getContextPath() %>/saml-logout";
+                                    window.location.href = "<%= request.getContextPath() %>/saml/logout";
                                 }
                             },
                             {
@@ -126,7 +106,7 @@
                             },
                             ],
                             close: function() {
-                                window.location.href = "<%= request.getContextPath() %>/saml-logout";
+                                window.location.href = "<%= request.getContextPath() %>/saml/logout";
                             }
                         });
                     });

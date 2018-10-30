@@ -82,6 +82,7 @@
     DiscoverQuery qArgs = (DiscoverQuery) request.getAttribute("queryArgs");
     String sortedBy = qArgs.getSortField();
     String order = qArgs.getSortOrder().toString();
+    String sortOrder = order.equals("desc") ? "Descending" : "Ascending";
     String ascSelected = (SortOption.ASCENDING.equalsIgnoreCase(order)   ? "selected=\"selected\"" : "");
     String descSelected = (SortOption.DESCENDING.equalsIgnoreCase(order) ? "selected=\"selected\"" : "");
     String httpFilters ="";
@@ -570,8 +571,15 @@ else if( qResults != null)
 <% } %>
 
 <% if (items.size() > 0) { %>
+	<% String sortFieldKey = "search.sort-by." + Utils.addEntities(sortedBy); %>
+	<fmt:message var="sortFieldName" key="<%= sortFieldKey %>"/>
     <div class="panel panel-info">
-    <div class="panel-heading"><fmt:message key="jsp.search.results.itemhits"/></div>
+    <div class="panel-heading"><fmt:message key="jsp.search.results.itemhits"/>
+		<fmt:message key="jsp.search.results.sortby">
+			<fmt:param value="${sortFieldName}"/>
+			<fmt:param value="<%= sortOrder %>"/>
+		</fmt:message>
+	</div>
     <dspace:itemlist items="<%= items %>" authorLimit="<%= etAl %>" />
     </div>
 <% } %>

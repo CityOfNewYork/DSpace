@@ -180,16 +180,6 @@
     <servlet-class>org.dspace.app.webui.servlet.ItemExportArchiveServlet</servlet-class>
   </servlet>
 
-        <servlet>
-                <servlet-name>browse</servlet-name>
-                <servlet-class>org.dspace.app.webui.servlet.BrowserServlet</servlet-class>
-        </servlet>
-
-        <servlet>
-                <servlet-name>browsewithdrawn</servlet-name>
-                <servlet-class>org.dspace.app.webui.servlet.admin.WithdrawnBrowserServlet</servlet-class>
-        </servlet>
-
   <servlet>
     <servlet-name>collection-wizard</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.admin.CollectionWizardServlet</servlet-class>
@@ -345,11 +335,6 @@
   </servlet>
 
   <servlet>
-    <servlet-name>saml-logout</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.SAMLLogoutServlet</servlet-class>
-  </servlet>
-
-  <servlet>
     <servlet-name>profile</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.EditProfileServlet</servlet-class>
   </servlet>
@@ -499,21 +484,6 @@
   <servlet-mapping>
     <servlet-name>exportdownload</servlet-name>
     <url-pattern>/exportdownload/*</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>browse</servlet-name>
-    <url-pattern>/browse</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>browsewithdrawn</servlet-name>
-    <url-pattern>/dspace-admin/withdrawn</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>browsewithdrawn</servlet-name>
-    <url-pattern>/tools/withdrawn</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -681,11 +651,6 @@
     <url-pattern>/saml-login</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>saml-logout</servlet-name>
-    <url-pattern>/saml-logout</url-pattern>
-  </servlet-mapping>
-  
   <servlet-mapping>
     <servlet-name>profile</servlet-name>
     <url-pattern>/profile</url-pattern>

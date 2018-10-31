@@ -128,13 +128,14 @@
         <!--The sort filters for the discovery search-->
         <property name="searchSortConfiguration">
             <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
-                <!--<property name="defaultSort" ref="sortDateIssued"/>-->
+                <property name="defaultSort" ref="sortDateIssued"/>
                 <!--DefaultSortOrder can either be desc or asc (desc is default)-->
                 <property name="defaultSortOrder" value="desc"/>
                 <property name="sortFields">
                     <list>
                         <ref bean="sortTitle" />
                         <ref bean="sortDateIssued" />
+                        <ref bean="sortAuthor" />
                     </list>
                 </property>
             </bean>
@@ -248,13 +249,14 @@
         <!--The sort filters for the discovery search (same as defaultConfiguration above)-->
         <property name="searchSortConfiguration">
             <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
-                <!--<property name="defaultSort" ref="sortDateIssued"/>-->
+                <property name="defaultSort" ref="sortDateIssued"/>
                 <!--DefaultSortOrder can either be desc or asc (desc is default)-->
                 <property name="defaultSortOrder" value="desc"/>
                 <property name="sortFields">
                     <list>
                         <ref bean="sortTitle" />
                         <ref bean="sortDateIssued" />
+                        <ref bean="sortAuthor" />
                     </list>
                 </property>
             </bean>
@@ -570,6 +572,10 @@
     <bean id="sortDateIssued" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
         <property name="metadataField" value="dc.date.issued"/>
         <property name="type" value="date"/>
+    </bean>
+
+    <bean id="sortAuthor" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
+        <property name="metadataField" value="dc.contributor.author"/>
     </bean>
 
 </beans>

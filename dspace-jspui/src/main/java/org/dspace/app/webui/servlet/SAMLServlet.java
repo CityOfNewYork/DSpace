@@ -40,7 +40,6 @@ import java.util.*;
 
 /**
  * SAML authentication servlet.
- *
  */
 public class SAMLServlet extends DSpaceServlet {
 
@@ -53,20 +52,14 @@ public class SAMLServlet extends DSpaceServlet {
             = AuthenticateServiceFactory.getInstance().getAuthenticationService();
     private static final ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
 
-    public static final String PUBLIC_USER_TYPE = "EDIRSSO";
-    public static final String AGENCY_USER_TYPE = "Saml2In:NYC Employees";
-
     private static final String NYC_ID_USERNAME = configurationService.getProperty("nyc.id.username");
     private static final String NYC_ID_PASSWORD = configurationService.getProperty("nyc.id.password");
     private static final String WEB_SERVICES_SCHEME = configurationService.getProperty("web.services.scheme");
     private static final String WEB_SERVICES_HOST = configurationService.getProperty("web.services.host");
     private static final String EMAIL_VALIDATION_STATUS_ENDPOINT = "/account/api/isEmailValidated.htm";
-    private static final String TOU_STATUS_ENDPOINT = "/account/api/isTermsOfUseCurrent.htm";
-    private static final String ENROLLMENT_ENDPOINT = "/account/api/enrollment.htm";
-    private static final String ENROLLMENT_STATUS_ENDPOINT = "/account/api/getEnrollment.htm";
     private static final String EMAIL_STATUS_CHECK_FAILURE = "Failed to check email validation status.";
-    private static final String TOU_STATUS_CHECK_FAILURE = "Failed to check terms of use version.";
-    private static final String ENROLLMENT_FAILURE = "Failed to enroll.";
+    private static final String USER_ENDPOINT = "/account/api/user.htm";
+    private static final String USER_ENDPOINT_FAILURE = "Failed to get user.";
 
     @Override
     protected void doDSGet(Context context, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException,
@@ -81,32 +74,24 @@ public class SAMLServlet extends DSpaceServlet {
             return;
         }
 
-        String termsOfUseURL = acceptTermsOfUse(credential);
-        if (termsOfUseURL != null && !termsOfUseURL.isEmpty()) {
-            SecurityContextHolder.clearContext();
-            response.sendRedirect(termsOfUseURL);
-            return;
-        }
+        // Store in request to be used in authenticate method
+        Boolean nycEmployee = isNYCEmployee(credential);
+        request.setAttribute("nyc.employee", nycEmployee);
 
         int status = authenticationService.authenticate(context, null, null, null, request);
 
         if (status == AuthenticationMethod.SUCCESS) {
-            // If userType is not AGENCY_USER_TYPE, enrollment is not called and user is not logged into dspace
-            // User will be redirected to the home page.
-            if (credential.getAttributeAsString("userType").equals(AGENCY_USER_TYPE)) {
-                enrollment(credential);
+            if (nycEmployee) {
                 Authenticate.loggedIn(context, request, context.getCurrentUser());
 
                 // Store user's last active time from request to session
                 request.getSession().setAttribute("last.active", request.getAttribute("last.active"));
-            } else if (credential.getAttributeAsString("userType").equals(PUBLIC_USER_TYPE)) {
+            } else  {
                 request.getSession().invalidate();
                 request.getSession();
-                request.getSession().setAttribute("userType", PUBLIC_USER_TYPE);
             }
             response.sendRedirect(request.getContextPath());
-        }
-        else {
+        } else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             JSPManager.showJSP(request, response, "/error/internal.jsp");
         }
@@ -143,9 +128,9 @@ public class SAMLServlet extends DSpaceServlet {
     /**
      * Generate a string that can be signed to produce an authentication signature.
      *
-     * @param method HTTP method
+     * @param method   HTTP method
      * @param endpoint path part of HTTP Request-URI
-     * @param params query string parameters
+     * @param params   query string parameters
      * @return String of authentication signature (StringToSign)
      */
     private static String getStringToSign(String method, String endpoint, Map<String, String> params) {
@@ -163,8 +148,8 @@ public class SAMLServlet extends DSpaceServlet {
      * Build URI using URIBuilder.
      *
      * @param scheme URL scheme
-     * @param host host name
-     * @param path URL path
+     * @param host   host name
+     * @param path   URL path
      * @param params query string parameters
      * @return URI
      */
@@ -186,9 +171,9 @@ public class SAMLServlet extends DSpaceServlet {
      * Perform a request on an NYC.ID Web Services endpoint.
      * "username" and "signature" are added to the specified params.
      *
-     * @param endpoint web services endpoint (e.g. "/account/validateEmail.html")
+     * @param endpoint  web services endpoint (e.g. "/account/validateEmail.html")
      * @param paramsMap request parameters excluding "userName" and "signature"
-     * @param method HTTP method
+     * @param method    HTTP method
      * @return {@link WebServicesResponse} of request
      * @throws IOException
      */
@@ -239,7 +224,7 @@ public class SAMLServlet extends DSpaceServlet {
      * Log an error message if the specified's status code is not 200.
      *
      * @param response {@link WebServicesResponse} of web service request
-     * @param message error message
+     * @param message  error message
      */
     private static void checkWebServicesResponse(WebServicesResponse response, String message) {
         if (response.getStatusCode() != 200) {
@@ -248,9 +233,6 @@ public class SAMLServlet extends DSpaceServlet {
     }
 
     /**
-     * If the user did not log in via NYC.ID (i.e. user_type is not "EDIRSSO"),
-     * no email validation is necessary.
-     *
      * If the email validation flag is "FALSE", the Email Validation Web Service
      * is invoked.
      *
@@ -264,8 +246,7 @@ public class SAMLServlet extends DSpaceServlet {
      */
     private static String validateEmail(SAMLCredential credential) throws IOException {
         String redirectURL = null;
-        if (credential.getAttributeAsString("userType").equals(PUBLIC_USER_TYPE) &&
-                credential.getAttributeAsString("nycExtEmailValidationFlag").equals("FALSE")) {
+        if (credential.getAttributeAsString("nycExtEmailValidationFlag").equals("False")) {
             // Store query string parameters into map
             Map<String, String> map = new HashMap<>();
             map.put("guid", credential.getAttributeAsString("guid"));
@@ -297,70 +278,29 @@ public class SAMLServlet extends DSpaceServlet {
     }
 
     /**
-     * If the user has logged in using the NYC Employees button
-     * (i.e. userType is "Saml2In:NYC Employees"), no TOU
-     * acceptance is necessary.
-     *
-     * Otherwise, invoke the Terms of Use Web Service to determine
-     * if the user has accepted the latest TOU version.
-     *
-     * If the return TOU status equals False, return string of url
-     * to the NYC.ID TOU page where the user can accept the latest
-     * terms of use.
+     * Call the Get User Web Service to get a JSON-formatted user.
+     * Get the value of key "nycEmployee" to determine whether user is a NYC Employee.
      *
      * @param credential SAML entities
-     * @return String of url or null
+     * @return Boolean value of whether user is a NYC Employee
      * @throws IOException
      */
-    private static String acceptTermsOfUse(SAMLCredential credential) throws IOException {
-        String redirectURL = null;
-        if (!credential.getAttributeAsString("userType").equals(AGENCY_USER_TYPE)) {
-            Map<String, String> map = new HashMap<>();
-            map.put("guid", credential.getAttributeAsString("guid"));
-            map.put("userType", credential.getAttributeAsString("userType"));
-
-            WebServicesResponse webServicesResponse = webServicesRequest(TOU_STATUS_ENDPOINT, map, "GET");
-
-            checkWebServicesResponse(webServicesResponse, TOU_STATUS_CHECK_FAILURE);
-
-            try {
-                JSONObject jsonResponse = new JSONObject(webServicesResponse.getResponseString());
-                if (!jsonResponse.getBoolean("current")) {
-                    String targetURL = configurationService.getProperty("dspace.baseUrl") + "/saml/login";
-                    targetURL = Base64.getEncoder().encodeToString(targetURL.getBytes());
-
-                    redirectURL = MessageFormat.format("{0}://{1}{2}target={3}",
-                            WEB_SERVICES_SCHEME,
-                            WEB_SERVICES_HOST,
-                            "/account/user/termsOfUse.htm?",
-                            targetURL);
-                }
-            } catch (JSONException e) {
-                throw new RuntimeException("Unable to create JSON from response body. The string was " +
-                        webServicesResponse.getResponseString());
-            }
-        }
-        return redirectURL;
-    }
-
-    /**
-     * Create an enrollment record for a specified user.
-     *
-     * @param credential SAML entities
-     * @throws IOException
-     */
-    private static void enrollment(SAMLCredential credential) throws IOException {
+    private static Boolean isNYCEmployee(SAMLCredential credential) throws IOException {
+        // Store query string parameters into map
         Map<String, String> map = new HashMap<>();
         map.put("guid", credential.getAttributeAsString("guid"));
-        map.put("userType", credential.getAttributeAsString("userType"));
 
-        // Create shallow copy of request parameters
-        Map<String, String> getEnrollmentParams = new HashMap<>(map);
+        // Send web services request
+        WebServicesResponse webServicesResponse = webServicesRequest(USER_ENDPOINT, map, "GET");
 
-        WebServicesResponse getEnrollmentResponse = webServicesRequest(ENROLLMENT_STATUS_ENDPOINT, getEnrollmentParams, "GET");
-        if (getEnrollmentResponse.getStatusCode() != 200) {
-            WebServicesResponse webServicesResponse = webServicesRequest(ENROLLMENT_ENDPOINT, map, "PUT");
-            checkWebServicesResponse(webServicesResponse, ENROLLMENT_FAILURE);
+        checkWebServicesResponse(webServicesResponse, USER_ENDPOINT_FAILURE);
+
+        try {
+            JSONObject jsonResponse = new JSONObject(webServicesResponse.getResponseString());
+            return jsonResponse.getBoolean("nycEmployee");
+        } catch (JSONException e) {
+            throw new RuntimeException("Unable to create JSON from response body. The string was " +
+                    webServicesResponse.getResponseString());
         }
     }
 
@@ -374,7 +314,8 @@ public class SAMLServlet extends DSpaceServlet {
 
         /**
          * Create a new WebServiceResponse object
-         * @param statusCode response status code
+         *
+         * @param statusCode     response status code
          * @param responseString response body
          */
         private WebServicesResponse(int statusCode, String responseString) {

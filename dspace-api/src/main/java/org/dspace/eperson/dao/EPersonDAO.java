@@ -32,7 +32,7 @@ public interface EPersonDAO extends DSpaceObjectDAO<EPerson>, DSpaceObjectLegacy
 
     public EPerson findByNetid(Context context, String netid) throws SQLException;
 
-    public EPerson findByGuidAndUserType(Context context, String guid, String userType, List<MetadataField> queryFields) throws SQLException;
+    public EPerson findByGuid(Context context, String guid, MetadataField guidField) throws SQLException;
 
     public List<EPerson> search(Context context, String query, List<MetadataField> queryFields, List<MetadataField> sortFields, int offset, int limit) throws SQLException;
 

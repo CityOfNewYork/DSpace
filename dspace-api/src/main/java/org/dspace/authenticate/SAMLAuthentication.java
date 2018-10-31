@@ -109,7 +109,7 @@ public class SAMLAuthentication implements AuthenticationMethod {
      * Authenticate the user in dspace after successful SAML login.
      * SAML entities will be stored in SAMLCredential object inside Authentication.
      *
-     * Query database if eperson exists by guid and userType.
+     * Query database if eperson exists by guid.
      * If eperson does not exist, call registerNewEPerson method to create
      * new eperson object.
      * If eperson exist, call updateEPerson to update user attributes.
@@ -149,16 +149,16 @@ public class SAMLAuthentication implements AuthenticationMethod {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SAMLCredential credential = (SAMLCredential) authentication.getCredentials();
 
-        // Check if eperson exists by guid and userType
+        // Check if eperson exists by guid
         EPerson eperson = null;
-        eperson = ePersonService.findByGuidAndUserType(context,
-                credential.getAttributeAsString("GUID"),
-                credential.getAttributeAsString("userType"));
+        eperson = ePersonService.findByGuid(context, credential.getAttributeAsString("GUID"));
 
-        // If eperson cannot be found by guid and userType, query by email
+        // If eperson cannot be found by guid, query by email
         if (eperson == null) {
             eperson = ePersonService.findByEmail(context, credential.getAttributeAsString("mail"));
         }
+
+        String nycEmployee = request.getAttribute("nyc.employee").toString();
 
         // Update or create user
         try {
@@ -166,7 +166,7 @@ public class SAMLAuthentication implements AuthenticationMethod {
                 if (!eperson.canLogIn()) {
                     return BAD_ARGS;
                 } else {
-                    updateEPerson(context, credential, eperson);
+                    updateEPerson(context, credential, eperson, nycEmployee);
 
                     if (eperson.getLastActive() != null) {
                         String pattern = "EEEEE MMMMM dd yyyy HH:mm:ss";
@@ -216,10 +216,8 @@ public class SAMLAuthentication implements AuthenticationMethod {
 
     /**
      * Register a new eperson object. This method is called when no existing user was
-     * found for the guid and userType and autoregister is enabled. When these conditions
+     * found for the guid and autoregister is enabled. When these conditions
      * are met this method will create a new eperson object.
-     *
-     *
      *
      * @param context
      *  The current DSpace database context
@@ -232,7 +230,7 @@ public class SAMLAuthentication implements AuthenticationMethod {
      *
      * @return eperson
      * @throws SQLException if database error
-     * @throws AuthorizeException
+     * @throws AuthorizeException if database error on update
      */
     private EPerson registerNewEPerson(Context context, SAMLCredential credential, HttpServletRequest request)
             throws SQLException, AuthorizeException {
@@ -243,7 +241,7 @@ public class SAMLAuthentication implements AuthenticationMethod {
         eperson.setGuid(context, credential.getAttributeAsString("GUID"));
         eperson.setFirstName(context, credential.getAttributeAsString("givenName"));
         eperson.setLastName(context, credential.getAttributeAsString("sn"));
-        eperson.setUserType(context, credential.getAttributeAsString("userType"));
+        eperson.setNYCEmployee(context, request.getAttribute("nyc.employee").toString());
         eperson.setCanLogIn(true);
         authenticationService.initEPerson(context, request, eperson);
         ePersonService.update(context, eperson);
@@ -266,16 +264,16 @@ public class SAMLAuthentication implements AuthenticationMethod {
      *  The eperson object to update.
      *
      * @throws SQLException if database error
-     * @throws AuthorizeException
+     * @throws AuthorizeException if database error on update
      */
-    private void updateEPerson(Context context, SAMLCredential credential, EPerson eperson)
+    private void updateEPerson(Context context, SAMLCredential credential, EPerson eperson, String nycEmployee)
             throws SQLException, AuthorizeException {
         context.turnOffAuthorisationSystem();
 
         eperson.setGuid(context, credential.getAttributeAsString("GUID"));
         eperson.setFirstName(context, credential.getAttributeAsString("givenName"));
         eperson.setLastName(context, credential.getAttributeAsString("sn"));
-        eperson.setUserType(context, credential.getAttributeAsString("userType"));
+        eperson.setNYCEmployee(context, nycEmployee);
 
         ePersonService.update(context, eperson);
         context.dispatchEvents();

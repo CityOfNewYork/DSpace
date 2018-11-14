@@ -665,10 +665,15 @@ public class ItemTag extends TagSupport
 	                            argument = "value";
 	                            value = val.getValue();
 	                        }
-	                    	out.print("<a class=\"" + ("authority".equals(argument)?"authority ":"") + browseIndex + "\""
-	                                                + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
-	                    				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(val.getValue())
-	                    				+ "</a>");
+
+	                        if (metadataField.getElement().equals("contributor")) {
+	                            out.print(Utils.addEntities(val.getValue()));
+                            } else {
+                                out.print("<a class=\"" + ("authority".equals(argument) ? "authority " : "") + browseIndex + "\""
+                                        + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
+                                        + URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(val.getValue())
+                                        + "</a>");
+                            }
 	                    }
                         else
                         {

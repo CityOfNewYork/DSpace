@@ -143,7 +143,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 brand" style="text-align: center">
-                <a href="<%= request.getContextPath() %>">
+                <a href="<%= request.getContextPath() %>/">
                     <img src="<%= request.getContextPath() %>/static/img/doris-logo.png">
                 </a>
             </div>

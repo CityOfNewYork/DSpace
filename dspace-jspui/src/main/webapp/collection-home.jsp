@@ -124,7 +124,6 @@
 <%
             }
 %>
-      <a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/statistics"><fmt:message key="jsp.collection-home.display-statistics"/></a>
       </h2></div>
 <%  if (logo != null) { %>
         <div class="col-md-4">
@@ -201,13 +200,15 @@
     <fmt:message var="bi_name" key="<%= bi_name_key %>"/>
     <fmt:message var="so_name" key="<%= so_name_key %>"/>
     <div class="browse_range">
-        <fmt:message key="jsp.collection-home.content.range">
-            <fmt:param value="${bi_name}"/>
-            <fmt:param value="${so_name}"/>
-            <fmt:param value="<%= Integer.toString(bi.getStart()) %>"/>
-            <fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
-            <fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
-        </fmt:message>
+        <strong>
+            <fmt:message key="jsp.collection-home.content.range">
+                <fmt:param value="${bi_name}"/>
+                <fmt:param value="${so_name}"/>
+                <fmt:param value="<%= Integer.toString(bi.getStart()) %>"/>
+                <fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
+                <fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
+            </fmt:message>
+        </strong>
     </div>
 
     <%--  do the top previous and next page links --%>
@@ -247,13 +248,15 @@
 
     <%-- give us the bottom report on what we are looking at --%>
     <div class="browse_range">
-        <fmt:message key="jsp.collection-home.content.range">
-            <fmt:param value="${bi_name}"/>
-            <fmt:param value="${so_name}"/>
-            <fmt:param value="<%= Integer.toString(bi.getStart()) %>"/>
-            <fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
-            <fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
-        </fmt:message>
+        <strong>
+            <fmt:message key="jsp.collection-home.content.range">
+                <fmt:param value="${bi_name}"/>
+                <fmt:param value="${so_name}"/>
+                <fmt:param value="<%= Integer.toString(bi.getStart()) %>"/>
+                <fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
+                <fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
+            </fmt:message>
+        </strong>
     </div>
 
     <%--  do the bottom previous and next page links --%>

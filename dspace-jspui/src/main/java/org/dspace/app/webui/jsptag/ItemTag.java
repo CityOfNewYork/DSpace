@@ -216,7 +216,11 @@ public class ItemTag extends TagSupport
 
     /** Default DC fields to display, in absence of configuration */
     private static final String defaultFields
-            = "dc.title, dc.title.alternative, dc.contributor.*, dc.subject, dc.date.issued(date), dc.publisher, dc.identifier.citation, dc.relation.ispartofseries, dc.description.abstract, dc.description, dc.identifier.govdoc, dc.identifier.uri(link), dc.identifier.isbn, dc.identifier.issn, dc.identifier.ismn, dc.identifier";
+            = "dc.title, dc.title.alternative, dc.contributor.*, dc.subject, dc.date.issued(date), dc.publisher, dc.identifier.citation, dc.relation.ispartofseries, dc.description.abstract, dc.description, dc.identifier.govdoc, dc.identifier.isbn, dc.identifier.issn, dc.identifier.ismn, dc.identifier";
+
+    /** Fields to display on full item page */
+    private static final String fullItemFields
+            = "dc.title, dc.title.alternative, dc.contributor.*, dc.subject, dc.description.abstract, dc.date.issued(date), dc.type, dc.language.iso, dc.coverage.temporal-fiscal, dc.coverage.temporal-calendar, dc.coverage.spatial-borough, dc.coverage.spatial-school-district, dc.coverage.spatial-community-board-district, dc.coverage.spatial-place";
 
     /** log4j logger */
     private static final Logger log = Logger.getLogger(ItemTag.class);
@@ -710,55 +714,75 @@ public class ItemTag extends TagSupport
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         Context context = UIUtil.obtainContext(request);
 
-        // Get all the metadata
-        List<MetadataValue> values = itemService.getMetadata(item, Item.ANY, Item.ANY, Item.ANY, Item.ANY);
-
         out.println("<div class=\"panel panel-info\"><div class=\"panel-heading\">"
                 + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.full") + "</div>");
+                "org.dspace.app.webui.jsptag.ItemTag.full") + "</div>");
 
         // Three column table - DC field, value, language
         out.println("<table class=\"panel-body table itemDisplayTable\">");
         out.println("<tr><th id=\"s1\" class=\"standard\">"
                 + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.dcfield")
+                "org.dspace.app.webui.jsptag.ItemTag.dcfield")
                 + "</th><th id=\"s2\" class=\"standard\">"
                 + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.value")
-                + "</th><th id=\"s3\" class=\"standard\">"
-                + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.lang")
+                "org.dspace.app.webui.jsptag.ItemTag.value")
                 + "</th></tr>");
 
-        for (MetadataValue val : values)
-        {
-        	MetadataField field = val.getMetadataField();
-            if (!metadataExposureService.isHidden(context, field.getMetadataSchema().getName(),
-            		field.getElement(), field.getQualifier()))
-            {
-                out.print("<tr><td headers=\"s1\" class=\"metadataFieldLabel\">");
-                out.print(field.getMetadataSchema().getName());
-                out.print("." + field.getElement());
+        String[] metadataFields = styleSelection.getConfigurationForStyle(style);
 
-                if (field.getQualifier() != null)
-                {
-                    out.print("." + field.getQualifier());
-                }
+        if (ArrayUtils.isEmpty(metadataFields)) {
+            metadataFields = fullItemFields.split(",");
+        }
+
+        for (String field : metadataFields) {
+            field = field.trim();
+            boolean isDate = false;
+
+            // Find out if the field should be rendered with a particular style (only use case is date for us)
+            String style = null;
+            Matcher fieldStyleMatcher = fieldStylePatter.matcher(field);
+            if (fieldStyleMatcher.matches()) {
+                style = fieldStyleMatcher.group(1);
+            }
+
+            if (style != null) {
+                isDate = style.contains("date");
+                field = field.replaceAll("\\("+style+"\\)", "");
+            }
+
+            // Get the separate schema + element + qualifier
+            String[] eq = field.split("\\.");
+            String schema = eq[0];
+            String element = eq[1];
+            String qualifier = null;
+            if (eq.length > 2 && eq[2].equals("*")) {
+                qualifier = Item.ANY;
+            }
+            else if (eq.length > 2) {
+                qualifier = eq[2];
+            }
+
+            List <MetadataValue> values = itemService.getMetadata(item, schema, element, qualifier, Item.ANY);
+
+            for (MetadataValue val : values) {
+                MetadataField metadataField = val.getMetadataField();
+
+                out.print("<tr><td headers=\"s1\" class=\"metadataFieldLabel\">");
+                String label = I18nUtil.getMessage("metadata."
+                                + ("default".equals(this.style) ? "" : this.style + ".") + metadataField,
+                        context);
+                out.print(label);
 
                 out.print("</td><td headers=\"s2\" class=\"metadataFieldValue\">");
-                out.print(Utils.addEntities(val.getValue()));
-                out.print("</td><td headers=\"s3\" class=\"metadataFieldValue\">");
+                if (isDate) {
+                    DCDate dd = new DCDate(val.getValue());
 
-                if (val.getLanguage() == null)
-                {
-                    out.print("-");
+                    // Parse the date
+                    out.print(UIUtil.displayDate(dd, false, false, (HttpServletRequest)pageContext.getRequest()));
                 }
-                else
-                {
-                    out.print(val.getLanguage());
+                else {
+                    out.print(Utils.addEntities(val.getValue()));
                 }
-
-                out.println("</td></tr>");
             }
         }
 

@@ -64,7 +64,7 @@
     <% if (samlLoggedIn) { %>
         function resetTimeout() {
             // Only clear session timeout if timeout is set and if dialog is hidden
-            if (timeoutID && !$("#dialog").is(":visible")) {
+            if (timeoutID && !jQuery("#dialog").is(":visible")) {
                 clearTimeout(timeoutID);
                 loadDialog();
             }

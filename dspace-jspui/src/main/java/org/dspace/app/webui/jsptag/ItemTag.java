@@ -786,45 +786,6 @@ public class ItemTag extends TagSupport
             }
         }
 
-        // Get all the metadata
-//        List<MetadataValue> values = itemService.getMetadata(item, Item.ANY, Item.ANY, Item.ANY, Item.ANY);
-//
-//        for (MetadataValue val : values)
-//        {
-//        	MetadataField field = val.getMetadataField();
-//            if (!metadataExposureService.isHidden(context, field.getMetadataSchema().getName(),
-//            		field.getElement(), field.getQualifier()))
-//            {
-//                out.print("<tr><td headers=\"s1\" class=\"metadataFieldLabel\">");
-//                String label = I18nUtil.getMessage("metadata."
-//                                + ("default".equals(this.style) ? "" : this.style + ".") + field,
-//                        context);
-//                out.print(label);
-//                out.print(field.getMetadataSchema().getName());
-//                out.print("." + field.getElement());
-
-//                if (field.getQualifier() != null)
-//                {
-//                    out.print("." + field.getQualifier());
-//                }
-
-//                out.print("</td><td headers=\"s2\" class=\"metadataFieldValue\">");
-//                out.print(Utils.addEntities(val.getValue()));
-//                out.print("</td><td headers=\"s3\" class=\"metadataFieldValue\">");
-//
-//                if (val.getLanguage() == null)
-//                {
-//                    out.print("-");
-//                }
-//                else
-//                {
-//                    out.print(val.getLanguage());
-//                }
-//
-//                out.println("</td></tr>");
-//            }
-//        }
-
         listCollections();
 
         out.println("</table></div><br/>");

@@ -516,6 +516,10 @@
                 <stored-value>Media and Entertainment, Mayor's Office of (MOME)</stored-value>
             </pair>
             <pair>
+                <displayed-value>Municipal Drug Strategy Council (MDSC)</displayed-value>
+                <stored-value>Municipal Drug Strategy Council (MDSC)</stored-value>
+            </pair>
+            <pair>
                 <displayed-value>New Business Acceleration Team (NBAT)</displayed-value>
                 <stored-value>New Business Acceleration Team (NBAT)</stored-value>
             </pair>
@@ -586,6 +590,10 @@
             <pair>
                 <displayed-value>Sanitation, Department of (DSNY)</displayed-value>
                 <stored-value>Sanitation, Department of (DSNY)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>School Construction Authority (SCA)</displayed-value>
+                <stored-value>School Construction Authority (SCA)</stored-value>
             </pair>
             <pair>
                 <displayed-value>Small Business Services, Department of (SBS)</displayed-value>

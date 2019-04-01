@@ -511,7 +511,7 @@ public class BrowseListTag extends TagSupport
                             {
                             	String startLink = "";
                             	String endLink = "";
-                            	if (!StringUtils.isEmpty(browseType[colIdx]) && !disableCrossLinks)
+                            	if (!element.equals("contributor") && !StringUtils.isEmpty(browseType[colIdx]) && !disableCrossLinks)
                             	{
                                     String argument;
                                     String value;

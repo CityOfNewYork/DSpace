@@ -80,7 +80,7 @@
 	    String fkey = "jsp.search.facet.refine."+f;
 	    int limit = facetConf.getFacetLimit()+1;
 	    %><div id="facet_<%= f %>" class="facet col-md-<%= discovery_facet_cols %>">
-	    <span class="facetName"><fmt:message key="<%= fkey %>" /></span>
+	    <h4><fmt:message key="<%= fkey %>" /></h4>
 	    <ul class="list-group"><%
 	    int idx = 1;
 	    int currFp = UIUtil.getIntParameter(request, f+"_page");

@@ -2,7 +2,6 @@
 
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
-<%@ page import="org.dspace.app.webui.servlet.SAMLServlet" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 
@@ -14,17 +13,6 @@
 
     Boolean samlLoggedIn = (authentication != null) && !authentication.getPrincipal().equals("anonymousUser");
 
-    String userType = "";
-    if (user != null)
-    {
-        userType = user.getUserType();
-    } else if (request.getSession().getAttribute("userType") != null) {
-        // TODO: temporary fix for public user login
-        // Implement storing public user as (EPerson) request attribute via SAMLAuthentication at a later date
-        userType = (String) request.getSession().getAttribute("userType");
-    }
-
-    String logoutURL = ConfigurationManager.getProperty("logout.url");
     String webServicesScheme = ConfigurationManager.getProperty("web.services.scheme");
     String webServicesHost = ConfigurationManager.getProperty("web.services.host");
 %>
@@ -51,15 +39,13 @@
             <% } else { %>
                 <span class="upper-header-right">
                     <span class="upper-header-a">
-                        <a id="logout" href="<%= request.getContextPath() %>/saml-logout">Log Out</a>
+                        <a id="logout" href="<%= request.getContextPath() %>/saml/logout">Log Out</a>
                     </span>
                 </span>
-                <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
-                    <img class="vert-divide-right" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
-                    <span class="upper-header-b">
-                        <a id="profile-link" href="#">Profile</a>
-                    </span>
-                <% } %>
+                <img class="vert-divide-right" alt="" src="<%= request.getContextPath() %>/static/img/upper-header-divider.gif">
+                <span class="upper-header-b">
+                    <a id="profile-link" href="#">Profile</a>
+                </span>
             <% } %>
         </div>
     </div>
@@ -73,40 +59,12 @@
 <script type="text/javascript">
     "use strict";
 
-    /**
-     * Open NYC.ID Logout page in new tab and close it
-     * after 1000 milliseconds (the page must have been loaded by this time).
-     *
-     * After closing, call afterTimeout if specified.
-     *
-     * @param afterTimeout function to redirect to application's logout link
-     */
-    function idpLogout(afterTimeout) {
-        var logoutTab = window.open("<%= logoutURL %>");
-        logoutTab.opener =- null;
-        setTimeout(function() {
-            logoutTab.close();
-            if (typeof afterTimeout === "function") {
-                afterTimeout();
-            }
-        }, 1000);
-    }
-
-    // Use jQuery instead of $ because Prototype.js loads after jQuery and overwrites $
-    jQuery("#logout").click(function (e) {
-        e.preventDefault();
-        var logoutPage = this.href;
-        idpLogout(function() {
-            window.location = logoutPage;
-        });
-    });
-
     let timeoutID;
 
     <% if (samlLoggedIn) { %>
         function resetTimeout() {
             // Only clear session timeout if timeout is set and if dialog is hidden
-            if (timeoutID && !$("#dialog").is(":visible")) {
+            if (timeoutID && !jQuery("#dialog").is(":visible")) {
                 clearTimeout(timeoutID);
                 loadDialog();
             }
@@ -137,7 +95,7 @@
                                 text: "Log Out",
                                 click: function() {
                                     $('#dialog').dialog("close");
-                                    window.location.href = "<%= request.getContextPath() %>/saml-logout";
+                                    window.location.href = "<%= request.getContextPath() %>/saml/logout";
                                 }
                             },
                             {
@@ -148,7 +106,7 @@
                             },
                             ],
                             close: function() {
-                                window.location.href = "<%= request.getContextPath() %>/saml-logout";
+                                window.location.href = "<%= request.getContextPath() %>/saml/logout";
                             }
                         });
                     });
@@ -160,11 +118,8 @@
             document.onclick = resetTimeout;
         <% } %>
 
-    // TODO: SAMLProfile Servlet (NYC.ID web service)
-    <% if (userType.equals(SAMLServlet.PUBLIC_USER_TYPE)) { %>
-        jQuery("#profile-link").attr(
-            "href",
-            "<%= webServicesScheme %>" + "://" + "<%= webServicesHost %>" + "/account/?returnOnSave=true&target=" + btoa(window.location.href)
-        );
-    <% } %>
+    jQuery("#profile-link").attr(
+        "href",
+        "<%= webServicesScheme %>" + "://" + "<%= webServicesHost %>" + "/account/user/profile.htm?returnOnSave=true&target=" + btoa(window.location.href)
+    );
 </script>

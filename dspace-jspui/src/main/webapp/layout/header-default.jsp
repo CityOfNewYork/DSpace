@@ -109,7 +109,7 @@
     <%-- HACK: marginwidth, marginheight: for non-CSS compliant Netscape browser --%>
     <body class="undernavigation">
 <a class="sr-only" href="#content">Skip navigation</a>
-<%--<dspace:include page="/layout/header-nyc.jsp" />--%>
+<dspace:include page="/layout/header-nyc.jsp" />
 <header class="navbar navbar-inverse">
     <%
     if (!navbar.equals("off"))
@@ -140,11 +140,11 @@
         </div>
     <% } %>
 
-    <div class="container banner">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12 brand">
-                <a href="http://www1.nyc.gov/site/records/index.page">
-                    <img src="<%= request.getContextPath() %>/static/img/doris-banner.jpg" style="max-width: 50%; max-height: 50%;" >
+            <div class="col-md-12 brand" style="text-align: center">
+                <a href="<%= request.getContextPath() %>/">
+                    <img src="<%= request.getContextPath() %>/static/img/doris-logo.png">
                 </a>
             </div>
         </div>

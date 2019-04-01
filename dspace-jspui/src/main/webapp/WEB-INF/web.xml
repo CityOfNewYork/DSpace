@@ -63,15 +63,15 @@
       <filter-name>rdf-content-negotiation</filter-name>
       <filter-class>org.dspace.rdf.negotiation.NegotiationFilter</filter-class>
   </filter>
-    <!--<filter>-->
-        <!--<filter-name>springSecurityFilterChain</filter-name>-->
-        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-    <!--</filter>-->
+  <filter>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
 
-  <!--<filter-mapping>-->
-    <!--<filter-name>springSecurityFilterChain</filter-name>-->
-      <!--<url-pattern>/*</url-pattern>-->
-  <!--</filter-mapping>-->
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
   <!-- Filter mappings -->
   <filter-mapping>
@@ -179,16 +179,6 @@
     <servlet-name>exportdownload</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.ItemExportArchiveServlet</servlet-class>
   </servlet>
-
-        <servlet>
-                <servlet-name>browse</servlet-name>
-                <servlet-class>org.dspace.app.webui.servlet.BrowserServlet</servlet-class>
-        </servlet>
-
-        <servlet>
-                <servlet-name>browsewithdrawn</servlet-name>
-                <servlet-class>org.dspace.app.webui.servlet.admin.WithdrawnBrowserServlet</servlet-class>
-        </servlet>
 
   <servlet>
     <servlet-name>collection-wizard</servlet-name>
@@ -329,25 +319,20 @@
     <servlet-class>org.dspace.app.webui.servlet.OpenSearchServlet</servlet-class>
   </servlet>
 
-  <servlet>
-    <servlet-name>password-login</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.PasswordServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <servlet-name>ldap-login</servlet-name>
-    <servlet-class>org.dspace.app.webui.servlet.LDAPServlet</servlet-class>
-  </servlet>
-
   <!--<servlet>-->
-    <!--<servlet-name>saml-login</servlet-name>-->
-    <!--<servlet-class>org.dspace.app.webui.servlet.SAMLServlet</servlet-class>-->
+    <!--<servlet-name>password-login</servlet-name>-->
+    <!--<servlet-class>org.dspace.app.webui.servlet.PasswordServlet</servlet-class>-->
   <!--</servlet>-->
 
   <!--<servlet>-->
-    <!--<servlet-name>saml-logout</servlet-name>-->
-    <!--<servlet-class>org.dspace.app.webui.servlet.SAMLLogoutServlet</servlet-class>-->
+    <!--<servlet-name>ldap-login</servlet-name>-->
+    <!--<servlet-class>org.dspace.app.webui.servlet.LDAPServlet</servlet-class>-->
   <!--</servlet>-->
+
+  <servlet>
+    <servlet-name>saml-login</servlet-name>
+    <servlet-class>org.dspace.app.webui.servlet.SAMLServlet</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>profile</servlet-name>
@@ -502,21 +487,6 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>browse</servlet-name>
-    <url-pattern>/browse</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>browsewithdrawn</servlet-name>
-    <url-pattern>/dspace-admin/withdrawn</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>browsewithdrawn</servlet-name>
-    <url-pattern>/tools/withdrawn</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
     <servlet-name>community-list</servlet-name>
     <url-pattern>/community-list</url-pattern>
   </servlet-mapping>
@@ -666,26 +636,21 @@
     <url-pattern>/open-search/*</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>password-login</servlet-name>
-    <url-pattern>/password-login</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>ldap-login</servlet-name>
-    <url-pattern>/ldap-login</url-pattern>
-  </servlet-mapping>
-
   <!--<servlet-mapping>-->
-    <!--<servlet-name>saml-login</servlet-name>-->
-    <!--<url-pattern>/saml-login</url-pattern>-->
+    <!--<servlet-name>password-login</servlet-name>-->
+    <!--<url-pattern>/password-login</url-pattern>-->
   <!--</servlet-mapping>-->
 
   <!--<servlet-mapping>-->
-    <!--<servlet-name>saml-logout</servlet-name>-->
-    <!--<url-pattern>/saml-logout</url-pattern>-->
+    <!--<servlet-name>ldap-login</servlet-name>-->
+    <!--<url-pattern>/ldap-login</url-pattern>-->
   <!--</servlet-mapping>-->
-  
+
+  <servlet-mapping>
+    <servlet-name>saml-login</servlet-name>
+    <url-pattern>/saml-login</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>profile</servlet-name>
     <url-pattern>/profile</url-pattern>

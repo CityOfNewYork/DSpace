@@ -495,7 +495,7 @@
                     <% } %>
                 </td>
                 <td headers="t4" class="<%= row %>RowOddCol">
-                    <input class="form-control" type="text" name="language_<%= key %>_<%= sequenceNumber %>" value="<%= (dcv.get(i).getLanguage() == null ? "" : dcv.get(i).getLanguage().trim()) %>" size="5"/>
+                    <input class="form-control" type="text" name="language_<%= key %>_<%= sequenceNumber %>" value="<%= (dcv.get(i).getLanguage() == null ? "" : Utils.addEntities(dcv.get(i).getLanguage().trim())) %>" size="5"/>
                 </td>
                 <td headers="t5" class="<%= row %>RowEvenCol">
                     <%-- <input type="submit" name="submit_remove_<%= key %>_<%= sequenceNumber %>" value="Remove" /> --%>

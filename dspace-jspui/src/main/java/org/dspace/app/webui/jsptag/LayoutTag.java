@@ -186,15 +186,6 @@ public class LayoutTag extends BodyTagSupport
                 // "commLink" mode - show all parent communities
                 List<Community> comms = (List<Community>) request
                         .getAttribute("dspace.communities");
-
-                if (comms != null)
-                {
-                    for (Community c : comms)
-                    {
-                        parents.add(c.getName());
-                        parentLinks.add("/handle/" + c.getHandle());
-                    }
-                }
             }
             else if (locbar.equalsIgnoreCase("nolink"))
             {
@@ -217,12 +208,6 @@ public class LayoutTag extends BodyTagSupport
 
                 if (comms != null)
                 {
-                    for (Community c : comms)
-                    {
-                        parents.add(c.getName());
-                        parentLinks.add("/handle/" + c.getHandle());
-                    }
-
                     if (col != null)
                     {
                         parents.add(col.getName());

@@ -82,6 +82,7 @@
     DiscoverQuery qArgs = (DiscoverQuery) request.getAttribute("queryArgs");
     String sortedBy = qArgs.getSortField();
     String order = qArgs.getSortOrder().toString();
+    String sortOrder = order.equals("desc") ? "Descending" : "Ascending";
     String ascSelected = (SortOption.ASCENDING.equalsIgnoreCase(order)   ? "selected=\"selected\"" : "");
     String descSelected = (SortOption.DESCENDING.equalsIgnoreCase(order) ? "selected=\"selected\"" : "");
     String httpFilters ="";
@@ -491,12 +492,12 @@ else if( qResults != null)
 	        qResults.getStart()+qResults.getMaxResults():qResults.getTotalSearchResults();
 %>
     <%-- <p align="center">Results <//%=qResults.getStart()+1%>-<//%=qResults.getStart()+qResults.getHitHandles().size()%> of --%>
-	<div class="alert alert-info"><fmt:message key="jsp.search.results.results">
+	<strong><fmt:message key="jsp.search.results.results">
         <fmt:param><%=qResults.getStart()+1%></fmt:param>
         <fmt:param><%=lastHint%></fmt:param>
         <fmt:param><%=qResults.getTotalSearchResults()%></fmt:param>
         <fmt:param><%=(float) qResults.getSearchTime() / 1000%></fmt:param>
-    </fmt:message></div>
+    </fmt:message></strong>
     <ul class="pagination pull-right">
 	<%
 	if (pageFirst != pageCurrent)
@@ -570,8 +571,15 @@ else if( qResults != null)
 <% } %>
 
 <% if (items.size() > 0) { %>
-    <div class="panel panel-info">
-    <div class="panel-heading"><fmt:message key="jsp.search.results.itemhits"/></div>
+	<% String sortFieldKey = "search.sort-by." + Utils.addEntities(sortedBy); %>
+	<fmt:message var="sortFieldName" key="<%= sortFieldKey %>"/>
+    <div class="panel panel-default">
+    <div class="panel-heading"><strong><fmt:message key="jsp.search.results.itemhits"/>
+		<fmt:message key="jsp.search.results.sortby">
+			<fmt:param value="${sortFieldName}"/>
+			<fmt:param value="<%= sortOrder %>"/>
+		</fmt:message></strong>
+	</div>
     <dspace:itemlist items="<%= items %>" authorLimit="<%= etAl %>" />
     </div>
 <% } %>
@@ -700,8 +708,8 @@ else
 	    int limit = facetConf.getFacetLimit()+1;
 	    
 	    String fkey = "jsp.search.facet.refine."+f;
-	    %><div id="facet_<%= f %>" class="panel panel-success">
-	    <div class="panel-heading"><fmt:message key="<%= fkey %>" /></div>
+	    %><div id="facet_<%= f %>">
+	    <h4><fmt:message key="<%= fkey %>" /></h4>
 	    <ul class="list-group"><%
 	    int idx = 1;
 	    int currFp = UIUtil.getIntParameter(request, f+"_page");

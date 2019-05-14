@@ -169,20 +169,21 @@
     Collection collection = (Collection) request.getAttribute("collection");
     if(collection != null && request.getAttribute("dspace.layout.sidebar") != null) {
 %>
-                <p>Welcome to the Government Publications Portal. The Government Publications Portal is a permanent
-                    searchable
-                    digital repository for all of New York City’s recent agency publications, maintained by the
-                    Municipal
-                    Library at the New York City Department of Records and Information Services. The portal is part of
-                    the New
-                    York City government’s ongoing effort to be open and accessible for all citizens. The <a
-                            href="http://library.amlegal.com/nxt/gateway.dll/New%20York/charter/newyorkcitycharter/chapter49officersandemployees?f=templates$fn=default.htm$3.0$vid=amlegal:newyork_ny$anc=JD_1133"
-                            target="_blank" rel="noopener noreferrer">New York City Charter, Section 1133</a>, requires agencies to submit copies
-                    of any publication to us for permanent access and
-                    storage.</p>
+        <p>Welcome to the Government Publications Portal. The Government Publications Portal is a permanent searchable
+        digital repository for all of New York City’s recent agency publications. The portal is maintained by the
+        Municipal Library at the New York City Department of Records and Information Services (DORIS). The portal is
+        part of New York City government’s ongoing mission to make government information publicly and easily
+        accessible. The <a
+        href="http://library.amlegal.com/nxt/gateway.dll/New%20York/charter/newyorkcitycharter/chapter49officersandemployees?f=templates$fn=default.htm$3.0$vid=amlegal:newyork_ny$anc=JD_1133"
+        target="_blank" rel="noopener noreferrer">New York City Charter, Section 1133</a>, requires agencies to submit
+        digital copies of all publications to the Library for permanent
+        access and storage.
+        </p>
+        <p>For older agency publications on paper, please consult our <a href="https://nycrecords.bywatersolutions.com/"
+        target="_blank" rel="noopener noreferrer">electronic catalog</a>.</p>
         <p>To find publications, search by keyword, such as agency name, subject, title, report type, or date. Once you
-            have search results, you can sort them further using filters, including by relevance, by date, or
-            alphabet.</p>
+        have search results, you can sort them further using filters, including by relevance, by date, or with just one
+        letter of the alphabet.</p>
         <br/>
         <div class="row">
             <div class="col-md-9"> <%

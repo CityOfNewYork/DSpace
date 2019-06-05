@@ -304,10 +304,6 @@
                 <stored-value>Civilian Complaint Review Board (CCRB)</stored-value>
             </pair>
             <pair>
-                <displayed-value>Combat Domestic Violence, Mayor's Office to (OCDV)</displayed-value>
-                <stored-value>Combat Domestic Violence, Mayor's Office to (OCDV)</stored-value>
-            </pair>
-            <pair>
                 <displayed-value>Commission on Gender Equity (CGE)</displayed-value>
                 <stored-value>Commission on Gender Equity (CGE)</stored-value>
             </pair>
@@ -378,6 +374,10 @@
             <pair>
                 <displayed-value>Emergency Management, Office of (OEM)</displayed-value>
                 <stored-value>Emergency Management, Office of (OEM)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>End Domestic and Gender-Based Violence, Mayor's Office to (ENDGBV)</displayed-value>
+                <stored-value>End Domestic and Gender-Based Violence, Mayor's Office to (ENDGBV)</stored-value>
             </pair>
             <pair>
                 <displayed-value>Environmental Coordination, Mayor's Office of (OEC)</displayed-value>

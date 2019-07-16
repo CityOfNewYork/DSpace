@@ -177,8 +177,13 @@
         href="http://library.amlegal.com/nxt/gateway.dll/New%20York/charter/newyorkcitycharter/chapter49officersandemployees?f=templates$fn=default.htm$3.0$vid=amlegal:newyork_ny$anc=JD_1133"
         target="_blank" rel="noopener noreferrer">New York City Charter, Section 1133</a>, requires agencies to submit
         digital copies of all publications to the Library for permanent
-        access and storage.
-        </p>
+        access and storage. Beginning July 1, 2019, DORIS will maintain a list of all required reports on its website
+        for public perusal. Effective January 1, 2020, more information will be available including not only access
+        to the report but citation to the law requiring the publication, date or reporting period covered. Should
+        the agencies concerned not submit the report within the required time limit, DORIS will issue a request for the
+        report to the agency. Such requests will be published on the government publications website in place of the
+        report until such report is published.
+    </p>
         <p>For older agency publications on paper, please consult our <a href="https://nycrecords.bywatersolutions.com/"
         target="_blank" rel="noopener noreferrer">electronic catalog</a>.</p>
         <p>To find publications, search by keyword, such as agency name, subject, title, report type, or date. Once you

@@ -260,6 +260,9 @@
                 <stored-value>Aging, Department for the (DFTA)</stored-value>
             </pair>
             <pair>
+                <displayed-value>Board of Education Retirement System, New York City (BERS)</displayed-value>
+                <stored-value>Board of Education Retirement System, New York City (BERS)</stored-value>
+            </pair>
                 <displayed-value>Buildings, Department of (DOB)</displayed-value>
                 <stored-value>Buildings, Department of (DOB)</stored-value>
             </pair>
@@ -324,8 +327,8 @@
                 <stored-value>Conflicts of Interest Board (COIB)</stored-value>
             </pair>
             <pair>
-                <displayed-value>Consumer Affairs, Department of (DCA)</displayed-value>
-                <stored-value>Consumer Affairs, Department of (DCA)</stored-value>
+                <displayed-value>Consumer and Worker Protection, Department of (DCWP)</displayed-value>
+                <stored-value>Consumer and Worker Protection, Department of (DCWP)</stored-value>
             </pair>
             <pair>
                 <displayed-value>Contract Services, Mayor's Office of (MOCS)</displayed-value>
@@ -406,6 +409,10 @@
             <pair>
                 <displayed-value>Fire Department, New York City (FDNY)</displayed-value>
                 <stored-value>Fire Department, New York City (FDNY)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Fire Department Pension Fund</displayed-value>
+                <stored-value>Fire Department Pension Fund</stored-value>
             </pair>
             <pair>
                 <displayed-value>Food Policy Director, Mayor's Office of the (MOFP)</displayed-value>
@@ -618,6 +625,10 @@
             <pair>
                 <displayed-value>Taxi and Limousine Commission (TLC)</displayed-value>
                 <stored-value>Taxi and Limousine Commission (TLC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Teachers' Retirement System (TRS)</displayed-value>
+                <stored-value>Teachers' Retirement System (TRS)</stored-value>
             </pair>
             <pair>
                 <displayed-value>Technology and Innovation, Mayor's Office of (MOTI)</displayed-value>
@@ -1476,6 +1487,10 @@
             <pair>
                 <displayed-value>Reports - Weekly</displayed-value>
                 <stored-value>Reports - Weekly</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Reports - Quarterly</displayed-value>
+                <stored-value>Reports - Quarterly</stored-value>
             </pair>
             <pair>
                 <displayed-value>Reports - Other (Consultant/Staff)</displayed-value>

@@ -45,8 +45,8 @@
 
     <dc-type>
         <schema>eperson</schema>
-        <element>usertype</element>
-        <scope_note>Metadata field used for the user type</scope_note>
+        <element>nycEmployee</element>
+        <scope_note>Metadata field used for the nycEmployee</scope_note>
     </dc-type>
 
 </dspace-dc-types>

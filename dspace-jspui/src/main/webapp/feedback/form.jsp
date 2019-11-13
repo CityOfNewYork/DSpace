@@ -60,25 +60,28 @@
 <%
     }
 %>
-    <form action="<%= request.getContextPath() %>/contact" method="post">
-        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">
-        <center>
-            <table>
-                <tr>
-                    <td class="submitFormLabel"><label for="temail"><fmt:message key="jsp.feedback.form.email"/></label></td>
-                    <td><input type="text" name="email" id="temail" size="50" value="<%=StringEscapeUtils.escapeHtml(email)%>" /></td>
-                </tr>
-                <tr>
-                    <td class="submitFormLabel"><label for="tfeedback"><fmt:message key="jsp.feedback.form.comment"/></label></td>
-                    <td><textarea name="feedback" id="tfeedback" rows="6" cols="50"><%=StringEscapeUtils.escapeHtml(feedback)%></textarea></td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                    <input type="submit" name="submit" value="<fmt:message key="jsp.feedback.form.send"/>" />
-                    </td>
-                </tr>
-            </table>
-        </center>
-    </form>
+    <br>
+    <p>Please send an email to municipal-library-admins at records dot nyc dot gov to ask questions about the
+        Government Publications Portal or provide feedback.</p>
+<%--    <form action="<%= request.getContextPath() %>/contact" method="post">--%>
+<%--        <input type="hidden" name="csrf_token" value="<%= session.getAttribute("csrfToken")%>">--%>
+<%--        <center>--%>
+<%--            <table>--%>
+<%--                <tr>--%>
+<%--                    <td class="submitFormLabel"><label for="temail"><fmt:message key="jsp.feedback.form.email"/></label></td>--%>
+<%--                    <td><input type="text" name="email" id="temail" size="50" value="<%=StringEscapeUtils.escapeHtml(email)%>" /></td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td class="submitFormLabel"><label for="tfeedback"><fmt:message key="jsp.feedback.form.comment"/></label></td>--%>
+<%--                    <td><textarea name="feedback" id="tfeedback" rows="6" cols="50"><%=StringEscapeUtils.escapeHtml(feedback)%></textarea></td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td colspan="2" align="center">--%>
+<%--                    <input type="submit" name="submit" value="<fmt:message key="jsp.feedback.form.send"/>" />--%>
+<%--                    </td>--%>
+<%--                </tr>--%>
+<%--            </table>--%>
+<%--        </center>--%>
+<%--    </form>--%>
 
 </dspace:layout>

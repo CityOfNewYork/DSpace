@@ -2,7 +2,9 @@
 
 $(function () {
     var titleField = $("#dc_title"),
-        descriptionField = $("#dc_description_abstract_id");
+        descriptionField = $("#dc_description_abstract_id"),
+        agency = $("#agency"),
+        requiredReport = $("#required-report-type");
 
     $("#submit-next").click(function (e) {
         // validator for fiscal and calendar year
@@ -48,6 +50,46 @@ $(function () {
 
     descriptionField.keyup(function () {
         characterCounter("#description-character-count", 300, $(this).val().length, 100)
+    });
+
+    // JSON WITH REQUIRED REPORTS
+    var requiredReports = {
+        'Actuary, NYC Office of the (NYCOA)': ['Report on Open Data Compliance','Language Access Implementation Plan/Local Law 30 of 2017 Report; required at least every 3 years','Report on Agency Policies on Identifying Information','Quarterly Equal Employment Opportunity and Diversity Plan Implementation','Project Initiation, Commitment Plan','Report on Proposed Scope of Projects'],
+        'Administrative Trials and Hearings, Office of (OATH)': ['Annual Report on Adjudications of Engine Idling Violations (with Environmental Control Board (ECB))','Report on Open Data Compliance','Language Access Implementation Plan/Local Law 30 of 2017 Report; required at least every 3 years','Report on Agency Policies on Identifying Information','Report on Agency Policies on Identifying Information','BenchNotes','Adjudications of Specified Violations/"Criminal Justice Reform Act Quarterly Report"','Quarterly Equal Employment Opportunity and Diversity Plan Implementation','Report on ECB Adjudications of Summonses Issued to Vendors','Project Initiation, Commitment Plan','Report on Proposed Scope of Projects']
+    };
+
+    // INITIAL LOAD
+    requiredReport.empty();
+    // Add blank option
+    requiredReport.append(new Option('', ''));
+    if (agency.val() in requiredReports) {
+        requiredReports[agency.val()].forEach(function (report) {
+            requiredReport.append(new Option(report, report));
+        });
+    }
+    // Add Not Required option
+    requiredReport.append(new Option('Not Required', 'Not Required'));
+    requiredReport.prop('disabled', false);
+
+    // ON AGENCY CHANGE
+    agency.change(function () {
+        var selectedAgency = agency.val();
+            if (selectedAgency !== '') {
+                requiredReport.empty();
+                // Add blank option
+                requiredReport.append(new Option('', ''));
+                if (selectedAgency in requiredReports) {
+                    requiredReports[selectedAgency].forEach(function (report) {
+                        requiredReport.append(new Option(report, report));
+                    });
+                }
+                // Add Not Required option
+                requiredReport.append(new Option('Not Required', 'Not Required'));
+                requiredReport.prop('disabled', false);
+            } else {
+                requiredReport.empty();
+                requiredReport.prop('disabled', true);
+            }
     });
 });
 

@@ -1254,6 +1254,20 @@
           .append(fieldName)
           .append("\"");
       }
+      else if (fieldName.equals("dc_contributor_author"))
+      {
+          sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")
+                  .append("<select id='agency' class=\"form-control\" name=\"")
+                  .append(fieldName)
+                  .append("\"");
+      }
+      else if (fieldName.equals("dc_type_required-report-type"))
+      {
+          sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")
+                  .append("<select disabled id='required-report-type' class=\"form-control\" name=\"")
+                  .append(fieldName)
+                  .append("\"");
+      }
       else
       {
         sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")

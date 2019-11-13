@@ -75,6 +75,17 @@
 
                 <field>
                     <dc-schema>dc</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier>required-report-type</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Required Report Type</label>
+                    <input-type value-pairs-name="required-report-types">dropdown</input-type>
+                    <hint>If you do not see your required report type here please contact the municipal library</hint>
+                    <required>You must select a required report type</required>
+                </field>
+
+                <field>
+                    <dc-schema>dc</dc-schema>
                     <dc-element>contributor</dc-element>
                     <dc-qualifier>other</dc-qualifier>
                     <repeatable>true</repeatable>
@@ -263,6 +274,7 @@
                 <displayed-value>Board of Education Retirement System, New York City (BERS)</displayed-value>
                 <stored-value>Board of Education Retirement System, New York City (BERS)</stored-value>
             </pair>
+            <pair>
                 <displayed-value>Buildings, Department of (DOB)</displayed-value>
                 <stored-value>Buildings, Department of (DOB)</stored-value>
             </pair>
@@ -1577,6 +1589,13 @@
             <pair>
                 <displayed-value>Staten Island</displayed-value>
                 <stored-value>staten_island</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="required-report-types" dc-term="type">
+            <pair>
+                <displayed-value> </displayed-value>
+                <stored-value> </stored-value>
             </pair>
         </value-pairs>
 

@@ -705,6 +705,13 @@
                   .append("</label>");
           sb.append("<div class=\"col-md-10\">");
       }
+      else if (fieldName.equals("dc_type_required-report-id"))
+      {
+          sb.append("<div hidden class=\"row\"><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")
+                  .append(label)
+                  .append("</label>");
+          sb.append("<div class=\"col-md-10\">");
+      }
       else
       {
           sb.append("<div class=\"row\"><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")

@@ -299,6 +299,10 @@
                 <stored-value>Children's Services, Administration for (ACS)</stored-value>
             </pair>
             <pair>
+                <displayed-value>City Clerk, Office of the (CLERK)</displayed-value>
+                <stored-value>City Clerk, Office of the (CLERK)</stored-value>
+            </pair>
+            <pair>
                 <displayed-value>City Council, New York (NYCC)</displayed-value>
                 <stored-value>City Council, New York (NYCC)</stored-value>
             </pair>
@@ -329,6 +333,10 @@
             <pair>
                 <displayed-value>Community Affairs Unit (CAU)</displayed-value>
                 <stored-value>Community Affairs Unit (CAU)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Community Boards</displayed-value>
+                <stored-value>Community Boards</stored-value>
             </pair>
             <pair>
                 <displayed-value>Comptroller (COMP)</displayed-value>
@@ -369,6 +377,10 @@
             <pair>
                 <displayed-value>Design and Construction, Department of (DDC)</displayed-value>
                 <stored-value>Design and Construction, Department of (DDC)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Districting Commission</displayed-value>
+                <stored-value>Districting Commission</stored-value>
             </pair>
             <pair>
                 <displayed-value>Economic Development Corporation (EDC)</displayed-value>
@@ -541,6 +553,10 @@
             <pair>
                 <displayed-value>New Business Acceleration Team (NBAT)</displayed-value>
                 <stored-value>New Business Acceleration Team (NBAT)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>New York City Fire Pension Fund</displayed-value>
+                <stored-value>New York City Fire Pension Fund</stored-value>
             </pair>
             <pair>
                 <displayed-value>NYC &amp; Company (NYCGO)</displayed-value>

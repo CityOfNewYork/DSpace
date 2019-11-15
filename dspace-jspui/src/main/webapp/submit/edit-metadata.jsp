@@ -705,7 +705,7 @@
                   .append("</label>");
           sb.append("<div class=\"col-md-10\">");
       }
-      else if (fieldName.equals("dc_type_required-report-id"))
+      else if (fieldName.equals("dc_identifier_required-report-id"))
       {
           sb.append("<div hidden class=\"row\"><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")
                   .append(label)
@@ -1504,6 +1504,7 @@
 	<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/scriptaculous/controls.js"></script>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/custom-form-validators.js"></script>
+    <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/required-reports.js"></script>
 </c:set>
 <dspace:layout style="submission" locbar="off" navbar="off" titlekey="jsp.submit.edit-metadata.title">
 

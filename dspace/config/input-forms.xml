@@ -78,15 +78,15 @@
                     <dc-element>type</dc-element>
                     <dc-qualifier>required-report-type</dc-qualifier>
                     <repeatable>false</repeatable>
-                    <label>Required Report Type</label>
+                    <label>Required Report Name</label>
                     <input-type value-pairs-name="required-report-types">dropdown</input-type>
-                    <hint>If you do not see your required report type here please contact the municipal library</hint>
+                    <hint>If your required report is not listed here, please email municipal-library-admins@records.nyc.gov</hint>
                     <required>You must select a required report type</required>
                 </field>
 
                 <field>
                     <dc-schema>dc</dc-schema>
-                    <dc-element>type</dc-element>
+                    <dc-element>identifier</dc-element>
                     <dc-qualifier>required-report-id</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Required Report ID</label>

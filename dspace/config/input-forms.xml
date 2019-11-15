@@ -76,12 +76,12 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>type</dc-element>
-                    <dc-qualifier>required-report-type</dc-qualifier>
+                    <dc-qualifier>required-report-name</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Required Report Name</label>
-                    <input-type value-pairs-name="required-report-types">dropdown</input-type>
+                    <input-type value-pairs-name="required-report-names">dropdown</input-type>
                     <hint>If your required report is not listed here, please email municipal-library-admins@records.nyc.gov</hint>
-                    <required>You must select a required report type</required>
+                    <required>You must select a required report</required>
                 </field>
 
                 <field>
@@ -1619,13 +1619,6 @@
             </pair>
         </value-pairs>
 
-        <value-pairs value-pairs-name="required-report-types" dc-term="type">
-            <pair>
-                <displayed-value> </displayed-value>
-                <stored-value> </stored-value>
-            </pair>
-        </value-pairs>
-
         <value-pairs value-pairs-name="school-districts" dc-term="coverage.spacial">
             <pair>
                 <displayed-value>District 1</displayed-value>
@@ -2001,6 +1994,13 @@
             <pair>
                 <displayed-value>Staten Island 3</displayed-value>
                 <stored-value>Staten Island 3</stored-value>
+            </pair>
+        </value-pairs>
+
+        <value-pairs value-pairs-name="required-report-names" dc-term="type.required-report-name">
+            <pair>
+                <displayed-value> </displayed-value>
+                <stored-value> </stored-value>
             </pair>
         </value-pairs>
 

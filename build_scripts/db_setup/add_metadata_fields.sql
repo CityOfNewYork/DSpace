@@ -5,5 +5,5 @@ INSERT INTO metadatafieldregistry (metadata_schema_id, element, qualifier, scope
 INSERT INTO metadatafieldregistry (metadata_schema_id, element, qualifier, scope_note) VALUES (1, 'coverage', 'spatial-borough', 'Associated borough of the publication');
 INSERT INTO metadatafieldregistry (metadata_schema_id, element, qualifier, scope_note) VALUES (1, 'coverage', 'spatial-school-district', 'Associated school district of the publication');
 INSERT INTO metadatafieldregistry (metadata_schema_id, element, qualifier, scope_note) VALUES (1, 'coverage', 'spatial-community-board-district', 'Associated community board district of the publication');
-INSERT INTO metadatafieldregistry (metadata_schema_id, element, qualifier, scope_note) VALUES (1, 'type', 'required-report-type', 'Required report type of the publication');
+INSERT INTO metadatafieldregistry (metadata_schema_id, element, qualifier, scope_note) VALUES (1, 'type', 'required-report-name', 'Required report name of the publication');
 INSERT INTO metadatafieldregistry (metadata_schema_id, element, qualifier, scope_note) VALUES (1, 'identifier', 'required-report-id', 'Required report ID to be used for tracking purposes');

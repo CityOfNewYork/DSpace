@@ -4,7 +4,7 @@ $(function () {
     var titleField = $("#dc_title"),
         descriptionField = $("#dc_description_abstract_id"),
         agency = $("#agency"),
-        requiredReport = $("#required-report-type");
+        requiredReport = $("#required-report-name");
 
     $("#submit-next").click(function (e) {
         // validator for fiscal and calendar year

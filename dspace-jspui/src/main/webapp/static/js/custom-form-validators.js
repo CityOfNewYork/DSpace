@@ -4,7 +4,8 @@ $(function () {
     var titleField = $("#dc_title"),
         descriptionField = $("#dc_description_abstract_id"),
         agency = $("#agency"),
-        requiredReport = $("#required-report-name");
+        requiredReport = $("#required-report-name"),
+        requiredReportID = $('#dc_identifier_required-report-id');
 
     $("#submit-next").click(function (e) {
         // validator for fiscal and calendar year
@@ -68,34 +69,37 @@ $(function () {
     // On Agency change
     agency.change(function () {
         var selectedAgency = agency.val();
-            if (selectedAgency !== '') {
-                requiredReport.empty();
-                // Add blank option
-                requiredReport.append(new Option('', ''));
-                if (selectedAgency in requiredReports) {
-                    requiredReports[selectedAgency].forEach(function (report) {
-                        requiredReport.append(new Option(report['report_name'], report['report_name']));
-                    });
-                }
-                // Add Not Required option
-                requiredReport.append(new Option('Not Required', 'Not Required'));
-                requiredReport.prop('disabled', false);
-            } else {
-                requiredReport.empty();
-                requiredReport.prop('disabled', true);
+        requiredReport.empty();
+        requiredReportID.val('');
+        if (selectedAgency !== '') {
+            // Add blank option
+            requiredReport.append(new Option('', ''));
+            if (selectedAgency in requiredReports) {
+                requiredReports[selectedAgency].forEach(function (report) {
+                    requiredReport.append(new Option(report['report_name'], report['report_name']));
+                });
             }
+            // Add Not Required option
+            requiredReport.append(new Option('Not Required', 'Not Required'));
+            requiredReport.prop('disabled', false);
+        } else {
+            requiredReport.prop('disabled', true);
+        }
     });
 
     // On Required Report change
     requiredReport.change(function () {
         var selectedAgency = agency.val();
         var selectedReport = requiredReport.val();
-
-        for (var i = 0; i < requiredReports[selectedAgency].length; i++) {
-            if (requiredReports[selectedAgency][i]['report_name'] === selectedReport) {
-                $('#dc_identifier_required-report-id').val(requiredReports[selectedAgency][i]['report_id']);
-                break;
+        if (selectedReport !== '') {
+            for (var i = 0; i < requiredReports[selectedAgency].length; i++) {
+                if (requiredReports[selectedAgency][i]['report_name'] === selectedReport) {
+                    requiredReportID.val(requiredReports[selectedAgency][i]['report_id']);
+                    break;
+                }
             }
+        } else {
+            requiredReportID.val('');
         }
     });
 });
@@ -119,7 +123,7 @@ function characterCounter (target, limit, currentLength, minLength) {
      *
      * */
     var length = limit - currentLength;
-    minLength = (typeof minLength !== 'undefined') ? minLength : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        minLength = (typeof minLength !== 'undefined') ? minLength : 0;
     var s = length === 1 ? "" : "s";
     $(target).text(length + " character" + s + " remaining");
     if (length == 0) {

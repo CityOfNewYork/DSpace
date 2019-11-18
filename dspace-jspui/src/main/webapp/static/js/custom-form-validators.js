@@ -91,15 +91,15 @@ $(function () {
     requiredReport.change(function () {
         var selectedAgency = agency.val();
         var selectedReport = requiredReport.val();
-        if (selectedReport !== '') {
+        if (selectedReport === '' || selectedReport === 'Not Required') {
+            requiredReportID.val('');
+        } else {
             for (var i = 0; i < requiredReports[selectedAgency].length; i++) {
                 if (requiredReports[selectedAgency][i]['report_name'] === selectedReport) {
                     requiredReportID.val(requiredReports[selectedAgency][i]['report_id']);
                     break;
                 }
             }
-        } else {
-            requiredReportID.val('');
         }
     });
 });

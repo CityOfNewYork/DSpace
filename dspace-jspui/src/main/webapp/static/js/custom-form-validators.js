@@ -54,6 +54,7 @@ $(function () {
     });
 
     // On initial page load
+    var initialRequiredReport = requiredReport.val();
     requiredReport.empty();
     // Add blank option
     requiredReport.append(new Option('', ''));
@@ -64,27 +65,22 @@ $(function () {
     }
     // Add Not Required option
     requiredReport.append(new Option('Not Required', 'Not Required'));
-    requiredReport.prop('disabled', false);
+    requiredReport.val(initialRequiredReport);
 
     // On Agency change
     agency.change(function () {
         var selectedAgency = agency.val();
         requiredReport.empty();
         requiredReportID.val('');
-        if (selectedAgency !== '') {
-            // Add blank option
-            requiredReport.append(new Option('', ''));
-            if (selectedAgency in requiredReports) {
-                requiredReports[selectedAgency].forEach(function (report) {
-                    requiredReport.append(new Option(report['report_name'], report['report_name']));
-                });
-            }
-            // Add Not Required option
-            requiredReport.append(new Option('Not Required', 'Not Required'));
-            requiredReport.prop('disabled', false);
-        } else {
-            requiredReport.prop('disabled', true);
+        // Add blank option
+        requiredReport.append(new Option('', ''));
+        if (selectedAgency in requiredReports) {
+            requiredReports[selectedAgency].forEach(function (report) {
+                requiredReport.append(new Option(report['report_name'], report['report_name']));
+            });
         }
+        // Add Not Required option
+        requiredReport.append(new Option('Not Required', 'Not Required'));
     });
 
     // On Required Report change

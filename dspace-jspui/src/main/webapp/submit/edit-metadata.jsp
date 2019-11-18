@@ -1271,7 +1271,7 @@
       else if (fieldName.equals("dc_type_required-report-name"))
       {
           sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")
-                  .append("<select disabled id='required-report-name' class=\"form-control\" name=\"")
+                  .append("<select id='required-report-name' class=\"form-control\" name=\"")
                   .append(fieldName)
                   .append("\"");
       }

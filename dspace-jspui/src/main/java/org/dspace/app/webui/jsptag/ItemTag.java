@@ -220,7 +220,7 @@ public class ItemTag extends TagSupport
 
     /** Fields to display on full item page */
     private static final String fullItemFields
-            = "dc.title, dc.title.alternative, dc.contributor.*, dc.subject, dc.description.abstract, dc.date.issued(date), dc.type, dc.language.iso, dc.coverage.temporal-fiscal, dc.coverage.temporal-calendar, dc.coverage.spatial-borough, dc.coverage.spatial-school-district, dc.coverage.spatial-community-board-district, dc.coverage.spatial-place";
+            = "dc.title, dc.title.alternative, dc.contributor.*, dc.subject, dc.description.abstract, dc.date.issued(date), dc.type, dc.language.iso, dc.coverage.temporal-fiscal, dc.coverage.temporal-calendar, dc.coverage.spatial-borough, dc.coverage.spatial-school-district, dc.coverage.spatial-community-board-district, dc.coverage.spatial-place, dc.type.required-report-name";
 
     /** log4j logger */
     private static final Logger log = Logger.getLogger(ItemTag.class);

@@ -2,7 +2,10 @@
 
 $(function () {
     var titleField = $("#dc_title"),
-        descriptionField = $("#dc_description_abstract_id");
+        descriptionField = $("#dc_description_abstract_id"),
+        agency = $("#agency"),
+        requiredReport = $("#required-report-name"),
+        requiredReportID = $('#dc_identifier_required-report-id');
 
     $("#submit-next").click(function (e) {
         // validator for fiscal and calendar year
@@ -48,6 +51,52 @@ $(function () {
 
     descriptionField.keyup(function () {
         characterCounter("#description-character-count", 300, $(this).val().length, 100)
+    });
+
+    // On initial page load
+    var initialRequiredReport = requiredReport.val();
+    requiredReport.empty();
+    // Add blank option
+    requiredReport.append(new Option('', ''));
+    if (agency.val() in requiredReports) {
+        requiredReports[agency.val()].forEach(function (report) {
+            requiredReport.append(new Option(report['report_name'], report['report_name']));
+        });
+    }
+    // Add Not Required option
+    requiredReport.append(new Option('Not Required', 'Not Required'));
+    requiredReport.val(initialRequiredReport);
+
+    // On Agency change
+    agency.change(function () {
+        var selectedAgency = agency.val();
+        requiredReport.empty();
+        requiredReportID.val('');
+        // Add blank option
+        requiredReport.append(new Option('', ''));
+        if (selectedAgency in requiredReports) {
+            requiredReports[selectedAgency].forEach(function (report) {
+                requiredReport.append(new Option(report['report_name'], report['report_name']));
+            });
+        }
+        // Add Not Required option
+        requiredReport.append(new Option('Not Required', 'Not Required'));
+    });
+
+    // On Required Report change
+    requiredReport.change(function () {
+        var selectedAgency = agency.val();
+        var selectedReport = requiredReport.val();
+        if (selectedReport === '' || selectedReport === 'Not Required') {
+            requiredReportID.val('');
+        } else {
+            for (var i = 0; i < requiredReports[selectedAgency].length; i++) {
+                if (requiredReports[selectedAgency][i]['report_name'] === selectedReport) {
+                    requiredReportID.val(requiredReports[selectedAgency][i]['report_id']);
+                    break;
+                }
+            }
+        }
     });
 });
 

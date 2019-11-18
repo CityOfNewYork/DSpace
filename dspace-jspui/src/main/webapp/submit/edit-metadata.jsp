@@ -705,6 +705,13 @@
                   .append("</label>");
           sb.append("<div class=\"col-md-10\">");
       }
+      else if (fieldName.equals("dc_identifier_required-report-id"))
+      {
+          sb.append("<div hidden class=\"row\"><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")
+                  .append(label)
+                  .append("</label>");
+          sb.append("<div class=\"col-md-10\">");
+      }
       else
       {
           sb.append("<div class=\"row\"><label class=\"col-md-2" + (required ? " label-required" : "") + "\">")
@@ -1254,6 +1261,20 @@
           .append(fieldName)
           .append("\"");
       }
+      else if (fieldName.equals("dc_contributor_author"))
+      {
+          sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")
+                  .append("<select id='agency' class=\"form-control\" name=\"")
+                  .append(fieldName)
+                  .append("\"");
+      }
+      else if (fieldName.equals("dc_type_required-report-name"))
+      {
+          sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")
+                  .append("<select id='required-report-name' class=\"form-control\" name=\"")
+                  .append(fieldName)
+                  .append("\"");
+      }
       else
       {
         sb.append("<span class=\"col-md-8\" style='padding-left: 30px; padding-right:20px;'>")
@@ -1483,6 +1504,7 @@
 	<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/scriptaculous/controls.js"></script>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/jquery/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/custom-form-validators.js"></script>
+    <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/required-reports.js"></script>
 </c:set>
 <dspace:layout style="submission" locbar="off" navbar="off" titlekey="jsp.submit.edit-metadata.title">
 

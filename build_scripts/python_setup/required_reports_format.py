@@ -26,7 +26,7 @@ Steps:
     - Format with IntelliJ (CMD + OPTION + L)
 '''
 
-required_reports_pairs = open('required_report_pairs.txt', 'w')
+required_reports_pairs = open('required_reports_pairs.txt', 'w')
 required_reports_json = open('required_reports_json.txt', 'w')
 required_reports_searches = open('required_reports_searches.txt', 'w')
 required_reports = {}

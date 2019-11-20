@@ -123,6 +123,7 @@
                 <ref bean="searchFilterAssociatedSchool" />
                 <ref bean="searchFilterAssociatedCommunity" />
                 <ref bean="searchFilterAssociatedPlace" />
+                <ref bean="searchFilterRequiredReportName" />
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -244,6 +245,7 @@
                 <ref bean="searchFilterAssociatedSchool" />
                 <ref bean="searchFilterAssociatedCommunity" />
                 <ref bean="searchFilterAssociatedPlace" />
+                <ref bean="searchFilterRequiredReportName" />
             </list>
         </property>
         <!--The sort filters for the discovery search (same as defaultConfiguration above)-->
@@ -549,6 +551,15 @@
         <property name="metadataFields">
             <list>
                 <value>dc.coverage.spatial-place</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="searchFilterRequiredReportName" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+        <property name="indexFieldName" value="requiredReportName"/>
+        <property name="metadataFields">
+            <list>
+                <value>dc.type.required-report-name</value>
             </list>
         </property>
     </bean>
